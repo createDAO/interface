@@ -1,31 +1,15 @@
-name: CI/CD Pipeline
+name: Production Deployment
 
 on:
-  # Only run on PRs targeting main
-  pull_request:
-    branches: [ main ]
-    types: [opened, synchronize, reopened]
-  
-  # Only run on direct pushes to main that aren't from PR merges
   push:
     branches: [ main ]
-    paths-ignore:
-      - '.github/workflows/**'
-    tags-ignore:
-      - '**'
+  
 
-# Add check to prevent double-running on PR merges
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-# Define environment variables available to all jobs
 env:
   NODE_VERSION: '20'
 
 permissions:
-  contents: write # Changed to write for release creation
-  pull-requests: write
+  contents: write
   deployments: write
 
 jobs:
@@ -36,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0  # Fetch all history and tags
+        fetch-depth: 0
     
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -56,10 +40,11 @@ jobs:
     - name: Build Check
       run: npm run build
 
+
   deploy-production:
+
     name: Deploy to Production
     needs: [test]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: Live
