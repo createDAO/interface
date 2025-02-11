@@ -14,7 +14,7 @@ const Footer: FC = () => {
         <span>
           {version} (
           <a
-            href={`https://github.com/dikodev/createDAO/commit/${commitHash}`}
+            href={`https://github.com/createDAO/interface/commit/${commitHash}`}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.link}

@@ -1,0 +1,36 @@
+# Branch protection rules for the main branch
+protection:
+  # Require pull request reviews before merging
+  required_pull_request_reviews:
+    required_approving_review_count: 1
+    dismiss_stale_reviews: true
+    require_code_owner_reviews: false
+    require_last_push_approval: true
+    allow_self_review: false
+
+  # Require status checks to pass before merging
+  required_status_checks:
+    strict: true
+    contexts:
+      - "Run Tests"
+      - "TypeScript Check"
+      - "Lint Check"
+      - "Build Check"
+
+  # Include administrators in restrictions
+  enforce_admins: true
+
+  # Restrict who can push to the protected branch
+  restrictions: null  # null means any user with push access
+
+  # Require conversation resolution before merging
+  required_conversation_resolution: true
+
+  # Require linear history (no merge commits)
+  required_linear_history: true
+
+  # Allow force pushes (set to true to disable force pushes)
+  allow_force_pushes: false
+
+  # Allow deletions (set to true to disable branch deletion)
+  allow_deletions: false

@@ -4,10 +4,20 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    types: [opened, synchronize, reopened]
+
+# Define environment variables available to all jobs
+env:
+  NODE_VERSION: '20'
+
+permissions:
+  contents: read
+  pull-requests: write
+  deployments: write
 
 jobs:
   test:
+    name: Run Tests
     runs-on: ubuntu-latest
     
     steps:
@@ -18,7 +28,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
     
     - name: Install Dependencies
@@ -34,10 +44,13 @@ jobs:
       run: npm run build
 
   deploy-test:
+    name: Deploy to Test
     needs: test
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    environment: Test
+    environment: 
+      name: Test
+      url: ${{ steps.deployment.outputs.url }}
     
     steps:
     - uses: actions/checkout@v4
@@ -52,6 +65,7 @@ jobs:
         echo "VERSION=${LATEST_TAG}" >> $GITHUB_OUTPUT
 
     - name: Deploy to Test Server
+      id: deployment
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEPLOY_HOST }}
@@ -60,16 +74,35 @@ jobs:
         port: 22
         script: |
           cd ${{ secrets.DEPLOY_PATH }}
-          git pull
+          git fetch origin
+          git checkout ${{ github.event.pull_request.head.sha }}
           echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env
           echo "VITE_APP_VERSION=${{ steps.get_version.outputs.VERSION }}" >> .env
           docker-compose up -d --build
+          echo "url=https://test.createdao.org" >> $GITHUB_OUTPUT
+
+    - name: Comment PR
+      uses: actions/github-script@v7
+      if: success()
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `✅ Deployment to test environment successful!\nPreview: ${process.env.DEPLOYMENT_URL}`
+          })
+      env:
+        DEPLOYMENT_URL: ${{ steps.deployment.outputs.url }}
 
   deploy-production:
+    name: Deploy to Production
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment: Live
+    environment:
+      name: Live
+      url: https://createdao.org
     
     steps:
     - uses: actions/checkout@v4
@@ -92,7 +125,9 @@ jobs:
         port: 22
         script: |
           cd ${{ secrets.DEPLOY_PATH }}
-          git pull
+          git fetch origin
+          git checkout main
+          git pull origin main
           echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env
           echo "VITE_APP_VERSION=${{ steps.get_version.outputs.VERSION }}" >> .env
           docker-compose up -d --build
@@ -103,3 +138,17 @@ jobs:
         -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
         -H "Content-Type: application/json" \
         --data '{"purge_everything":true}'
+
+    - name: Create Release
+      if: success()
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get_version.outputs.VERSION }}
+        release_name: Release ${{ steps.get_version.outputs.VERSION }}
+        body: |
+          Production deployment of version ${{ steps.get_version.outputs.VERSION }}
+          Commit: ${{ github.sha }}
+        draft: false
+        prerelease: false

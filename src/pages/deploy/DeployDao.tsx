@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useChainId, useSwitchChain, useAccount } from 'wagmi'
 import { useDaoDeployment } from '@hooks/useDaoDeployment'
 import { DAOFormData } from '../../types/dao'

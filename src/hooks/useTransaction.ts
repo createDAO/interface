@@ -27,16 +27,18 @@ export function useTransaction() {
     onReplaced: (replacement) => {
       const { reason, transaction, replacedTransaction } = replacement
       if (reason === 'repriced') {
-        console.log('Transaction was sped up:', {
+        // Log speed up event
+        console.warn('Transaction was sped up:', {
           oldHash: replacedTransaction.hash,
           newHash: transaction.hash,
         })
-    setState(state => ({
-      ...state,
+        setState(state => ({
+          ...state,
           hash: transaction.hash,
         }))
       } else if (reason === 'cancelled') {
-        console.log('Transaction was cancelled:', replacedTransaction.hash)
+        // Log cancellation
+        console.warn('Transaction was cancelled:', replacedTransaction.hash)
         setState({
           ...initialState,
           isError: true,
@@ -48,12 +50,13 @@ export function useTransaction() {
           },
         })
       } else {
-        console.log('Transaction was replaced:', {
+        // Log replacement
+        console.warn('Transaction was replaced:', {
           oldHash: replacedTransaction.hash,
           newHash: transaction.hash,
         })
-    setState(state => ({
-      ...state,
+        setState(state => ({
+          ...state,
           hash: transaction.hash,
         }))
       }
@@ -121,8 +124,15 @@ export function useTransaction() {
   }
 }
 
+interface BaseError {
+  code?: number;
+  name?: string;
+  message?: string;
+  details?: string;
+}
+
 // Helper to format common transaction errors
-export function formatTransactionError(error: any): TransactionError {
+export function formatTransactionError(error: BaseError): TransactionError {
   // User rejected transaction
   if (error.code === 4001) {
     return {

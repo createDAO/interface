@@ -1,4 +1,4 @@
-import { DAO_VERSIONS } from '../../config/dao'
+import { DAO_VERSIONS } from '@config/dao'
 import styles from './VersionSelect.module.css'
 
 interface VersionSelectProps {

@@ -34,7 +34,7 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
           ...prev,
           [connector.uid]: !!provider
         }))
-      } catch (e) {
+      } catch {
         setConnectorStates(prev => ({
           ...prev,
           [connector.uid]: false
@@ -43,7 +43,7 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
     })
   }, [connectors])
 
-  const handleConnect = async (connector: any) => {
+  const handleConnect = async (connector: typeof connectors[number]) => {
     if (connecting) return; // Prevent multiple clicks
     setConnecting(connector.uid)
     try {

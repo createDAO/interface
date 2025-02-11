@@ -1,17 +1,18 @@
 import { useChainId } from 'wagmi'
 import { useWriteContract } from 'wagmi'
-import { parseEther, decodeEventLog } from 'viem'
+import { parseEther, decodeEventLog, Log } from 'viem'
 import { env } from '../config/env'
 import { getContractAddresses, getContractABI } from '../config/contracts'
 import { DAOFormData, DeploymentResult } from '../types/dao'
 import { useTransaction, formatTransactionError } from './useTransaction'
+import { TransactionReceipt } from '../types/transaction'
 
 // Helper to parse receipt for deployed addresses
-function parseReceipt(receipt: any): DeploymentResult | null {
+function parseReceipt(receipt: TransactionReceipt | undefined): DeploymentResult | null {
   if (!receipt) return null
 
   // Find the DAOCreated event
-  const event = receipt.logs.find((log: any) => {
+  const event = receipt.logs.find((log: Log) => {
     try {
       const decodedLog = decodeEventLog({
         abi: getContractABI('daoFactory'),
@@ -27,7 +28,16 @@ function parseReceipt(receipt: any): DeploymentResult | null {
   if (!event) return null
 
   // Decode the event data
-  const decodedEvent = decodeEventLog({
+  const decodedEvent = decodeEventLog<{
+    args: {
+      daoAddress: string;
+      tokenAddress: string;
+      treasuryAddress: string;
+      stakingAddress: string;
+      name: string;
+      versionId: string;
+    };
+  }>({
     abi: getContractABI('daoFactory'),
     data: event.data,
     topics: event.topics,
@@ -89,7 +99,7 @@ export function useDaoDeployment() {
       return {
         transactionHash: hash,
       } as DeploymentResult
-    } catch (error: any) {
+    } catch (error) {
       // Format and set error state
       transaction.setError(formatTransactionError(error))
       // Re-throw for component error handling

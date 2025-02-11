@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useChainId } from 'wagmi'
 import { isAddress } from 'viem'
 import { NetworkSelect } from '@components/NetworkSelect'
