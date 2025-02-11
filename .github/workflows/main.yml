@@ -83,9 +83,12 @@ jobs:
           git fetch origin
           git checkout main
           git pull origin main
+          docker-compose down
+          docker system prune -f 
+          docker-compose build --no-cache
           echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env
           echo "VITE_APP_VERSION=${VERSION}" >> .env  # Footer adds 'v' prefix
-          docker-compose up -d --build
+          docker-compose up -d
 
     - name: Purge Cloudflare Cache
       run: |
