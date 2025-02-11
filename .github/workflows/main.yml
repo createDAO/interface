@@ -83,11 +83,28 @@ jobs:
           git fetch origin
           git checkout main
           git pull origin main
+          
+          # Keep existing .env but update version variables
+          export VITE_APP_VERSION=${{ steps.get_version.outputs.VERSION }}
+          export VITE_COMMIT_HASH=${{ github.sha }}
+          
+          # Clean up and rebuild
           docker-compose down
-          docker system prune -f 
-          docker-compose build --no-cache
-          echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env
-          echo "VITE_APP_VERSION=${VERSION}" >> .env  # Footer adds 'v' prefix
+          docker system prune -f
+          
+          # Build with version args
+          docker-compose build \
+            --build-arg VITE_APP_VERSION=$VITE_APP_VERSION \
+            --build-arg VITE_COMMIT_HASH=$VITE_COMMIT_HASH \
+            --no-cache
+          
+          # Append version variables to existing .env
+          grep -v "VITE_COMMIT_HASH\|VITE_APP_VERSION" .env > .env.tmp || true
+          echo "VITE_COMMIT_HASH=$VITE_COMMIT_HASH" >> .env.tmp
+          echo "VITE_APP_VERSION=$VITE_APP_VERSION" >> .env.tmp
+          mv .env.tmp .env
+          
+          # Start containers
           docker-compose up -d
 
     - name: Purge Cloudflare Cache

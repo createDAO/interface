@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - VITE_APP_VERSION=${VITE_APP_VERSION}
+        - VITE_COMMIT_HASH=${VITE_COMMIT_HASH}
     restart: unless-stopped
     ports:
       - "80:80"
