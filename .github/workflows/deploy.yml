@@ -1,0 +1,55 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          
+      - name: Deploy to production
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          # Test SSH connection
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST "echo Connected successfully"
+          
+          # Get .env from server before build
+          scp -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/.env .
+          
+          # Copy files to server
+          rsync -avz --delete \
+            --exclude='.git*' \
+            --exclude='node_modules' \
+            -e "ssh -i ~/.ssh/deploy_key" \
+            ./ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+          
+          # Execute deployment commands
+          ssh -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST "\
+            cd $DEPLOY_PATH && \
+            docker-compose down && \
+            docker-compose up -d --build"
+
+      - name: Purge Cloudflare Cache
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
