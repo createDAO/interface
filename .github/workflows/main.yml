@@ -3,15 +3,7 @@ name: Production Deployment
 on:
   push:
     branches: [ main ]
-    paths-ignore:
-      - '.github/workflows/**'
-    tags-ignore:
-      - '**'
-
-# Add check to prevent parallel runs
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  
 
 env:
   NODE_VERSION: '20'
@@ -48,7 +40,9 @@ jobs:
     - name: Build Check
       run: npm run build
 
-  deploy:
+
+  deploy-production:
+
     name: Deploy to Production
     needs: [test]
     runs-on: ubuntu-latest
