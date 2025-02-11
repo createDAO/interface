@@ -63,9 +63,18 @@ jobs:
     - name: Get Version
       id: get_version
       run: |
-        git fetch --tags
-        LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.1.0")
-        echo "VERSION=${LATEST_TAG}" >> $GITHUB_OUTPUT
+        # Get version from package.json
+        VERSION=$(node -p "require('./package.json').version")
+        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+        
+        # Check if tag exists
+        if ! git rev-parse "v${VERSION}" >/dev/null 2>&1; then
+          # Create and push tag if it doesn't exist
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git tag -a "v${VERSION}" -m "Release v${VERSION}"
+          git push origin "v${VERSION}"
+        fi
 
     # Get Vercel Preview URL
     - name: Get Vercel Preview URL
@@ -102,7 +111,7 @@ jobs:
           git checkout main
           git pull origin main
           echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env
-          echo "VITE_APP_VERSION=${{ steps.get_version.outputs.VERSION }}" >> .env
+          echo "VITE_APP_VERSION=${VERSION}" >> .env  # Footer adds 'v' prefix
           docker-compose up -d --build
 
     - name: Purge Cloudflare Cache
@@ -118,10 +127,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.get_version.outputs.VERSION }}
-        release_name: Release ${{ steps.get_version.outputs.VERSION }}
+        tag_name: v${{ steps.get_version.outputs.VERSION }}
+        release_name: Release v${{ steps.get_version.outputs.VERSION }}
         body: |
-          Production deployment of version ${{ steps.get_version.outputs.VERSION }}
+          Production deployment of version v${{ steps.get_version.outputs.VERSION }}
           Commit: ${{ github.sha }}
         draft: false
         prerelease: false
