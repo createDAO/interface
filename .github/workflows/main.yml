@@ -76,6 +76,28 @@ jobs:
           git push origin "v${VERSION}"
         fi
 
+    # Get Vercel Preview URL
+    - name: Get Vercel Preview URL
+      uses: zentered/vercel-preview-url@v1.1.9
+      id: vercel_preview_url
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        GITHUB_REF: "main"
+        GITHUB_REPOSITORY: ${{ github.repository }}
+      with:
+        vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+
+    # Wait for Vercel deployment to be ready
+    - name: Wait for Vercel Deployment
+      uses: UnlyEd/github-action-await-vercel@v1
+      id: await-vercel
+      env:
+        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      with:
+        deployment-url: ${{ steps.vercel_preview_url.outputs.preview_url }}
+        timeout: 420 # 7 minutes
+        poll-interval: 15
+
     - name: Deploy to Production
       uses: appleboy/ssh-action@master
       with:
