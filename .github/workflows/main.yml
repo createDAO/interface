@@ -1,10 +1,14 @@
 name: CI/CD Pipeline
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     types: [opened, synchronize, reopened]
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '.github/workflows/**'  # Ignore workflow file changes
+    tags-ignore:
+      - '**'  # Ignore tag pushes
 
 # Define environment variables available to all jobs
 env:
