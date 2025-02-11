@@ -1,23 +1,25 @@
 import { useChainId } from 'wagmi'
 import { useWriteContract } from 'wagmi'
-import { parseEther, decodeEventLog, Log } from 'viem'
+import { parseEther, decodeEventLog, type Hex } from 'viem'
 import { env } from '../config/env'
 import { getContractAddresses, getContractABI } from '../config/contracts'
 import { DAOFormData, DeploymentResult } from '../types/dao'
 import { useTransaction, formatTransactionError } from './useTransaction'
-import { TransactionReceipt } from '../types/transaction'
+import type { TransactionReceipt } from '../types/transaction'
+import type { BaseError } from 'viem'
 
 // Helper to parse receipt for deployed addresses
 function parseReceipt(receipt: TransactionReceipt | undefined): DeploymentResult | null {
   if (!receipt) return null
 
   // Find the DAOCreated event
-  const event = receipt.logs.find((log: Log) => {
+  // Type assertion since we know the logs will be compatible with ViemLog
+  const event = receipt.logs.find((log) => {
     try {
       const decodedLog = decodeEventLog({
         abi: getContractABI('daoFactory'),
-        data: log.data,
-        topics: log.topics,
+        data: log.data as Hex,
+        topics: log.topics as [Hex, ...Hex[]],
       })
       return decodedLog.eventName === 'DAOCreated'
     } catch {
@@ -28,28 +30,29 @@ function parseReceipt(receipt: TransactionReceipt | undefined): DeploymentResult
   if (!event) return null
 
   // Decode the event data
-  const decodedEvent = decodeEventLog<{
-    args: {
-      daoAddress: string;
-      tokenAddress: string;
-      treasuryAddress: string;
-      stakingAddress: string;
-      name: string;
-      versionId: string;
-    };
-  }>({
+  const decodedEvent = decodeEventLog({
     abi: getContractABI('daoFactory'),
-    data: event.data,
-    topics: event.topics,
+    data: event.data as Hex,
+    topics: event.topics as [Hex, ...Hex[]],
   })
 
+  // Type assertion since we know the event structure
+  const args = decodedEvent.args as unknown as {
+    daoAddress: string;
+    tokenAddress: string;
+    treasuryAddress: string;
+    stakingAddress: string;
+    name: string;
+    versionId: string;
+  };
+
   return {
-    daoAddress: decodedEvent.args.daoAddress,
-    tokenAddress: decodedEvent.args.tokenAddress,
-    treasuryAddress: decodedEvent.args.treasuryAddress,
-    stakingAddress: decodedEvent.args.stakingAddress,
-    name: decodedEvent.args.name,
-    versionId: decodedEvent.args.versionId,
+    daoAddress: args.daoAddress,
+    tokenAddress: args.tokenAddress,
+    treasuryAddress: args.treasuryAddress,
+    stakingAddress: args.stakingAddress,
+    name: args.name,
+    versionId: args.versionId,
     transactionHash: receipt.transactionHash,
   }
 }
@@ -101,7 +104,7 @@ export function useDaoDeployment() {
       } as DeploymentResult
     } catch (error) {
       // Format and set error state
-      transaction.setError(formatTransactionError(error))
+      transaction.setError(formatTransactionError(error as BaseError))
       // Re-throw for component error handling
       throw error
     }
