@@ -53,7 +53,7 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     environment:
-      name: Live
+      name: Production
       url: https://createdao.org
     
     steps:
