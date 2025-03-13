@@ -41,7 +41,7 @@ export function TransactionStatus({
         </div>
       )}
 
-      {state.isSubmitting && (
+      {state.isSubmitting && !state.isWaitingForConfirmation && (
         <div className={styles.status}>
           <div className={styles.spinner} />
           <p>{defaultMessages.submitting}</p>

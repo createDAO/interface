@@ -79,15 +79,10 @@ jobs:
         # Update package.json
         npm version $NEW_VERSION --no-git-tag-version
         
-        # Update .env file if needed
-        if grep -q "VITE_DAO_VERSION=" .env; then
-          sed -i "s/VITE_DAO_VERSION=.*/VITE_DAO_VERSION=\"$NEW_VERSION\"/" .env
-        fi
-        
         # Commit the changes
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add package.json .env
+        git add package.json
         git commit -m "chore: bump version to $NEW_VERSION [skip ci]"
         git push
         
@@ -127,13 +122,12 @@ jobs:
         # Get .env from server before build
         scp -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/.env .
         
-        # Update version variables in .env
         grep -v "VITE_COMMIT_HASH\|VITE_APP_VERSION" .env > .env.tmp || true
         echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env.tmp
         
-        # Get the latest version from package.json
-        VERSION=$(node -p "require('./package.json').version")
-        echo "VITE_APP_VERSION=${VERSION}" >> .env.tmp
+        # Get the latest app version from package.json
+        APP_VERSION=$(node -p "require('./package.json').version")
+        echo "VITE_APP_VERSION=${APP_VERSION}" >> .env.tmp
         mv .env.tmp .env
         
         # Copy files to server
