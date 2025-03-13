@@ -16,23 +16,20 @@ RUN npm ci
 # Copy source code (excluding .env)
 COPY . .
 
-# Copy .env from build context and add build-time variables
+# Copy .env first (for other environment variables)
 COPY .env .
+
+# Add version and commit hash to .env
 RUN echo "VITE_COMMIT_HASH=${VITE_COMMIT_HASH}" >> .env && \
     echo "VITE_APP_VERSION=${VITE_APP_VERSION}" >> .env
 
-# Build the application with environment variables
-RUN set -a && \
-    . ./.env && \
-    set +a && \
-    npm run build
+# Build the application with all environment variables
+RUN npm run build
 
 # Production stage
 FROM nginx:alpine
 
-# Create app directory and copy .env
 WORKDIR /app
-COPY --from=build /app/.env .
 
 # Copy built assets from build stage
 COPY --from=build /app/dist /usr/share/nginx/html
