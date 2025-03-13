@@ -40,15 +40,17 @@ function DeployDao() {
     }
 
     if (!formData.symbol) {
-      newErrors.symbol = 'Token symbol is required'
-    } else if (formData.symbol.length > 5) {
-      newErrors.symbol = 'Symbol must be 5 characters or less'
+      newErrors.symbol = 'Symbol is required'
+    } else if (formData.symbol.length > 6) {
+      newErrors.symbol = 'Symbol must be 6 characters or less'
     }
 
     if (!formData.totalSupply) {
       newErrors.totalSupply = 'Total supply is required'
     } else if (isNaN(Number(formData.totalSupply)) || Number(formData.totalSupply) <= 0) {
       newErrors.totalSupply = 'Total supply must be a positive number'
+    } else if (Number(formData.totalSupply) >= 999999999999) {
+      newErrors.totalSupply = 'Total supply must be less than 999,999,999,999'
     }
 
     setErrors(newErrors)
