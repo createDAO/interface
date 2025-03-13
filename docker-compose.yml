@@ -38,7 +38,3 @@ services:
 networks:
   dao-network:
     driver: bridge
-    # Enable IPv6
-    enable_ipv6: true
-    driver_opts:
-      com.docker.network.enable_ipv6: "true"

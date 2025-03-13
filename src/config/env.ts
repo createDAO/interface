@@ -3,7 +3,10 @@ export const env = {
   defaultChain: import.meta.env.VITE_DEFAULT_CHAIN_ID,
   wallet: {
     projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
-    appName: import.meta.env.VITE_APP_NAME || 'createDAO'
+    appName: import.meta.env.VITE_APP_NAME || 'createDAO',
+    appDescription: import.meta.env.VITE_APP_DESCRIPTION || 'Create and deploy your DAO on any EVM network in minutes',
+    appUrl: import.meta.env.VITE_APP_URL || window.location.origin,
+    appIcon: import.meta.env.VITE_APP_ICON || '/src/assets/meta/og-image.png'
   },
   dao: {
     factoryAddress: import.meta.env.VITE_DAO_FACTORY_ADDRESS as `0x${string}`,
@@ -27,7 +30,7 @@ export const env = {
 // Wallet metadata for WalletConnect
 export const getWalletMetadata = () => ({
   name: env.wallet.appName,
-  description: 'createDAO - Create and manage DAOs',
-  url: window.location.origin,
-  icons: ['https://avatars.githubusercontent.com/u/37784886']
+  description: env.wallet.appDescription,
+  url: env.wallet.appUrl,
+  icons: [env.wallet.appIcon.startsWith('http') ? env.wallet.appIcon : `${window.location.origin}${env.wallet.appIcon}`]
 })

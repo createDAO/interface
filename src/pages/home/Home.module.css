@@ -4,42 +4,190 @@
   margin: 0 auto;
 }
 
-h1 {
-  font-size: 2.5rem;
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.heroTitle {
+  font-size: 3rem;
   margin-bottom: 1rem;
   color: var(--text-color);
+  background: linear-gradient(90deg, var(--primary-color), #4a90e2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-p {
-  font-size: 1.2rem;
+.heroSubtitle {
+  font-size: 1.5rem;
   color: var(--text-color);
-  opacity: 0.7;
-  max-width: 600px;
+  opacity: 0.9;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.subtitle {
-  font-size: 1.8rem;
-  margin: 2rem 0 1rem;
+.tutorialBanner {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #4a90e2 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  color: white;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tutorialBanner:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tutorialLink {
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: opacity 0.2s;
+}
+
+.tutorialLink:hover {
+  opacity: 0.9;
+  color: white;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.cardTitle {
+  font-size: 1.5rem;
   color: var(--text-color);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.cardTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.cardContent {
+  color: var(--text-color);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.cardContent p {
+  margin-bottom: 1.2rem;
+}
+
+.cardContent p:last-child {
+  margin-bottom: 0;
+}
+
+.warningCard {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
+  border-left: 4px solid #e74c3c;
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  counter-reset: step-counter;
+}
+
+.steps li {
+  margin-bottom: 1rem;
+  padding-left: 2.5rem;
+  position: relative;
+  color: var(--text-color);
+}
+
+.steps li::before {
+  content: counter(step-counter);
+  counter-increment: step-counter;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.contractGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.contractItem {
+  background: var(--card-bg-hover);
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+}
+
+.contractName {
+  font-weight: bold;
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .list {
-  list-style-position: inside;
-  max-width: 800px;
+  padding-left: 1.5rem;
   margin: 1rem 0;
 }
 
 .list li {
-  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
   color: var(--text-color);
-  opacity: 0.8;
-  margin-bottom: 1rem;
-  line-height: 1.5;
+}
+
+.highlight {
+  color: white;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .link {
-  color: #3498db;
-  text-decoration: none;
+  color: var(--primary-color);
+  text-decoration: underline;
   transition: opacity 0.2s;
 }
 
@@ -47,69 +195,38 @@ p {
   opacity: 0.8;
 }
 
-.intro {
-  font-size: 1.4rem;
-  color: var(--text-color);
-  margin: 2rem 0;
-  line-height: 1.6;
-}
-
-.section {
-  margin: 2.5rem 0;
-}
-
-.sectionTitle {
-  font-size: 1.6rem;
-  color: var(--text-color);
-  margin-bottom: 1rem;
-}
-
-.steps {
-  list-style: none;
-  padding: 0;
-}
-
-.steps li {
-  margin-bottom: 1rem;
-  line-height: 1.5;
-  color: var(--text-color);
-  opacity: 0.9;
-}
-
-.contractList {
-  background: rgba(52, 152, 219, 0.1);
+.ctaButton {
+  display: inline-block;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
   border-radius: 8px;
-  padding: 1.5rem;
-  margin: 1rem 0;
-}
-
-.contractList h4 {
-  margin: 0 0 1rem;
-  color: var(--text-color);
-  font-size: 1.2rem;
-}
-
-.contractItem {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-}
-
-.contractItem:last-child {
-  margin-bottom: 0;
-}
-
-.contractName {
   font-weight: bold;
-  margin-right: 0.5rem;
-  color: var(--text-color);
+  margin-top: 1rem;
+  transition: background 0.3s ease;
+  text-decoration: none;
 }
 
-.important {
-  background: rgba(231, 76, 60, 0.1);
-  border-radius: 8px;
-  padding: 1rem 1.5rem;
-  margin: 1rem 0;
-  color: var(--text-color);
-  font-weight: 500;
+.ctaButton:hover {
+  background: var(--primary-hover);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 5rem 1rem 1.5rem;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  
+  .contractGrid {
+    grid-template-columns: 1fr;
+  }
 }

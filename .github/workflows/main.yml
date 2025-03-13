@@ -1,15 +1,22 @@
-name: Production Deployment
+name: CI/CD Pipeline
 
 on:
+  pull_request:
+    types: [opened, synchronize, reopened]
   push:
     branches: [ main ]
-  
+    paths-ignore:
+      - '.github/workflows/**'  # Ignore workflow file changes
+    tags-ignore:
+      - '**'  # Ignore tag pushes
 
+# Define environment variables available to all jobs
 env:
   NODE_VERSION: '20'
 
 permissions:
-  contents: write
+  contents: write # Changed to write for release creation
+  pull-requests: write
   deployments: write
 
 jobs:
@@ -20,7 +27,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        fetch-depth: 0  # Fetch all history and tags
     
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -40,14 +47,16 @@ jobs:
     - name: Build Check
       run: npm run build
 
+  # Vercel handles test deployments automatically
+  # We only need to wait for its status check in production deployment
 
   deploy-production:
-
     name: Deploy to Production
     needs: [test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
-      name: Production
+      name: Live
       url: https://createdao.org
     
     steps:
@@ -83,29 +92,9 @@ jobs:
           git fetch origin
           git checkout main
           git pull origin main
-          
-          # Keep existing .env but update version variables
-          export VITE_APP_VERSION=${{ steps.get_version.outputs.VERSION }}
-          export VITE_COMMIT_HASH=${{ github.sha }}
-          
-          # Clean up and rebuild
-          docker-compose down
-          docker system prune -f
-          
-          # Build with version args
-          docker-compose build \
-            --build-arg VITE_APP_VERSION=$VITE_APP_VERSION \
-            --build-arg VITE_COMMIT_HASH=$VITE_COMMIT_HASH \
-            --no-cache
-          
-          # Append version variables to existing .env
-          grep -v "VITE_COMMIT_HASH\|VITE_APP_VERSION" .env > .env.tmp || true
-          echo "VITE_COMMIT_HASH=$VITE_COMMIT_HASH" >> .env.tmp
-          echo "VITE_APP_VERSION=$VITE_APP_VERSION" >> .env.tmp
-          mv .env.tmp .env
-          
-          # Start containers
-          docker-compose up -d
+          echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env
+          echo "VITE_APP_VERSION=${VERSION}" >> .env  # Footer adds 'v' prefix
+          docker-compose up -d --build
 
     - name: Purge Cloudflare Cache
       run: |
@@ -114,16 +103,16 @@ jobs:
         -H "Content-Type: application/json" \
         --data '{"purge_everything":true}'
 
-    - name: Create/Update Release
+    - name: Create Release
       if: success()
-      uses: softprops/action-gh-release@v1
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: v${{ steps.get_version.outputs.VERSION }}
-        name: Release v${{ steps.get_version.outputs.VERSION }}
+        release_name: Release v${{ steps.get_version.outputs.VERSION }}
         body: |
           Production deployment of version v${{ steps.get_version.outputs.VERSION }}
           Commit: ${{ github.sha }}
         draft: false
         prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

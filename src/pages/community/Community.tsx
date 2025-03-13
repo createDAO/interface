@@ -15,9 +15,9 @@ function Community() {
       icon: '🐦'
     },
     {
-      title: 'Documentation',
+      title: 'Support',
       description: 'Learn how to create and manage DAOs',
-      url: 'https://docs.createdao.org/',
+      url: 'https://daoforum.org/forums/createdao/',
       icon: '📚'
     },
     {

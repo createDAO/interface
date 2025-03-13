@@ -1,7 +1,7 @@
 :root {
   /* Light theme variables */
   --bg-color-light: #ffffff;
-  --text-color-light: #333333;
+  --text-color-light: #181818;
   --card-bg-light: #ffffff;
   --border-color-light: #e2e8f0;
   --card-bg-hover-light: #f8fafc;
@@ -47,7 +47,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .app {
@@ -80,9 +80,9 @@ main {
   background: var(--primary-color);
 }
 
-/* Smooth transitions for theme changes */
+/* Theme changes without text animations */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+  transition: background-color 0.3s ease, border-color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
