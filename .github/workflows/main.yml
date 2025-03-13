@@ -51,6 +51,48 @@ jobs:
   # Vercel handles test deployments automatically
   # We only need to wait for its status check in production deployment
 
+  version-bump:
+    name: Bump Version
+    needs: [test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        default_bump: patch
+        release_branches: main
+    
+    - name: Update package.json version
+      run: |
+        # Get the new version without 'v' prefix
+        NEW_VERSION="${{ steps.tag_version.outputs.new_version }}"
+        
+        # Update package.json
+        npm version $NEW_VERSION --no-git-tag-version
+        
+        # Update .env file if needed
+        if grep -q "VITE_DAO_VERSION=" .env; then
+          sed -i "s/VITE_DAO_VERSION=.*/VITE_DAO_VERSION=\"$NEW_VERSION\"/" .env
+        fi
+        
+        # Commit the changes
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add package.json .env
+        git commit -m "chore: bump version to $NEW_VERSION [skip ci]"
+        git push
+        
+        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
   deploy-production:
     name: Deploy to Production
     needs: [test]
