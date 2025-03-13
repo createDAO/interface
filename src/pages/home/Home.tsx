@@ -57,7 +57,7 @@ function Home() {
             </p>
             <p>
               <strong>Always use the latest version</strong> of CreateDAO since older versions 
-              might contain bugs and vulnerabilities. We're moving fast and fixing things as we go!
+              might contain bugs and vulnerabilities. We're moving fast and fixing things as we go! 
             </p>
             <p>
               Need Sepolia ETH for testing? <a 

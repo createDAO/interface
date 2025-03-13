@@ -51,9 +51,51 @@ jobs:
   # Vercel handles test deployments automatically
   # We only need to wait for its status check in production deployment
 
+  version-bump:
+    name: Bump Version
+    needs: [test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        default_bump: patch
+        release_branches: main
+    
+    - name: Update package.json version
+      run: |
+        # Get the new version without 'v' prefix
+        NEW_VERSION="${{ steps.tag_version.outputs.new_version }}"
+        
+        # Update package.json
+        npm version $NEW_VERSION --no-git-tag-version
+        
+        # Update .env file if needed
+        if grep -q "VITE_DAO_VERSION=" .env; then
+          sed -i "s/VITE_DAO_VERSION=.*/VITE_DAO_VERSION=\"$NEW_VERSION\"/" .env
+        fi
+        
+        # Commit the changes
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add package.json .env
+        git commit -m "chore: bump version to $NEW_VERSION [skip ci]"
+        git push
+        
+        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
   deploy-production:
     name: Deploy to Production
-    needs: [test]
+    needs: [version-bump]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
@@ -64,22 +106,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    
-    - name: Get Version
-      id: get_version
-      run: |
-        # Get version from package.json
-        VERSION=$(node -p "require('./package.json').version")
-        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
-        
-        # Check if tag exists
-        if ! git rev-parse "v${VERSION}" >/dev/null 2>&1; then
-          # Create and push tag if it doesn't exist
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git tag -a "v${VERSION}" -m "Release v${VERSION}"
-          git push origin "v${VERSION}"
-        fi
+        ref: main  # Ensure we get the latest commit with version bump
 
     - name: Set up SSH
       run: |
@@ -93,7 +120,6 @@ jobs:
         DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
-        VERSION: ${{ steps.get_version.outputs.VERSION }}
       run: |
         # Test SSH connection
         ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST "echo Connected successfully"
@@ -104,6 +130,9 @@ jobs:
         # Update version variables in .env
         grep -v "VITE_COMMIT_HASH\|VITE_APP_VERSION" .env > .env.tmp || true
         echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env.tmp
+        
+        # Get the latest version from package.json
+        VERSION=$(node -p "require('./package.json').version")
         echo "VITE_APP_VERSION=${VERSION}" >> .env.tmp
         mv .env.tmp .env
         
@@ -128,14 +157,20 @@ jobs:
         -H "Content-Type: application/json" \
         --data '{"purge_everything":true}'
 
-    - name: Create Release
+    - name: Get Version
+      id: get_version
+      run: |
+        # Get version from package.json
+        VERSION=$(node -p "require('./package.json').version")
+        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+    - name: Create GitHub Release
       if: success()
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: v${{ steps.get_version.outputs.VERSION }}
-        release_name: Release v${{ steps.get_version.outputs.VERSION }}
+        name: Release v${{ steps.get_version.outputs.VERSION }}
         body: |
           Production deployment of version v${{ steps.get_version.outputs.VERSION }}
           Commit: ${{ github.sha }}
