@@ -79,10 +79,15 @@ jobs:
         # Update package.json
         npm version $NEW_VERSION --no-git-tag-version
         
+        # Update .env file if needed
+        if grep -q "VITE_DAO_VERSION=" .env; then
+          sed -i "s/VITE_DAO_VERSION=.*/VITE_DAO_VERSION=\"$NEW_VERSION\"/" .env
+        fi
+        
         # Commit the changes
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add package.json
+        git add package.json .env
         git commit -m "chore: bump version to $NEW_VERSION [skip ci]"
         git push
         
@@ -90,7 +95,7 @@ jobs:
 
   deploy-production:
     name: Deploy to Production
-    needs: [version-bump]
+    needs: [test]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
@@ -100,8 +105,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        fetch-depth: 0
-        ref: main  # Ensure we get the latest commit with version bump
+        fetch-depth: 0  # Need full history for commit count
+    
+    - name: Generate Version
+      id: version
+      run: |
+        # Generate version based on commit count
+        VERSION="1.0.$(git rev-list --count HEAD)"
+        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+        echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
     - name: Set up SSH
       run: |
@@ -122,12 +134,10 @@ jobs:
         # Get .env from server before build
         scp -i ~/.ssh/deploy_key $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/.env .
         
+        # Update version variables in .env (preserves VITE_DAO_VERSION by only removing specific vars)
         grep -v "VITE_COMMIT_HASH\|VITE_APP_VERSION" .env > .env.tmp || true
         echo "VITE_COMMIT_HASH=${GITHUB_SHA}" >> .env.tmp
-        
-        # Get the latest app version from package.json
-        APP_VERSION=$(node -p "require('./package.json').version")
-        echo "VITE_APP_VERSION=${APP_VERSION}" >> .env.tmp
+        echo "VITE_APP_VERSION=${VERSION}" >> .env.tmp
         mv .env.tmp .env
         
         # Copy files to server
@@ -151,22 +161,14 @@ jobs:
         -H "Content-Type: application/json" \
         --data '{"purge_everything":true}'
 
-    - name: Get Version
-      id: get_version
-      run: |
-        # Get version from package.json
-        VERSION=$(node -p "require('./package.json').version")
-        echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
-        echo "VERSION=${VERSION}" >> $GITHUB_ENV
-
     - name: Create GitHub Release
       if: success()
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: v${{ steps.get_version.outputs.VERSION }}
-        name: Release v${{ steps.get_version.outputs.VERSION }}
+        tag_name: v${{ env.VERSION }}
+        name: Release v${{ env.VERSION }}
         body: |
-          Production deployment of version v${{ steps.get_version.outputs.VERSION }}
+          Production deployment of version v${{ env.VERSION }}
           Commit: ${{ github.sha }}
         draft: false
         prerelease: false
