@@ -68,7 +68,7 @@ function DeployDao() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateForm()) {
       return
     }
@@ -122,7 +122,7 @@ function DeployDao() {
           {address ? (
             <WalletButton />
           ) : (
-            <button 
+            <button
               onClick={() => setShowWalletPopup(true)}
               className={styles.connectButton}
             >
@@ -131,11 +131,17 @@ function DeployDao() {
           )}
         </div>
 
+        <div className={styles.noteContainer}>
+          <p className={styles.note}>
+            <strong>March 17, 2025 Update:</strong> The voting time has been changed from 3 days to 5 minutes for easier testing.
+            A new factory with an extended voting time will be deployed once the initial testing phase is complete.
+          </p>
+        </div>
+        
         <h1 className={styles.title}>Create DAO</h1>
         <p className={styles.description}>
           Create your DAO with a governance token
         </p>
-
         <div className={styles.selectors}>
           <div className={styles.formGroup}>
             <label htmlFor="network" className={styles.label}>Network</label>
@@ -143,7 +149,7 @@ function DeployDao() {
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="version" className={styles.label}>Version</label>
-            <VersionSelect 
+            <VersionSelect
               value={selectedVersion}
               onChange={setSelectedVersion}
             />
@@ -216,7 +222,7 @@ function DeployDao() {
           </button>
         </form>
 
-        <TransactionStatus 
+        <TransactionStatus
           state={txState}
           chainId={chainId}
           messages={{
