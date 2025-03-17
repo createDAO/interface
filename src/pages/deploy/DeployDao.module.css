@@ -86,6 +86,28 @@
   line-height: 1.5;
 }
 
+.noteContainer {
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+}
+
+.note {
+  background-color: rgba(255, 200, 0, 0.1);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 6px;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.note strong {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
 .selectors {
   display: grid;
   grid-template-columns: 1fr 1fr;
