@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react'
 import { useChainId, useSwitchChain, useAccount } from 'wagmi'
 import { useDaoDeployment } from '@hooks/useDaoDeployment'
 import { getContractAddresses } from '@config/contracts'
-import { getContractAddresses } from '@config/contracts'
 import { DAOFormData } from '../../types/dao'
 import { SUPPORTED_NETWORKS } from '@config/networks'
 import { TransactionStatus } from '@components/TransactionStatus'
@@ -17,7 +16,6 @@ function DeployDao() {
   const [showWalletPopup, setShowWalletPopup] = useState(false)
   const { address } = useAccount()
   const chainId = useChainId()
-  const { switchChain, isPending: isSwitchingNetwork } = useSwitchChain()
   const { switchChain, isPending: isSwitchingNetwork } = useSwitchChain()
   const { deploy, state: txState, deploymentData } = useDaoDeployment()
 
@@ -108,15 +106,7 @@ function DeployDao() {
     }
   }
 
-  // Check if the current network has deployed contracts
-  const hasDeployedContracts = (chainId: number | undefined): boolean => {
-    if (!chainId) return false;
-    const addresses = getContractAddresses(chainId);
-    return !!addresses && !!addresses.daoFactory && addresses.daoFactory !== '0x';
-  };
-
   const isWrongNetwork = chainId && !SUPPORTED_NETWORKS.find(n => n.id === chainId)
-  const noContractsForNetwork = chainId && !hasDeployedContracts(chainId);
   const noContractsForNetwork = chainId && !hasDeployedContracts(chainId);
 
   if (isWrongNetwork) {
@@ -154,9 +144,7 @@ function DeployDao() {
                 onClick={() => switchChain?.({ chainId: network.id })}
                 className={styles.networkButton}
                 disabled={isSwitchingNetwork}
-                disabled={isSwitchingNetwork}
               >
-                {isSwitchingNetwork ? 'Switching...' : `Switch to ${network.name}`}
                 {isSwitchingNetwork ? 'Switching...' : `Switch to ${network.name}`}
               </button>
             ))}
@@ -205,7 +193,6 @@ function DeployDao() {
         <div className={styles.selectors}>
           <div className={styles.formGroup}>
             <label htmlFor="network" className={styles.label}>Network</label>
-            <NetworkSelect onSwitchError={handleNetworkSwitchError} />
             <NetworkSelect onSwitchError={handleNetworkSwitchError} />
           </div>
           <div className={styles.formGroup}>

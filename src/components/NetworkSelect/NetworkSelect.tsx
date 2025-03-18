@@ -24,7 +24,7 @@ export function NetworkSelect({ onSwitchError }: NetworkSelectProps = {}) {
     const networkConfig = getFactoryAddress(newChainId)
     if (networkConfig.isAvailable) {
       try {
-        await switchChain({ chainId: newChainId as 1 | 11155111 | 56 | 8453 | 42161 | 43114 | 137 | 10 | 100 | 81457 | 534352 })
+        await switchChain({ chainId: newChainId as 11155111 | 1 | 56 | 8453 | 42161 | 43114 | 137 | 10 | 100 | 81457 | 534352 })
       } catch (err) {
         // Error will be handled by the useEffect above
         console.error('Network switch failed:', err)

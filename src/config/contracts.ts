@@ -13,7 +13,7 @@ export const getContractAddresses = (chainId: number) => {
     // },
   };
 
-  return addresses[chainId] || addresses[1]; // Default to mainnet addresses
+  return addresses[chainId] || addresses[11155111]; // Default to mainnet addresses
 };
 
 // DAO Factory ABI
