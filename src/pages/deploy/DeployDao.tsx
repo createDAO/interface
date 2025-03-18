@@ -32,7 +32,7 @@ function DeployDao() {
 
   // Handle network switch errors
   const handleNetworkSwitchError = (error: Error) => {
-    setNetworkSwitchError(`Failed to switch network: ${error.message}`);
+    setNetworkSwitchError(`Failed to switch network:  Your wallet does not support test networks. Error: ${error.message}`);
   }
 
   // Check if the current network has deployed contracts
