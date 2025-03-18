@@ -45,16 +45,16 @@ export const getFactoryAddress = (chainId: number): NetworkConfig => {
 
   // Future networks
   const comingSoonMessages: Record<number, string> = {
-    1: 'Coming to Ethereum Mainnet',
-    56: 'Coming to BSC',
-    8453: 'Coming to Base',
-    42161: 'Coming to Arbitrum',
-    43114: 'Coming to Avalanche',
-    137: 'Coming to Polygon',
-    10: 'Coming to Optimism',
-    100: 'Coming to Gnosis',
-    81457: 'Coming to Blast',
-    534352: 'Coming to Scroll'
+    1: 'Coming Soon',
+    56: 'Coming Soon',
+    8453: 'Coming Soon',
+    42161: 'Coming Soon',
+    43114: 'Coming Soon',
+    137: 'Coming Soon',
+    10: 'Coming Soon',
+    100: 'Coming Soon',
+    81457: 'Coming Soon',
+    534352: 'Coming Soon'
   }
 
   return {

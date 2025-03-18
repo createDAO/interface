@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useChainId, useSwitchChain, useAccount } from 'wagmi'
 import { useDaoDeployment } from '@hooks/useDaoDeployment'
+import { getContractAddresses } from '@config/contracts'
 import { DAOFormData } from '../../types/dao'
 import { SUPPORTED_NETWORKS } from '@config/networks'
 import { TransactionStatus } from '@components/TransactionStatus'
@@ -15,7 +16,7 @@ function DeployDao() {
   const [showWalletPopup, setShowWalletPopup] = useState(false)
   const { address } = useAccount()
   const chainId = useChainId()
-  const { switchChain } = useSwitchChain()
+  const { switchChain, isPending: isSwitchingNetwork } = useSwitchChain()
   const { deploy, state: txState, deploymentData } = useDaoDeployment()
 
   const [selectedVersion, setSelectedVersion] = useState(getCurrentVersion().id)
@@ -27,6 +28,19 @@ function DeployDao() {
   })
 
   const [errors, setErrors] = useState<Partial<DAOFormData>>({})
+  const [networkSwitchError, setNetworkSwitchError] = useState<string | null>(null)
+
+  // Handle network switch errors
+  const handleNetworkSwitchError = (error: Error) => {
+    setNetworkSwitchError(`Failed to switch network: ${error.message}`);
+  }
+
+  // Clear network switch error when chainId changes (successful switch)
+  React.useEffect(() => {
+    if (networkSwitchError) {
+      setNetworkSwitchError(null);
+    }
+  }, [chainId, networkSwitchError]);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<DAOFormData> = {}
@@ -80,7 +94,15 @@ function DeployDao() {
     }
   }
 
+  // Check if the current network has deployed contracts
+  const hasDeployedContracts = (chainId: number | undefined): boolean => {
+    if (!chainId) return false;
+    const addresses = getContractAddresses(chainId);
+    return !!addresses && !!addresses.daoFactory && addresses.daoFactory !== '0x';
+  };
+
   const isWrongNetwork = chainId && !SUPPORTED_NETWORKS.find(n => n.id === chainId)
+  const noContractsForNetwork = chainId && !hasDeployedContracts(chainId);
 
   if (isWrongNetwork) {
     return (
@@ -90,14 +112,25 @@ function DeployDao() {
           <p className={styles.description}>
             Please switch to a supported network to create your DAO
           </p>
+          {isSwitchingNetwork && (
+            <div className={styles.networkError}>
+              <p>Switching network... Please confirm in your wallet.</p>
+            </div>
+          )}
+          {networkSwitchError && (
+            <div className={styles.networkError}>
+              <p>{networkSwitchError}</p>
+            </div>
+          )}
           <div className={styles.networkButtons}>
             {SUPPORTED_NETWORKS.map((network) => (
               <button
                 key={network.id}
                 onClick={() => switchChain?.({ chainId: network.id })}
                 className={styles.networkButton}
+                disabled={isSwitchingNetwork}
               >
-                Switch to {network.name}
+                {isSwitchingNetwork ? 'Switching...' : `Switch to ${network.name}`}
               </button>
             ))}
           </div>
@@ -145,7 +178,7 @@ function DeployDao() {
         <div className={styles.selectors}>
           <div className={styles.formGroup}>
             <label htmlFor="network" className={styles.label}>Network</label>
-            <NetworkSelect />
+            <NetworkSelect onSwitchError={handleNetworkSwitchError} />
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="version" className={styles.label}>Version</label>
@@ -212,6 +245,16 @@ function DeployDao() {
             />
             {errors.totalSupply && <span className={styles.error}>{errors.totalSupply}</span>}
           </div>
+
+          {(noContractsForNetwork || networkSwitchError || isSwitchingNetwork) && (
+            <div className={styles.networkError}>
+              <p>
+                {isSwitchingNetwork ? "Switching network... Please confirm in your wallet." :
+                 networkSwitchError || 
+                 "Your current network not supported. Please switch to the Sepolia testnet."}
+              </p>
+            </div>
+          )}
 
           <button
             type="submit"

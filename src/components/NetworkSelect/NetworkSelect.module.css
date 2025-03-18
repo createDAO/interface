@@ -43,3 +43,26 @@
 .select option:disabled {
   color: var(--text-2);
 }
+
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.loadingText {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--bg-color);
+  border-radius: 4px;
+}
