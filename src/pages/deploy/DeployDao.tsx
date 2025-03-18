@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useChainId, useSwitchChain, useAccount } from 'wagmi'
 import { useDaoDeployment } from '@hooks/useDaoDeployment'
 import { getContractAddresses } from '@config/contracts'
@@ -35,12 +35,24 @@ function DeployDao() {
     setNetworkSwitchError(`Failed to switch network: ${error.message}`);
   }
 
-  // Clear network switch error when chainId changes (successful switch)
+  // Check if the current network has deployed contracts
+  const hasDeployedContracts = useCallback((chainId: number | undefined): boolean => {
+    if (!chainId) return false;
+    const addresses = getContractAddresses(chainId);
+    return !!addresses && !!addresses.daoFactory && addresses.daoFactory !== '0x';
+  }, []);
+
+  // Only clear network switch error when we successfully switch to a supported network
   React.useEffect(() => {
-    if (networkSwitchError) {
+    // Check if we're on a supported network with deployed contracts
+    const isOnSupportedNetwork = chainId && SUPPORTED_NETWORKS.some(n => n.id === chainId);
+    const hasContracts = hasDeployedContracts(chainId);
+    
+    // Only clear the error if we're on a supported network with contracts
+    if (networkSwitchError && isOnSupportedNetwork && hasContracts) {
       setNetworkSwitchError(null);
     }
-  }, [chainId, networkSwitchError]);
+  }, [chainId, networkSwitchError, hasDeployedContracts]);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<DAOFormData> = {}
@@ -94,13 +106,6 @@ function DeployDao() {
     }
   }
 
-  // Check if the current network has deployed contracts
-  const hasDeployedContracts = (chainId: number | undefined): boolean => {
-    if (!chainId) return false;
-    const addresses = getContractAddresses(chainId);
-    return !!addresses && !!addresses.daoFactory && addresses.daoFactory !== '0x';
-  };
-
   const isWrongNetwork = chainId && !SUPPORTED_NETWORKS.find(n => n.id === chainId)
   const noContractsForNetwork = chainId && !hasDeployedContracts(chainId);
 
@@ -112,14 +117,24 @@ function DeployDao() {
           <p className={styles.description}>
             Please switch to a supported network to create your DAO
           </p>
-          {isSwitchingNetwork && (
+          {/* Show network errors with priority: 1. Switching 2. Error */}
+          {(isSwitchingNetwork || networkSwitchError) && (
             <div className={styles.networkError}>
-              <p>Switching network... Please confirm in your wallet.</p>
-            </div>
-          )}
-          {networkSwitchError && (
-            <div className={styles.networkError}>
-              <p>{networkSwitchError}</p>
+              <p>
+                {isSwitchingNetwork 
+                  ? "Switching network... Please confirm in your wallet." 
+                  : <>
+                      {networkSwitchError}
+                      <button 
+                        onClick={() => setNetworkSwitchError(null)} 
+                        className={styles.dismissButton}
+                        aria-label="Dismiss error"
+                      >
+                        ✕
+                      </button>
+                    </>
+                }
+              </p>
             </div>
           )}
           <div className={styles.networkButtons}>
@@ -246,12 +261,25 @@ function DeployDao() {
             {errors.totalSupply && <span className={styles.error}>{errors.totalSupply}</span>}
           </div>
 
-          {(noContractsForNetwork || networkSwitchError || isSwitchingNetwork) && (
+          {/* Show network errors with priority: 1. Switching 2. Error 3. Unsupported */}
+          {(isSwitchingNetwork || networkSwitchError || noContractsForNetwork) && (
             <div className={styles.networkError}>
               <p>
-                {isSwitchingNetwork ? "Switching network... Please confirm in your wallet." :
-                 networkSwitchError || 
-                 "Your current network not supported. Please switch to the Sepolia testnet."}
+                {isSwitchingNetwork 
+                  ? "Switching network... Please confirm in your wallet." 
+                  : networkSwitchError 
+                    ? <>
+                        {networkSwitchError}
+                        <button 
+                          onClick={() => setNetworkSwitchError(null)} 
+                          className={styles.dismissButton}
+                          aria-label="Dismiss error"
+                        >
+                          ✕
+                        </button>
+                      </>
+                    : "Your current network not supported. Please switch to the Sepolia testnet."
+                }
               </p>
             </div>
           )}
