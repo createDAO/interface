@@ -40,7 +40,7 @@ function DeployDao() {
     if (networkSwitchError) {
       setNetworkSwitchError(null);
     }
-  }, [chainId]);
+  }, [chainId, networkSwitchError]);
 
   const validateForm = (): boolean => {
     const newErrors: Partial<DAOFormData> = {}
