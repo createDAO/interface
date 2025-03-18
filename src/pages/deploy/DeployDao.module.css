@@ -173,6 +173,25 @@
   font-size: 0.95rem;
   font-weight: 500;
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dismissButton {
+  background: none;
+  border: none;
+  color: var(--error-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.dismissButton:hover {
+  background-color: rgba(255, 0, 0, 0.1);
 }
 
 .submitButton {
