@@ -9,8 +9,6 @@ services:
         - VITE_APP_VERSION=${VITE_APP_VERSION}
         - VITE_COMMIT_HASH=${VITE_COMMIT_HASH}
     restart: unless-stopped
-    ports:
-      - "80:80"
     environment:
       - NODE_ENV=production
       - NGINX_SERVER_NAME=${NGINX_SERVER_NAME}
