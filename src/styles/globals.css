@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Color scheme */
+  --color-primary-100: oklch(0.98 0.04 250);
+  --color-primary-200: oklch(0.95 0.08 250);
+  --color-primary-300: oklch(0.90 0.12 250);
+  --color-primary-400: oklch(0.85 0.16 250);
+  --color-primary-500: oklch(0.80 0.20 250);
+  --color-primary-600: oklch(0.70 0.22 250);
+  --color-primary-700: oklch(0.60 0.24 250);
+  --color-primary-800: oklch(0.50 0.22 250);
+  --color-primary-900: oklch(0.40 0.20 250);
+  
+  /* Light/dark mode variables */
+  --bg-light: oklch(0.98 0 0);
+  --bg-dark: oklch(0.15 0 0);
+  --text-light: oklch(0.15 0 0);
+  --text-dark: oklch(0.98 0 0);
+  
+  /* Spacing and layout */
+  --spacing: 0.25rem;
+  --container-padding: calc(var(--spacing) * 6);
+  --border-radius: 0.5rem;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-200;
+}
+
+/* Custom utilities */
+@layer utilities {
+  .container-padding {
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+}
