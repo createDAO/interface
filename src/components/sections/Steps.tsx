@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Steps: React.FC = () => {
   const steps = [
@@ -81,9 +82,9 @@ const Steps: React.FC = () => {
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
           </div>
           <div>
-            <button className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200">
+            <Link href="/create" className="inline-block bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer">
               Create Your DAO
-            </button>
+            </Link>
           </div>
         </div>
       </div>

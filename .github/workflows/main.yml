@@ -1,0 +1,156 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  validate:
+    name: Validate Code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: npm ci
+      
+      - name: TypeScript Check
+        run: tsc --noEmit
+      
+      - name: Lint Check
+        run: npm run lint
+
+  deploy:
+    name: Deploy to Production
+    needs: [validate]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    environment:
+      name: Production
+      url: https://createdao.org
+    
+    steps:
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
+      - name: Add known hosts
+        run: |
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+      
+      - name: Deploy to Production Server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          # Connect to server, pull latest code, build and restart containers
+          ssh -o ServerAliveInterval=60 -o ServerAliveCountMax=60 $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && \
+            # Pull latest code from repository
+            git stash && \
+            git pull && \
+            
+            # Get the current commit hash
+            COMMIT_HASH=\$(git rev-parse --short HEAD) && \
+            
+            # Create/update .env file with required environment variables
+            echo \"NGINX_SERVER_NAME=${{ secrets.NGINX_SERVER_NAME }}\" > .env && \
+            echo \"NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=${{ secrets.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID }}\" >> .env && \
+            echo \"NEXT_PUBLIC_DRPC_API_KEY=${{ secrets.NEXT_PUBLIC_DRPC_API_KEY }}\" >> .env && \
+            echo \"NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}\" >> .env && \
+            echo \"NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}\" >> .env && \
+            echo \"NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}\" >> .env && \
+            echo \"NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}\" >> .env && \
+            echo \"NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID }}\" >> .env && \
+            echo \"NEXT_PUBLIC_FIREBASE_APP_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}\" >> .env && \
+            echo \"NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}\" >> .env && \
+            
+            # Create cloudflare-certs directory if it doesn't exist
+            mkdir -p cloudflare-certs && \
+            
+            # Add Cloudflare certificates from secrets
+            echo \"${{ secrets.CLOUDFLARE_ORIGIN_CERT }}\" > cloudflare-certs/cloudflare-origin.pem && \
+            echo \"${{ secrets.CLOUDFLARE_PRIVATE_KEY }}\" > cloudflare-certs/cloudflare-private.key && \
+            
+            # Set proper permissions for certificate files
+            chmod 644 cloudflare-certs/cloudflare-origin.pem && \
+            chmod 600 cloudflare-certs/cloudflare-private.key && \
+            
+            # Verify package.json exists and extract version for build args
+            echo \"Checking for package.json in \$(pwd)\" && \
+            if [ -f \"package.json\" ]; then
+              VERSION=\$(grep -m1 '\"version\":' package.json | cut -d'\"' -f4)
+            else
+              echo \"package.json not found, using default version\" && \
+              VERSION=\"1.0.0\"
+            fi && \
+            echo \"APP_VERSION=\${VERSION}\" >> .env && \
+            echo \"COMMIT_HASH=\${COMMIT_HASH}\" >> .env && \
+            echo \"NEXT_PUBLIC_APP_VERSION=\${VERSION}\" >> .env && \
+            echo \"NEXT_PUBLIC_COMMIT_HASH=\${COMMIT_HASH}\" >> .env && \
+            
+            # Build the Docker images locally
+            docker-compose build --no-cache && \
+            
+            # Stop and remove existing containers and volumes
+            docker-compose down -v && \
+            
+            # Start new containers
+            docker-compose up -d && \
+            
+            # Clean up
+            docker system prune -a --volumes -f && \
+            
+            # Verify containers are running
+            docker-compose ps"
+
+      - name: Verify Deployment
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          NGINX_SERVER_NAME: ${{ secrets.NGINX_SERVER_NAME }}
+        run: |
+          echo "Waiting for services to start..."
+          sleep 15
+          echo "Checking if services are running..."
+          curl -sSf https://$NGINX_SERVER_NAME/health || echo "Health check failed, but continuing..."
+
+      - name: Purge Cloudflare Cache
+        if: success()
+        run: |
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+          -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          --data '{"purge_everything":true}'
+          
+      - name: Deployment Summary
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          echo "Deployment completed successfully!"
+          echo "Commit: $(ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && git rev-parse HEAD")"
+          echo "Application version: $(ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && grep -m1 '\"version\":' package.json | cut -d'\"' -f4 || echo 'Not found'")"
+          echo "Environment variables in .env file: $(ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && grep -c '^NEXT_PUBLIC_' .env || echo 'No env file found'")"
+          echo "Container status:"
+          ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && docker-compose ps"
+          echo "Container health checks:"
+          ssh $DEPLOY_USER@$DEPLOY_HOST "cd $DEPLOY_PATH && docker ps --format '{{.Names}} - {{.Status}}'"

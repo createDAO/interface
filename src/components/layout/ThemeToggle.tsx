@@ -1,31 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
 
 const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  // Use state to track client-side rendering
+  const [mounted, setMounted] = useState(false);
+  
+  // After hydration, set mounted to true
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Default to light theme for server rendering
+  const clientTheme = mounted ? theme : 'light';
+  const isDarkMode = clientTheme === 'dark';
+
+  // Moon icon path (for light mode)
+  const moonPath = "M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z";
+  
+  // Sun icon path (for dark mode)
+  const sunPath = "M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z";
 
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200"
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200 cursor-pointer"
+      aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
     >
-      {theme === 'light' ? (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 text-gray-800"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-          />
-        </svg>
-      ) : (
+      {isDarkMode ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5 text-yellow-300"
@@ -37,7 +39,22 @@ const ThemeToggle: React.FC = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            d={sunPath}
+          />
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5 text-gray-800"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d={moonPath}
           />
         </svg>
       )}

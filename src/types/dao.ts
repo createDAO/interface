@@ -26,7 +26,13 @@ export interface NetworkInfo {
   id: number;
   name: string;
   isTestnet: boolean;
-  icon?: string;
+  icon?: string | import('next/image').StaticImageData;
+  isAvailable?: boolean;
+  nativeCurrency?: {
+    name: string;
+    symbol: string;
+    decimals: number;
+  };
 }
 
 export interface DAOVersion {

@@ -11,7 +11,7 @@ const DAO_FACTORY_ABI = [
       },
       {
         "internalType": "string",
-        "name": "daoName",
+        "name": "name",
         "type": "string"
       },
       {
@@ -21,17 +21,38 @@ const DAO_FACTORY_ABI = [
       },
       {
         "internalType": "string",
-        "name": "symbol",
+        "name": "tokenSymbol",
         "type": "string"
       },
       {
         "internalType": "uint256",
-        "name": "totalSupply",
+        "name": "initialSupply",
         "type": "uint256"
       }
     ],
     "name": "createDAO",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "daoAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "treasuryAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "stakingAddress",
+        "type": "address"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -41,23 +62,17 @@ const DAO_FACTORY_ABI = [
       {
         "indexed": true,
         "internalType": "address",
-        "name": "creator",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
         "name": "daoAddress",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "tokenAddress",
         "type": "address"
       },
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "treasuryAddress",
         "type": "address"

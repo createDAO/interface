@@ -11,12 +11,16 @@ interface TransactionStatusProps {
     waitingForConfirmation?: string;
     success?: string;
     error?: string;
+    checkingBalance?: string;
+    balanceError?: string;
+    simulating?: string;
+    simulationError?: string;
   };
   className?: string;
 }
 
-export function TransactionStatus({ 
-  state, 
+export function TransactionStatus({
+  state,
   chainId,
   messages = {},
   className = ''
@@ -27,13 +31,118 @@ export function TransactionStatus({
     waitingForConfirmation: 'Waiting for confirmation...',
     success: 'Transaction successful!',
     error: 'Transaction failed',
+    checkingBalance: 'Checking wallet balance...',
+    balanceError: 'Insufficient balance',
+    simulating: 'Simulating transaction...',
+    simulationError: 'Transaction simulation failed',
     ...messages
   };
+
+
+  // Helper to determine if we should show a retry button
+  const canRetry = React.useMemo(() => {
+    if (!state.isError) return false;
+
+    // Don't show retry for user rejections or insufficient funds
+    if (state.error?.name === 'UserRejectedError' ||
+      state.error?.name === 'InsufficientFundsError') {
+      return false;
+    }
+
+    // Show retry for network errors, timeouts, and some other errors
+    return ['NetworkError', 'TimeoutError', 'TransactionTimeoutError',
+      'ChainDisconnectedError', 'TransactionUnderpricedError'].includes(state.error?.name || '');
+  }, [state.isError, state.error?.name]);
 
   if (state.isIdle) return null;
 
   return (
     <div className={`rounded-lg p-4 my-4 ${className}`}>
+      {/* Balance check status */}
+      {state.isCheckingBalance && (
+        <div className="flex items-center">
+          <div className="animate-spin h-5 w-5 mr-3 border-2 border-primary-500 border-t-transparent rounded-full"></div>
+          <p className="text-gray-700 dark:text-gray-300">{defaultMessages.checkingBalance}</p>
+        </div>
+      )}
+
+      {state.isBalanceChecked && state.balanceCheckResult && !state.balanceCheckResult.sufficient && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-4">
+          <div className="flex items-center mb-2">
+            <div className="bg-red-500 dark:bg-red-400 rounded-full p-1 mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <p className="text-red-700 dark:text-red-300 font-medium">{defaultMessages.balanceError}</p>
+          </div>
+
+          <div className="bg-red-100 dark:bg-red-900/30 rounded-md p-3 mt-2">
+            <p className="text-red-600 dark:text-red-400 text-sm">
+              <strong>Insufficient balance:</strong> You need <strong>{(
+                (Number(state.balanceCheckResult.required) - Number(state.balanceCheckResult.balance)) / 1e18
+              ).toFixed(6)} {state.balanceCheckResult.symbol}</strong> more to complete this transaction.
+            </p>
+          </div>
+
+        </div>
+      )}
+
+      {/* Simulation status */}
+      {state.isSimulating && (
+        <div className="flex items-center">
+          <div className="animate-spin h-5 w-5 mr-3 border-2 border-primary-500 border-t-transparent rounded-full"></div>
+          <p className="text-gray-700 dark:text-gray-300">{defaultMessages.simulating}</p>
+        </div>
+      )}
+
+      {state.isSimulated && state.simulationResult && !state.simulationResult.success && (
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-4">
+          <div className="flex items-center mb-2">
+            <div className="bg-red-500 dark:bg-red-400 rounded-full p-1 mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <p className="text-red-700 dark:text-red-300 font-medium">{defaultMessages.simulationError}</p>
+          </div>
+          {state.simulationResult.error && (
+            <div className="bg-red-100 dark:bg-red-900/30 rounded-md p-3 mt-2">
+              <p className="text-red-600 dark:text-red-400 text-sm">
+                {(() => {
+                  const error = state.simulationResult.error || '';
+
+                  // Extract only the relevant part for contract function errors
+                  if (error.includes('The contract function')) {
+                    // Split the error message at "Contract Call:" and take only the first part
+                    const parts = error.split('Contract Call:');
+                    if (parts.length > 1) {
+                      // Further extract the function name and reason from the first part
+                      const firstPart = parts[0];
+                      const match = firstPart.match(/The contract function "([^"]+)" reverted with the following reason: (.+)/);
+                      if (match) {
+                        return `${match[1]}: ${match[2].trim()}`;
+                      }
+                      return firstPart.trim(); // Fallback to just returning the first part
+                    }
+                    
+                    // If "Contract Call:" isn't found, try the regex approach as a fallback
+                    const match = error.match(/The contract function "([^"]+)" reverted with the following reason: (.+)/);
+                    if (match) {
+                      return `${match[1]}: ${match[2].trim()}`;
+                    }
+                  }
+
+                  // Return the original error if no pattern match
+                  return error;
+                })()}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Transaction signature status */}
       {state.isWaitingForSignature && (
         <div className="flex items-center">
           <div className="animate-spin h-5 w-5 mr-3 border-2 border-primary-500 border-t-transparent rounded-full"></div>
@@ -41,6 +150,7 @@ export function TransactionStatus({
         </div>
       )}
 
+      {/* Transaction submission status */}
       {state.isSubmitting && !state.isWaitingForConfirmation && (
         <div className="flex items-center">
           <div className="animate-spin h-5 w-5 mr-3 border-2 border-primary-500 border-t-transparent rounded-full"></div>
@@ -55,7 +165,7 @@ export function TransactionStatus({
             <p className="text-blue-700 dark:text-blue-300 font-medium">{defaultMessages.waitingForConfirmation}</p>
           </div>
           {state.hash && (
-            <a 
+            <a
               href={`${getExplorerUrl(chainId)}/tx/${state.hash}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -81,7 +191,7 @@ export function TransactionStatus({
             <p className="text-green-700 dark:text-green-300 font-medium">{defaultMessages.success}</p>
           </div>
           {state.hash && (
-            <a 
+            <a
               href={`${getExplorerUrl(chainId)}/tx/${state.hash}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -106,22 +216,126 @@ export function TransactionStatus({
             </div>
             <p className="text-red-700 dark:text-red-300 font-medium">{state.error?.shortMessage || defaultMessages.error}</p>
           </div>
+
           {state.error?.details && (
-            <p className="text-red-600 dark:text-red-400 text-sm mt-2 ml-8">{state.error.details}</p>
+            <div className="bg-red-100 dark:bg-red-900/30 rounded-md p-3 mt-2 mb-3">
+              <p className="text-red-600 dark:text-red-400 text-sm">{state.error.details}</p>
+            </div>
           )}
-          {state.hash && (
-            <a 
-              href={`${getExplorerUrl(chainId)}/tx/${state.hash}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-red-600 dark:text-red-400 hover:underline text-sm flex items-center mt-2"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-              View on Explorer
-            </a>
+
+          {/* Specific error guidance based on error type */}
+          {state.error?.name === 'TransactionTimeoutError' && (
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                <strong>Tip:</strong> Your transaction might still be processing. Check the explorer to see its status.
+              </p>
+            </div>
           )}
+
+          {state.error?.name === 'InsufficientFundsError' && (
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                <strong>Tip:</strong> Add more funds to your wallet and try again.
+              </p>
+            </div>
+          )}
+
+          {state.error?.name === 'GasLimitExceededError' && (
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                <strong>Tip:</strong> Try increasing the gas limit in your wallet settings.
+              </p>
+            </div>
+          )}
+
+          {state.error?.name === 'TransactionUnderpricedError' && (
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                <strong>Tip:</strong> Try increasing the gas price in your wallet settings.
+              </p>
+            </div>
+          )}
+
+          {state.error?.name === 'NonceError' && (
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                <strong>Tip:</strong> Try resetting your wallet&#39;s transaction history or adjusting the nonce manually.
+              </p>
+            </div>
+          )}
+
+          {/* Wallet connection errors */}
+          {state.error?.name === 'ConnectorNotConnectedError' && (
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                <strong>Tip:</strong> Your wallet is disconnected. Please reconnect your wallet and try again.
+              </p>
+              <button
+                onClick={() => window.location.reload()}
+                className="mt-2 text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center cursor-pointer"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Refresh Page
+              </button>
+            </div>
+          )}
+
+          {/* Authorization errors */}
+          {state.error?.name === 'WalletAuthorizationError' && (
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                <strong>Tip:</strong> Your wallet needs permission to interact with this contract. Open your wallet and check for permission requests.
+              </p>
+              <div className="mt-2 space-y-2">
+                <p className="text-yellow-700 dark:text-yellow-300 text-sm font-medium">Steps to fix:</p>
+                <ol className="list-decimal list-inside text-yellow-700 dark:text-yellow-300 text-sm space-y-1 pl-2">
+                  <li>Open your wallet (MetaMask, etc.)</li>
+                  <li>Look for pending permission requests</li>
+                  <li>Grant permission to the contract</li>
+                  <li>Try the transaction again</li>
+                </ol>
+              </div>
+            </div>
+          )}
+
+          {/* User rejected transaction */}
+          {state.error?.name === 'UserRejectedError' && (
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
+              <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                <strong>Note:</strong> You rejected the transaction in your wallet. If this was unintentional, please try again.
+              </p>
+            </div>
+          )}
+
+          <div className="flex flex-wrap items-center gap-3 mt-3">
+            {state.hash && (
+              <a
+                href={`${getExplorerUrl(chainId)}/tx/${state.hash}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-600 dark:text-red-400 hover:underline text-sm flex items-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                View on Explorer
+              </a>
+            )}
+
+            {canRetry && (
+              <button
+                onClick={() => window.location.reload()}
+                className="text-blue-600 dark:text-blue-400 hover:underline text-sm flex items-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Retry Transaction
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>

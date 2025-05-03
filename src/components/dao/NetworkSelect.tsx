@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useChainId, useSwitchChain } from 'wagmi';
 import { SUPPORTED_NETWORKS } from '../../config/networks';
 import { getFactoryAddress } from '../../config/dao';
@@ -13,17 +13,20 @@ export function NetworkSelect({ onSwitchError, className = '' }: NetworkSelectPr
   const { switchChain, isPending, error } = useSwitchChain();
 
   // If there's an error, pass it to the parent component
-  React.useEffect(() => {
+  useEffect(() => {
     if (error && onSwitchError) {
       onSwitchError(error);
     }
   }, [error, onSwitchError]);
 
+
   const handleNetworkChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newChainId = Number(e.target.value);
     const networkConfig = getFactoryAddress(newChainId);
+
     if (networkConfig.isAvailable) {
       try {
+        // Switch to the chain
         await switchChain({ chainId: newChainId });
       } catch (err) {
         // Error will be handled by the useEffect above

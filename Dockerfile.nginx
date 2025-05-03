@@ -1,0 +1,23 @@
+FROM nginx:alpine
+
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Create directories for Next.js files
+RUN mkdir -p /usr/share/nginx/html/_next/static && \
+    mkdir -p /usr/share/nginx/html/public && \
+    mkdir -p /usr/share/nginx/html/_next
+
+# Ensure nginx user has proper permissions
+RUN chown -R nginx:nginx /usr/share/nginx/html && \
+    chmod -R 755 /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget --quiet --tries=1 --spider http://localhost:80/health || exit 1
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

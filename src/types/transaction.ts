@@ -7,9 +7,19 @@ export interface TransactionState {
   isWaitingForConfirmation: boolean;
   isSuccess: boolean;
   isError: boolean;
+  // Pre-deployment checks
+  isCheckingBalance?: boolean;
+  isBalanceChecked?: boolean;
+  isBalanceError?: boolean;
+  isSimulating?: boolean;
+  isSimulated?: boolean;
+  isSimulationError?: boolean;
   error?: TransactionError;
   hash?: Hash;
   receipt?: TransactionReceipt;
+  // Additional data for pre-deployment
+  simulationResult?: SimulationResult;
+  balanceCheckResult?: BalanceCheckResult;
 }
 
 export interface TransactionError {
@@ -17,6 +27,19 @@ export interface TransactionError {
   name: string;
   shortMessage: string;
   details?: string;
+}
+
+export interface SimulationResult {
+  success: boolean;
+  gasUsed?: bigint;
+  error?: string;
+}
+
+export interface BalanceCheckResult {
+  sufficient: boolean;
+  balance?: bigint;
+  required?: bigint;
+  symbol?: string;
 }
 
 export interface TransactionReceipt {

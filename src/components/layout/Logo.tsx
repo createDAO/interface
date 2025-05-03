@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from './ThemeContext';
 
 interface LogoProps {
@@ -7,7 +7,16 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className = '' }) => {
   const { theme } = useContext(ThemeContext);
-  const isDarkMode = theme === 'dark';
+  // Use state to track client-side rendering
+  const [mounted, setMounted] = useState(false);
+  
+  // After hydration, set mounted to true
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Only use the theme context after client-side hydration
+  const isDarkMode = mounted ? theme === 'dark' : false;
 
   return (
     <svg 
@@ -19,9 +28,9 @@ const Logo: React.FC<LogoProps> = ({ className = '' }) => {
       preserveAspectRatio="xMidYMid meet"
       className={className}
     >
-      {/* Circle */}
+      {/* Circle - always use black for initial server render */}
       <circle cx="20" cy="20" r="20" fill={isDarkMode ? 'white' : 'black'}/>
-      {/* Text */}
+      {/* Text - always use black for initial server render */}
       <text
         x="48"
         y="27.5"

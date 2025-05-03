@@ -1,5 +1,5 @@
 {
-  "name": "createdaov2",
+  "name": "createdao",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,24 +8,43 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "dao",
+    "ethereum",
+    "blockchain",
+    "web3",
+    "governance",
+    "defi"
+  ],
+  "author": "Dikobay",
+  "license": "BSL-1.1",
+  "description": "A web application for creating and deploying DAOs on multiple EVM blockchains",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/createDAO/interface"
+  },
+  
   "dependencies": {
+    "@tanstack/react-query": "^5.74.11",
+    "firebase": "^11.6.0",
+    "next": "^15.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "shiki": "^3.3.0",
+    "viem": "^2.7.9",
+    "wagmi": "^2.5.7"
+  },
+
+  "devDependencies": {
+    "eslint": "9.25.1",
+    "eslint-config-next": "15.3.1",
     "@tailwindcss/postcss": "^4.1.4",
-    "@tailwindcss/vite": "^4.1.4",
+    "@tanstack/react-query-devtools": "^5.74.11",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "next": "^15.3.1",
     "postcss": "^8.5.3",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.4",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.2",
-    "viem": "^2.7.9",
-    "wagmi": "^2.5.7"
+    "typescript": "^5.8.3"
   }
 }

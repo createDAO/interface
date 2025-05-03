@@ -1,7 +1,7 @@
 // Environment variables with defaults
 export const env = {
   dao: {
-    version: 'v2', // Default DAO version
+    version: '1.0.0', // Default DAO version
     factoryAddress: {
       // Default factory addresses by chain ID
       1: '', // Ethereum Mainnet
@@ -12,5 +12,5 @@ export const env = {
     name: 'CreateDAO',
     description: 'Create and Deploy DAOs on Multiple Blockchains',
     url: 'https://createdao.org',
-  }
+  },
 };

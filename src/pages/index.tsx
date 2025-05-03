@@ -5,6 +5,7 @@ import Hero from '../components/sections/Hero';
 import Steps from '../components/sections/Steps';
 import Features from '../components/sections/Features';
 import Networks from '../components/sections/Networks';
+import ManagementPlatforms from '../components/sections/ManagementPlatforms';
 import CTA from '../components/sections/CTA';
 import FAQ from '../components/sections/FAQ';
 
@@ -15,7 +16,7 @@ const Home: React.FC = () => {
         <title>CreateDAO - Create and Deploy DAOs on Multiple Blockchains</title>
         <meta name="description" content="The easiest way to create and deploy DAOs on multiple blockchains. Open source, secure, and always free." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         
         {/* Open Graph / Social Media Meta Tags */}
         <meta property="og:title" content="CreateDAO - Create and Deploy DAOs on Multiple Blockchains" />
@@ -35,6 +36,7 @@ const Home: React.FC = () => {
       <Steps />
       <Features />
       <Networks />
+      <ManagementPlatforms />
       <CTA />
       <FAQ />
     </Layout>
