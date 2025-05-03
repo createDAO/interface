@@ -12,13 +12,7 @@ export const DAO_VERSIONS: DAOVersion[] = [
     name: "v1.0.1",
     description: "Upcoming DAO factory changes",
     isAvailable: false,
-  },
-  {
-    id: "1.0.2",
-    name: "v1.0.2",
-    description: "Upcoming DAO factory changes",
-    isAvailable: true,
-  },
+  }
 ];
 
 interface FactoryAddressConfig {
