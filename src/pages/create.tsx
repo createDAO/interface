@@ -450,7 +450,7 @@ const CreateDAO: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>Create DAO | DAO Cafe</title>
+        <title>Create Your DAO | CreateDAO</title>
         <meta name="description" content="Create your own DAO with customizable governance and token parameters" />
       </Head>
 

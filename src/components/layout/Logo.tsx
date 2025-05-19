@@ -41,7 +41,7 @@ const Logo: React.FC<LogoProps> = ({ className = '' }) => {
           letterSpacing: '0.25px'
         }}
       >
-        createDAO
+        CreateDAO
       </text>
     </svg>
   );
