@@ -1,0 +1,23 @@
+{
+  "title": "Pertanyaan Umum",
+  "subtitle": "Semua yang perlu Anda ketahui tentang CreateDAO.",
+  "contactText": "Punya pertanyaan lain? Hubungi komunitas kami.",
+  "questions": {
+    "isFree": {
+      "question": "Apakah ini benar-benar gratis?",
+      "answer": "Ya! CreateDAO sepenuhnya gratis untuk digunakan. Anda hanya membayar biaya gas jaringan blockchain saat menerapkan DAO Anda."
+    },
+    "isSecure": {
+      "question": "Apakah kodenya aman?",
+      "answer": "Kontrak pintar kami belum diaudit, tetapi audit oleh firma keamanan terkemuka direncanakan segera. Kode ini bersifat sumber terbuka untuk transparansi penuh sementara itu."
+    },
+    "supportedNetworks": {
+      "question": "Jaringan mana saja yang didukung?",
+      "answer": "Saat ini kami mendukung {{networks}}. Lebih banyak jaringan akan segera hadir berdasarkan umpan balik komunitas."
+    },
+    "customization": {
+      "question": "Bisakah saya menyesuaikan DAO saya?",
+      "answer": "Belum, tetapi di masa mendatang Anda akan dapat menyesuaikan periode pemungutan suara, ambang batas proposal, dan parameter tata kelola lainnya agar sesuai dengan kebutuhan komunitas Anda."
+    }
+  }
+}

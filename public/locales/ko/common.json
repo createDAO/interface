@@ -1,0 +1,51 @@
+{
+  "buttons": {
+    "create": "DAO 생성",
+    "learnMore": "더 알아보기",
+    "connect": "연결",
+    "deploy": "배포",
+    "review": "검토",
+    "back": "뒤로",
+    "next": "다음",
+    "submit": "제출",
+    "cancel": "취소"
+  },
+  "labels": {
+    "name": "이름",
+    "token": "토큰",
+    "symbol": "심볼",
+    "supply": "공급량",
+    "network": "네트워크",
+    "version": "버전",
+    "gas": "가스",
+    "deploymentReady": "배포 준비 완료"
+  },
+  "metadata": {
+    "title": "CreateDAO - 손쉽게 DAO를 만드세요",
+    "description": "몇 번의 클릭만으로 여러 블록체인에 탈중앙화 자율 조직을 시작하세요. 코딩이 필요 없습니다."
+  },
+  "footer": {
+    "description": "여러 블록체인에서 DAO를 만들고 배포하는 가장 쉬운 방법입니다.",
+    "version": "버전",
+    "commit": "커밋",
+    "resources": "자료",
+    "documentation": "문서",
+    "tutorials": "튜토리얼",
+    "coreConcepts": "핵심 개념",
+    "community": "커뮤니티",
+    "github": "GitHub",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "legal": "법률",
+    "contact": "커뮤니티에 문의하세요",
+    "copyright": "© {{year}} CreateDAO. 모든 권리 보유.",
+    "terms": "서비스 약관",
+    "privacy": "개인정보 처리방침"
+  },
+  "errors": {
+    "general": "오류가 발생했습니다",
+    "tryAgain": "다시 시도해주세요"
+  },
+  "languageName": "한국어",
+  "languageSelector": "언어 선택"
+}

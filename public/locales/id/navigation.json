@@ -1,0 +1,18 @@
+{
+  "home": "Beranda",
+  "features": "Fitur",
+  "howItWorks": "Cara Kerja",
+  "networks": "Jaringan",
+  "deployedDAOs": "DAO yang Diterapkan",
+  "createDAO": "Buat DAO",
+  "daoFeatures": "Fitur DAO",
+  "menu": {
+    "open": "Buka menu",
+    "close": "Tutup menu"
+  },
+  "theme": {
+    "toggle": "Ganti tema",
+    "light": "Mode terang",
+    "dark": "Mode gelap"
+  }
+}

@@ -2,8 +2,11 @@ import React from 'react';
 import { SUPPORTED_NETWORKS, getExplorerUrl } from '../../config/networks';
 import { getFactoryAddress } from '../../config/dao';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next';
 
 const Networks: React.FC = () => {
+  const { t } = useTranslation('home');
+  
   // Filter out testnet networks for display in the Networks section
   const mainnetNetworks = SUPPORTED_NETWORKS.filter(network => !network.isTestnet);
 
@@ -12,10 +15,10 @@ const Networks: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Supported Networks
+            {t('networks.title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Create and deploy your DAO on any of these popular blockchain networks.
+            {t('networks.subtitle')}
           </p>
         </div>
 
@@ -78,7 +81,7 @@ const Networks: React.FC = () => {
 
         <div className="mt-12 text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            More networks coming soon based on community feedback.
+            {t('networks.comingSoon')}
           </p>
         </div>
       </div>

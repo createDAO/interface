@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "Fitur & Informasi DAO | CreateDAO",
+    "description": "Pelajari tentang fitur dan komponen DAO yang dibuat dengan CreateDAO"
+  },
+  "header": {
+    "title": "Fitur & Informasi DAO",
+    "subtitle": "Pahami komponen, fitur, dan detail teknis DAO Anda"
+  },
+  "introduction": {
+    "title": "Pendahuluan",
+    "description": "CreateDAO menerapkan ekosistem DAO lengkap dengan empat kontrak pintar inti yang bekerja sama untuk menyediakan tata kelola, manajemen token, kontrol perbendaharaan, dan kemampuan staking.",
+    "whatYouGet": {
+      "title": "Apa yang Anda Dapatkan",
+      "description": "Saat Anda membuat DAO melalui CreateDAO, Anda menerima sistem tata kelola lengkap dengan:",
+      "items": [
+        "Kontrak <strong>Inti DAO</strong> yang berfungsi penuh dengan sistem proposal dan pemungutan suara",
+        "<strong>Token Tata Kelola ERC20</strong> dengan mekanisme pajak yang dapat disesuaikan",
+        "<strong>Perbendaharaan</strong> yang aman untuk mengelola aset DAO Anda",
+        "<strong>Sistem Staking</strong> dengan pengganda kekuatan suara berbasis waktu",
+        "Semua kontrak diterapkan sebagai <strong>proksi yang dapat ditingkatkan</strong> untuk peningkatan di masa mendatang"
+      ]
+    },
+    "forCreators": {
+      "title": "Untuk Pembuat DAO",
+      "description": "Sebagai pembuat, Anda akan menerima:",
+      "items": [
+        "1 token tata kelola untuk mulai berpartisipasi",
+        "Kemampuan untuk membuat proposal awal",
+        "Kontrol atas penerapan awal",
+        "Alat untuk memulai komunitas Anda"
+      ]
+    },
+    "forMembers": {
+      "title": "Untuk Anggota DAO",
+      "description": "Anggota komunitas Anda akan dapat:",
+      "items": [
+        "Mempertaruhkan token untuk mendapatkan kekuatan suara",
+        "Membuat dan memberikan suara pada proposal",
+        "Berpartisipasi dalam prapenjualan",
+        "Membantu mengatur perbendaharaan dan masa depan DAO"
+      ]
+    }
+  },
+  "architecture": {
+    "title": "Arsitektur DAO",
+    "description": "DAO Anda terdiri dari empat kontrak utama yang bekerja sama untuk menyediakan sistem tata kelola yang lengkap.",
+    "diagram": {
+      "daoCore": "Inti DAO",
+      "governance": "Tata Kelola & Proposal",
+      "daoToken": "Token DAO",
+      "erc20": "Token Tata Kelola ERC20",
+      "treasury": "Perbendaharaan",
+      "assetManagement": "Manajemen Aset",
+      "staking": "Staking",
+      "votingPower": "Kekuatan Suara",
+      "daoFactory": "Pabrik DAO",
+      "note": "Semua kontrak diterapkan sebagai proksi yang dapat ditingkatkan dengan implementasi terbaru"
+    },
+    "upgradeableDesign": {
+      "title": "Desain yang Dapat Ditingkatkan",
+      "description": "Semua kontrak menggunakan pola UUPS (Universal Upgradeable Proxy Standard), memungkinkan peningkatan di masa mendatang sambil mempertahankan status dan saldo. Peningkatan hanya dapat dilakukan melalui proposal tata kelola yang telah melewati pemungutan suara komunitas."
+    },
+    "contractInteractions": {
+      "title": "Interaksi Kontrak",
+      "description": "Kontrak Inti DAO adalah pusat sentral yang mengoordinasikan semua tindakan tata kelola. Ini berinteraksi dengan kontrak Token, Perbendaharaan, dan Staking untuk melaksanakan proposal yang disetujui oleh komunitas."
+    }
+  },
+  "components": {
+    "title": "Komponen Inti",
+    "description": "Setiap kontrak dalam ekosistem DAO Anda melayani tujuan tertentu dan memiliki fitur unik.",
+    "daoCore": {
+      "title": "Inti DAO",
+      "description": "Kontrak Inti DAO adalah pusat tata kelola sentral yang mengelola proposal, pemungutan suara, dan pelaksanaan keputusan komunitas.",
+      "features": {
+        "title": "Fitur Utama:",
+        "items": [
+          "<span class=\"font-medium\">Sistem Proposal:</span> Buat, berikan suara, dan laksanakan berbagai jenis proposal",
+          "<span class=\"font-medium\">Mekanisme Pemungutan Suara:</span> Pemungutan suara aman dengan kekuatan suara berbasis stake",
+          "<span class=\"font-medium\">Logika Pelaksanaan:</span> Pelaksanaan proposal yang disetujui dengan aman",
+          "<span class=\"font-medium\">Kontrol Darurat:</span> Fungsionalitas jeda/lanjutkan untuk keamanan"
+        ]
+      },
+      "parameters": {
+        "title": "Parameter Tata Kelola:",
+        "votingPeriod": "Periode Pemungutan Suara",
+        "votingPeriodValue": "3 hari",
+        "minProposalStake": "Stake Proposal Minimum",
+        "minProposalStakeValue": "1 token",
+        "quorum": "Korum",
+        "quorumValue": "50% dari kekuatan suara",
+        "version": "Versi",
+        "versionValue": "1.0.0"
+      },
+      "codeBlockTitle": "Inisialisasi Kontrak Inti DAO"
+    },
+    "daoToken": {
+      "title": "Token DAO",
+      "description": "Token DAO adalah token ERC20 yang berfungsi sebagai token tata kelola untuk DAO Anda. Ini mencakup fitur tambahan di luar token ERC20 standar.",
+      "features": {
+        "title": "Fitur Utama:",
+        "items": [
+          "<span class=\"font-medium\">Distribusi Awal:</span> 1 token ke pembuat, sisanya ke perbendaharaan",
+          "<span class=\"font-medium\">Mekanisme Pajak:</span> Tarif pajak yang dapat dikonfigurasi hingga 10%",
+          "<span class=\"font-medium\">Daftar Putih:</span> Alamat dapat dikecualikan dari pajak",
+          "<span class=\"font-medium\">Integrasi Staking:</span> Bekerja dengan kontrak staking untuk tata kelola"
+        ]
+      },
+      "codeBlockTitle": "Mekanisme Pajak Token DAO"
+    },
+    "treasury": {
+      "title": "Perbendaharaan",
+      "description": "Kontrak Perbendaharaan dengan aman menyimpan dan mengelola semua aset yang dimiliki oleh DAO, termasuk token dan ETH.",
+      "features": {
+        "title": "Fitur Utama:",
+        "items": [
+          "<span class=\"font-medium\">Kontrol Aset:</span> Menyimpan mayoritas token pada awalnya",
+          "<span class=\"font-medium\">Multi-Aset:</span> Dapat menyimpan ETH dan token ERC20 apa pun",
+          "<span class=\"font-medium\">Dikendalikan Tata Kelola:</span> Hanya DAO yang dapat mengotorisasi transfer",
+          "<span class=\"font-medium\">Pelacakan Saldo:</span> Metode untuk memeriksa saldo saat ini"
+        ]
+      },
+      "codeBlockTitle": "Fungsi Transfer Perbendaharaan"
+    },
+    "staking": {
+      "title": "Staking",
+      "description": "Kontrak Staking memungkinkan pemegang token untuk mempertaruhkan token mereka untuk mendapatkan kekuatan suara di DAO.",
+      "features": {
+        "title": "Fitur Utama:",
+        "items": [
+          "<span class=\"font-medium\">Pengganda Berbasis Waktu:</span> Periode staking yang lebih lama meningkatkan kekuatan suara",
+          "<span class=\"font-medium\">Perhitungan Kekuatan Suara:</span> Stake × Pengganda Waktu",
+          "<span class=\"font-medium\">Staking Fleksibel:</span> Pengguna dapat melakukan stake dan unstake kapan saja",
+          "<span class=\"font-medium\">Parameter yang Dapat Dikonfigurasi:</span> Pengganda dan ambang batas dapat disesuaikan melalui tata kelola"
+        ]
+      },
+      "multipliers": {
+        "title": "Pengganda Staking:",
+        "table": {
+          "headers": {
+            "duration": "Durasi Staking",
+            "multiplier": "Pengganda",
+            "example": "Contoh"
+          },
+          "rows": [
+            {
+              "duration": "Kurang dari 1 minggu",
+              "multiplier": "1x (dasar)",
+              "example": "100 token = 100 kekuatan suara"
+            },
+            {
+              "duration": "1 minggu hingga 1 bulan",
+              "multiplier": "1.25x",
+              "example": "100 token = 125 kekuatan suara"
+            },
+            {
+              "duration": "1 bulan hingga 3 bulan",
+              "multiplier": "1.5x",
+              "example": "100 token = 150 kekuatan suara"
+            },
+            {
+              "duration": "Lebih dari 3 bulan",
+              "multiplier": "2x",
+              "example": "100 token = 200 kekuatan suara"
+            }
+          ]
+        }
+      },
+      "codeBlockTitle": "Perhitungan Kekuatan Suara Staking"
+    }
+  },
+  "governance": {
+    "title": "Fitur Tata Kelola",
+    "description": "DAO Anda mencakup sistem tata kelola yang komprehensif dengan berbagai jenis proposal dan mekanisme pemungutan suara.",
+    "proposalTypes": {
+      "title": "Jenis Proposal yang Tersedia",
+      "treasuryTransfers": {
+        "title": "Transfer Perbendaharaan",
+        "description": "Mengusulkan untuk mentransfer token atau ETH dari perbendaharaan ke alamat mana pun"
+      },
+      "presaleCreation": {
+        "title": "Pembuatan Prapenjualan",
+        "description": "Luncurkan prapenjualan token dengan jumlah token dan harga awal yang dapat disesuaikan"
+      },
+      "presaleManagement": {
+        "title": "Manajemen Prapenjualan",
+        "description": "Jeda/lanjutkan prapenjualan dan tarik dana dari prapenjualan yang telah selesai"
+      },
+      "contractUpgrades": {
+        "title": "Peningkatan Kontrak",
+        "description": "Tingkatkan kontrak inti atau modul ke implementasi yang lebih baru"
+      },
+      "emergencyControls": {
+        "title": "Kontrol Darurat",
+        "description": "Jeda/lanjutkan seluruh DAO dalam keadaan darurat"
+      },
+      "moduleUpgrades": {
+        "title": "Peningkatan Modul",
+        "description": "Tambahkan atau tingkatkan modul tertentu seperti kontrak prapenjualan atau vesting"
+      }
+    },
+    "votingProcess": {
+      "title": "Proses Pemungutan Suara",
+      "steps": [
+        "<span class=\"font-medium\">Pembuatan Proposal:</span> Setiap anggota dengan setidaknya 1 token yang di-stake dapat membuat proposal",
+        "<span class=\"font-medium\">Periode Pemungutan Suara:</span> Anggota memiliki periode waktu yang ditentukan untuk memberikan suara mereka",
+        "<span class=\"font-medium\">Pemberian Suara:</span> Anggota memberikan suara \"Setuju\" atau \"Tidak Setuju\" dengan kekuatan suara mereka",
+        "<span class=\"font-medium\">Pemeriksaan Korum:</span> Setidaknya 50% dari total kekuatan suara harus berpartisipasi",
+        "<span class=\"font-medium\">Pelaksanaan:</span> Jika disetujui, proposal dapat dilaksanakan untuk menerapkan perubahan"
+      ]
+    }
+  },
+  "deployment": {
+    "title": "Proses Penerapan",
+    "description": "Saat Anda membuat DAO, langkah-langkah berikut terjadi secara otomatis dalam satu transaksi.",
+    "steps": [
+      "<span class=\"font-medium\">Penerapan Token:</span> Token tata kelola ERC20 Anda diterapkan terlebih dahulu",
+      "<span class=\"font-medium\">Penerapan Perbendaharaan:</span> Kontrak perbendaharaan diterapkan (belum diinisialisasi)",
+      "<span class=\"font-medium\">Penerapan Staking:</span> Kontrak staking diterapkan dan ditautkan ke token Anda",
+      "<span class=\"font-medium\">Penerapan DAO:</span> Kontrak DAO utama diterapkan dan terhubung ke semua kontrak lainnya",
+      "<span class=\"font-medium\">Inisialisasi Perbendaharaan:</span> Perbendaharaan diinisialisasi dengan DAO sebagai pemilik",
+      "<span class=\"font-medium\">Konfigurasi Token:</span> Kontrak staking diatur dalam token dan kepemilikan dialihkan ke DAO",
+      "<span class=\"font-medium\">Distribusi Token:</span> Token yang tersisa ditransfer ke perbendaharaan",
+      "<span class=\"font-medium\">Pengalihan Kepemilikan:</span> DAO menjadi mengatur dirinya sendiri (memiliki dirinya sendiri)"
+    ],
+    "note": {
+      "title": "Catatan Penting",
+      "description": "Setelah penerapan, DAO Anda sepenuhnya otonom dan dikendalikan oleh tata kelola. Pembuat menerima 1 token untuk mulai berpartisipasi, tetapi tidak memiliki hak istimewa di luar itu. Semua keputusan besar harus melalui proses tata kelola."
+    }
+  },
+  "gettingStarted": {
+    "title": "Memulai",
+    "description": "Setelah membuat DAO Anda, berikut adalah beberapa langkah untuk memulai dengan tata kelola.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Pertaruhkan Token Anda",
+        "description": "Pertaruhkan token awal Anda untuk mendapatkan kekuatan suara. Semakin lama Anda melakukan stake, semakin banyak kekuatan suara yang akan Anda miliki."
+      },
+      {
+        "number": "2",
+        "title": "Buat Proposal",
+        "description": "Buat proposal pertama Anda untuk mendistribusikan token dari perbendaharaan atau meluncurkan prapenjualan untuk menumbuhkan komunitas Anda."
+      },
+      {
+        "number": "3",
+        "title": "Kembangkan Komunitas Anda",
+        "description": "Undang anggota untuk bergabung dengan DAO Anda, distribusikan token melalui proposal, dan bangun komunitas yang terdesentralisasi."
+      }
+    ],
+    "createButton": "Buat DAO Anda Sekarang"
+  }
+}

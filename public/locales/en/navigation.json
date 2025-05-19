@@ -1,0 +1,18 @@
+{
+  "home": "Home",
+  "features": "Features",
+  "howItWorks": "How It Works",
+  "networks": "Networks",
+  "deployedDAOs": "Deployed DAOs",
+  "createDAO": "Create DAO",
+  "daoFeatures": "DAO Features",
+  "menu": {
+    "open": "Open menu",
+    "close": "Close menu"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light mode",
+    "dark": "Dark mode"
+  }
+}

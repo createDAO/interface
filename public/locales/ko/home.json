@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "title": "DAO를 <highlight>손쉽게</highlight> 만드세요",
+    "description": "몇 번의 클릭만으로 여러 블록체인에 탈중앙화 자율 조직을 시작하세요. 코딩이 필요 없습니다.",
+    "gasFeeNote": "배포 시 네트워크 가스비만 지불"
+  },
+  "features": {
+    "title": "CreateDAO를 선택해야 하는 이유",
+    "subtitle": "DAO를 시작하고 관리하는 데 필요한 모든 것",
+    "governance": {
+      "title": "거버넌스",
+      "description": "온체인에서 제안 생성, 투표 및 결정 실행"
+    },
+    "treasury": {
+      "title": "재무 관리",
+      "description": "커뮤니티 투표를 통해 자산 관리 및 자금 할당"
+    },
+    "multichain": {
+      "title": "멀티체인 지원",
+      "description": "여러 EVM 호환 블록체인에 배포"
+    },
+    "noCode": {
+      "title": "노코드 솔루션",
+      "description": "단 한 줄의 코드도 작성하지 않고 DAO 시작"
+    },
+    "customization": {
+      "title": "맞춤 설정",
+      "description": "커뮤니티의 필요에 맞게 DAO 구성"
+    },
+    "security": {
+      "title": "보안",
+      "description": "최고의 보안 관행과 오픈 소스 투명성으로 구축"
+    },
+    "openSource": {
+      "title": "오픈 소스",
+      "description": "저희 DAO 팩토리 계약 및 인터페이스는 GitHub에서 완전히 오픈 소스입니다."
+    },
+    "notAudited": {
+      "title": "아직 감사받지 않은 보안",
+      "description": "안심할 수 있도록 스마트 계약은 아직 주요 보안 회사로부터 감사받지 않았습니다."
+    },
+    "alwaysFree": {
+      "title": "항상 무료",
+      "description": "숨겨진 수수료 없음. 배포 시 네트워크 가스만 지불."
+    },
+    "openSourceSection": {
+      "title": "오픈 소스 코드",
+      "description": "저희 스마트 계약을 확인하고 코드에 기여하세요. 저희는 투명성과 커뮤니티 중심 개발을 믿습니다.",
+      "button": "GitHub에서 보기"
+    },
+    "subtitle2": "저희는 DAO 생성을 위한 가장 신뢰할 수 있고 사용자 친화적인 플랫폼을 구축했습니다."
+  },
+  "howItWorks": {
+    "title": "작동 방식",
+    "subtitle": "몇 가지 간단한 단계로 DAO 생성",
+    "steps": {
+      "step1": {
+        "title": "네트워크 선택",
+        "description": "DAO를 위한 블록체인 네트워크 선택"
+      },
+      "step2": {
+        "title": "DAO 구성",
+        "description": "DAO 이름, 토큰 및 거버넌스 매개변수 설정"
+      },
+      "step3": {
+        "title": "검토 및 배포",
+        "description": "설정 검토 및 블록체인에 DAO 배포"
+      },
+      "step4": {
+        "title": "DAO 관리",
+        "description": "거버넌스 및 재무 관리를 위해 새 DAO 사용"
+      }
+    }
+  },
+  "steps": {
+    "title": "세 가지 간단한 단계",
+    "subtitle": "DAO 생성이 그 어느 때보다 쉬워졌습니다. 다음 간단한 단계를 따라 조직을 시작하세요.",
+    "step1": {
+      "title": "지갑 연결",
+      "description": "시작하려면 MetaMask 또는 WalletConnect를 사용하세요."
+    },
+    "step2": {
+      "title": "DAO 세부 정보 입력",
+      "description": "DAO 이름을 지정하고 기본 거버넌스 매개변수를 설정하세요."
+    },
+    "step3": {
+      "title": "배포",
+      "description": "거래를 확인하면 DAO를 사용할 준비가 됩니다."
+    },
+    "readyToStart": "시작할 준비가 되셨나요?",
+    "createButton": "DAO 생성하기"
+  },
+  "networks": {
+    "title": "지원되는 네트워크",
+    "subtitle": "이러한 인기 있는 블록체인 네트워크 중 하나에 DAO를 생성하고 배포하세요.",
+    "comingSoon": "커뮤니티 피드백을 바탕으로 더 많은 네트워크가 곧 추가될 예정입니다."
+  },
+  "platforms": {
+    "title": "DAO 관리 플랫폼",
+    "subtitle": "배포 후 DAO를 관리하기 위한 강력한 인터페이스.",
+    "description": "배포 후 다음 플랫폼으로 DAO를 관리하세요.",
+    "daoCafe": {
+      "name": "DAOCafe",
+      "description": "DAO 관리를 위한 포괄적인 인터페이스: 제안 생성, 토론, 투표, 프리세일 생성, 재무 이체 제안 등.",
+      "visitButton": "DAOCafe 방문하기"
+    },
+    "addYourPlatform": {
+      "title": "플랫폼 추가하기",
+      "description": "자체 DAO 관리 인터페이스를 개발하고 여기에 소개하세요. 통합 세부 정보 및 요구 사항은 저희 문서를 확인하세요.",
+      "readDocsButton": "문서 읽기"
+    },
+    "integration": {
+      "text": "여기에 플랫폼을 등록하고 싶으신가요?",
+      "linkText": "통합 방법 알아보기"
+    }
+  },
+  "cta": {
+    "title": "지금 DAO 생성하기",
+    "description": "커뮤니티와 재무를 관리하기 위해 이미 CreateDAO를 사용하고 있는 수백 개의 조직에 참여하세요.",
+    "createButton": "DAO 생성",
+    "learnMoreButton": "더 알아보기",
+    "gasFeeNote": "배포 시 네트워크 가스비만 지불"
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "title": "创建您的 DAO",
+  "subtitle": "几分钟内启动您的去中心化自治组织",
+  "steps": {
+    "network": {
+      "title": "选择网络",
+      "description": "为您的 DAO 选择区块链网络",
+      "networkLabel": "网络",
+      "networkPlaceholder": "选择网络",
+      "versionLabel": "版本",
+      "versionPlaceholder": "选择版本"
+    },
+    "networkTypes": {
+      "ethereumMainnet": "以太坊主网：主要的以太坊区块链，安全性最高但燃料费较高",
+      "layer2Networks": "二层网络：Optimism、Arbitrum 等提供较低费用，同时继承以太坊安全性",
+      "alternativeL1s": "替代 L1：像 Avalanche、BNB Chain 等网络提供不同的权衡",
+      "testnets": "测试网：在部署到主网之前进行测试（免费使用）"
+    },
+    "details": {
+      "title": "DAO 详情",
+      "description": "配置您的 DAO 和治理代币",
+      "daoName": {
+        "label": "DAO 名称",
+        "placeholder": "输入您的 DAO 名称",
+        "helper": "您的去中心化自治组织的名称"
+      },
+      "tokenName": {
+        "label": "代币名称",
+        "placeholder": "输入您的代币名称",
+        "helper": "您的治理代币的名称"
+      },
+      "tokenSymbol": {
+        "label": "代币符号",
+        "placeholder": "3-5 个字符",
+        "helper": "您代币的简短标识符（例如，BTC、ETH）"
+      },
+      "tokenSupply": {
+        "label": "代币供应量",
+        "placeholder": "输入总供应量",
+        "helper": "将创建的代币总数"
+      }
+    },
+    "review": {
+      "title": "审核",
+      "description": "在部署前审核您的 DAO 配置",
+      "summary": "摘要",
+      "network": "网络",
+      "version": "版本",
+      "daoName": "DAO 名称",
+      "tokenName": "代币名称",
+      "tokenSymbol": "代币符号",
+      "tokenSupply": "代币供应量",
+      "estimatedGas": "预估燃料费",
+      "deploymentCost": "部署成本",
+      "readyToDeploy": "准备部署您的 DAO？",
+      "reviewYourDao": "审核您的 DAO",
+      "reviewDescription": "请在部署前审核您的 DAO 配置。一旦部署，某些设置将无法更改。",
+      "daoConfigSummary": "DAO 配置摘要",
+      "organizationDetails": "组织详情",
+      "tokenDetails": "代币详情",
+      "latest": "最新"
+    },
+    "deployment": {
+      "title": "部署",
+      "description": "将您的 DAO 部署到区块链",
+      "connecting": "连接钱包中...",
+      "preparing": "准备部署中...",
+      "deploying": "部署 DAO 中...",
+      "success": "DAO 成功部署！",
+      "failed": "部署失败",
+      "tryAgain": "重试",
+      "viewOnExplorer": "在浏览器中查看",
+      "managementPlatforms": "您现在可以使用这些平台管理您的 DAO：",
+      "processingDeployment": "处理部署",
+      "waitingForDeployment": "请等待您的 DAO 部署到区块链...",
+      "daoCreatedSuccessfully": "DAO 创建成功！",
+      "daoIsLive": "您的 {{daoName}} DAO 现已在区块链上线",
+      "daoFullyFunctional": "您的 DAO 现在具有完整的治理功能、代币管理和资金控制。",
+      "contractAddresses": "合约地址",
+      "daoCoreContract": "DAO 核心合约",
+      "tokenContract": "代币合约",
+      "transactionDetails": "交易详情",
+      "transactionHash": "交易哈希",
+      "viewOnBlockExplorer": "在区块浏览器中查看",
+      "blockExplorerDescription": "您可以在区块链浏览器上查看您的交易详情，以跟踪其状态并验证部署。",
+      "nextSteps": "下一步",
+      "registerYourDao": "注册您的 DAO",
+      "registerDescription": "要提出行动、投票或管理资产，请将您的 DAO 连接到管理界面。",
+      "stakeYourToken": "质押您的代币",
+      "stakeDescription": "质押您的初始代币以获得 DAO 治理系统中的投票权。",
+      "createProposal": "创建提案",
+      "proposalDescription": "创建您的第一个治理提案，以分配代币或管理资金库资产。"
+    }
+  },
+  "validation": {
+    "required": "此字段为必填项",
+    "minLength": "必须至少 {{min}} 个字符",
+    "maxLength": "必须最多 {{max}} 个字符",
+    "invalidSymbol": "符号必须是 2-5 个大写字母",
+    "positiveNumber": "必须是正数",
+    "maxSupply": "必须小于或等于 {{max}}"
+  },
+  "tokenDistribution": {
+    "title": "代币分配",
+    "totalSupply": "总供应量",
+    "details": "代币分配详情",
+    "creator": "创建者（您）",
+    "initialToken": "初始治理代币",
+    "treasury": "资金库",
+    "controlledByDao": "由 DAO 控制",
+    "initialTokenForGovernance": "用于治理的初始代币",
+    "controlledByDaoGovernance": "由 DAO 治理控制",
+    "howItWorks": {
+      "title": "代币分配如何运作",
+      "description": "部署后，您将收到 1 个代币开始参与治理。剩余的代币将存储在资金库中，可以通过社区批准的治理提案进行分配。"
+    }
+  },
+  "navigation": {
+    "backToNetwork": "返回网络",
+    "continueToReview": "继续到审核",
+    "continueToDetails": "继续到 DAO 详情",
+    "backToDetails": "返回 DAO 详情",
+    "continueToPreDeployment": "继续到预部署",
+    "processing": "处理中..."
+  },
+  "network": {
+    "wrongNetwork": "错误的网络",
+    "switchToSupported": "请切换到支持的网络来创建您的 DAO",
+    "switchingNetwork": "切换网络中... 请在您的钱包中确认。",
+    "switchFailed": "切换网络失败。请检查您的钱包并重试。",
+    "switching": "切换中...",
+    "switchTo": "切换到 {{name}}",
+    "tooltip": "您的 DAO 将部署在的区块链网络。每个网络都有不同的特性和费用。",
+    "features": "网络功能",
+    "notSupported": "您当前的网络不受支持。请切换到支持的网络。",
+    "note": "注意",
+    "sepoliaNote": "为了快速测试，Sepolia DAO 部署时投票期为 5 分钟。"
+  },
+  "version": {
+    "tooltip": "要部署的 DAO 合约版本。较新的版本可能包含额外的功能或改进。"
+  },
+  "architecture": {
+    "title": "您的 DAO 架构",
+    "daoCore": "DAO 核心",
+    "daoCoreDescription": "提案、投票和执行社区决策的中央治理枢纽",
+    "daoToken": "DAO 代币",
+    "daoTokenDescription": "具有可定制税收机制和分配控制的 ERC20 治理代币",
+    "treasury": "资金库",
+    "treasuryDescription": "安全保管 DAO 资产的金库，由治理提案控制",
+    "staking": "质押",
+    "stakingDescription": "基于时间的质押，为长期持有者提供投票权重乘数",
+    "upgradeableProxies": "所有合约都部署为可升级代理，使用最新的实现"
+  },
+  "features": {
+    "governance": {
+      "title": "治理",
+      "description": "创建提案并对重要决策进行投票"
+    },
+    "treasury": {
+      "title": "资金库",
+      "description": "管理资金并分配资源"
+    },
+    "token": {
+      "title": "治理代币",
+      "description": "用于投票权和治理的 ERC-20 代币"
+    },
+    "multiSig": {
+      "title": "多重签名",
+      "description": "关键操作需要多重批准"
+    }
+  },
+  "wallet": {
+    "connected": "钱包已连接",
+    "readyToDeploy": "您的钱包已连接，可以部署 DAO",
+    "disconnect": "断开连接",
+    "address": "钱包地址",
+    "copy": "复制",
+    "balance": "余额",
+    "connectionRequired": "需要钱包连接",
+    "connectionMessage": "您需要连接 Web3 钱包来部署您的 DAO。这允许您：",
+    "signTransaction": "签署部署交易",
+    "becomeAdmin": "成为初始 DAO 管理员",
+    "receiveToken": "接收您的治理代币",
+    "connect": "连接钱包"
+  },
+  "deploymentCost": {
+    "title": "预估部署成本",
+    "description": "部署您的 DAO 将花费大约：",
+    "calculating": "计算中...",
+    "note": "注意：实际成本可能因部署时的网络状况而有所不同。",
+    "gasUnits": "≈ {{units}} 燃料单位"
+  },
+  "whatHappensNext": {
+    "title": "接下来会发生什么",
+    "description": "当您点击\"继续到预部署\"时，将发生以下情况：",
+    "checkBalance": "我们将检查您的钱包余额，确保您有足够的资金",
+    "simulateTransaction": "我们将模拟交易以验证其成功",
+    "confirmTransaction": "您的钱包将提示您确认交易",
+    "deployContracts": "DAO 合约将被部署到 {{network}} 网络",
+    "receiveToken": "您将收到 1 个 {{symbol}} 代币开始参与治理",
+    "treasuryStorage": "剩余的 {{amount}} {{symbol}} 将存储在资金库中"
+  },
+  "preDeployment": {
+    "title": "预部署检查",
+    "description": "我们将运行一些检查，以确保您的 DAO 部署成功。这有助于防止失败的交易和浪费的燃料费。",
+    "checklist": "部署检查清单",
+    "balanceCheck": {
+      "title": "钱包余额检查",
+      "description": "验证您有足够的 {{symbol}} 进行部署"
+    },
+    "simulation": {
+      "title": "交易模拟",
+      "description": "在 {{network}} 上模拟部署以确保成功"
+    },
+    "signing": {
+      "title": "交易签名",
+      "inProgress": "请在您的钱包中签署交易...",
+      "description": "用您的钱包签署交易以部署 DAO"
+    },
+    "confirmation": {
+      "title": "交易确认",
+      "inProgress": "等待区块链确认...",
+      "description": "等待交易在区块链上确认"
+    },
+    "status": {
+      "passed": "通过",
+      "failed": "失败",
+      "signed": "已签署",
+      "confirmed": "已确认"
+    },
+    "networkMismatch": {
+      "title": "网络不匹配",
+      "description": "您的钱包连接到 {{current}}，但您选择了 {{selected}} 进行部署。",
+      "switching": "切换网络中... 请在您的钱包中确认。",
+      "switchFailed": "自动切换失败。请在您的钱包中手动更改网络。",
+      "switchNeeded": "请切换您的网络到 {{network}} 以继续。",
+      "switchTo": "切换到 {{network}}"
+    },
+    "backToReview": "返回审核"
+  },
+  "stepIndicator": {
+    "stepCount": "步骤 {{current}} / {{total}}",
+    "steps": {
+      "network": {
+        "label": "网络",
+        "description": "选择区块链网络"
+      },
+      "daoDetails": {
+        "label": "DAO 详情",
+        "description": "配置 DAO 和代币"
+      },
+      "review": {
+        "label": "审核",
+        "description": "验证配置"
+      },
+      "preDeploy": {
+        "label": "预部署",
+        "description": "运行预部署检查"
+      },
+      "success": {
+        "label": "成功",
+        "description": "查看您的新 DAO"
+      }
+    }
+  },
+  "transaction": {
+    "waitingForSignature": "请签署交易...",
+    "submitting": "提交交易中...",
+    "waitingForConfirmation": "等待确认中...",
+    "success": "交易成功！",
+    "error": "交易失败",
+    "checkingBalance": "检查钱包余额中...",
+    "balanceError": "余额不足",
+    "balanceCheckError": "检查钱包余额失败",
+    "simulating": "模拟交易中...",
+    "simulationError": "交易模拟失败",
+    "unexpectedError": "意外错误",
+    "unexpectedErrorDetails": "交易模拟过程中发生意外错误",
+    "viewOnExplorer": "在浏览器中查看",
+    "insufficientBalanceDetails": "余额不足：您需要额外 <strong>{{amount}} {{symbol}}</strong> 来完成此交易。",
+    "tipTransactionProcessing": "提示：您的交易可能仍在处理中。查看浏览器以了解其状态。",
+    "tipAddMoreFunds": "提示：向您的钱包添加更多资金并重试。",
+    "tipIncreaseGasLimit": "提示：尝试在钱包设置中增加燃料限制。",
+    "tipIncreaseGasPrice": "提示：尝试在钱包设置中增加燃料价格。",
+    "tipResetWallet": "提示：尝试重置钱包的交易历史或手动调整 nonce。",
+    "tipWalletDisconnected": "提示：您的钱包已断开连接。请重新连接您的钱包并重试。",
+    "refreshPage": "刷新页面",
+    "tipWalletPermission": "提示：您的钱包需要权限与此合约交互。打开您的钱包并检查权限请求。",
+    "stepsToFix": "修复步骤：",
+    "stepOpenWallet": "打开您的钱包（MetaMask 等）",
+    "stepLookForPermissions": "查找待处理的权限请求",
+    "stepGrantPermission": "授予合约权限",
+    "stepTryAgain": "再次尝试交易",
+    "noteRejectedTransaction": "注意：您在钱包中拒绝了交易。如果这是无意的，请重试。",
+    "retryTransaction": "重试交易",
+    "simulationErrorMessage": "合约模拟遇到错误。这可能是由于合约限制或网络问题。"
+  }
+}

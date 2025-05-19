@@ -1,0 +1,23 @@
+{
+  "title": "Common Questions",
+  "subtitle": "Everything you need to know about CreateDAO.",
+  "contactText": "Have more questions? Contact our community.",
+  "questions": {
+    "isFree": {
+      "question": "Is it really free?",
+      "answer": "Yes! CreateDAO is completely free to use. You only pay the blockchain's network gas fees when deploying your DAO."
+    },
+    "isSecure": {
+      "question": "Is the code secure?",
+      "answer": "Our smart contracts have not been audited yet, but audits by leading security firms are planned soon. The code is open source for full transparency in the meantime."
+    },
+    "supportedNetworks": {
+      "question": "Which networks are supported?",
+      "answer": "We currently support {{networks}}. More networks are coming soon based on community feedback."
+    },
+    "customization": {
+      "question": "Can I customize my DAO?",
+      "answer": "Not yet, but in the future you'll be able to customize voting periods, proposal thresholds, and other governance parameters to fit your community's needs."
+    }
+  }
+}

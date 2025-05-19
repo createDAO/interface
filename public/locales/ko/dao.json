@@ -1,0 +1,61 @@
+{
+  "terminology": {
+    "dao": "DAO",
+    "daoFull": "탈중앙화 자율 조직",
+    "token": "토큰",
+    "governance": "거버넌스",
+    "proposal": "제안",
+    "vote": "투표",
+    "treasury": "재무",
+    "member": "회원",
+    "community": "커뮤니티",
+    "blockchain": "블록체인",
+    "smartContract": "스마트 계약",
+    "gas": "가스",
+    "gasPrice": "가스 가격",
+    "transaction": "거래",
+    "wallet": "지갑",
+    "connect": "지갑 연결",
+    "disconnect": "지갑 연결 해제"
+  },
+  "wallets": {
+    "metamask": "메타마스크",
+    "walletConnect": "월렛커넥트",
+    "coinbase": "코인베이스 월렛",
+    "trustWallet": "트러스트 월렛",
+    "ledger": "레저",
+    "brave": "브레이브 월렛",
+    "rabby": "래비 월렛",
+    "okx": "OKX 월렛",
+    "browser": "브라우저 지갑"
+  },
+  "networks": {
+    "ethereum": "이더리움",
+    "polygon": "폴리곤",
+    "arbitrum": "아비트럼",
+    "optimism": "옵티미즘",
+    "base": "베이스",
+    "avalanche": "아발란체",
+    "bnb": "BNB 체인",
+    "gnosis": "그노시스 체인",
+    "celo": "셀로",
+    "mantle": "맨틀",
+    "scroll": "스크롤",
+    "blast": "블래스트",
+    "unichain": "유니체인",
+    "worldchain": "월드체인"
+  },
+  "status": {
+    "connecting": "연결 중...",
+    "connected": "연결됨",
+    "disconnected": "연결 해제됨",
+    "pending": "대기 중",
+    "confirmed": "확인됨",
+    "failed": "실패",
+    "success": "성공",
+    "error": "오류",
+    "deploymentReady": "배포 준비 완료",
+    "deploying": "배포 중...",
+    "deployed": "배포됨"
+  }
+}

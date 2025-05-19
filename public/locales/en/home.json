@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "title": "Create Your DAO <highlight>Effortlessly</highlight>",
+    "description": "Launch your decentralized autonomous organization on multiple blockchains with just a few clicks. No coding required.",
+    "gasFeeNote": "Only pay network gas fees for deployment"
+  },
+  "features": {
+    "title": "Why Choose CreateDAO",
+    "subtitle": "Everything you need to launch and manage your DAO",
+    "governance": {
+      "title": "Governance",
+      "description": "Create proposals, vote, and execute decisions on-chain"
+    },
+    "treasury": {
+      "title": "Treasury Management",
+      "description": "Manage assets and allocate funds through community voting"
+    },
+    "multichain": {
+      "title": "Multi-Chain Support",
+      "description": "Deploy on multiple EVM-compatible blockchains"
+    },
+    "noCode": {
+      "title": "No-Code Solution",
+      "description": "Launch your DAO without writing a single line of code"
+    },
+    "customization": {
+      "title": "Customization",
+      "description": "Configure your DAO to fit your community's needs"
+    },
+    "security": {
+      "title": "Security",
+      "description": "Built with security best practices and open-source transparency"
+    },
+    "openSource": {
+      "title": "Open Source",
+      "description": "Our DAO factory contract and interface are fully open source on GitHub."
+    },
+    "notAudited": {
+      "title": "Not Yet Audited Security",
+      "description": "Smart contracts NOT YET audited by leading security firms for your peace of mind."
+    },
+    "alwaysFree": {
+      "title": "Always Free",
+      "description": "No hidden fees. Only pay network gas for deployment."
+    },
+    "openSourceSection": {
+      "title": "Open Source Code",
+      "description": "Check our smart contracts and contribute to the code. We believe in transparency and community-driven development.",
+      "button": "View on GitHub"
+    },
+    "subtitle2": "We've built the most reliable and user-friendly platform for creating DAOs."
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Create your DAO in just a few simple steps",
+    "steps": {
+      "step1": {
+        "title": "Choose Network",
+        "description": "Select the blockchain network for your DAO"
+      },
+      "step2": {
+        "title": "Configure DAO",
+        "description": "Set up your DAO name, token, and governance parameters"
+      },
+      "step3": {
+        "title": "Review & Deploy",
+        "description": "Review your settings and deploy your DAO to the blockchain"
+      },
+      "step4": {
+        "title": "Manage DAO",
+        "description": "Use your new DAO for governance and treasury management"
+      }
+    }
+  },
+  "steps": {
+    "title": "Three Simple Steps",
+    "subtitle": "Creating a DAO has never been easier. Follow these simple steps to launch your organization.",
+    "step1": {
+      "title": "Connect Wallet",
+      "description": "Use MetaMask or WalletConnect to get started."
+    },
+    "step2": {
+      "title": "Enter DAO Details",
+      "description": "Name your DAO and set basic governance parameters."
+    },
+    "step3": {
+      "title": "Deploy",
+      "description": "Confirm transaction and your DAO is ready to use."
+    },
+    "readyToStart": "Ready to start?",
+    "createButton": "Create Your DAO"
+  },
+  "networks": {
+    "title": "Supported Networks",
+    "subtitle": "Create and deploy your DAO on any of these popular blockchain networks.",
+    "comingSoon": "More networks coming soon based on community feedback."
+  },
+  "platforms": {
+    "title": "DAO Management Platforms",
+    "subtitle": "Powerful interfaces to manage your DAO after deployment.",
+    "description": "Once deployed, manage your DAO with these platforms",
+    "daoCafe": {
+      "name": "DAOCafe",
+      "description": "A comprehensive interface to manage DAOs: create proposals, discuss, vote, create presales, propose treasury transfers, and more.",
+      "visitButton": "Visit DAOCafe"
+    },
+    "addYourPlatform": {
+      "title": "Add Your Platform",
+      "description": "Develop your own DAO management interface and get it featured here. Check our documentation for integration details and requirements.",
+      "readDocsButton": "Read Documentation"
+    },
+    "integration": {
+      "text": "Want to see your platform listed here?",
+      "linkText": "Learn how to integrate"
+    }
+  },
+  "cta": {
+    "title": "Create Your DAO Now",
+    "description": "Join hundreds of organizations already using CreateDAO to manage their communities and treasuries.",
+    "createButton": "Create DAO",
+    "learnMoreButton": "Learn More",
+    "gasFeeNote": "Only pay network gas fees for deployment"
+  }
+}

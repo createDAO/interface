@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "title": "Buat DAO Anda <highlight>Dengan Mudah</highlight>",
+    "description": "Luncurkan organisasi otonom terdesentralisasi Anda di berbagai blockchain hanya dengan beberapa klik. Tidak perlu coding.",
+    "gasFeeNote": "Hanya bayar biaya gas jaringan untuk penerapan"
+  },
+  "features": {
+    "title": "Mengapa Memilih CreateDAO",
+    "subtitle": "Semua yang Anda butuhkan untuk meluncurkan dan mengelola DAO Anda",
+    "governance": {
+      "title": "Tata Kelola",
+      "description": "Buat proposal, berikan suara, dan laksanakan keputusan secara on-chain"
+    },
+    "treasury": {
+      "title": "Manajemen Perbendaharaan",
+      "description": "Kelola aset dan alokasikan dana melalui pemungutan suara komunitas"
+    },
+    "multichain": {
+      "title": "Dukungan Multi-Chain",
+      "description": "Terapkan di berbagai blockchain yang kompatibel dengan EVM"
+    },
+    "noCode": {
+      "title": "Solusi Tanpa Kode",
+      "description": "Luncurkan DAO Anda tanpa menulis satu baris kode pun"
+    },
+    "customization": {
+      "title": "Kustomisasi",
+      "description": "Konfigurasikan DAO Anda agar sesuai dengan kebutuhan komunitas Anda"
+    },
+    "security": {
+      "title": "Keamanan",
+      "description": "Dibangun dengan praktik terbaik keamanan dan transparansi sumber terbuka"
+    },
+    "openSource": {
+      "title": "Sumber Terbuka",
+      "description": "Kontrak pabrik DAO dan antarmuka kami sepenuhnya sumber terbuka di GitHub."
+    },
+    "notAudited": {
+      "title": "Keamanan Belum Diaudit",
+      "description": "Kontrak pintar BELUM DIAUDIT oleh firma keamanan terkemuka untuk ketenangan pikiran Anda."
+    },
+    "alwaysFree": {
+      "title": "Selalu Gratis",
+      "description": "Tidak ada biaya tersembunyi. Hanya bayar gas jaringan untuk penerapan."
+    },
+    "openSourceSection": {
+      "title": "Kode Sumber Terbuka",
+      "description": "Periksa kontrak pintar kami dan berkontribusi pada kode. Kami percaya pada transparansi dan pengembangan yang didorong oleh komunitas.",
+      "button": "Lihat di GitHub"
+    },
+    "subtitle2": "Kami telah membangun platform yang paling andal dan ramah pengguna untuk membuat DAO."
+  },
+  "howItWorks": {
+    "title": "Cara Kerjanya",
+    "subtitle": "Buat DAO Anda hanya dalam beberapa langkah sederhana",
+    "steps": {
+      "step1": {
+        "title": "Pilih Jaringan",
+        "description": "Pilih jaringan blockchain untuk DAO Anda"
+      },
+      "step2": {
+        "title": "Konfigurasi DAO",
+        "description": "Siapkan nama DAO, token, dan parameter tata kelola Anda"
+      },
+      "step3": {
+        "title": "Tinjau & Terapkan",
+        "description": "Tinjau pengaturan Anda dan terapkan DAO Anda ke blockchain"
+      },
+      "step4": {
+        "title": "Kelola DAO",
+        "description": "Gunakan DAO baru Anda untuk tata kelola dan manajemen perbendaharaan"
+      }
+    }
+  },
+  "steps": {
+    "title": "Tiga Langkah Sederhana",
+    "subtitle": "Membuat DAO tidak pernah semudah ini. Ikuti langkah-langkah sederhana ini untuk meluncurkan organisasi Anda.",
+    "step1": {
+      "title": "Hubungkan Dompet",
+      "description": "Gunakan MetaMask atau WalletConnect untuk memulai."
+    },
+    "step2": {
+      "title": "Masukkan Detail DAO",
+      "description": "Beri nama DAO Anda dan atur parameter tata kelola dasar."
+    },
+    "step3": {
+      "title": "Terapkan",
+      "description": "Konfirmasi transaksi dan DAO Anda siap digunakan."
+    },
+    "readyToStart": "Siap untuk memulai?",
+    "createButton": "Buat DAO Anda"
+  },
+  "networks": {
+    "title": "Jaringan yang Didukung",
+    "subtitle": "Buat dan terapkan DAO Anda di salah satu jaringan blockchain populer ini.",
+    "comingSoon": "Lebih banyak jaringan akan segera hadir berdasarkan umpan balik komunitas."
+  },
+  "platforms": {
+    "title": "Platform Manajemen DAO",
+    "subtitle": "Antarmuka yang kuat untuk mengelola DAO Anda setelah penerapan.",
+    "description": "Setelah diterapkan, kelola DAO Anda dengan platform ini",
+    "daoCafe": {
+      "name": "DAOCafe",
+      "description": "Antarmuka komprehensif untuk mengelola DAO: buat proposal, diskusikan, berikan suara, buat prapenjualan, usulkan transfer perbendaharaan, dan lainnya.",
+      "visitButton": "Kunjungi DAOCafe"
+    },
+    "addYourPlatform": {
+      "title": "Tambahkan Platform Anda",
+      "description": "Kembangkan antarmuka manajemen DAO Anda sendiri dan tampilkan di sini. Periksa dokumentasi kami untuk detail dan persyaratan integrasi.",
+      "readDocsButton": "Baca Dokumentasi"
+    },
+    "integration": {
+      "text": "Ingin melihat platform Anda terdaftar di sini?",
+      "linkText": "Pelajari cara mengintegrasikan"
+    }
+  },
+  "cta": {
+    "title": "Buat DAO Anda Sekarang",
+    "description": "Bergabunglah dengan ratusan organisasi yang sudah menggunakan CreateDAO untuk mengelola komunitas dan perbendaharaan mereka.",
+    "createButton": "Buat DAO",
+    "learnMoreButton": "Pelajari Lebih Lanjut",
+    "gasFeeNote": "Hanya bayar biaya gas jaringan untuk penerapan"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "home": "Главная",
+  "features": "Функции",
+  "howItWorks": "Как это работает",
+  "networks": "Сети",
+  "deployedDAOs": "Развернутые DAO",
+  "createDAO": "Создать DAO",
+  "daoFeatures": "Функции DAO",
+  "menu": {
+    "open": "Открыть меню",
+    "close": "Закрыть меню"
+  },
+  "theme": {
+    "toggle": "Переключить тему",
+    "light": "Светлый режим",
+    "dark": "Темный режим"
+  }
+}

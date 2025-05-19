@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "title": "DAO yang Diterapkan | CreateDAO",
+    "description": "Lihat semua DAO yang diterapkan melalui CreateDAO"
+  },
+  "header": {
+    "title": "DAO yang Diterapkan",
+    "subtitle": "Jelajahi semua DAO yang diterapkan melalui platform CreateDAO"
+  },
+  "filters": {
+    "network": {
+      "label": "Filter berdasarkan Jaringan",
+      "all": "Semua Jaringan",
+      "comingSoon": "(Segera Hadir)"
+    }
+  },
+  "table": {
+    "headers": {
+      "name": "Nama DAO",
+      "network": "Jaringan",
+      "token": "Token",
+      "address": "Alamat DAO",
+      "created": "Dibuat",
+      "actions": "Tindakan"
+    },
+    "content": {
+      "version": "Versi",
+      "creator": "Pembuat"
+    }
+  },
+  "actions": {
+    "viewExplorer": "Lihat di Explorer",
+    "createDao": "Buat DAO"
+  },
+  "status": {
+    "loading": "Memuat DAO...",
+    "noResults": {
+      "title": "Tidak Ada DAO Ditemukan",
+      "allNetworks": "Belum ada DAO yang diterapkan.",
+      "specificNetwork": "Belum ada DAO yang diterapkan di {{network}}."
+    }
+  },
+  "pagination": {
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "showing": "Menampilkan",
+    "to": "hingga",
+    "of": "dari",
+    "results": "hasil"
+  },
+  "dates": {
+    "unknown": "Tidak diketahui",
+    "invalid": "Tanggal tidak valid"
+  },
+  "errors": {
+    "loadFailed": "Gagal memuat DAO"
+  }
+}

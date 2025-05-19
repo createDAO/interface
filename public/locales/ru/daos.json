@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "title": "Развернутые DAO | CreateDAO",
+    "description": "Просмотр всех DAO, развернутых через CreateDAO"
+  },
+  "header": {
+    "title": "Развернутые DAO",
+    "subtitle": "Просмотрите все DAO, развернутые через платформу CreateDAO"
+  },
+  "filters": {
+    "network": {
+      "label": "Фильтровать по сети",
+      "all": "Все сети",
+      "comingSoon": "(Скоро)"
+    }
+  },
+  "table": {
+    "headers": {
+      "name": "Название DAO",
+      "network": "Сеть",
+      "token": "Токен",
+      "address": "Адрес DAO",
+      "created": "Создано",
+      "actions": "Действия"
+    },
+    "content": {
+      "version": "Версия",
+      "creator": "Создатель"
+    }
+  },
+  "actions": {
+    "viewExplorer": "Посмотреть в обозревателе",
+    "createDao": "Создать DAO"
+  },
+  "status": {
+    "loading": "Загрузка DAO...",
+    "noResults": {
+      "title": "DAO не найдены",
+      "allNetworks": "DAO еще не были развернуты.",
+      "specificNetwork": "DAO еще не были развернуты в сети {{network}}."
+    }
+  },
+  "pagination": {
+    "previous": "Предыдущая",
+    "next": "Следующая",
+    "showing": "Показано",
+    "to": "до",
+    "of": "из",
+    "results": "результатов"
+  },
+  "dates": {
+    "unknown": "Неизвестно",
+    "invalid": "Неверная дата"
+  },
+  "errors": {
+    "loadFailed": "Не удалось загрузить DAO"
+  }
+}

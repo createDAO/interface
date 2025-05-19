@@ -1,0 +1,18 @@
+{
+  "home": "Trang chủ",
+  "features": "Tính năng",
+  "howItWorks": "Cách hoạt động",
+  "networks": "Mạng lưới",
+  "deployedDAOs": "Các DAO đã triển khai",
+  "createDAO": "Tạo DAO",
+  "daoFeatures": "Tính năng DAO",
+  "menu": {
+    "open": "Mở menu",
+    "close": "Đóng menu"
+  },
+  "theme": {
+    "toggle": "Chuyển đổi chủ đề",
+    "light": "Chế độ sáng",
+    "dark": "Chế độ tối"
+  }
+}

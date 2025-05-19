@@ -1,0 +1,61 @@
+{
+  "terminology": {
+    "dao": "DAO",
+    "daoFull": "分散型自律組織",
+    "token": "トークン",
+    "governance": "ガバナンス",
+    "proposal": "提案",
+    "vote": "投票",
+    "treasury": "財務",
+    "member": "メンバー",
+    "community": "コミュニティ",
+    "blockchain": "ブロックチェーン",
+    "smartContract": "スマートコントラクト",
+    "gas": "ガス",
+    "gasPrice": "ガス価格",
+    "transaction": "トランザクション",
+    "wallet": "ウォレット",
+    "connect": "ウォレットを接続",
+    "disconnect": "ウォレットを切断"
+  },
+  "wallets": {
+    "metamask": "MetaMask",
+    "walletConnect": "WalletConnect",
+    "coinbase": "Coinbase Wallet",
+    "trustWallet": "Trust Wallet",
+    "ledger": "Ledger",
+    "brave": "Brave Wallet",
+    "rabby": "Rabby Wallet",
+    "okx": "OKX Wallet",
+    "browser": "ブラウザウォレット"
+  },
+  "networks": {
+    "ethereum": "イーサリアム",
+    "polygon": "Polygon",
+    "arbitrum": "Arbitrum",
+    "optimism": "Optimism",
+    "base": "Base",
+    "avalanche": "Avalanche",
+    "bnb": "BNB Chain",
+    "gnosis": "Gnosis Chain",
+    "celo": "Celo",
+    "mantle": "Mantle",
+    "scroll": "Scroll",
+    "blast": "Blast",
+    "unichain": "Unichain",
+    "worldchain": "Worldchain"
+  },
+  "status": {
+    "connecting": "接続中...",
+    "connected": "接続済み",
+    "disconnected": "切断済み",
+    "pending": "保留中",
+    "confirmed": "確認済み",
+    "failed": "失敗",
+    "success": "成功",
+    "error": "エラー",
+    "deploymentReady": "デプロイ準備完了",
+    "deploying": "デプロイ中...",
+    "deployed": "デプロイ済み"
+  }
+}

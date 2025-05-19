@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "title": "Tạo DAO của bạn <highlight>Một cách dễ dàng</highlight>",
+    "description": "Khởi chạy tổ chức tự trị phi tập trung của bạn trên nhiều blockchain chỉ với vài cú nhấp chuột. Không yêu cầu mã hóa.",
+    "gasFeeNote": "Chỉ trả phí gas mạng để triển khai"
+  },
+  "features": {
+    "title": "Tại sao chọn CreateDAO",
+    "subtitle": "Mọi thứ bạn cần để khởi chạy và quản lý DAO của mình",
+    "governance": {
+      "title": "Quản trị",
+      "description": "Tạo đề xuất, bỏ phiếu và thực hiện các quyết định trên chuỗi"
+    },
+    "treasury": {
+      "title": "Quản lý Kho bạc",
+      "description": "Quản lý tài sản và phân bổ quỹ thông qua bỏ phiếu cộng đồng"
+    },
+    "multichain": {
+      "title": "Hỗ trợ Đa chuỗi",
+      "description": "Triển khai trên nhiều blockchain tương thích EVM"
+    },
+    "noCode": {
+      "title": "Giải pháp Không cần Mã",
+      "description": "Khởi chạy DAO của bạn mà không cần viết một dòng mã nào"
+    },
+    "customization": {
+      "title": "Tùy chỉnh",
+      "description": "Định cấu hình DAO của bạn để phù hợp với nhu cầu của cộng đồng"
+    },
+    "security": {
+      "title": "Bảo mật",
+      "description": "Được xây dựng với các phương pháp bảo mật tốt nhất và tính minh bạch của mã nguồn mở"
+    },
+    "openSource": {
+      "title": "Mã nguồn mở",
+      "description": "Hợp đồng nhà máy DAO và giao diện của chúng tôi hoàn toàn là mã nguồn mở trên GitHub."
+    },
+    "notAudited": {
+      "title": "Bảo mật Chưa được Kiểm toán",
+      "description": "Các hợp đồng thông minh CHƯA ĐƯỢC kiểm toán bởi các công ty bảo mật hàng đầu để bạn yên tâm."
+    },
+    "alwaysFree": {
+      "title": "Luôn miễn phí",
+      "description": "Không có phí ẩn. Chỉ trả phí gas mạng để triển khai."
+    },
+    "openSourceSection": {
+      "title": "Mã nguồn mở",
+      "description": "Kiểm tra các hợp đồng thông minh của chúng tôi và đóng góp vào mã. Chúng tôi tin vào tính minh bạch và phát triển dựa trên cộng đồng.",
+      "button": "Xem trên GitHub"
+    },
+    "subtitle2": "Chúng tôi đã xây dựng nền tảng đáng tin cậy và thân thiện với người dùng nhất để tạo DAO."
+  },
+  "howItWorks": {
+    "title": "Cách hoạt động",
+    "subtitle": "Tạo DAO của bạn chỉ trong vài bước đơn giản",
+    "steps": {
+      "step1": {
+        "title": "Chọn Mạng lưới",
+        "description": "Chọn mạng lưới blockchain cho DAO của bạn"
+      },
+      "step2": {
+        "title": "Định cấu hình DAO",
+        "description": "Thiết lập tên DAO, token và các thông số quản trị của bạn"
+      },
+      "step3": {
+        "title": "Xem lại & Triển khai",
+        "description": "Xem lại cài đặt của bạn và triển khai DAO của bạn lên blockchain"
+      },
+      "step4": {
+        "title": "Quản lý DAO",
+        "description": "Sử dụng DAO mới của bạn để quản trị và quản lý kho bạc"
+      }
+    }
+  },
+  "steps": {
+    "title": "Ba bước đơn giản",
+    "subtitle": "Tạo DAO chưa bao giờ dễ dàng hơn thế. Thực hiện theo các bước đơn giản sau để khởi chạy tổ chức của bạn.",
+    "step1": {
+      "title": "Kết nối Ví",
+      "description": "Sử dụng MetaMask hoặc WalletConnect để bắt đầu."
+    },
+    "step2": {
+      "title": "Nhập Chi tiết DAO",
+      "description": "Đặt tên cho DAO của bạn và thiết lập các thông số quản trị cơ bản."
+    },
+    "step3": {
+      "title": "Triển khai",
+      "description": "Xác nhận giao dịch và DAO của bạn đã sẵn sàng để sử dụng."
+    },
+    "readyToStart": "Sẵn sàng bắt đầu?",
+    "createButton": "Tạo DAO của bạn"
+  },
+  "networks": {
+    "title": "Các Mạng lưới được Hỗ trợ",
+    "subtitle": "Tạo và triển khai DAO của bạn trên bất kỳ mạng lưới blockchain phổ biến nào sau đây.",
+    "comingSoon": "Nhiều mạng lưới khác sẽ sớm ra mắt dựa trên phản hồi của cộng đồng."
+  },
+  "platforms": {
+    "title": "Nền tảng Quản lý DAO",
+    "subtitle": "Các giao diện mạnh mẽ để quản lý DAO của bạn sau khi triển khai.",
+    "description": "Sau khi triển khai, quản lý DAO của bạn bằng các nền tảng này",
+    "daoCafe": {
+      "name": "DAOCafe",
+      "description": "Một giao diện toàn diện để quản lý DAO: tạo đề xuất, thảo luận, bỏ phiếu, tạo bán trước, đề xuất chuyển kho bạc, và nhiều hơn nữa.",
+      "visitButton": "Truy cập DAOCafe"
+    },
+    "addYourPlatform": {
+      "title": "Thêm Nền tảng của bạn",
+      "description": "Phát triển giao diện quản lý DAO của riêng bạn và được giới thiệu tại đây. Kiểm tra tài liệu của chúng tôi để biết chi tiết tích hợp và các yêu cầu.",
+      "readDocsButton": "Đọc Tài liệu"
+    },
+    "integration": {
+      "text": "Bạn muốn thấy nền tảng của mình được liệt kê ở đây?",
+      "linkText": "Tìm hiểu cách tích hợp"
+    }
+  },
+  "cta": {
+    "title": "Tạo DAO của bạn ngay bây giờ",
+    "description": "Tham gia cùng hàng trăm tổ chức đã sử dụng CreateDAO để quản lý cộng đồng và kho bạc của họ.",
+    "createButton": "Tạo DAO",
+    "learnMoreButton": "Tìm hiểu thêm",
+    "gasFeeNote": "Chỉ trả phí gas mạng để triển khai"
+  }
+}

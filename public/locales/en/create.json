@@ -1,0 +1,298 @@
+{
+  "title": "Create Your DAO",
+  "subtitle": "Launch your decentralized autonomous organization in minutes",
+  "steps": {
+    "network": {
+      "title": "Choose Network",
+      "description": "Select the blockchain network for your DAO",
+      "networkLabel": "Network",
+      "networkPlaceholder": "Select a network",
+      "versionLabel": "Version",
+      "versionPlaceholder": "Select a version"
+    },
+    "networkTypes": {
+      "ethereumMainnet": "Ethereum Mainnet: The primary Ethereum blockchain with highest security but higher gas fees",
+      "layer2Networks": "Layer 2 Networks: Optimism, Arbitrum, etc. offer lower fees while inheriting Ethereum security",
+      "alternativeL1s": "Alternative L1s: Networks like Avalanche, BNB Chain offer different trade-offs",
+      "testnets": "Testnets: For testing before deploying to mainnet (free to use)"
+    },
+    "details": {
+      "title": "DAO Details",
+      "description": "Configure your DAO and governance token",
+      "daoName": {
+        "label": "DAO Name",
+        "placeholder": "Enter your DAO name",
+        "helper": "The name of your decentralized autonomous organization"
+      },
+      "tokenName": {
+        "label": "Token Name",
+        "placeholder": "Enter your token name",
+        "helper": "The name of your governance token"
+      },
+      "tokenSymbol": {
+        "label": "Token Symbol",
+        "placeholder": "3-5 characters",
+        "helper": "A short identifier for your token (e.g., BTC, ETH)"
+      },
+      "tokenSupply": {
+        "label": "Token Supply",
+        "placeholder": "Enter total supply",
+        "helper": "The total number of tokens that will be created"
+      }
+    },
+    "review": {
+      "title": "Review",
+      "description": "Review your DAO configuration before deployment",
+      "summary": "Summary",
+      "network": "Network",
+      "version": "Version",
+      "daoName": "DAO Name",
+      "tokenName": "Token Name",
+      "tokenSymbol": "Token Symbol",
+      "tokenSupply": "Token Supply",
+      "estimatedGas": "Estimated Gas",
+      "deploymentCost": "Deployment Cost",
+      "readyToDeploy": "Ready to deploy your DAO?",
+      "reviewYourDao": "Review Your DAO",
+      "reviewDescription": "Please review your DAO configuration before deployment. Once deployed, some settings cannot be changed.",
+      "daoConfigSummary": "DAO Configuration Summary",
+      "organizationDetails": "Organization Details",
+      "tokenDetails": "Token Details",
+      "latest": "Latest"
+    },
+    "deployment": {
+      "title": "Deployment",
+      "description": "Deploy your DAO to the blockchain",
+      "connecting": "Connecting to wallet...",
+      "preparing": "Preparing deployment...",
+      "deploying": "Deploying DAO...",
+      "success": "DAO successfully deployed!",
+      "failed": "Deployment failed",
+      "tryAgain": "Try Again",
+      "viewOnExplorer": "View on Explorer",
+      "managementPlatforms": "You can now manage your DAO using these platforms:",
+      "processingDeployment": "Processing Deployment",
+      "waitingForDeployment": "Please wait while your DAO is being deployed to the blockchain...",
+      "daoCreatedSuccessfully": "DAO Created Successfully!",
+      "daoIsLive": "Your {{daoName}} DAO is now live on the blockchain",
+      "daoFullyFunctional": "Your DAO is now fully functional with governance capabilities, token management, and treasury controls.",
+      "contractAddresses": "Contract Addresses",
+      "daoCoreContract": "DAO Core Contract",
+      "tokenContract": "Token Contract",
+      "transactionDetails": "Transaction Details",
+      "transactionHash": "Transaction Hash",
+      "viewOnBlockExplorer": "View on Block Explorer",
+      "blockExplorerDescription": "You can view your transaction details on the blockchain explorer to track its status and verify the deployment.",
+      "nextSteps": "Next Steps",
+      "registerYourDao": "Register Your DAO",
+      "registerDescription": "To propose actions, vote, or manage assets, connect your DAO to a management interface.",
+      "stakeYourToken": "Stake Your Token",
+      "stakeDescription": "Stake your initial token to gain voting power in your DAO's governance system.",
+      "createProposal": "Create a Proposal",
+      "proposalDescription": "Create your first governance proposal to distribute tokens or manage treasury assets."
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "minLength": "Must be at least {{min}} characters",
+    "maxLength": "Must be at most {{max}} characters",
+    "invalidSymbol": "Symbol must be 2-5 uppercase letters",
+    "positiveNumber": "Must be a positive number",
+    "maxSupply": "Must be less than or equal to {{max}}"
+  },
+  "tokenDistribution": {
+    "title": "Token Distribution",
+    "totalSupply": "Total Supply",
+    "details": "Token Distribution Details",
+    "creator": "Creator (You)",
+    "initialToken": "initial governance token",
+    "treasury": "Treasury",
+    "controlledByDao": "controlled by DAO",
+    "initialTokenForGovernance": "Initial token for governance",
+    "controlledByDaoGovernance": "Controlled by DAO governance",
+    "howItWorks": {
+      "title": "How Token Distribution Works",
+      "description": "After deployment, you'll receive 1 token to start participating in governance. The remaining tokens will be stored in the treasury and can be distributed through governance proposals approved by the community."
+    }
+  },
+  "navigation": {
+    "backToNetwork": "Back to Network",
+    "continueToReview": "Continue to Review",
+    "continueToDetails": "Continue to DAO Details",
+    "backToDetails": "Back to DAO Details",
+    "continueToPreDeployment": "Continue to Pre-Deployment",
+    "processing": "Processing..."
+  },
+  "network": {
+    "wrongNetwork": "Wrong Network",
+    "switchToSupported": "Please switch to a supported network to create your DAO",
+    "switchingNetwork": "Switching network... Please confirm in your wallet.",
+    "switchFailed": "Failed to switch network. Please check your wallet and try again.",
+    "switching": "Switching...",
+    "switchTo": "Switch to {{name}}",
+    "tooltip": "The blockchain network where your DAO will be deployed. Each network has different characteristics and fees.",
+    "features": "Network Features",
+    "notSupported": "Your current network is not supported. Please switch to a supported network.",
+    "note": "Note",
+    "sepoliaNote": "For fast testing, Sepolia DAOs are deployed with a 5-minute voting period."
+  },
+  "version": {
+    "tooltip": "The version of the DAO contracts to deploy. Newer versions may include additional features or improvements."
+  },
+  "architecture": {
+    "title": "Your DAO Architecture",
+    "daoCore": "DAO Core",
+    "daoCoreDescription": "Central governance hub for proposals, voting, and execution of community decisions",
+    "daoToken": "DAO Token",
+    "daoTokenDescription": "ERC20 governance token with customizable tax mechanisms and distribution controls",
+    "treasury": "Treasury",
+    "treasuryDescription": "Secure vault for managing DAO assets, controlled by governance proposals",
+    "staking": "Staking",
+    "stakingDescription": "Time-based staking with voting power multipliers for long-term holders",
+    "upgradeableProxies": "All contracts are deployed as upgradeable proxies with the latest implementations"
+  },
+  "features": {
+    "governance": {
+      "title": "Governance",
+      "description": "Create proposals and vote on important decisions"
+    },
+    "treasury": {
+      "title": "Treasury",
+      "description": "Manage funds and allocate resources"
+    },
+    "token": {
+      "title": "Governance Token",
+      "description": "ERC-20 token for voting rights and governance"
+    },
+    "multiSig": {
+      "title": "Multi-Signature",
+      "description": "Require multiple approvals for critical actions"
+    }
+  },
+  "wallet": {
+    "connected": "Wallet Connected",
+    "readyToDeploy": "Your wallet is connected and ready to deploy the DAO",
+    "disconnect": "Disconnect",
+    "address": "Wallet Address",
+    "copy": "Copy",
+    "balance": "Balance",
+    "connectionRequired": "Wallet Connection Required",
+    "connectionMessage": "You need to connect a Web3 wallet to deploy your DAO. This allows you to:",
+    "signTransaction": "Sign the deployment transaction",
+    "becomeAdmin": "Become the initial DAO admin",
+    "receiveToken": "Receive your governance token",
+    "connect": "Connect Wallet"
+  },
+  "deploymentCost": {
+    "title": "Estimated Deployment Cost",
+    "description": "Deploying your DAO will cost approximately:",
+    "calculating": "Calculating...",
+    "note": "Note: Actual cost may vary based on network conditions at the time of deployment.",
+    "gasUnits": "≈ {{units}} gas units"
+  },
+  "whatHappensNext": {
+    "title": "What Happens Next",
+    "description": "When you click \"Continue to Pre-Deployment\", the following will happen:",
+    "checkBalance": "We'll check your wallet balance to ensure you have enough funds",
+    "simulateTransaction": "We'll simulate the transaction to verify it will succeed",
+    "confirmTransaction": "Your wallet will prompt you to confirm the transaction",
+    "deployContracts": "The DAO contracts will be deployed to the {{network}} network",
+    "receiveToken": "You'll receive 1 {{symbol}} token to start participating in governance",
+    "treasuryStorage": "The remaining {{amount}} {{symbol}} will be stored in the treasury"
+  },
+  "preDeployment": {
+    "title": "Pre-Deployment Checks",
+    "description": "We'll run a few checks to ensure your DAO deployment will be successful. This helps prevent failed transactions and wasted gas fees.",
+    "checklist": "Deployment Checklist",
+    "balanceCheck": {
+      "title": "Wallet Balance Check",
+      "description": "Verifying you have enough {{symbol}} to deploy"
+    },
+    "simulation": {
+      "title": "Transaction Simulation",
+      "description": "Simulating the deployment on {{network}} to ensure success"
+    },
+    "signing": {
+      "title": "Transaction Signing",
+      "inProgress": "Please sign the transaction in your wallet...",
+      "description": "Sign the transaction with your wallet to deploy the DAO"
+    },
+    "confirmation": {
+      "title": "Transaction Confirmation",
+      "inProgress": "Waiting for blockchain confirmation...",
+      "description": "Wait for the transaction to be confirmed on the blockchain"
+    },
+    "status": {
+      "passed": "Passed",
+      "failed": "Failed",
+      "signed": "Signed",
+      "confirmed": "Confirmed"
+    },
+    "networkMismatch": {
+      "title": "Network Mismatch",
+      "description": "Your wallet is connected to {{current}}, but you selected {{selected}} for deployment.",
+      "switching": "Switching network... Please confirm in your wallet.",
+      "switchFailed": "Failed to switch automatically. Please change your network manually in your wallet.",
+      "switchNeeded": "Please switch your network to {{network}} to continue.",
+      "switchTo": "Switch to {{network}}"
+    },
+    "backToReview": "Back to Review"
+  },
+  "stepIndicator": {
+    "stepCount": "Step {{current}} of {{total}}",
+    "steps": {
+      "network": {
+        "label": "Network",
+        "description": "Choose blockchain network"
+      },
+      "daoDetails": {
+        "label": "DAO Details",
+        "description": "Configure DAO and token"
+      },
+      "review": {
+        "label": "Review",
+        "description": "Verify configuration"
+      },
+      "preDeploy": {
+        "label": "Pre-Deploy",
+        "description": "Run pre-deployment checks"
+      },
+      "success": {
+        "label": "Success",
+        "description": "View your new DAO"
+      }
+    }
+  },
+  "transaction": {
+    "waitingForSignature": "Please sign the transaction...",
+    "submitting": "Submitting transaction...",
+    "waitingForConfirmation": "Waiting for confirmation...",
+    "success": "Transaction successful!",
+    "error": "Transaction failed",
+    "checkingBalance": "Checking wallet balance...",
+    "balanceError": "Insufficient balance",
+    "balanceCheckError": "Failed to check wallet balance",
+    "simulating": "Simulating transaction...",
+    "simulationError": "Transaction simulation failed",
+    "unexpectedError": "Unexpected error",
+    "unexpectedErrorDetails": "An unexpected error occurred during transaction simulation",
+    "viewOnExplorer": "View on Explorer",
+    "insufficientBalanceDetails": "Insufficient balance: You need <strong>{{amount}} {{symbol}}</strong> more to complete this transaction.",
+    "tipTransactionProcessing": "Tip: Your transaction might still be processing. Check the explorer to see its status.",
+    "tipAddMoreFunds": "Tip: Add more funds to your wallet and try again.",
+    "tipIncreaseGasLimit": "Tip: Try increasing the gas limit in your wallet settings.",
+    "tipIncreaseGasPrice": "Tip: Try increasing the gas price in your wallet settings.",
+    "tipResetWallet": "Tip: Try resetting your wallet's transaction history or adjusting the nonce manually.",
+    "tipWalletDisconnected": "Tip: Your wallet is disconnected. Please reconnect your wallet and try again.",
+    "refreshPage": "Refresh Page",
+    "tipWalletPermission": "Tip: Your wallet needs permission to interact with this contract. Open your wallet and check for permission requests.",
+    "stepsToFix": "Steps to fix:",
+    "stepOpenWallet": "Open your wallet (MetaMask, etc.)",
+    "stepLookForPermissions": "Look for pending permission requests",
+    "stepGrantPermission": "Grant permission to the contract",
+    "stepTryAgain": "Try the transaction again",
+    "noteRejectedTransaction": "Note: You rejected the transaction in your wallet. If this was unintentional, please try again.",
+    "retryTransaction": "Retry Transaction",
+    "simulationErrorMessage": "The contract simulation encountered an error. This may be due to contract restrictions or network issues."
+  }
+}

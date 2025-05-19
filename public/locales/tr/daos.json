@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "title": "Dağıtılan DAO'lar | CreateDAO",
+    "description": "CreateDAO aracılığıyla dağıtılan tüm DAO'ları görüntüleyin"
+  },
+  "header": {
+    "title": "Dağıtılan DAO'lar",
+    "subtitle": "CreateDAO platformu aracılığıyla dağıtılan tüm DAO'lara göz atın"
+  },
+  "filters": {
+    "network": {
+      "label": "Ağa Göre Filtrele",
+      "all": "Tüm Ağlar",
+      "comingSoon": "(Yakında Gelecek)"
+    }
+  },
+  "table": {
+    "headers": {
+      "name": "DAO Adı",
+      "network": "Ağ",
+      "token": "Token",
+      "address": "DAO Adresi",
+      "created": "Oluşturuldu",
+      "actions": "Eylemler"
+    },
+    "content": {
+      "version": "Sürüm",
+      "creator": "Oluşturan"
+    }
+  },
+  "actions": {
+    "viewExplorer": "Gezginde Görüntüle",
+    "createDao": "Bir DAO Oluştur"
+  },
+  "status": {
+    "loading": "DAO'lar Yükleniyor...",
+    "noResults": {
+      "title": "DAO Bulunamadı",
+      "allNetworks": "Henüz DAO dağıtılmadı.",
+      "specificNetwork": "{{network}} üzerinde henüz DAO dağıtılmadı."
+    }
+  },
+  "pagination": {
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "showing": "Gösteriliyor",
+    "to": "-",
+    "of": "/",
+    "results": "sonuç"
+  },
+  "dates": {
+    "unknown": "Bilinmiyor",
+    "invalid": "Geçersiz tarih"
+  },
+  "errors": {
+    "loadFailed": "DAO'lar yüklenemedi"
+  }
+}

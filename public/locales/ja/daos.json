@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "title": "デプロイされたDAO | CreateDAO",
+    "description": "CreateDAOを通じてデプロイされたすべてのDAOを表示します"
+  },
+  "header": {
+    "title": "デプロイされたDAO",
+    "subtitle": "CreateDAOプラットフォームを通じてデプロイされたすべてのDAOを閲覧します"
+  },
+  "filters": {
+    "network": {
+      "label": "ネットワークでフィルタリング",
+      "all": "すべてのネットワーク",
+      "comingSoon": "（近日公開）"
+    }
+  },
+  "table": {
+    "headers": {
+      "name": "DAO名",
+      "network": "ネットワーク",
+      "token": "トークン",
+      "address": "DAOアドレス",
+      "created": "作成日",
+      "actions": "アクション"
+    },
+    "content": {
+      "version": "バージョン",
+      "creator": "作成者"
+    }
+  },
+  "actions": {
+    "viewExplorer": "エクスプローラーで表示",
+    "createDao": "DAOを作成"
+  },
+  "status": {
+    "loading": "DAOを読み込み中...",
+    "noResults": {
+      "title": "DAOが見つかりません",
+      "allNetworks": "まだDAOはデプロイされていません。",
+      "specificNetwork": "{{network}}にはまだDAOがデプロイされていません。"
+    }
+  },
+  "pagination": {
+    "previous": "前へ",
+    "next": "次へ",
+    "showing": "表示中",
+    "to": "～",
+    "of": "/",
+    "results": "件の結果"
+  },
+  "dates": {
+    "unknown": "不明",
+    "invalid": "無効な日付"
+  },
+  "errors": {
+    "loadFailed": "DAOの読み込みに失敗しました"
+  }
+}

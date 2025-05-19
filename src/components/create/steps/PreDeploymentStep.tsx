@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useChainId, useAccount, useBalance, useSwitchChain } from 'wagmi';
+import { useTranslation } from 'next-i18next';
 import { parseEther } from 'viem';
 import { simulateContract } from '@wagmi/core';
 import config from '../../../config/wagmi';
@@ -41,6 +42,7 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
   onError,
   selectedNetworkId
 }) => {
+  const { t } = useTranslation('create');
   const chainId = useChainId();
   const { address } = useAccount();
   const { data: balance } = useBalance({ address });
@@ -198,8 +200,11 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
             onError({
               code: -1,
               name: 'InsufficientFundsError',
-              shortMessage: 'Insufficient balance for deployment',
-              details: `You need ${neededEth.toFixed(6)} ${balance.symbol} more to complete this transaction.`
+              shortMessage: t('transaction.balanceError'),
+              details: t('transaction.insufficientBalanceDetails', { 
+                amount: neededEth.toFixed(6), 
+                symbol: balance.symbol 
+              }).replace(/<[^>]*>/g, '')
             });
           }
         } catch (error) {
@@ -207,7 +212,7 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
           onError({
             code: -1,
             name: 'BalanceCheckError',
-            shortMessage: 'Failed to check wallet balance',
+              shortMessage: t('transaction.balanceCheckError', 'Failed to check wallet balance'),
             details: error instanceof Error ? error.message : 'Unknown error occurred'
           });
         } finally {
@@ -221,8 +226,8 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
         onError({
           code: -1,
           name: 'BalanceCheckError',
-          shortMessage: 'Failed to check wallet balance',
-          details: 'An unexpected error occurred during balance check'
+          shortMessage: t('transaction.balanceCheckError', 'Failed to check wallet balance'),
+          details: t('transaction.unexpectedErrorDetails', 'An unexpected error occurred during balance check')
         });
       });
     };
@@ -355,7 +360,7 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
             onError({
               code: -1,
               name: 'SimulationError',
-              shortMessage: 'Transaction simulation failed',
+              shortMessage: t('transaction.simulationError'),
               details: formattedDetails
             });
           }
@@ -384,8 +389,8 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
           onError({
             code: -1,
             name: 'SimulationError',
-            shortMessage: 'Transaction simulation failed',
-            details: errorMessage
+              shortMessage: t('transaction.simulationError'),
+              details: errorMessage
           });
         } finally {
           setIsLoading(false);
@@ -410,8 +415,8 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
         onError({
           code: -1,
           name: 'UnexpectedError',
-          shortMessage: 'Unexpected error',
-          details: 'An unexpected error occurred during transaction simulation'
+          shortMessage: t('transaction.unexpectedError', 'Unexpected error'),
+          details: t('transaction.unexpectedErrorDetails', 'An unexpected error occurred during transaction simulation')
         });
       });
     };
@@ -429,10 +434,10 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
           <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
           </svg>
-          Pre-Deployment Checks
+          {t('preDeployment.title')}
         </h3>
         <p className="text-primary-700 dark:text-primary-400 mb-4">
-          We&#39;ll run a few checks to ensure your DAO deployment will be successful. This helps prevent failed transactions and wasted gas fees.
+          {t('preDeployment.description')}
         </p>
       </div>
 
@@ -443,7 +448,7 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
             <path fillRule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 100-12 6 6 0 000 12z" clipRule="evenodd" />
             <path d="M10 6a1 1 0 011 1v3.586l2.707 2.707a1 1 0 01-1.414 1.414l-3-3A1 1 0 019 11V7a1 1 0 011-1z" clipRule="evenodd" />
           </svg>
-          Deployment Checklist
+          {t('preDeployment.checklist')}
         </h3>
 
         <div className="space-y-4">
@@ -473,15 +478,15 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
                   </div>
                 )}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">Wallet Balance Check</h4>
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">{t('preDeployment.balanceCheck.title')}</h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Verifying you have enough {network?.nativeCurrency?.symbol || 'ETH'} to deploy
+                    {t('preDeployment.balanceCheck.description', { symbol: network?.nativeCurrency?.symbol || 'ETH' })}
                   </p>
                 </div>
               </div>
               {balanceCheckStatus.isChecked && balanceCheckStatus.isPassed && (
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                  Passed
+                  {t('preDeployment.status.passed')}
                 </span>
               )}
             </div>
@@ -498,9 +503,9 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
                     </svg>
                   </div>
                   <div>
-                    <h4 className="text-sm font-medium text-red-800 dark:text-red-300">Transaction Simulation Failed</h4>
+                    <h4 className="text-sm font-medium text-red-800 dark:text-red-300">{t('transaction.simulationError')}</h4>
                     <p className="text-xs text-red-600 dark:text-red-400">
-                      The contract simulation encountered an error. This may be due to contract restrictions or network issues.
+                      {t('transaction.simulationErrorMessage')}
                     </p>
                   </div>
                 </div>
@@ -532,20 +537,20 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
                     </div>
                   )}
                   <div>
-                    <h4 className="text-sm font-medium text-gray-900 dark:text-white">Transaction Simulation</h4>
+                    <h4 className="text-sm font-medium text-gray-900 dark:text-white">{t('preDeployment.simulation.title')}</h4>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      Simulating the deployment on {networkName} to ensure success
+                      {t('preDeployment.simulation.description', { network: networkName })}
                     </p>
                   </div>
                 </div>
                 {simulationStatus === 'passed' && (
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                    Passed
+                    {t('preDeployment.status.passed')}
                   </span>
                 )}
                 {simulationStatus === 'failed' && (
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                    Failed
+                    {t('preDeployment.status.failed')}
                   </span>
                 )}
               </div>
@@ -572,17 +577,17 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
                   </div>
                 )}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">Transaction Signing</h4>
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">{t('preDeployment.signing.title')}</h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {txState.isWaitingForSignature ?
-                      "Please sign the transaction in your wallet..." :
-                      "Sign the transaction with your wallet to deploy the DAO"}
+                      t('preDeployment.signing.inProgress') :
+                      t('preDeployment.signing.description')}
                   </p>
                 </div>
               </div>
               {txState.isWaitingForConfirmation || txState.isSuccess ? (
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                  Signed
+                  {t('preDeployment.status.signed')}
                 </span>
               ) : null}
             </div>
@@ -608,17 +613,17 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
                   </div>
                 )}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">Transaction Confirmation</h4>
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">{t('preDeployment.confirmation.title')}</h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {txState.isWaitingForConfirmation ?
-                      "Waiting for blockchain confirmation..." :
-                      "Wait for the transaction to be confirmed on the blockchain"}
+                      t('preDeployment.confirmation.inProgress') :
+                      t('preDeployment.confirmation.description')}
                   </p>
                 </div>
               </div>
               {txState.isSuccess ? (
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                  Confirmed
+                  {t('preDeployment.status.confirmed')}
                 </span>
               ) : null}
             </div>
@@ -631,10 +636,10 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
         state={txState}
         chainId={chainId}
         messages={{
-          checkingBalance: 'Checking your wallet balance...',
-          balanceError: 'Insufficient balance for deployment',
-          simulating: 'Simulating transaction...',
-          simulationError: 'Transaction simulation failed'
+          checkingBalance: t('transaction.checkingBalance'),
+          balanceError: t('transaction.balanceError'),
+          simulating: t('transaction.simulating'),
+          simulationError: t('transaction.simulationError')
         }}
         className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md"
       />
@@ -649,15 +654,15 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
               </svg>
             </div>
             <div className="ml-3 flex-1">
-              <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-300">Network Mismatch</h3>
+              <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-300">{t('preDeployment.networkMismatch.title')}</h3>
               <div className="mt-1 text-sm text-yellow-700 dark:text-yellow-400">
-                <p>Your wallet is connected to {networkName}, but you selected {selectedNetworkName} for deployment.</p>
+                <p>{t('preDeployment.networkMismatch.description', { current: networkName, selected: selectedNetworkName })}</p>
                 {isSwitchingNetwork ? (
-                  <p className="mt-1">Switching network... Please confirm in your wallet.</p>
+                  <p className="mt-1">{t('preDeployment.networkMismatch.switching')}</p>
                 ) : switchError ? (
-                  <p className="mt-1">Failed to switch automatically. Please change your network manually in your wallet.</p>
+                  <p className="mt-1">{t('preDeployment.networkMismatch.switchFailed')}</p>
                 ) : (
-                  <p className="mt-1">Please switch your network to {selectedNetworkName} to continue.</p>
+                  <p className="mt-1">{t('preDeployment.networkMismatch.switchNeeded', { network: selectedNetworkName })}</p>
                 )}
               </div>
               {!isSwitchingNetwork && (
@@ -665,7 +670,7 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
                   onClick={() => switchChain({ chainId: selectedNetworkId })}
                   className="mt-2 inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
                 >
-                  Switch to {selectedNetworkName}
+                  {t('preDeployment.networkMismatch.switchTo', { network: selectedNetworkName })}
                 </button>
               )}
             </div>
@@ -684,7 +689,7 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
           <svg className="inline-block mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
           </svg>
-          Back to Review
+          {t('preDeployment.backToReview')}
         </button>
       </div>
     </div>

@@ -1,0 +1,23 @@
+{
+  "title": "Sıkça Sorulan Sorular",
+  "subtitle": "CreateDAO hakkında bilmeniz gereken her şey.",
+  "contactText": "Daha fazla sorunuz mu var? Topluluğumuzla iletişime geçin.",
+  "questions": {
+    "isFree": {
+      "question": "Gerçekten ücretsiz mi?",
+      "answer": "Evet! CreateDAO'yu kullanmak tamamen ücretsizdir. DAO'nuzu dağıtırken yalnızca blok zincirinin ağ gaz ücretlerini ödersiniz."
+    },
+    "isSecure": {
+      "question": "Kod güvenli mi?",
+      "answer": "Akıllı sözleşmelerimiz henüz denetlenmedi, ancak önde gelen güvenlik firmaları tarafından yapılacak denetimler yakında planlanıyor. Bu arada tam şeffaflık için kod açık kaynaklıdır."
+    },
+    "supportedNetworks": {
+      "question": "Hangi ağlar destekleniyor?",
+      "answer": "Şu anda {{networks}} destekliyoruz. Topluluk geri bildirimlerine göre yakında daha fazla ağ eklenecektir."
+    },
+    "customization": {
+      "question": "DAO'mu özelleştirebilir miyim?",
+      "answer": "Henüz değil, ancak gelecekte topluluğunuzun ihtiyaçlarına uyacak şekilde oylama sürelerini, teklif eşiklerini ve diğer yönetişim parametrelerini özelleştirebileceksiniz."
+    }
+  }
+}

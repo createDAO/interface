@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { DAOFormData } from '../../../types/dao';
 
 interface DeploymentData {
@@ -18,14 +19,15 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
   deploymentData,
   isSuccess
 }) => {
+  const { t } = useTranslation('create');
 
   if (!deploymentData || !isSuccess) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
         <div className="animate-spin h-12 w-12 border-4 border-primary-500 border-t-transparent rounded-full mb-4"></div>
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Processing Deployment</h3>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{t('steps.deployment.processingDeployment')}</h3>
         <p className="text-gray-600 dark:text-gray-300 text-center">
-          Please wait while your DAO is being deployed to the blockchain...
+          {t('steps.deployment.waitingForDeployment')}
         </p>
       </div>
     );
@@ -41,9 +43,9 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
             </svg>
           </div>
           <div className="ml-4">
-            <h3 className="text-xl font-bold text-green-800 dark:text-green-300">DAO Created Successfully!</h3>
+            <h3 className="text-xl font-bold text-green-800 dark:text-green-300">{t('steps.deployment.daoCreatedSuccessfully')}</h3>
             <p className="text-green-700 dark:text-green-400">
-              Your {formData.daoName} DAO is now live on the blockchain
+              {t('steps.deployment.daoIsLive', { daoName: formData.daoName })}
             </p>
           </div>
         </div>
@@ -56,7 +58,7 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
               </svg>
             </div>
             <p className="text-gray-700 dark:text-gray-300">
-              Your DAO is now fully functional with governance capabilities, token management, and treasury controls.
+              {t('steps.deployment.daoFullyFunctional')}
             </p>
           </div>
         </div>
@@ -68,14 +70,14 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
             <svg className="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
             </svg>
-            Contract Addresses
+            {t('steps.deployment.contractAddresses')}
           </h3>
 
           <div className="space-y-4">
             <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
               <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 flex items-center">
                 <div className="w-3 h-3 bg-indigo-500 bg-opacity-20 border border-indigo-500 rounded-full mr-2"></div>
-                DAO Core Contract
+                {t('steps.deployment.daoCoreContract')}
               </h4>
               <div className="flex items-center">
                 <p className="text-sm font-mono text-gray-900 dark:text-white break-all">
@@ -98,7 +100,7 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
             <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
               <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 flex items-center">
                 <div className="w-3 h-3 bg-green-500 bg-opacity-20 border border-green-500 rounded-full mr-2"></div>
-                Token Contract
+                {t('steps.deployment.tokenContract')}
               </h4>
               <div className="flex items-center">
                 <p className="text-sm font-mono text-gray-900 dark:text-white break-all">
@@ -125,12 +127,12 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
             <svg className="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h8V3a1 1 0 112 0v1h1a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V6a2 2 0 012-2h1V3a1 1 0 011-1zm11 14a1 1 0 001-1V6a1 1 0 00-1-1H4a1 1 0 00-1 1v9a1 1 0 001 1h12z" clipRule="evenodd" />
             </svg>
-            Transaction Details
+            {t('steps.deployment.transactionDetails')}
           </h3>
 
           <div className="space-y-4">
             <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-              <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Transaction Hash</h4>
+              <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">{t('steps.deployment.transactionHash')}</h4>
               <div className="flex items-center">
                 <p className="text-sm font-mono text-gray-900 dark:text-white break-all">
                   {deploymentData.transactionHash}
@@ -154,10 +156,10 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
                 <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                 </svg>
-                View on Block Explorer
+                {t('steps.deployment.viewOnBlockExplorer')}
               </h4>
               <p className="text-sm text-blue-700 dark:text-blue-400">
-                You can view your transaction details on the blockchain explorer to track its status and verify the deployment.
+                {t('steps.deployment.blockExplorerDescription')}
               </p>
             </div>
           </div>
@@ -169,7 +171,7 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
           <svg className="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
           </svg>
-          Next Steps
+            {t('steps.deployment.nextSteps')}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -178,10 +180,10 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
               <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center mr-3">
                 <span className="text-primary-600 dark:text-primary-400 font-bold">1</span>
               </div>
-              <h4 className="font-medium text-gray-900 dark:text-white">Register Your DAO</h4>
+              <h4 className="font-medium text-gray-900 dark:text-white">{t('steps.deployment.registerYourDao')}</h4>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              To propose actions, vote, or manage assets, connect your DAO to a management interface.
+              {t('steps.deployment.registerDescription')}
             </p>
           </div>
 
@@ -190,10 +192,10 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
               <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center mr-3">
                 <span className="text-primary-600 dark:text-primary-400 font-bold">2</span>
               </div>
-              <h4 className="font-medium text-gray-900 dark:text-white">Stake Your Token</h4>
+              <h4 className="font-medium text-gray-900 dark:text-white">{t('steps.deployment.stakeYourToken')}</h4>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              Stake your initial token to gain voting power in your DAO&#39;s governance system.
+              {t('steps.deployment.stakeDescription')}
             </p>
           </div>
 
@@ -202,10 +204,10 @@ const DeploymentStep: React.FC<DeploymentStepProps> = ({
               <div className="w-8 h-8 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center mr-3">
                 <span className="text-primary-600 dark:text-primary-400 font-bold">3</span>
               </div>
-              <h4 className="font-medium text-gray-900 dark:text-white">Create a Proposal</h4>
+              <h4 className="font-medium text-gray-900 dark:text-white">{t('steps.deployment.createProposal')}</h4>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300">
-              Create your first governance proposal to distribute tokens or manage treasury assets.
+              {t('steps.deployment.proposalDescription')}
             </p>
           </div>
         </div>

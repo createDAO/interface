@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { DAOFormData } from '../../../types/dao';
 import { InfoTooltip } from '../ui';
 
@@ -21,6 +22,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
   goToNextStep,
   canProceedToNextStep
 }) => {
+  const { t } = useTranslation('create');
   return (
     <div className="space-y-6">
       <div className="bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-lg p-6 mb-6">
@@ -28,18 +30,18 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
           <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
           </svg>
-          Configure Your DAO
+          {t('steps.details.title')}
         </h3>
         <p className="text-primary-700 dark:text-primary-400 mb-4">
-          Set up the core details of your DAO. These settings will define your organization&#39;s identity and governance token.
+          {t('steps.details.description')}
         </p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
         <div>
           <label htmlFor="daoName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            DAO Name
-            <InfoTooltip text="This will be the official name of your DAO organization and will be used in governance proposals." />
+            {t('steps.details.daoName.label')}
+            <InfoTooltip text={t('steps.details.daoName.helper')} />
           </label>
           <div className="relative">
             <input
@@ -48,7 +50,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
               type="text"
               value={formData.daoName}
               onChange={handleInputChange}
-              placeholder="e.g., My Awesome DAO"
+              placeholder={t('steps.details.daoName.placeholder')}
               className={`w-full bg-white dark:bg-gray-800 border ${touchedFields.daoName && errors.daoName ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent pr-10`}
             />
             {formData.daoName && !errors.daoName && (
@@ -59,14 +61,14 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
           </div>
           {touchedFields.daoName && errors.daoName && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.daoName}</p>}
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            Choose a clear, memorable name that reflects your DAO&#39;s purpose
+            {t('steps.details.daoName.helper')}
           </p>
         </div>
 
         <div>
           <label htmlFor="tokenName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Token Name
-            <InfoTooltip text="The full name of your governance token. This token will be used for voting and can be distributed to community members." />
+            {t('steps.details.tokenName.label')}
+            <InfoTooltip text={t('steps.details.tokenName.helper')} />
           </label>
           <div className="relative">
             <input
@@ -75,7 +77,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
               type="text"
               value={formData.tokenName}
               onChange={handleInputChange}
-              placeholder="e.g., My DAO Token"
+              placeholder={t('steps.details.tokenName.placeholder')}
               className={`w-full bg-white dark:bg-gray-800 border ${touchedFields.tokenName && errors.tokenName ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent pr-10`}
             />
             {formData.tokenName && !errors.tokenName && (
@@ -86,14 +88,14 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
           </div>
           {touchedFields.tokenName && errors.tokenName && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.tokenName}</p>}
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            This will appear in wallets and exchanges
+            {t('steps.details.tokenName.helper')}
           </p>
         </div>
 
         <div>
           <label htmlFor="symbol" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Token Symbol
-            <InfoTooltip text="The ticker symbol for your token (max 6 characters). This will appear in wallets and exchanges." />
+            {t('steps.details.tokenSymbol.label')}
+            <InfoTooltip text={t('steps.details.tokenSymbol.helper')} />
           </label>
           <div className="relative">
             <input
@@ -102,7 +104,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
               type="text"
               value={formData.symbol}
               onChange={handleInputChange}
-              placeholder="e.g., MDT"
+              placeholder={t('steps.details.tokenSymbol.placeholder')}
               className={`w-full bg-white dark:bg-gray-800 border ${touchedFields.symbol && errors.symbol ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent pr-10`}
             />
             {formData.symbol && !errors.symbol && (
@@ -113,14 +115,14 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
           </div>
           {touchedFields.symbol && errors.symbol && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.symbol}</p>}
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            Short, uppercase ticker (e.g., BTC, ETH, USDC)
+            {t('steps.details.tokenSymbol.helper')}
           </p>
         </div>
 
         <div>
           <label htmlFor="totalSupply" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Total Supply
-            <InfoTooltip text="The total number of tokens to create. You will receive 1 token, and the rest will be stored in the treasury. The DAO can distribute these tokens through proposals." />
+            {t('steps.details.tokenSupply.label')}
+            <InfoTooltip text={t('steps.details.tokenSupply.helper')} />
           </label>
           <div className="relative">
             <input
@@ -129,7 +131,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
               type="text"
               value={formData.totalSupply}
               onChange={handleInputChange}
-              placeholder="e.g., 1000000"
+              placeholder={t('steps.details.tokenSupply.placeholder')}
               className={`w-full bg-white dark:bg-gray-800 border ${touchedFields.totalSupply && errors.totalSupply ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent pr-10`}
             />
             {formData.totalSupply && !errors.totalSupply && (
@@ -140,7 +142,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
           </div>
           {touchedFields.totalSupply && errors.totalSupply && <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.totalSupply}</p>}
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            You will receive 1 token, and the remaining tokens will be stored in the treasury
+            {t('steps.details.tokenSupply.helper')}
           </p>
         </div>
       </div>
@@ -153,7 +155,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
               <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd" />
             </svg>
-            Token Distribution
+            {t('tokenDistribution.title', 'Token Distribution')}
           </h3>
           
           <div className="flex flex-col md:flex-row items-center justify-center mb-6">
@@ -188,26 +190,26 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
               {/* Labels */}
               <div className="absolute inset-0 flex items-center justify-center flex-col">
                 <p className="text-lg font-bold text-gray-900 dark:text-white">{Number(formData.totalSupply).toLocaleString()}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Total Supply</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('tokenDistribution.totalSupply', 'Total Supply')}</p>
               </div>
             </div>
             
             <div className="md:ml-8 w-full md:w-auto">
               <div className="bg-white dark:bg-gray-900 p-5 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                <h4 className="font-medium text-gray-900 dark:text-white mb-3">Token Distribution Details</h4>
+                <h4 className="font-medium text-gray-900 dark:text-white mb-3">{t('tokenDistribution.details', 'Token Distribution Details')}</h4>
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <div className="w-4 h-4 bg-indigo-500 bg-opacity-20 border border-indigo-500 rounded-full mt-1 mr-2 flex-shrink-0"></div>
                     <div>
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">Creator (You)</span>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">1 {formData.symbol} (initial governance token)</p>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{t('tokenDistribution.creator', 'Creator (You)')}</span>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">1 {formData.symbol} ({t('tokenDistribution.initialToken', 'initial governance token')})</p>
                     </div>
                   </li>
                   <li className="flex items-start">
                     <div className="w-4 h-4 bg-yellow-500 bg-opacity-20 border border-yellow-500 rounded-full mt-1 mr-2 flex-shrink-0"></div>
                     <div>
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">Treasury</span>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">{(Number(formData.totalSupply) - 1).toLocaleString()} {formData.symbol} (controlled by DAO)</p>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{t('tokenDistribution.treasury', 'Treasury')}</span>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">{(Number(formData.totalSupply) - 1).toLocaleString()} {formData.symbol} ({t('tokenDistribution.controlledByDao', 'controlled by DAO')})</p>
                     </div>
                   </li>
                 </ul>
@@ -219,19 +221,19 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
             <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <div className="w-4 h-4 bg-blue-500 bg-opacity-20 border border-blue-500 rounded-full mr-2"></div>
-                <span className="text-gray-700 dark:text-gray-300 font-medium">Creator (You)</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">{t('tokenDistribution.creator', 'Creator (You)')}</span>
               </div>
               <p className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">1 {formData.symbol}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Initial token for governance</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{t('tokenDistribution.initialTokenForGovernance', 'Initial token for governance')}</p>
             </div>
             
             <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
               <div className="flex items-center">
                 <div className="w-4 h-4 bg-yellow-500 bg-opacity-20 border border-yellow-500 rounded-full mr-2"></div>
-                <span className="text-gray-700 dark:text-gray-300 font-medium">Treasury</span>
+                <span className="text-gray-700 dark:text-gray-300 font-medium">{t('tokenDistribution.treasury', 'Treasury')}</span>
               </div>
               <p className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">{(Number(formData.totalSupply) - 1).toLocaleString()} {formData.symbol}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Controlled by DAO governance</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{t('tokenDistribution.controlledByDaoGovernance', 'Controlled by DAO governance')}</p>
             </div>
           </div>
           
@@ -240,10 +242,10 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
-              How Token Distribution Works
+              {t('tokenDistribution.howItWorks.title', 'How Token Distribution Works')}
             </h4>
             <p className="text-blue-700 dark:text-blue-400 text-sm">
-              After deployment, you&#39;ll receive 1 token to start participating in governance. The remaining tokens will be stored in the treasury and can be distributed through governance proposals approved by the community.
+              {t('tokenDistribution.howItWorks.description', 'After deployment, you\'ll receive 1 token to start participating in governance. The remaining tokens will be stored in the treasury and can be distributed through governance proposals approved by the community.')}
             </p>
           </div>
         </div>
@@ -259,7 +261,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
           <svg className="inline-block mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
           </svg>
-          Back to Network
+          {t('navigation.backToNetwork', 'Back to Network')}
         </button>
         
         <button
@@ -268,7 +270,7 @@ const DAODetailsStep: React.FC<DAODetailsStepProps> = ({
           disabled={!canProceedToNextStep()}
           className="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Continue to Review
+          {t('navigation.continueToReview', 'Continue to Review')}
           <svg className="inline-block ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>

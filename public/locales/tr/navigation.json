@@ -1,0 +1,18 @@
+{
+  "home": "Ana Sayfa",
+  "features": "Özellikler",
+  "howItWorks": "Nasıl Çalışır?",
+  "networks": "Ağlar",
+  "deployedDAOs": "Dağıtılan DAO'lar",
+  "createDAO": "DAO Oluştur",
+  "daoFeatures": "DAO Özellikleri",
+  "menu": {
+    "open": "Menüyü Aç",
+    "close": "Menüyü Kapat"
+  },
+  "theme": {
+    "toggle": "Temayı Değiştir",
+    "light": "Açık mod",
+    "dark": "Karanlık mod"
+  }
+}

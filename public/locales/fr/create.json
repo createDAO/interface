@@ -1,0 +1,138 @@
+{
+  "title": "Create Your DAO",
+  "subtitle": "Launch your decentralized autonomous organization in minutes",
+  "steps": {
+    "network": {
+      "title": "Choose Network",
+      "description": "Select the blockchain network for your DAO",
+      "networkLabel": "Network",
+      "networkPlaceholder": "Select a network",
+      "versionLabel": "Version",
+      "versionPlaceholder": "Select a version"
+    },
+    "details": {
+      "title": "DAO Details",
+      "description": "Configure your DAO and governance token",
+      "daoName": {
+        "label": "DAO Name",
+        "placeholder": "Enter your DAO name",
+        "helper": "The name of your decentralized autonomous organization"
+      },
+      "tokenName": {
+        "label": "Token Name",
+        "placeholder": "Enter your token name",
+        "helper": "The name of your governance token"
+      },
+      "tokenSymbol": {
+        "label": "Token Symbol",
+        "placeholder": "3-5 characters",
+        "helper": "A short identifier for your token (e.g., BTC, ETH)"
+      },
+      "tokenSupply": {
+        "label": "Token Supply",
+        "placeholder": "Enter total supply",
+        "helper": "The total number of tokens that will be created"
+      }
+    },
+    "review": {
+      "title": "Review",
+      "description": "Review your DAO configuration before deployment",
+      "summary": "Summary",
+      "network": "Network",
+      "version": "Version",
+      "daoName": "DAO Name",
+      "tokenName": "Token Name",
+      "tokenSymbol": "Token Symbol",
+      "tokenSupply": "Token Supply",
+      "estimatedGas": "Estimated Gas",
+      "deploymentCost": "Deployment Cost",
+      "readyToDeploy": "Ready to deploy your DAO?"
+    },
+    "deployment": {
+      "title": "Deployment",
+      "description": "Deploy your DAO to the blockchain",
+      "connecting": "Connecting to wallet...",
+      "preparing": "Preparing deployment...",
+      "deploying": "Deploying DAO...",
+      "success": "DAO successfully deployed!",
+      "failed": "Deployment failed",
+      "tryAgain": "Try Again",
+      "viewOnExplorer": "View on Explorer",
+      "managementPlatforms": "You can now manage your DAO using these platforms:"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "minLength": "Must be at least {{min}} characters",
+    "maxLength": "Must be at most {{max}} characters",
+    "invalidSymbol": "Symbol must be 2-5 uppercase letters",
+    "positiveNumber": "Must be a positive number",
+    "maxSupply": "Must be less than or equal to {{max}}"
+  },
+  "tokenDistribution": {
+    "title": "Token Distribution",
+    "totalSupply": "Total Supply",
+    "details": "Token Distribution Details",
+    "creator": "Creator (You)",
+    "initialToken": "initial governance token",
+    "treasury": "Treasury",
+    "controlledByDao": "controlled by DAO",
+    "initialTokenForGovernance": "Initial token for governance",
+    "controlledByDaoGovernance": "Controlled by DAO governance",
+    "howItWorks": {
+      "title": "How Token Distribution Works",
+      "description": "After deployment, you'll receive 1 token to start participating in governance. The remaining tokens will be stored in the treasury and can be distributed through governance proposals approved by the community."
+    }
+  },
+  "navigation": {
+    "backToNetwork": "Back to Network",
+    "continueToReview": "Continue to Review",
+    "continueToDetails": "Continue to DAO Details"
+  },
+  "network": {
+    "wrongNetwork": "Wrong Network",
+    "switchToSupported": "Please switch to a supported network to create your DAO",
+    "switchingNetwork": "Switching network... Please confirm in your wallet.",
+    "switchFailed": "Failed to switch network. Please check your wallet and try again.",
+    "switching": "Switching...",
+    "switchTo": "Switch to {{name}}",
+    "tooltip": "The blockchain network where your DAO will be deployed. Each network has different characteristics and fees.",
+    "features": "Network Features",
+    "notSupported": "Your current network is not supported. Please switch to a supported network.",
+    "note": "Note",
+    "sepoliaNote": "For fast testing, Sepolia DAOs are deployed with a 5-minute voting period."
+  },
+  "version": {
+    "tooltip": "The version of the DAO contracts to deploy. Newer versions may include additional features or improvements."
+  },
+  "architecture": {
+    "title": "Your DAO Architecture",
+    "daoCore": "DAO Core",
+    "daoCoreDescription": "Central governance hub for proposals, voting, and execution of community decisions",
+    "daoToken": "DAO Token",
+    "daoTokenDescription": "ERC20 governance token with customizable tax mechanisms and distribution controls",
+    "treasury": "Treasury",
+    "treasuryDescription": "Secure vault for managing DAO assets, controlled by governance proposals",
+    "staking": "Staking",
+    "stakingDescription": "Time-based staking with voting power multipliers for long-term holders",
+    "upgradeableProxies": "All contracts are deployed as upgradeable proxies with the latest implementations"
+  },
+  "features": {
+    "governance": {
+      "title": "Governance",
+      "description": "Create proposals and vote on important decisions"
+    },
+    "treasury": {
+      "title": "Treasury",
+      "description": "Manage funds and allocate resources"
+    },
+    "token": {
+      "title": "Governance Token",
+      "description": "ERC-20 token for voting rights and governance"
+    },
+    "multiSig": {
+      "title": "Multi-Signature",
+      "description": "Require multiple approvals for critical actions"
+    }
+  }
+}

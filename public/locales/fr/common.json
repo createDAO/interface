@@ -1,0 +1,39 @@
+{
+  "buttons": {
+    "create": "Créer une DAO",
+    "learnMore": "En savoir plus",
+    "connect": "Connecter",
+    "deploy": "Déployer",
+    "review": "Réviser",
+    "back": "Retour",
+    "next": "Suivant",
+    "submit": "Soumettre",
+    "cancel": "Annuler"
+  },
+  "labels": {
+    "name": "Nom",
+    "token": "Jeton",
+    "symbol": "Symbole",
+    "supply": "Approvisionnement",
+    "network": "Réseau",
+    "version": "Version",
+    "gas": "Gas",
+    "deploymentReady": "Prêt pour le déploiement"
+  },
+  "metadata": {
+    "title": "CreateDAO - Créez votre DAO sans effort",
+    "description": "Lancez votre organisation autonome décentralisée sur plusieurs blockchains en quelques clics. Aucun codage requis."
+  },
+  "footer": {
+    "contact": "Contactez notre communauté",
+    "copyright": "© {{year}} CreateDAO. Tous droits réservés.",
+    "terms": "Conditions d'utilisation",
+    "privacy": "Politique de confidentialité"
+  },
+  "errors": {
+    "general": "Une erreur s'est produite",
+    "tryAgain": "Veuillez réessayer"
+  },
+  "languageName": "Français",
+  "languageSelector": "Sélectionner la langue"
+}

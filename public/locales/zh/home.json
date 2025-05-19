@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "title": "轻松<highlight>创建</highlight>您的 DAO",
+    "description": "只需点击几下，即可在多个区块链上启动您的去中心化自治组织。无需编码。",
+    "gasFeeNote": "仅支付网络部署燃料费"
+  },
+  "features": {
+    "title": "为什么选择 CreateDAO",
+    "subtitle": "启动和管理您的 DAO 所需的一切",
+    "governance": {
+      "title": "治理",
+      "description": "创建提案，投票，并在链上执行决策"
+    },
+    "treasury": {
+      "title": "资金管理",
+      "description": "通过社区投票管理资产和分配资金"
+    },
+    "multichain": {
+      "title": "多链支持",
+      "description": "在多个兼容 EVM 的区块链上部署"
+    },
+    "noCode": {
+      "title": "无代码解决方案",
+      "description": "无需编写一行代码即可启动您的 DAO"
+    },
+    "customization": {
+      "title": "定制化",
+      "description": "配置您的 DAO 以满足社区需求"
+    },
+    "security": {
+      "title": "安全性",
+      "description": "采用安全最佳实践和开源透明度构建"
+    },
+    "openSource": {
+      "title": "开源",
+      "description": "我们的 DAO 工厂合约和界面在 GitHub 上完全开源。"
+    },
+    "notAudited": {
+      "title": "尚未审计的安全性",
+      "description": "智能合约尚未经过领先安全公司的审计，以确保您的安心。"
+    },
+    "alwaysFree": {
+      "title": "永久免费",
+      "description": "没有隐藏费用。仅支付网络部署燃料费。"
+    },
+    "openSourceSection": {
+      "title": "开源代码",
+      "description": "查看我们的智能合约并为代码做出贡献。我们相信透明度和社区驱动的开发。",
+      "button": "在 GitHub 上查看"
+    },
+    "subtitle2": "我们构建了最可靠和用户友好的 DAO 创建平台。"
+  },
+  "howItWorks": {
+    "title": "工作原理",
+    "subtitle": "只需几个简单步骤即可创建您的 DAO",
+    "steps": {
+      "step1": {
+        "title": "选择网络",
+        "description": "为您的 DAO 选择区块链网络"
+      },
+      "step2": {
+        "title": "配置 DAO",
+        "description": "设置您的 DAO 名称、代币和治理参数"
+      },
+      "step3": {
+        "title": "审核和部署",
+        "description": "审核您的设置并将 DAO 部署到区块链"
+      },
+      "step4": {
+        "title": "管理 DAO",
+        "description": "使用您的新 DAO 进行治理和资金管理"
+      }
+    }
+  },
+  "steps": {
+    "title": "三个简单步骤",
+    "subtitle": "创建 DAO 从未如此简单。按照这些简单步骤启动您的组织。",
+    "step1": {
+      "title": "连接钱包",
+      "description": "使用 MetaMask 或 WalletConnect 开始。"
+    },
+    "step2": {
+      "title": "输入 DAO 详情",
+      "description": "命名您的 DAO 并设置基本治理参数。"
+    },
+    "step3": {
+      "title": "部署",
+      "description": "确认交易，您的 DAO 即可使用。"
+    },
+    "readyToStart": "准备开始？",
+    "createButton": "创建您的 DAO"
+  },
+  "networks": {
+    "title": "支持的网络",
+    "subtitle": "在这些流行的区块链网络上创建和部署您的 DAO。",
+    "comingSoon": "根据社区反馈，更多网络即将推出。"
+  },
+  "platforms": {
+    "title": "DAO 管理平台",
+    "subtitle": "部署后管理您的 DAO 的强大界面。",
+    "description": "部署后，使用这些平台管理您的 DAO",
+    "daoCafe": {
+      "name": "DAOCafe",
+      "description": "一个全面的 DAO 管理界面：创建提案、讨论、投票、创建预售、提议资金转移等。",
+      "visitButton": "访问 DAOCafe"
+    },
+    "addYourPlatform": {
+      "title": "添加您的平台",
+      "description": "开发您自己的 DAO 管理界面并在此处展示。查看我们的文档了解集成详情和要求。",
+      "readDocsButton": "阅读文档"
+    },
+    "integration": {
+      "text": "想要在这里列出您的平台？",
+      "linkText": "了解如何集成"
+    }
+  },
+  "cta": {
+    "title": "立即创建您的 DAO",
+    "description": "加入已经使用 CreateDAO 管理其社区和资金的数百个组织。",
+    "createButton": "创建 DAO",
+    "learnMoreButton": "了解更多",
+    "gasFeeNote": "仅支付网络部署燃料费"
+  }
+}

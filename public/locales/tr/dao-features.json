@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "DAO Özellikleri ve Bilgileri | CreateDAO",
+    "description": "CreateDAO ile oluşturulan DAO'ların özellikleri ve bileşenleri hakkında bilgi edinin"
+  },
+  "header": {
+    "title": "DAO Özellikleri ve Bilgileri",
+    "subtitle": "DAO'nuzun bileşenlerini, özelliklerini ve teknik ayrıntılarını anlayın"
+  },
+  "introduction": {
+    "title": "Giriş",
+    "description": "CreateDAO, yönetişim, token yönetimi, hazine kontrolü ve staking yetenekleri sağlamak için birlikte çalışan dört temel akıllı sözleşmeyle eksiksiz bir DAO ekosistemi dağıtır.",
+    "whatYouGet": {
+      "title": "Ne Elde Edersiniz?",
+      "description": "CreateDAO aracılığıyla bir DAO oluşturduğunuzda, şunları içeren eksiksiz bir yönetişim sistemi alırsınız:",
+      "items": [
+        "Teklif ve oylama sistemlerine sahip tam işlevsel bir <strong>DAO Çekirdeği</strong> sözleşmesi",
+        "Özelleştirilebilir vergi mekanizmalarına sahip bir <strong>ERC20 Yönetişim Token'ı</strong>",
+        "DAO'nuzun varlıklarını yönetmek için güvenli bir <strong>Hazine</strong>",
+        "Zaman tabanlı oy gücü çarpanlarına sahip bir <strong>Staking Sistemi</strong>",
+        "Gelecekteki iyileştirmeler için <strong>yükseltilebilir proxy'ler</strong> olarak dağıtılan tüm sözleşmeler"
+      ]
+    },
+    "forCreators": {
+      "title": "DAO Oluşturucuları İçin",
+      "description": "Oluşturucu olarak şunları alacaksınız:",
+      "items": [
+        "Katılmaya başlamak için 1 yönetişim token'ı",
+        "İlk teklifleri oluşturma yeteneği",
+        "İlk dağıtım üzerinde kontrol",
+        "Topluluğunuzu başlatmak için araçlar"
+      ]
+    },
+    "forMembers": {
+      "title": "DAO Üyeleri İçin",
+      "description": "Topluluk üyeleriniz şunları yapabilecektir:",
+      "items": [
+        "Oy gücü kazanmak için token stake etme",
+        "Teklifler oluşturma ve oylama",
+        "Ön satışlara katılma",
+        "DAO'nun hazinesini ve geleceğini yönetmeye yardımcı olma"
+      ]
+    }
+  },
+  "architecture": {
+    "title": "DAO Mimarisi",
+    "description": "DAO'nuz, eksiksiz bir yönetişim sistemi sağlamak için birlikte çalışan dört ana sözleşmeden oluşur.",
+    "diagram": {
+      "daoCore": "DAO Çekirdeği",
+      "governance": "Yönetişim ve Teklifler",
+      "daoToken": "DAO Token'ı",
+      "erc20": "ERC20 Yönetişim Token'ı",
+      "treasury": "Hazine",
+      "assetManagement": "Varlık Yönetimi",
+      "staking": "Staking",
+      "votingPower": "Oy Gücü",
+      "daoFactory": "DAO Fabrikası",
+      "note": "Tüm sözleşmeler, en son uygulamalarla yükseltilebilir proxy'ler olarak dağıtılır"
+    },
+    "upgradeableDesign": {
+      "title": "Yükseltilebilir Tasarım",
+      "description": "Tüm sözleşmeler, durumu ve bakiyeleri korurken gelecekteki iyileştirmelere olanak tanıyan UUPS (Evrensel Yükseltilebilir Proxy Standardı) modelini kullanır. Yükseltmeler yalnızca topluluk oylamasını geçen yönetişim teklifleri aracılığıyla yürütülebilir."
+    },
+    "contractInteractions": {
+      "title": "Sözleşme Etkileşimleri",
+      "description": "DAO Çekirdek sözleşmesi, tüm yönetişim eylemlerini koordine eden merkezi merkezdir. Topluluk tarafından onaylanan teklifleri yürütmek için Token, Hazine ve Staking sözleşmeleriyle etkileşime girer."
+    }
+  },
+  "components": {
+    "title": "Temel Bileşenler",
+    "description": "DAO ekosisteminizdeki her sözleşme belirli bir amaca hizmet eder ve benzersiz özelliklere sahiptir.",
+    "daoCore": {
+      "title": "DAO Çekirdeği",
+      "description": "DAO Çekirdek sözleşmesi, teklifleri, oylamayı ve topluluk kararlarının yürütülmesini yöneten merkezi yönetişim merkezidir.",
+      "features": {
+        "title": "Temel Özellikler:",
+        "items": [
+          "<span class=\"font-medium\">Teklif Sistemi:</span> Çeşitli türlerde teklifler oluşturun, oylayın ve yürütün",
+          "<span class=\"font-medium\">Oylama Mekanizması:</span> Stake tabanlı oy gücüyle güvenli oylama",
+          "<span class=\"font-medium\">Yürütme Mantığı:</span> Onaylanmış tekliflerin güvenli yürütülmesi",
+          "<span class=\"font-medium\">Acil Durum Kontrolleri:</span> Güvenlik için duraklatma/devam ettirme işlevselliği"
+        ]
+      },
+      "parameters": {
+        "title": "Yönetişim Parametreleri:",
+        "votingPeriod": "Oylama Süresi",
+        "votingPeriodValue": "3 gün",
+        "minProposalStake": "Minimum Teklif Stake'i",
+        "minProposalStakeValue": "1 token",
+        "quorum": "Çoğunluk",
+        "quorumValue": "Oy gücünün %50'si",
+        "version": "Sürüm",
+        "versionValue": "1.0.0"
+      },
+      "codeBlockTitle": "DAO Çekirdek Sözleşmesi Başlatma"
+    },
+    "daoToken": {
+      "title": "DAO Token'ı",
+      "description": "DAO Token'ı, DAO'nuz için yönetişim token'ı olarak hizmet veren bir ERC20 token'ıdır. Standart bir ERC20 token'ının ötesinde ek özellikler içerir.",
+      "features": {
+        "title": "Temel Özellikler:",
+        "items": [
+          "<span class=\"font-medium\">İlk Dağıtım:</span> 1 token oluşturucuya, kalanı hazineye",
+          "<span class=\"font-medium\">Vergi Mekanizması:</span> %10'a kadar yapılandırılabilir vergi oranı",
+          "<span class=\"font-medium\">Beyaz Liste:</span> Adresler vergiden muaf tutulabilir",
+          "<span class=\"font-medium\">Staking Entegrasyonu:</span> Yönetişim için staking sözleşmesiyle çalışır"
+        ]
+      },
+      "codeBlockTitle": "DAO Token Vergi Mekanizması"
+    },
+    "treasury": {
+      "title": "Hazine",
+      "description": "Hazine sözleşmesi, token'lar ve ETH dahil olmak üzere DAO'ya ait tüm varlıkları güvenli bir şekilde tutar ve yönetir.",
+      "features": {
+        "title": "Temel Özellikler:",
+        "items": [
+          "<span class=\"font-medium\">Varlık Kontrolü:</span> Başlangıçta token'ların çoğunu tutar",
+          "<span class=\"font-medium\">Çoklu Varlık:</span> ETH ve herhangi bir ERC20 token'ını tutabilir",
+          "<span class=\"font-medium\">Yönetişim Kontrollü:</span> Yalnızca DAO transferlere izin verebilir",
+          "<span class=\"font-medium\">Bakiye Takibi:</span> Mevcut bakiyeleri kontrol etme yöntemleri"
+        ]
+      },
+      "codeBlockTitle": "Hazine Transfer Fonksiyonları"
+    },
+    "staking": {
+      "title": "Staking",
+      "description": "Staking sözleşmesi, token sahiplerinin DAO'da oy gücü kazanmak için token'larını stake etmelerine olanak tanır.",
+      "features": {
+        "title": "Temel Özellikler:",
+        "items": [
+          "<span class=\"font-medium\">Zaman Tabanlı Çarpanlar:</span> Daha uzun staking süreleri oy gücünü artırır",
+          "<span class=\"font-medium\">Oy Gücü Hesaplaması:</span> Stake × Zaman Çarpanı",
+          "<span class=\"font-medium\">Esnek Staking:</span> Kullanıcılar istedikleri zaman stake edebilir ve stake'lerini geri alabilirler",
+          "<span class=\"font-medium\">Yapılandırılabilir Parametreler:</span> Çarpanlar ve eşikler yönetişim yoluyla ayarlanabilir"
+        ]
+      },
+      "multipliers": {
+        "title": "Staking Çarpanları:",
+        "table": {
+          "headers": {
+            "duration": "Staking Süresi",
+            "multiplier": "Çarpan",
+            "example": "Örnek"
+          },
+          "rows": [
+            {
+              "duration": "1 haftadan az",
+              "multiplier": "1x (temel)",
+              "example": "100 token = 100 oy gücü"
+            },
+            {
+              "duration": "1 hafta ila 1 ay",
+              "multiplier": "1.25x",
+              "example": "100 token = 125 oy gücü"
+            },
+            {
+              "duration": "1 ay ila 3 ay",
+              "multiplier": "1.5x",
+              "example": "100 token = 150 oy gücü"
+            },
+            {
+              "duration": "3 aydan fazla",
+              "multiplier": "2x",
+              "example": "100 token = 200 oy gücü"
+            }
+          ]
+        }
+      },
+      "codeBlockTitle": "Staking Oy Gücü Hesaplaması"
+    }
+  },
+  "governance": {
+    "title": "Yönetişim Özellikleri",
+    "description": "DAO'nuz, çeşitli teklif türleri ve oylama mekanizmalarına sahip kapsamlı bir yönetişim sistemi içerir.",
+    "proposalTypes": {
+      "title": "Mevcut Teklif Türleri",
+      "treasuryTransfers": {
+        "title": "Hazine Transferleri",
+        "description": "Hazineden herhangi bir adrese token veya ETH transfer etmeyi teklif edin"
+      },
+      "presaleCreation": {
+        "title": "Ön Satış Oluşturma",
+        "description": "Özelleştirilebilir token miktarı ve başlangıç fiyatıyla token ön satışları başlatın"
+      },
+      "presaleManagement": {
+        "title": "Ön Satış Yönetimi",
+        "description": "Ön satışları duraklatın/devam ettirin ve tamamlanmış ön satışlardan fon çekin"
+      },
+      "contractUpgrades": {
+        "title": "Sözleşme Yükseltmeleri",
+        "description": "Çekirdek sözleşmeleri veya modülleri daha yeni uygulamalara yükseltin"
+      },
+      "emergencyControls": {
+        "title": "Acil Durum Kontrolleri",
+        "description": "Acil durumlarda tüm DAO'yu duraklatın/devam ettirin"
+      },
+      "moduleUpgrades": {
+        "title": "Modül Yükseltmeleri",
+        "description": "Ön satış veya hak ediş sözleşmeleri gibi belirli modülleri ekleyin veya yükseltin"
+      }
+    },
+    "votingProcess": {
+      "title": "Oylama Süreci",
+      "steps": [
+        "<span class=\"font-medium\">Teklif Oluşturma:</span> En az 1 stake edilmiş token'a sahip herhangi bir üye bir teklif oluşturabilir",
+        "<span class=\"font-medium\">Oylama Süresi:</span> Üyelerin oylarını kullanmaları için belirli bir süreleri vardır",
+        "<span class=\"font-medium\">Oy Kullanma:</span> Üyeler oy güçleriyle \"Lehte\" veya \"Aleyhte\" oy kullanır",
+        "<span class=\"font-medium\">Çoğunluk Kontrolü:</span> Toplam oy gücünün en az %50'si katılmalıdır",
+        "<span class=\"font-medium\">Yürütme:</span> Onaylanırsa, teklif değişiklikleri uygulamak için yürütülebilir"
+      ]
+    }
+  },
+  "deployment": {
+    "title": "Dağıtım Süreci",
+    "description": "Bir DAO oluşturduğunuzda, aşağıdaki adımlar tek bir işlemde otomatik olarak gerçekleşir.",
+    "steps": [
+      "<span class=\"font-medium\">Token Dağıtımı:</span> ERC20 yönetişim token'ınız önce dağıtılır",
+      "<span class=\"font-medium\">Hazine Dağıtımı:</span> Hazine sözleşmesi dağıtılır (başlatılmamış)",
+      "<span class=\"font-medium\">Staking Dağıtımı:</span> Staking sözleşmesi dağıtılır ve token'ınıza bağlanır",
+      "<span class=\"font-medium\">DAO Dağıtımı:</span> Ana DAO sözleşmesi dağıtılır ve diğer tüm sözleşmelere bağlanır",
+      "<span class=\"font-medium\">Hazine Başlatma:</span> Hazine, DAO sahibi olarak başlatılır",
+      "<span class=\"font-medium\">Token Yapılandırması:</span> Staking sözleşmesi token'da ayarlanır ve sahiplik DAO'ya devredilir",
+      "<span class=\"font-medium\">Token Dağıtımı:</span> Kalan token'lar hazineye aktarılır",
+      "<span class=\"font-medium\">Sahiplik Devri:</span> DAO kendi kendini yönetir hale gelir (kendine aittir)"
+    ],
+    "note": {
+      "title": "Önemli Not",
+      "description": "Dağıtımdan sonra, DAO'nuz tamamen otonomdur ve yönetişim tarafından kontrol edilir. Oluşturucu, katılmaya başlamak için 1 token alır, ancak bunun ötesinde özel ayrıcalıkları yoktur. Tüm önemli kararlar yönetişim sürecinden geçmelidir."
+    }
+  },
+  "gettingStarted": {
+    "title": "Başlarken",
+    "description": "DAO'nuzu oluşturduktan sonra, yönetişime başlamak için bazı adımlar şunlardır.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Token'ınızı Stake Edin",
+        "description": "Oy gücü kazanmak için başlangıç token'ınızı stake edin. Ne kadar uzun süre stake ederseniz, o kadar fazla oy gücünüz olur."
+      },
+      {
+        "number": "2",
+        "title": "Bir Teklif Oluşturun",
+        "description": "Hazineden token dağıtmak veya topluluğunuzu büyütmek için bir ön satış başlatmak üzere ilk teklifinizi oluşturun."
+      },
+      {
+        "number": "3",
+        "title": "Topluluğunuzu Büyütün",
+        "description": "Üyeleri DAO'nuza katılmaya davet edin, teklifler aracılığıyla token dağıtın ve merkezi olmayan bir topluluk oluşturun."
+      }
+    ],
+    "createButton": "DAO'nuzu Şimdi Oluşturun"
+  }
+}

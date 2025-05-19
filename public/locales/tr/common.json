@@ -1,0 +1,51 @@
+{
+  "buttons": {
+    "create": "DAO Oluştur",
+    "learnMore": "Daha Fazla Bilgi Edinin",
+    "connect": "Bağlan",
+    "deploy": "Dağıt",
+    "review": "Gözden Geçir",
+    "back": "Geri",
+    "next": "İleri",
+    "submit": "Gönder",
+    "cancel": "İptal"
+  },
+  "labels": {
+    "name": "Ad",
+    "token": "Token",
+    "symbol": "Sembol",
+    "supply": "Arz",
+    "network": "Ağ",
+    "version": "Sürüm",
+    "gas": "Gaz",
+    "deploymentReady": "Dağıtıma hazır"
+  },
+  "metadata": {
+    "title": "CreateDAO - DAO'nuzu Zahmetsizce Oluşturun",
+    "description": "Merkezi olmayan otonom organizasyonunuzu yalnızca birkaç tıklamayla birden fazla blok zincirinde başlatın. Kodlama gerekmez."
+  },
+  "footer": {
+    "description": "Birden fazla blok zincirinde DAO oluşturmanın ve dağıtmanın en kolay yolu.",
+    "version": "Sürüm",
+    "commit": "Commit",
+    "resources": "Kaynaklar",
+    "documentation": "Belgeler",
+    "tutorials": "Eğitimler",
+    "coreConcepts": "Temel Kavramlar",
+    "community": "Topluluk",
+    "github": "GitHub",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "legal": "Yasal",
+    "contact": "Topluluğumuzla iletişime geçin",
+    "copyright": "© {{year}} CreateDAO. Tüm hakları saklıdır.",
+    "terms": "Hizmet Şartları",
+    "privacy": "Gizlilik Politikası"
+  },
+  "errors": {
+    "general": "Bir hata oluştu",
+    "tryAgain": "Lütfen tekrar deneyin"
+  },
+  "languageName": "Türkçe",
+  "languageSelector": "Dil seçin"
+}

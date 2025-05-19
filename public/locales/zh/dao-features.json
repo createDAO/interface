@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "DAO 功能与信息 | CreateDAO",
+    "description": "了解使用 CreateDAO 创建的 DAO 的功能和组件"
+  },
+  "header": {
+    "title": "DAO 功能与信息",
+    "subtitle": "了解您的 DAO 的组件、功能和技术细节"
+  },
+  "introduction": {
+    "title": "介绍",
+    "description": "CreateDAO 部署了一个完整的 DAO 生态系统，包含四个核心智能合约，它们协同工作，提供治理、代币管理、资金控制和质押功能。",
+    "whatYouGet": {
+      "title": "您将获得",
+      "description": "当您通过 CreateDAO 创建 DAO 时，您将获得一个完整的治理系统，包括：",
+      "items": [
+        "一个功能齐全的<strong>DAO 核心</strong>合约，具有提案和投票系统",
+        "一个具有可定制税收机制的<strong>ERC20 治理代币</strong>",
+        "一个安全的<strong>资金库</strong>，用于管理您 DAO 的资产",
+        "一个具有基于时间的投票权重乘数的<strong>质押系统</strong>",
+        "所有合约都部署为<strong>可升级代理</strong>，以便未来改进"
+      ]
+    },
+    "forCreators": {
+      "title": "对于 DAO 创建者",
+      "description": "作为创建者，您将获得：",
+      "items": [
+        "1 个治理代币开始参与",
+        "创建初始提案的能力",
+        "对初始部署的控制",
+        "引导社区的工具"
+      ]
+    },
+    "forMembers": {
+      "title": "对于 DAO 成员",
+      "description": "您的社区成员将能够：",
+      "items": [
+        "质押代币获得投票权",
+        "创建和投票提案",
+        "参与预售",
+        "帮助治理 DAO 的资金库和未来"
+      ]
+    }
+  },
+  "architecture": {
+    "title": "DAO 架构",
+    "description": "您的 DAO 由四个主要合约组成，它们协同工作，提供完整的治理系统。",
+    "diagram": {
+      "daoCore": "DAO 核心",
+      "governance": "治理与提案",
+      "daoToken": "DAO 代币",
+      "erc20": "ERC20 治理代币",
+      "treasury": "资金库",
+      "assetManagement": "资产管理",
+      "staking": "质押",
+      "votingPower": "投票权重",
+      "daoFactory": "DAO 工厂",
+      "note": "所有合约都部署为可升级代理，使用最新的实现"
+    },
+    "upgradeableDesign": {
+      "title": "可升级设计",
+      "description": "所有合约都使用 UUPS（通用可升级代理标准）模式，允许未来改进的同时保留状态和余额。升级只能通过已通过社区投票的治理提案执行。"
+    },
+    "contractInteractions": {
+      "title": "合约交互",
+      "description": "DAO 核心合约是协调所有治理行动的中心枢纽。它与代币、资金库和质押合约交互，执行社区批准的提案。"
+    }
+  },
+  "components": {
+    "title": "核心组件",
+    "description": "您的 DAO 生态系统中的每个合约都有特定的用途和独特的功能。",
+    "daoCore": {
+      "title": "DAO 核心",
+      "description": "DAO 核心合约是中央治理枢纽，管理提案、投票和社区决策的执行。",
+      "features": {
+        "title": "主要功能：",
+        "items": [
+          "<span class=\"font-medium\">提案系统：</span> 创建、投票和执行各种类型的提案",
+          "<span class=\"font-medium\">投票机制：</span> 基于质押的安全投票权重",
+          "<span class=\"font-medium\">执行逻辑：</span> 安全执行已批准的提案",
+          "<span class=\"font-medium\">紧急控制：</span> 暂停/恢复功能以确保安全"
+        ]
+      },
+      "parameters": {
+        "title": "治理参数：",
+        "votingPeriod": "投票期",
+        "votingPeriodValue": "3 天",
+        "minProposalStake": "最低提案质押",
+        "minProposalStakeValue": "1 个代币",
+        "quorum": "法定人数",
+        "quorumValue": "50% 的投票权重",
+        "version": "版本",
+        "versionValue": "1.0.0"
+      },
+      "codeBlockTitle": "DAO 核心合约初始化"
+    },
+    "daoToken": {
+      "title": "DAO 代币",
+      "description": "DAO 代币是作为您 DAO 的治理代币的 ERC20 代币。它包含标准 ERC20 代币之外的附加功能。",
+      "features": {
+        "title": "主要功能：",
+        "items": [
+          "<span class=\"font-medium\">初始分配：</span> 创建者 1 个代币，其余进入资金库",
+          "<span class=\"font-medium\">税收机制：</span> 可配置的税率最高 10%",
+          "<span class=\"font-medium\">白名单：</span> 地址可以免除税收",
+          "<span class=\"font-medium\">质押集成：</span> 与质押合约配合用于治理"
+        ]
+      },
+      "codeBlockTitle": "DAO 代币税收机制"
+    },
+    "treasury": {
+      "title": "资金库",
+      "description": "资金库合约安全地持有和管理 DAO 拥有的所有资产，包括代币和 ETH。",
+      "features": {
+        "title": "主要功能：",
+        "items": [
+          "<span class=\"font-medium\">资产控制：</span> 最初持有大部分代币",
+          "<span class=\"font-medium\">多资产：</span> 可以持有 ETH 和任何 ERC20 代币",
+          "<span class=\"font-medium\">治理控制：</span> 只有 DAO 可以授权转账",
+          "<span class=\"font-medium\">余额跟踪：</span> 检查当前余额的方法"
+        ]
+      },
+      "codeBlockTitle": "资金库转账功能"
+    },
+    "staking": {
+      "title": "质押",
+      "description": "质押合约允许代币持有者质押他们的代币以获得 DAO 中的投票权。",
+      "features": {
+        "title": "主要功能：",
+        "items": [
+          "<span class=\"font-medium\">基于时间的乘数：</span> 更长的质押期增加投票权重",
+          "<span class=\"font-medium\">投票权重计算：</span> 质押量 × 时间乘数",
+          "<span class=\"font-medium\">灵活质押：</span> 用户可以随时质押和取消质押",
+          "<span class=\"font-medium\">可配置参数：</span> 乘数和阈值可以通过治理调整"
+        ]
+      },
+      "multipliers": {
+        "title": "质押乘数：",
+        "table": {
+          "headers": {
+            "duration": "质押时长",
+            "multiplier": "乘数",
+            "example": "示例"
+          },
+          "rows": [
+            {
+              "duration": "少于 1 周",
+              "multiplier": "1倍（基础）",
+              "example": "100 个代币 = 100 投票权重"
+            },
+            {
+              "duration": "1 周至 1 个月",
+              "multiplier": "1.25倍",
+              "example": "100 个代币 = 125 投票权重"
+            },
+            {
+              "duration": "1 个月至 3 个月",
+              "multiplier": "1.5倍",
+              "example": "100 个代币 = 150 投票权重"
+            },
+            {
+              "duration": "超过 3 个月",
+              "multiplier": "2倍",
+              "example": "100 个代币 = 200 投票权重"
+            }
+          ]
+        }
+      },
+      "codeBlockTitle": "质押投票权重计算"
+    }
+  },
+  "governance": {
+    "title": "治理功能",
+    "description": "您的 DAO 包含一个全面的治理系统，具有各种提案类型和投票机制。",
+    "proposalTypes": {
+      "title": "可用提案类型",
+      "treasuryTransfers": {
+        "title": "资金库转账",
+        "description": "提议将代币或 ETH 从资金库转移到任何地址"
+      },
+      "presaleCreation": {
+        "title": "预售创建",
+        "description": "启动代币预售，可自定义代币数量和初始价格"
+      },
+      "presaleManagement": {
+        "title": "预售管理",
+        "description": "暂停/恢复预售并从已完成的预售中提取资金"
+      },
+      "contractUpgrades": {
+        "title": "合约升级",
+        "description": "将核心合约或模块升级到更新的实现"
+      },
+      "emergencyControls": {
+        "title": "紧急控制",
+        "description": "在紧急情况下暂停/恢复整个 DAO"
+      },
+      "moduleUpgrades": {
+        "title": "模块升级",
+        "description": "添加或升级特定模块，如预售或归属合约"
+      }
+    },
+    "votingProcess": {
+      "title": "投票流程",
+      "steps": [
+        "<span class=\"font-medium\">提案创建：</span> 任何至少质押 1 个代币的成员都可以创建提案",
+        "<span class=\"font-medium\">投票期：</span> 成员有一段设定的时间来投票",
+        "<span class=\"font-medium\">投票：</span> 成员用他们的投票权重投\"赞成\"或\"反对\"票",
+        "<span class=\"font-medium\">法定人数检查：</span> 至少 50% 的总投票权重必须参与",
+        "<span class=\"font-medium\">执行：</span> 如果获得批准，提案可以被执行以实施变更"
+      ]
+    }
+  },
+  "deployment": {
+    "title": "部署流程",
+    "description": "当您创建 DAO 时，以下步骤会在单个交易中自动发生。",
+    "steps": [
+      "<span class=\"font-medium\">代币部署：</span> 首先部署您的 ERC20 治理代币",
+      "<span class=\"font-medium\">资金库部署：</span> 部署资金库合约（未初始化）",
+      "<span class=\"font-medium\">质押部署：</span> 部署质押合约并链接到您的代币",
+      "<span class=\"font-medium\">DAO 部署：</span> 部署主 DAO 合约并连接到所有其他合约",
+      "<span class=\"font-medium\">资金库初始化：</span> 以 DAO 为所有者初始化资金库",
+      "<span class=\"font-medium\">代币配置：</span> 在代币中设置质押合约并将所有权转移给 DAO",
+      "<span class=\"font-medium\">代币分配：</span> 剩余代币转移到资金库",
+      "<span class=\"font-medium\">所有权转移：</span> DAO 变为自治（拥有自己）"
+    ],
+    "note": {
+      "title": "重要提示",
+      "description": "部署后，您的 DAO 完全自治并由治理控制。创建者收到 1 个代币开始参与，但除此之外没有特殊权限。所有重大决策必须通过治理流程。"
+    }
+  },
+  "gettingStarted": {
+    "title": "开始使用",
+    "description": "创建 DAO 后，以下是开始治理的一些步骤。",
+    "steps": [
+      {
+        "number": "1",
+        "title": "质押您的代币",
+        "description": "质押您的初始代币以获得投票权。质押时间越长，您的投票权重越大。"
+      },
+      {
+        "number": "2",
+        "title": "创建提案",
+        "description": "创建您的第一个提案，从资金库分配代币或启动预售以发展您的社区。"
+      },
+      {
+        "number": "3",
+        "title": "发展您的社区",
+        "description": "邀请成员加入您的 DAO，通过提案分配代币，并建立一个去中心化的社区。"
+      }
+    ],
+    "createButton": "立即创建您的 DAO"
+  }
+}

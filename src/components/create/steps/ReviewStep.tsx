@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAccount, useEstimateFeesPerGas, useDisconnect, useEnsName, useBalance } from 'wagmi';
+import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import { formatEther } from 'viem';
 import { DAOFormData } from '../../../types/dao';
@@ -8,6 +9,7 @@ import { ConnectWallet } from '../../dao/ConnectWallet';
 
 // Wallet Connected Section Component
 const WalletConnectedSection = () => {
+  const { t } = useTranslation('create');
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
@@ -37,10 +39,10 @@ const WalletConnectedSection = () => {
             </svg>
           </div>
           <div className="ml-3">
-            <h3 className="text-lg font-medium text-green-800 dark:text-green-300">Wallet Connected</h3>
-            <p className="text-sm text-green-700 dark:text-green-400">
-              Your wallet is connected and ready to deploy the DAO
-            </p>
+          <h3 className="text-lg font-medium text-green-800 dark:text-green-300">{t('wallet.connected')}</h3>
+          <p className="text-sm text-green-700 dark:text-green-400">
+            {t('wallet.readyToDeploy')}
+          </p>
           </div>
         </div>
         <button
@@ -50,7 +52,7 @@ const WalletConnectedSection = () => {
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
           </svg>
-          <span className="text-sm font-medium">Disconnect</span>
+          <span className="text-sm font-medium">{t('wallet.disconnect')}</span>
         </button>
       </div>
 
@@ -66,7 +68,7 @@ const WalletConnectedSection = () => {
             </div>
             <div className="flex-1">
               <div className="flex items-center justify-between">
-                <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">Wallet Address</h4>
+                <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('wallet.address')}</h4>
                 <button 
                   onClick={copyToClipboard}
                   className="flex items-center text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 text-xs cursor-pointer"
@@ -74,7 +76,7 @@ const WalletConnectedSection = () => {
                   <svg className="h-3.5 w-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                   </svg>
-                  Copy
+                  {t('wallet.copy')}
                 </button>
               </div>
               <div className="mt-1">
@@ -98,7 +100,7 @@ const WalletConnectedSection = () => {
               </svg>
             </div>
             <div>
-              <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">Balance</h4>
+              <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">{t('wallet.balance')}</h4>
               <p className="text-lg font-medium text-gray-900 dark:text-white mt-1">
                 {balance ? `${parseFloat(balance.formatted).toFixed(4)} ${balance.symbol}` : 'Loading...'}
               </p>
@@ -131,6 +133,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
   selectedNetworkId,
   onEstimateCalculated // Destructure the callback prop
 }) => {
+  const { t } = useTranslation('create');
   // const chainId = useChainId();
   const [showWalletPopup, setShowWalletPopup] = useState(false);
   const [isInitiatingWallet, setIsInitiatingWallet] = useState(false);
@@ -194,10 +197,10 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
           <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
           </svg>
-          Review Your DAO
+          {t('steps.review.reviewYourDao')}
         </h3>
         <p className="text-primary-700 dark:text-primary-400 mb-4">
-          Please review your DAO configuration before deployment. Once deployed, some settings cannot be changed.
+          {t('steps.review.reviewDescription')}
         </p>
       </div>
       
@@ -206,15 +209,15 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
           <svg className="w-5 h-5 mr-2 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path fillRule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 100-12 6 6 0 000 12zm-1-5a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zm1-4a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" />
           </svg>
-          DAO Configuration Summary
+          {t('steps.review.daoConfigSummary')}
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-gray-50 dark:bg-gray-900 p-5 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h4 className="font-medium text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">Organization Details</h4>
+            <h4 className="font-medium text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">{t('steps.review.organizationDetails')}</h4>
             <div className="space-y-4">
               <div>
-                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Network</h5>
+                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('steps.review.network')}</h5>
                 <p className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
                   {SUPPORTED_NETWORKS.find(n => n.id === selectedNetworkId)?.name || 'Unknown Network'}
                   {SUPPORTED_NETWORKS.find(n => n.id === selectedNetworkId)?.icon && (
@@ -230,16 +233,16 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
               </div>
               
               <div>
-                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">DAO Name</h5>
+                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('steps.review.daoName')}</h5>
                 <p className="text-lg font-medium text-gray-900 dark:text-white">{formData.daoName}</p>
               </div>
               
               <div>
-                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Version</h5>
+                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('steps.review.version')}</h5>
                 <p className="text-lg font-medium text-gray-900 dark:text-white flex items-center">
                   {selectedVersion}
                   <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                    Latest
+                    {t('steps.review.latest')}
                   </span>
                 </p>
               </div>
@@ -247,20 +250,20 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
           </div>
           
           <div className="bg-gray-50 dark:bg-gray-900 p-5 rounded-lg border border-gray-200 dark:border-gray-700">
-            <h4 className="font-medium text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">Token Details</h4>
+            <h4 className="font-medium text-gray-900 dark:text-white mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">{t('steps.review.tokenDetails')}</h4>
             <div className="space-y-4">
               <div>
-                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Token Name</h5>
+                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('steps.review.tokenName')}</h5>
                 <p className="text-lg font-medium text-gray-900 dark:text-white">{formData.tokenName}</p>
               </div>
               
               <div>
-                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Token Symbol</h5>
+                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('steps.review.tokenSymbol')}</h5>
                 <p className="text-lg font-medium text-gray-900 dark:text-white">{formData.symbol}</p>
               </div>
               
               <div>
-                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Total Supply</h5>
+                <h5 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('steps.review.tokenSupply')}</h5>
                 <p className="text-lg font-medium text-gray-900 dark:text-white">{Number(formData.totalSupply).toLocaleString()} {formData.symbol}</p>
               </div>
             </div>
@@ -273,10 +276,10 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
-            Estimated Deployment Cost
+            {t('deploymentCost.title')}
           </h4>
           <div className="text-blue-700 dark:text-blue-400 space-y-2">
-            <p>Deploying your DAO will cost approximately:</p>
+            <p>{t('deploymentCost.description')}</p>
             <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border border-blue-100 dark:border-blue-800 flex items-center justify-between">
               {!estimatedCost ? (
                 <div className="flex items-center">
@@ -284,15 +287,15 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  <span className="font-medium text-lg">Calculating...</span>
+                  <span className="font-medium text-lg">{t('deploymentCost.calculating')}</span>
                 </div>
               ) : (
                 <span className="font-medium text-lg">{estimatedCost.cost} {estimatedCost.symbol}</span>
               )}
-              <span className="text-sm text-gray-500 dark:text-gray-400">≈ {ESTIMATED_GAS_UNITS.toLocaleString()} gas units</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">{t('deploymentCost.gasUnits', { units: ESTIMATED_GAS_UNITS.toLocaleString() })}</span>
             </div>
             <p className="text-sm">
-              Note: Actual cost may vary based on network conditions at the time of deployment.
+              {t('deploymentCost.note')}
             </p>
           </div>
         </div>
@@ -302,17 +305,17 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
             <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
-            What Happens Next
+            {t('whatHappensNext.title')}
           </h4>
           <div className="text-primary-700 dark:text-primary-400 space-y-2">
-            <p>When you click &#34;Continue to Pre-Deployment&#34;, the following will happen:</p>
+            <p>{t('whatHappensNext.description')}</p>
             <ol className="list-decimal pl-5 space-y-1">
-              <li>We&#39;ll check your wallet balance to ensure you have enough funds</li>
-              <li>We&#39;ll simulate the transaction to verify it will succeed</li>
-              <li>Your wallet will prompt you to confirm the transaction</li>
-              <li>The DAO contracts will be deployed to the {SUPPORTED_NETWORKS.find(n => n.id === selectedNetworkId)?.name} network</li>
-              <li>You&#39;ll receive 1 {formData.symbol} token to start participating in governance</li>
-              <li>The remaining {(Number(formData.totalSupply) - 1).toLocaleString()} {formData.symbol} will be stored in the treasury</li>
+              <li>{t('whatHappensNext.checkBalance')}</li>
+              <li>{t('whatHappensNext.simulateTransaction')}</li>
+              <li>{t('whatHappensNext.confirmTransaction')}</li>
+              <li>{t('whatHappensNext.deployContracts', { network: SUPPORTED_NETWORKS.find(n => n.id === selectedNetworkId)?.name })}</li>
+              <li>{t('whatHappensNext.receiveToken', { symbol: formData.symbol })}</li>
+              <li>{t('whatHappensNext.treasuryStorage', { amount: (Number(formData.totalSupply) - 1).toLocaleString(), symbol: formData.symbol })}</li>
             </ol>
           </div>
         </div>
@@ -333,13 +336,13 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
                 </svg>
               </div>
               <div className="ml-3 flex-1">
-                <h3 className="text-lg font-medium text-yellow-800 dark:text-yellow-300">Wallet Connection Required</h3>
+                <h3 className="text-lg font-medium text-yellow-800 dark:text-yellow-300">{t('wallet.connectionRequired')}</h3>
                 <div className="mt-2 text-yellow-700 dark:text-yellow-400">
-                  <p>You need to connect a Web3 wallet to deploy your DAO. This allows you to:</p>
+                  <p>{t('wallet.connectionMessage')}</p>
                   <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>Sign the deployment transaction</li>
-                    <li>Become the initial DAO admin</li>
-                    <li>Receive your governance token</li>
+                    <li>{t('wallet.signTransaction')}</li>
+                    <li>{t('wallet.becomeAdmin')}</li>
+                    <li>{t('wallet.receiveToken')}</li>
                   </ul>
                 </div>
                 <div className="mt-4">
@@ -347,7 +350,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
                     onClick={toggleWalletPopup}
                     className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 cursor-pointer"
                   >
-                    Connect Wallet
+                    {t('wallet.connect')}
                     <svg className="ml-2 -mr-0.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
@@ -378,7 +381,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
           <svg className="inline-block mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
           </svg>
-          Back to DAO Details
+          {t('navigation.backToDetails')}
         </button>
         
         <button
@@ -393,11 +396,11 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Processing...
+              {t('navigation.processing')}
             </>
           ) : (
             <>
-              Continue to Pre-Deployment
+              {t('navigation.continueToPreDeployment')}
               <svg className="inline-block ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>

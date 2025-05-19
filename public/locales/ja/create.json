@@ -1,0 +1,298 @@
+{
+  "title": "DAOを作成",
+  "subtitle": "数分で分散型自律組織を立ち上げましょう",
+  "steps": {
+    "network": {
+      "title": "ネットワークを選択",
+      "description": "DAOのブロックチェーンネットワークを選択してください",
+      "networkLabel": "ネットワーク",
+      "networkPlaceholder": "ネットワークを選択",
+      "versionLabel": "バージョン",
+      "versionPlaceholder": "バージョンを選択"
+    },
+    "networkTypes": {
+      "ethereumMainnet": "イーサリアムメインネット: 最もセキュリティが高い主要なイーサリアムブロックチェーンですが、ガス料金が高くなります",
+      "layer2Networks": "レイヤー2ネットワーク: Optimism、Arbitrumなどは、イーサリアムのセキュリティを継承しつつ、より低い手数料を提供します",
+      "alternativeL1s": "代替L1: Avalanche、BNB Chainなどのネットワークは、異なるトレードオフを提供します",
+      "testnets": "テストネット: メインネットにデプロイする前にテストするためのものです（無料で使用可能）"
+    },
+    "details": {
+      "title": "DAO詳細",
+      "description": "DAOとガバナンストークンを設定します",
+      "daoName": {
+        "label": "DAO名",
+        "placeholder": "DAO名を入力してください",
+        "helper": "分散型自律組織の名前"
+      },
+      "tokenName": {
+        "label": "トークン名",
+        "placeholder": "トークン名を入力してください",
+        "helper": "ガバナンストークンの名前"
+      },
+      "tokenSymbol": {
+        "label": "トークンシンボル",
+        "placeholder": "3～5文字",
+        "helper": "トークンの短い識別子（例: BTC、ETH）"
+      },
+      "tokenSupply": {
+        "label": "トークン供給量",
+        "placeholder": "総供給量を入力してください",
+        "helper": "作成されるトークンの総数"
+      }
+    },
+    "review": {
+      "title": "レビュー",
+      "description": "デプロイ前にDAOの設定を確認してください",
+      "summary": "概要",
+      "network": "ネットワーク",
+      "version": "バージョン",
+      "daoName": "DAO名",
+      "tokenName": "トークン名",
+      "tokenSymbol": "トークンシンボル",
+      "tokenSupply": "トークン供給量",
+      "estimatedGas": "推定ガス料金",
+      "deploymentCost": "デプロイ費用",
+      "readyToDeploy": "DAOをデプロイする準備はできましたか？",
+      "reviewYourDao": "DAOを確認",
+      "reviewDescription": "デプロイ前にDAOの設定を確認してください。一度デプロイすると、一部の設定は変更できません。",
+      "daoConfigSummary": "DAO設定概要",
+      "organizationDetails": "組織詳細",
+      "tokenDetails": "トークン詳細",
+      "latest": "最新"
+    },
+    "deployment": {
+      "title": "デプロイ",
+      "description": "DAOをブロックチェーンにデプロイします",
+      "connecting": "ウォレットに接続中...",
+      "preparing": "デプロイ準備中...",
+      "deploying": "DAOをデプロイ中...",
+      "success": "DAOが正常にデプロイされました！",
+      "failed": "デプロイに失敗しました",
+      "tryAgain": "再試行",
+      "viewOnExplorer": "エクスプローラーで表示",
+      "managementPlatforms": "これらのプラットフォームを使用してDAOを管理できるようになりました:",
+      "processingDeployment": "デプロイ処理中",
+      "waitingForDeployment": "DAOがブロックチェーンにデプロイされるまでお待ちください...",
+      "daoCreatedSuccessfully": "DAOが正常に作成されました！",
+      "daoIsLive": "{{daoName}} DAOがブロックチェーン上で稼働中です",
+      "daoFullyFunctional": "DAOは、ガバナンス機能、トークン管理、および財務管理を備え、完全に機能するようになりました。",
+      "contractAddresses": "コントラクトアドレス",
+      "daoCoreContract": "DAOコアコントラクト",
+      "tokenContract": "トークンコントラクト",
+      "transactionDetails": "トランザクション詳細",
+      "transactionHash": "トランザクションハッシュ",
+      "viewOnBlockExplorer": "ブロックエクスプローラーで表示",
+      "blockExplorerDescription": "ブロックチェーンエクスプローラーでトランザクションの詳細を表示して、ステータスを追跡し、デプロイを確認できます。",
+      "nextSteps": "次のステップ",
+      "registerYourDao": "DAOを登録",
+      "registerDescription": "アクションを提案したり、投票したり、資産を管理したりするには、DAOを管理インターフェースに接続します。",
+      "stakeYourToken": "トークンをステーク",
+      "stakeDescription": "DAOのガバナンスシステムで議決権を得るために、最初のトークンをステークします。",
+      "createProposal": "提案を作成",
+      "proposalDescription": "トークンを配布したり、財務資産を管理したりするための最初のガバナンス提案を作成します。"
+    }
+  },
+  "validation": {
+    "required": "このフィールドは必須です",
+    "minLength": "{{min}}文字以上である必要があります",
+    "maxLength": "{{max}}文字以下である必要があります",
+    "invalidSymbol": "シンボルは2～5文字の大文字である必要があります",
+    "positiveNumber": "正の数である必要があります",
+    "maxSupply": "{{max}}以下である必要があります"
+  },
+  "tokenDistribution": {
+    "title": "トークン配布",
+    "totalSupply": "総供給量",
+    "details": "トークン配布詳細",
+    "creator": "作成者（あなた）",
+    "initialToken": "初期ガバナンストークン",
+    "treasury": "財務",
+    "controlledByDao": "DAOによって管理",
+    "initialTokenForGovernance": "ガバナンスのための初期トークン",
+    "controlledByDaoGovernance": "DAOガバナンスによって管理",
+    "howItWorks": {
+      "title": "トークン配布の仕組み",
+      "description": "デプロイ後、ガバナンスに参加するために1トークンを受け取ります。残りのトークンは財務に保管され、コミュニティによって承認されたガバナンス提案を通じて配布できます。"
+    }
+  },
+  "navigation": {
+    "backToNetwork": "ネットワークに戻る",
+    "continueToReview": "レビューに進む",
+    "continueToDetails": "DAO詳細に進む",
+    "backToDetails": "DAO詳細に戻る",
+    "continueToPreDeployment": "事前デプロイに進む",
+    "processing": "処理中..."
+  },
+  "network": {
+    "wrongNetwork": "間違ったネットワーク",
+    "switchToSupported": "DAOを作成するには、サポートされているネットワークに切り替えてください",
+    "switchingNetwork": "ネットワークを切り替え中... ウォレットで確認してください。",
+    "switchFailed": "ネットワークの切り替えに失敗しました。ウォレットを確認して、もう一度お試しください。",
+    "switching": "切り替え中...",
+    "switchTo": "{{name}}に切り替える",
+    "tooltip": "DAOがデプロイされるブロックチェーンネットワーク。各ネットワークには異なる特性と手数料があります。",
+    "features": "ネットワーク機能",
+    "notSupported": "現在のネットワークはサポートされていません。サポートされているネットワークに切り替えてください。",
+    "note": "注意",
+    "sepoliaNote": "高速テストのため、Sepolia DAOは5分の投票期間でデプロイされます。"
+  },
+  "version": {
+    "tooltip": "デプロイするDAOコントラクトのバージョン。新しいバージョンには、追加機能や改善が含まれる場合があります。"
+  },
+  "architecture": {
+    "title": "DAOアーキテクチャ",
+    "daoCore": "DAOコア",
+    "daoCoreDescription": "提案、投票、およびコミュニティの決定の実行のための中央ガバナンスハブ",
+    "daoToken": "DAOトークン",
+    "daoTokenDescription": "カスタマイズ可能な税メカニズムと配布制御を備えたERC20ガバナンストークン",
+    "treasury": "財務",
+    "treasuryDescription": "ガバナンス提案によって管理されるDAO資産を管理するための安全な保管庫",
+    "staking": "ステーキング",
+    "stakingDescription": "長期保有者向けの議決権乗数付きの時間ベースのステーキング",
+    "upgradeableProxies": "すべてのコントラクトは、最新の実装を備えたアップグレード可能なプロキシとしてデプロイされます"
+  },
+  "features": {
+    "governance": {
+      "title": "ガバナンス",
+      "description": "提案を作成し、重要な決定に投票します"
+    },
+    "treasury": {
+      "title": "財務",
+      "description": "資金を管理し、リソースを割り当てます"
+    },
+    "token": {
+      "title": "ガバナンストークン",
+      "description": "議決権とガバナンスのためのERC-20トークン"
+    },
+    "multiSig": {
+      "title": "マルチシグネチャ",
+      "description": "重要なアクションには複数の承認が必要です"
+    }
+  },
+  "wallet": {
+    "connected": "ウォレット接続済み",
+    "readyToDeploy": "ウォレットが接続され、DAOをデプロイする準備ができました",
+    "disconnect": "切断",
+    "address": "ウォレットアドレス",
+    "copy": "コピー",
+    "balance": "残高",
+    "connectionRequired": "ウォレット接続が必要です",
+    "connectionMessage": "DAOをデプロイするには、Web3ウォレットを接続する必要があります。これにより、次のことが可能になります:",
+    "signTransaction": "デプロイトランザクションに署名する",
+    "becomeAdmin": "最初のDAO管理者になる",
+    "receiveToken": "ガバナンストークンを受け取る",
+    "connect": "ウォレットを接続"
+  },
+  "deploymentCost": {
+    "title": "推定デプロイ費用",
+    "description": "DAOのデプロイには約費用がかかります:",
+    "calculating": "計算中...",
+    "note": "注意: 実際の費用は、デプロイ時のネットワーク状況によって異なる場合があります。",
+    "gasUnits": "約 {{units}} ガスユニット"
+  },
+  "whatHappensNext": {
+    "title": "次に起こること",
+    "description": "「事前デプロイに進む」をクリックすると、次のことが起こります:",
+    "checkBalance": "十分な資金があることを確認するためにウォレットの残高を確認します",
+    "simulateTransaction": "トランザクションが成功することを確認するためにトランザクションをシミュレートします",
+    "confirmTransaction": "ウォレットがトランザクションの確認を求めます",
+    "deployContracts": "DAOコントラクトが{{network}}ネットワークにデプロイされます",
+    "receiveToken": "ガバナンスに参加するために1 {{symbol}}トークンを受け取ります",
+    "treasuryStorage": "残りの{{amount}} {{symbol}}は財務に保管されます"
+  },
+  "preDeployment": {
+    "title": "事前デプロイチェック",
+    "description": "DAOのデプロイが成功することを確認するために、いくつかのチェックを実行します。これにより、失敗したトランザクションや無駄なガス料金を防ぐことができます。",
+    "checklist": "デプロイチェックリスト",
+    "balanceCheck": {
+      "title": "ウォレット残高チェック",
+      "description": "デプロイに十分な{{symbol}}があることを確認しています"
+    },
+    "simulation": {
+      "title": "トランザクションシミュレーション",
+      "description": "{{network}}でのデプロイをシミュレートして成功を確認しています"
+    },
+    "signing": {
+      "title": "トランザクション署名",
+      "inProgress": "ウォレットでトランザクションに署名してください...",
+      "description": "DAOをデプロイするためにウォレットでトランザクションに署名します"
+    },
+    "confirmation": {
+      "title": "トランザクション確認",
+      "inProgress": "ブロックチェーンの確認を待っています...",
+      "description": "ブロックチェーンでトランザクションが確認されるのを待ちます"
+    },
+    "status": {
+      "passed": "合格",
+      "failed": "失敗",
+      "signed": "署名済み",
+      "confirmed": "確認済み"
+    },
+    "networkMismatch": {
+      "title": "ネットワークの不一致",
+      "description": "ウォレットは{{current}}に接続されていますが、デプロイ用に{{selected}}を選択しました。",
+      "switching": "ネットワークを切り替え中... ウォレットで確認してください。",
+      "switchFailed": "自動切り替えに失敗しました。ウォレットでネットワークを手動で変更してください。",
+      "switchNeeded": "続行するには、ネットワークを{{network}}に切り替えてください。",
+      "switchTo": "{{network}}に切り替える"
+    },
+    "backToReview": "レビューに戻る"
+  },
+  "stepIndicator": {
+    "stepCount": "ステップ {{current}}/{{total}}",
+    "steps": {
+      "network": {
+        "label": "ネットワーク",
+        "description": "ブロックチェーンネットワークを選択"
+      },
+      "daoDetails": {
+        "label": "DAO詳細",
+        "description": "DAOとトークンを設定"
+      },
+      "review": {
+        "label": "レビュー",
+        "description": "設定を確認"
+      },
+      "preDeploy": {
+        "label": "事前デプロイ",
+        "description": "事前デプロイチェックを実行"
+      },
+      "success": {
+        "label": "成功",
+        "description": "新しいDAOを表示"
+      }
+    }
+  },
+  "transaction": {
+    "waitingForSignature": "トランザクションに署名してください...",
+    "submitting": "トランザクションを送信中...",
+    "waitingForConfirmation": "確認を待っています...",
+    "success": "トランザクション成功！",
+    "error": "トランザクション失敗",
+    "checkingBalance": "ウォレット残高を確認中...",
+    "balanceError": "残高不足",
+    "balanceCheckError": "ウォレット残高の確認に失敗しました",
+    "simulating": "トランザクションをシミュレート中...",
+    "simulationError": "トランザクションシミュレーションに失敗しました",
+    "unexpectedError": "予期しないエラー",
+    "unexpectedErrorDetails": "トランザクションシミュレーション中に予期しないエラーが発生しました",
+    "viewOnExplorer": "エクスプローラーで表示",
+    "insufficientBalanceDetails": "残高不足: このトランザクションを完了するには、さらに<strong>{{amount}} {{symbol}}</strong>が必要です。",
+    "tipTransactionProcessing": "ヒント: トランザクションはまだ処理中である可能性があります。エクスプローラーでステータスを確認してください。",
+    "tipAddMoreFunds": "ヒント: ウォレットに資金を追加して、もう一度お試しください。",
+    "tipIncreaseGasLimit": "ヒント: ウォレット設定でガス制限を増やしてみてください。",
+    "tipIncreaseGasPrice": "ヒント: ウォレット設定でガス価格を上げてみてください。",
+    "tipResetWallet": "ヒント: ウォレットのトランザクション履歴をリセットするか、ノンスを手動で調整してみてください。",
+    "tipWalletDisconnected": "ヒント: ウォレットが切断されています。ウォレットを再接続して、もう一度お試しください。",
+    "refreshPage": "ページを更新",
+    "tipWalletPermission": "ヒント: ウォレットがこのコントラクトと対話するには許可が必要です。ウォレットを開き、許可リクエストを確認してください。",
+    "stepsToFix": "修正手順:",
+    "stepOpenWallet": "ウォレット（MetaMaskなど）を開く",
+    "stepLookForPermissions": "保留中の許可リクエストを探す",
+    "stepGrantPermission": "コントラクトに許可を与える",
+    "stepTryAgain": "トランザクションを再試行する",
+    "noteRejectedTransaction": "注意: ウォレットでトランザクションを拒否しました。意図しない場合は、もう一度お試しください。",
+    "retryTransaction": "トランザクションを再試行",
+    "simulationErrorMessage": "コントラクトシミュレーションでエラーが発生しました。これは、コントラクトの制限またはネットワークの問題が原因である可能性があります。"
+  }
+}

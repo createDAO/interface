@@ -83,7 +83,7 @@ const FACTORY_ADDRESSES: Record<number, FactoryAddressConfig> = {
   // Testnets
   11155111: {
     isAvailable: true,
-    address: "0xce1368c6b408b23b31d387eb0fb517d4485005e9",
+    address: "0xcC961E2a43762caD4c673d471b9fcddE233716Dd",
   },
   31337: {
     isAvailable: true,

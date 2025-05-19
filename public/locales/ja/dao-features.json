@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "DAOの機能と情報 | CreateDAO",
+    "description": "CreateDAOで作成されたDAOの機能とコンポーネントについて学びます"
+  },
+  "header": {
+    "title": "DAOの機能と情報",
+    "subtitle": "DAOのコンポーネント、機能、技術的な詳細を理解します"
+  },
+  "introduction": {
+    "title": "はじめに",
+    "description": "CreateDAOは、ガバナンス、トークン管理、財務管理、およびステーキング機能を提供するために連携する4つのコアスマートコントラクトを備えた完全なDAOエコシステムをデプロイします。",
+    "whatYouGet": {
+      "title": "得られるもの",
+      "description": "CreateDAOを通じてDAOを作成すると、次の機能を備えた完全なガバナンスシステムが提供されます:",
+      "items": [
+        "提案および投票システムを備えた完全に機能する<strong>DAOコア</strong>コントラクト",
+        "カスタマイズ可能な税メカニズムを備えた<strong>ERC20ガバナンストークン</strong>",
+        "DAOの資産を管理するための安全な<strong>財務</strong>",
+        "時間ベースの議決権乗数を備えた<strong>ステーキングシステム</strong>",
+        "将来の改善のために<strong>アップグレード可能なプロキシ</strong>としてデプロイされたすべてのコントラクト"
+      ]
+    },
+    "forCreators": {
+      "title": "DAO作成者向け",
+      "description": "作成者として、次のものが提供されます:",
+      "items": [
+        "参加を開始するための1ガバナンストークン",
+        "最初の提案を作成する機能",
+        "最初のデプロイメントの制御",
+        "コミュニティをブートストラップするためのツール"
+      ]
+    },
+    "forMembers": {
+      "title": "DAOメンバー向け",
+      "description": "コミュニティメンバーは次のことができるようになります:",
+      "items": [
+        "トークンをステークして議決権を得る",
+        "提案を作成して投票する",
+        "プレセールに参加する",
+        "DAOの財務と将来の統治を支援する"
+      ]
+    }
+  },
+  "architecture": {
+    "title": "DAOアーキテクチャ",
+    "description": "DAOは、完全なガバナンスシステムを提供するために連携する4つの主要なコントラクトで構成されています。",
+    "diagram": {
+      "daoCore": "DAOコア",
+      "governance": "ガバナンスと提案",
+      "daoToken": "DAOトークン",
+      "erc20": "ERC20ガバナンストークン",
+      "treasury": "財務",
+      "assetManagement": "資産管理",
+      "staking": "ステーキング",
+      "votingPower": "議決権",
+      "daoFactory": "DAOファクトリ",
+      "note": "すべてのコントラクトは、最新の実装を備えたアップグレード可能なプロキシとしてデプロイされます"
+    },
+    "upgradeableDesign": {
+      "title": "アップグレード可能な設計",
+      "description": "すべてのコントラクトはUUPS（Universal Upgradeable Proxy Standard）パターンを使用しており、状態と残高を維持しながら将来の改善を可能にします。アップグレードは、コミュニティの投票に合格したガバナンス提案を通じてのみ実行できます。"
+    },
+    "contractInteractions": {
+      "title": "コントラクトの相互作用",
+      "description": "DAOコアコントラクトは、すべてのガバナンスアクションを調整する中央ハブです。トークン、財務、およびステーキングコントラクトと相互作用して、コミュニティによって承認された提案を実行します。"
+    }
+  },
+  "components": {
+    "title": "コアコンポーネント",
+    "description": "DAOエコシステムの各コントラクトは特定の目的を果たし、独自の機能を備えています。",
+    "daoCore": {
+      "title": "DAOコア",
+      "description": "DAOコアコントラクトは、提案、投票、およびコミュニティの決定の実行を管理する中央ガバナンスハブです。",
+      "features": {
+        "title": "主な機能:",
+        "items": [
+          "<span class=\"font-medium\">提案システム:</span> さまざまな種類の提案を作成、投票、実行します",
+          "<span class=\"font-medium\">投票メカニズム:</span> ステークベースの議決権による安全な投票",
+          "<span class=\"font-medium\">実行ロジック:</span> 承認された提案の安全な実行",
+          "<span class=\"font-medium\">緊急制御:</span> セキュリティのための一時停止/再開機能"
+        ]
+      },
+      "parameters": {
+        "title": "ガバナンスパラメータ:",
+        "votingPeriod": "投票期間",
+        "votingPeriodValue": "3日間",
+        "minProposalStake": "最小提案ステーク",
+        "minProposalStakeValue": "1トークン",
+        "quorum": "定足数",
+        "quorumValue": "議決権の50%",
+        "version": "バージョン",
+        "versionValue": "1.0.0"
+      },
+      "codeBlockTitle": "DAOコアコントラクトの初期化"
+    },
+    "daoToken": {
+      "title": "DAOトークン",
+      "description": "DAOトークンは、DAOのガバナンストークンとして機能するERC20トークンです。標準のERC20トークンを超える追加機能が含まれています。",
+      "features": {
+        "title": "主な機能:",
+        "items": [
+          "<span class=\"font-medium\">初期配布:</span> 作成者に1トークン、残りは財務へ",
+          "<span class=\"font-medium\">税メカニズム:</span> 最大10%の構成可能な税率",
+          "<span class=\"font-medium\">ホワイトリスト登録:</span> アドレスは税から免除できます",
+          "<span class=\"font-medium\">ステーキング統合:</span> ガバナンスのためにステーキングコントラクトと連携します"
+        ]
+      },
+      "codeBlockTitle": "DAOトークン税メカニズム"
+    },
+    "treasury": {
+      "title": "財務",
+      "description": "財務コントラクトは、トークンやETHを含むDAOが所有するすべての資産を安全に保持および管理します。",
+      "features": {
+        "title": "主な機能:",
+        "items": [
+          "<span class=\"font-medium\">資産管理:</span> 当初はトークンの大部分を保持します",
+          "<span class=\"font-medium\">マルチアセット:</span> ETHおよび任意のERC20トークンを保持できます",
+          "<span class=\"font-medium\">ガバナンス制御:</span> DAOのみが転送を承認できます",
+          "<span class=\"font-medium\">残高追跡:</span> 現在の残高を確認するためのメソッド"
+        ]
+      },
+      "codeBlockTitle": "財務転送機能"
+    },
+    "staking": {
+      "title": "ステーキング",
+      "description": "ステーキングコントラクトにより、トークン保有者はトークンをステークしてDAOで議決権を得ることができます。",
+      "features": {
+        "title": "主な機能:",
+        "items": [
+          "<span class=\"font-medium\">時間ベースの乗数:</span> ステーキング期間が長いほど議決権が増加します",
+          "<span class=\"font-medium\">議決権計算:</span> ステーク × 時間乗数",
+          "<span class=\"font-medium\">柔軟なステーキング:</span> ユーザーはいつでもステークおよびアンステークできます",
+          "<span class=\"font-medium\">構成可能なパラメータ:</span> 乗数としきい値はガバナンスを通じて調整できます"
+        ]
+      },
+      "multipliers": {
+        "title": "ステーキング乗数:",
+        "table": {
+          "headers": {
+            "duration": "ステーキング期間",
+            "multiplier": "乗数",
+            "example": "例"
+          },
+          "rows": [
+            {
+              "duration": "1週間未満",
+              "multiplier": "1倍（基本）",
+              "example": "100トークン = 100議決権"
+            },
+            {
+              "duration": "1週間～1ヶ月",
+              "multiplier": "1.25倍",
+              "example": "100トークン = 125議決権"
+            },
+            {
+              "duration": "1ヶ月～3ヶ月",
+              "multiplier": "1.5倍",
+              "example": "100トークン = 150議決権"
+            },
+            {
+              "duration": "3ヶ月以上",
+              "multiplier": "2倍",
+              "example": "100トークン = 200議決権"
+            }
+          ]
+        }
+      },
+      "codeBlockTitle": "ステーキング議決権計算"
+    }
+  },
+  "governance": {
+    "title": "ガバナンス機能",
+    "description": "DAOには、さまざまな提案タイプと投票メカニズムを備えた包括的なガバナンスシステムが含まれています。",
+    "proposalTypes": {
+      "title": "利用可能な提案タイプ",
+      "treasuryTransfers": {
+        "title": "財務からの送金",
+        "description": "財務から任意の住所にトークンまたはETHを送金することを提案します"
+      },
+      "presaleCreation": {
+        "title": "プレセールの作成",
+        "description": "カスタマイズ可能なトークン量と初期価格でトークンプレセールを開始します"
+      },
+      "presaleManagement": {
+        "title": "プレセールの管理",
+        "description": "プレセールを一時停止/再開し、完了したプレセールから資金を引き出します"
+      },
+      "contractUpgrades": {
+        "title": "コントラクトのアップグレード",
+        "description": "コアコントラクトまたはモジュールを新しい実装にアップグレードします"
+      },
+      "emergencyControls": {
+        "title": "緊急制御",
+        "description": "緊急時にDAO全体を一時停止/再開します"
+      },
+      "moduleUpgrades": {
+        "title": "モジュールのアップグレード",
+        "description": "プレセールやベスティングコントラクトなどの特定のモジュールを追加またはアップグレードします"
+      }
+    },
+    "votingProcess": {
+      "title": "投票プロセス",
+      "steps": [
+        "<span class=\"font-medium\">提案の作成:</span> 少なくとも1つのステークされたトークンを持つメンバーは誰でも提案を作成できます",
+        "<span class=\"font-medium\">投票期間:</span> メンバーは投票を行うための設定された期間があります",
+        "<span class=\"font-medium\">投票:</span> メンバーは議決権で「賛成」または「反対」に投票します",
+        "<span class=\"font-medium\">定足数チェック:</span> 総議決権の少なくとも50%が参加する必要があります",
+        "<span class=\"font-medium\">実行:</span> 承認された場合、提案を実行して変更を実装できます"
+      ]
+    }
+  },
+  "deployment": {
+    "title": "デプロイプロセス",
+    "description": "DAOを作成すると、次の手順が単一のトランザクションで自動的に実行されます。",
+    "steps": [
+      "<span class=\"font-medium\">トークンのデプロイ:</span> ERC20ガバナンストークンが最初にデプロイされます",
+      "<span class=\"font-medium\">財務のデプロイ:</span> 財務コントラクトがデプロイされます（初期化されていません）",
+      "<span class=\"font-medium\">ステーキングのデプロイ:</span> ステーキングコントラクトがデプロイされ、トークンにリンクされます",
+      "<span class=\"font-medium\">DAOのデプロイ:</span> メインDAOコントラクトがデプロイされ、他のすべてのコントラクトに接続されます",
+      "<span class=\"font-medium\">財務の初期化:</span> 財務はDAOを所有者として初期化されます",
+      "<span class=\"font-medium\">トークンの構成:</span> ステーキングコントラクトがトークンに設定され、所有権がDAOに譲渡されます",
+      "<span class=\"font-medium\">トークンの配布:</span> 残りのトークンは財務に譲渡されます",
+      "<span class=\"font-medium\">所有権の譲渡:</span> DAOは自己統治になります（自身を所有します）"
+    ],
+    "note": {
+      "title": "重要な注意",
+      "description": "デプロイ後、DAOは完全に自律的であり、ガバナンスによって制御されます。作成者は参加を開始するために1トークンを受け取りますが、それ以上の特別な権限はありません。すべての主要な決定はガバナンスプロセスを経る必要があります。"
+    }
+  },
+  "gettingStarted": {
+    "title": "はじめに",
+    "description": "DAOを作成した後、ガバナンスを開始するためのいくつかの手順を次に示します。",
+    "steps": [
+      {
+        "number": "1",
+        "title": "トークンをステークする",
+        "description": "最初のトークンをステークして議決権を得ます。長くステークするほど、より多くの議決権が得られます。"
+      },
+      {
+        "number": "2",
+        "title": "提案を作成する",
+        "description": "財務からトークンを配布したり、プレセールを開始してコミュニティを成長させたりするための最初の提案を作成します。"
+      },
+      {
+        "number": "3",
+        "title": "コミュニティを成長させる",
+        "description": "メンバーをDAOに招待し、提案を通じてトークンを配布し、分散型コミュニティを構築します。"
+      }
+    ],
+    "createButton": "今すぐDAOを作成"
+  }
+}

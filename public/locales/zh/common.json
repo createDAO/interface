@@ -1,0 +1,51 @@
+{
+  "buttons": {
+    "create": "创建 DAO",
+    "learnMore": "了解更多",
+    "connect": "连接",
+    "deploy": "部署",
+    "review": "审核",
+    "back": "返回",
+    "next": "下一步",
+    "submit": "提交",
+    "cancel": "取消"
+  },
+  "labels": {
+    "name": "名称",
+    "token": "代币",
+    "symbol": "符号",
+    "supply": "供应量",
+    "network": "网络",
+    "version": "版本",
+    "gas": "燃料费",
+    "deploymentReady": "准备部署"
+  },
+  "metadata": {
+    "title": "CreateDAO - 轻松创建您的 DAO",
+    "description": "只需点击几下，即可在多个区块链上启动您的去中心化自治组织。无需编码。"
+  },
+  "footer": {
+    "description": "在多个区块链上创建和部署 DAO 的最简单方式。",
+    "version": "版本",
+    "commit": "提交",
+    "resources": "资源",
+    "documentation": "文档",
+    "tutorials": "教程",
+    "coreConcepts": "核心概念",
+    "community": "社区",
+    "github": "GitHub",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "legal": "法律",
+    "contact": "联系我们的社区",
+    "copyright": "© {{year}} CreateDAO. 保留所有权利。",
+    "terms": "服务条款",
+    "privacy": "隐私政策"
+  },
+  "errors": {
+    "general": "发生错误",
+    "tryAgain": "请重试"
+  },
+  "languageName": "简体中文",
+  "languageSelector": "选择语言"
+}

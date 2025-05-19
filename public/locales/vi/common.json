@@ -1,0 +1,51 @@
+{
+  "buttons": {
+    "create": "Tạo DAO",
+    "learnMore": "Tìm hiểu thêm",
+    "connect": "Kết nối",
+    "deploy": "Triển khai",
+    "review": "Xem lại",
+    "back": "Quay lại",
+    "next": "Tiếp theo",
+    "submit": "Gửi",
+    "cancel": "Hủy"
+  },
+  "labels": {
+    "name": "Tên",
+    "token": "Token",
+    "symbol": "Ký hiệu",
+    "supply": "Nguồn cung",
+    "network": "Mạng lưới",
+    "version": "Phiên bản",
+    "gas": "Gas",
+    "deploymentReady": "Sẵn sàng triển khai"
+  },
+  "metadata": {
+    "title": "CreateDAO - Tạo DAO của bạn một cách dễ dàng",
+    "description": "Khởi chạy tổ chức tự trị phi tập trung của bạn trên nhiều blockchain chỉ với vài cú nhấp chuột. Không yêu cầu mã hóa."
+  },
+  "footer": {
+    "description": "Cách dễ nhất để tạo và triển khai DAO trên nhiều blockchain.",
+    "version": "Phiên bản",
+    "commit": "Cam kết",
+    "resources": "Tài nguyên",
+    "documentation": "Tài liệu",
+    "tutorials": "Hướng dẫn",
+    "coreConcepts": "Khái niệm cốt lõi",
+    "community": "Cộng đồng",
+    "github": "GitHub",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "legal": "Pháp lý",
+    "contact": "Liên hệ với cộng đồng của chúng tôi",
+    "copyright": "© {{year}} CreateDAO. Đã đăng ký Bản quyền.",
+    "terms": "Điều khoản dịch vụ",
+    "privacy": "Chính sách bảo mật"
+  },
+  "errors": {
+    "general": "Đã xảy ra lỗi",
+    "tryAgain": "Vui lòng thử lại"
+  },
+  "languageName": "Tiếng Việt",
+  "languageSelector": "Chọn ngôn ngữ"
+}

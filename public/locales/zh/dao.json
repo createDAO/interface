@@ -1,0 +1,61 @@
+{
+  "terminology": {
+    "dao": "DAO",
+    "daoFull": "去中心化自治组织",
+    "token": "代币",
+    "governance": "治理",
+    "proposal": "提案",
+    "vote": "投票",
+    "treasury": "资金库",
+    "member": "成员",
+    "community": "社区",
+    "blockchain": "区块链",
+    "smartContract": "智能合约",
+    "gas": "燃料费",
+    "gasPrice": "燃料价格",
+    "transaction": "交易",
+    "wallet": "钱包",
+    "connect": "连接钱包",
+    "disconnect": "断开钱包"
+  },
+  "wallets": {
+    "metamask": "MetaMask",
+    "walletConnect": "WalletConnect",
+    "coinbase": "Coinbase 钱包",
+    "trustWallet": "Trust 钱包",
+    "ledger": "Ledger",
+    "brave": "Brave 钱包",
+    "rabby": "Rabby 钱包",
+    "okx": "OKX 钱包",
+    "browser": "浏览器钱包"
+  },
+  "networks": {
+    "ethereum": "以太坊",
+    "polygon": "Polygon",
+    "arbitrum": "Arbitrum",
+    "optimism": "Optimism",
+    "base": "Base",
+    "avalanche": "Avalanche",
+    "bnb": "BNB 链",
+    "gnosis": "Gnosis 链",
+    "celo": "Celo",
+    "mantle": "Mantle",
+    "scroll": "Scroll",
+    "blast": "Blast",
+    "unichain": "Unichain",
+    "worldchain": "Worldchain"
+  },
+  "status": {
+    "connecting": "连接中...",
+    "connected": "已连接",
+    "disconnected": "已断开",
+    "pending": "待处理",
+    "confirmed": "已确认",
+    "failed": "失败",
+    "success": "成功",
+    "error": "错误",
+    "deploymentReady": "准备部署",
+    "deploying": "部署中...",
+    "deployed": "已部署"
+  }
+}

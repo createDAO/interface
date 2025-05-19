@@ -1,0 +1,298 @@
+{
+  "title": "Buat DAO Anda",
+  "subtitle": "Luncurkan organisasi otonom terdesentralisasi Anda dalam hitungan menit",
+  "steps": {
+    "network": {
+      "title": "Pilih Jaringan",
+      "description": "Pilih jaringan blockchain untuk DAO Anda",
+      "networkLabel": "Jaringan",
+      "networkPlaceholder": "Pilih jaringan",
+      "versionLabel": "Versi",
+      "versionPlaceholder": "Pilih versi"
+    },
+    "networkTypes": {
+      "ethereumMainnet": "Jaringan Utama Ethereum: Blockchain utama Ethereum dengan keamanan tertinggi namun biaya gas lebih tinggi",
+      "layer2Networks": "Jaringan Layer 2: Optimism, Arbitrum, dll. menawarkan biaya lebih rendah sambil mewarisi keamanan Ethereum",
+      "alternativeL1s": "L1 Alternatif: Jaringan seperti Avalanche, BNB Chain menawarkan trade-off yang berbeda",
+      "testnets": "Testnet: Untuk pengujian sebelum menerapkan ke mainnet (gratis digunakan)"
+    },
+    "details": {
+      "title": "Detail DAO",
+      "description": "Konfigurasikan DAO dan token tata kelola Anda",
+      "daoName": {
+        "label": "Nama DAO",
+        "placeholder": "Masukkan nama DAO Anda",
+        "helper": "Nama organisasi otonom terdesentralisasi Anda"
+      },
+      "tokenName": {
+        "label": "Nama Token",
+        "placeholder": "Masukkan nama token Anda",
+        "helper": "Nama token tata kelola Anda"
+      },
+      "tokenSymbol": {
+        "label": "Simbol Token",
+        "placeholder": "3-5 karakter",
+        "helper": "Pengidentifikasi singkat untuk token Anda (mis., BTC, ETH)"
+      },
+      "tokenSupply": {
+        "label": "Pasokan Token",
+        "placeholder": "Masukkan total pasokan",
+        "helper": "Jumlah total token yang akan dibuat"
+      }
+    },
+    "review": {
+      "title": "Tinjau",
+      "description": "Tinjau konfigurasi DAO Anda sebelum penerapan",
+      "summary": "Ringkasan",
+      "network": "Jaringan",
+      "version": "Versi",
+      "daoName": "Nama DAO",
+      "tokenName": "Nama Token",
+      "tokenSymbol": "Simbol Token",
+      "tokenSupply": "Pasokan Token",
+      "estimatedGas": "Estimasi Gas",
+      "deploymentCost": "Biaya Penerapan",
+      "readyToDeploy": "Siap menerapkan DAO Anda?",
+      "reviewYourDao": "Tinjau DAO Anda",
+      "reviewDescription": "Harap tinjau konfigurasi DAO Anda sebelum penerapan. Setelah diterapkan, beberapa pengaturan tidak dapat diubah.",
+      "daoConfigSummary": "Ringkasan Konfigurasi DAO",
+      "organizationDetails": "Detail Organisasi",
+      "tokenDetails": "Detail Token",
+      "latest": "Terbaru"
+    },
+    "deployment": {
+      "title": "Penerapan",
+      "description": "Terapkan DAO Anda ke blockchain",
+      "connecting": "Menghubungkan ke dompet...",
+      "preparing": "Mempersiapkan penerapan...",
+      "deploying": "Menerapkan DAO...",
+      "success": "DAO berhasil diterapkan!",
+      "failed": "Penerapan gagal",
+      "tryAgain": "Coba Lagi",
+      "viewOnExplorer": "Lihat di Explorer",
+      "managementPlatforms": "Anda sekarang dapat mengelola DAO Anda menggunakan platform ini:",
+      "processingDeployment": "Memproses Penerapan",
+      "waitingForDeployment": "Harap tunggu sementara DAO Anda sedang diterapkan ke blockchain...",
+      "daoCreatedSuccessfully": "DAO Berhasil Dibuat!",
+      "daoIsLive": "DAO {{daoName}} Anda sekarang aktif di blockchain",
+      "daoFullyFunctional": "DAO Anda sekarang berfungsi penuh dengan kemampuan tata kelola, manajemen token, dan kontrol perbendaharaan.",
+      "contractAddresses": "Alamat Kontrak",
+      "daoCoreContract": "Kontrak Inti DAO",
+      "tokenContract": "Kontrak Token",
+      "transactionDetails": "Detail Transaksi",
+      "transactionHash": "Hash Transaksi",
+      "viewOnBlockExplorer": "Lihat di Block Explorer",
+      "blockExplorerDescription": "Anda dapat melihat detail transaksi Anda di penjelajah blockchain untuk melacak statusnya dan memverifikasi penerapan.",
+      "nextSteps": "Langkah Selanjutnya",
+      "registerYourDao": "Daftarkan DAO Anda",
+      "registerDescription": "Untuk mengusulkan tindakan, memberikan suara, atau mengelola aset, hubungkan DAO Anda ke antarmuka manajemen.",
+      "stakeYourToken": "Pertaruhkan Token Anda",
+      "stakeDescription": "Pertaruhkan token awal Anda untuk mendapatkan kekuatan suara dalam sistem tata kelola DAO Anda.",
+      "createProposal": "Buat Proposal",
+      "proposalDescription": "Buat proposal tata kelola pertama Anda untuk mendistribusikan token atau mengelola aset perbendaharaan."
+    }
+  },
+  "validation": {
+    "required": "Bidang ini wajib diisi",
+    "minLength": "Minimal harus {{min}} karakter",
+    "maxLength": "Maksimal harus {{max}} karakter",
+    "invalidSymbol": "Simbol harus terdiri dari 2-5 huruf kapital",
+    "positiveNumber": "Harus berupa angka positif",
+    "maxSupply": "Harus kurang dari atau sama dengan {{max}}"
+  },
+  "tokenDistribution": {
+    "title": "Distribusi Token",
+    "totalSupply": "Total Pasokan",
+    "details": "Detail Distribusi Token",
+    "creator": "Pembuat (Anda)",
+    "initialToken": "token tata kelola awal",
+    "treasury": "Perbendaharaan",
+    "controlledByDao": "dikendalikan oleh DAO",
+    "initialTokenForGovernance": "Token awal untuk tata kelola",
+    "controlledByDaoGovernance": "Dikendalikan oleh tata kelola DAO",
+    "howItWorks": {
+      "title": "Cara Kerja Distribusi Token",
+      "description": "Setelah penerapan, Anda akan menerima 1 token untuk mulai berpartisipasi dalam tata kelola. Token yang tersisa akan disimpan di perbendaharaan dan dapat didistribusikan melalui proposal tata kelola yang disetujui oleh komunitas."
+    }
+  },
+  "navigation": {
+    "backToNetwork": "Kembali ke Jaringan",
+    "continueToReview": "Lanjutkan ke Tinjauan",
+    "continueToDetails": "Lanjutkan ke Detail DAO",
+    "backToDetails": "Kembali ke Detail DAO",
+    "continueToPreDeployment": "Lanjutkan ke Pra-Penerapan",
+    "processing": "Memproses..."
+  },
+  "network": {
+    "wrongNetwork": "Jaringan Salah",
+    "switchToSupported": "Harap beralih ke jaringan yang didukung untuk membuat DAO Anda",
+    "switchingNetwork": "Mengalihkan jaringan... Harap konfirmasi di dompet Anda.",
+    "switchFailed": "Gagal mengalihkan jaringan. Harap periksa dompet Anda dan coba lagi.",
+    "switching": "Mengalihkan...",
+    "switchTo": "Beralih ke {{name}}",
+    "tooltip": "Jaringan blockchain tempat DAO Anda akan diterapkan. Setiap jaringan memiliki karakteristik dan biaya yang berbeda.",
+    "features": "Fitur Jaringan",
+    "notSupported": "Jaringan Anda saat ini tidak didukung. Harap beralih ke jaringan yang didukung.",
+    "note": "Catatan",
+    "sepoliaNote": "Untuk pengujian cepat, DAO Sepolia diterapkan dengan periode pemungutan suara 5 menit."
+  },
+  "version": {
+    "tooltip": "Versi kontrak DAO yang akan diterapkan. Versi yang lebih baru mungkin menyertakan fitur atau peningkatan tambahan."
+  },
+  "architecture": {
+    "title": "Arsitektur DAO Anda",
+    "daoCore": "Inti DAO",
+    "daoCoreDescription": "Pusat tata kelola sentral untuk proposal, pemungutan suara, dan pelaksanaan keputusan komunitas",
+    "daoToken": "Token DAO",
+    "daoTokenDescription": "Token tata kelola ERC20 dengan mekanisme pajak yang dapat disesuaikan dan kontrol distribusi",
+    "treasury": "Perbendaharaan",
+    "treasuryDescription": "Brankas aman untuk mengelola aset DAO, dikendalikan oleh proposal tata kelola",
+    "staking": "Staking",
+    "stakingDescription": "Staking berbasis waktu dengan pengganda kekuatan suara untuk pemegang jangka panjang",
+    "upgradeableProxies": "Semua kontrak diterapkan sebagai proksi yang dapat ditingkatkan dengan implementasi terbaru"
+  },
+  "features": {
+    "governance": {
+      "title": "Tata Kelola",
+      "description": "Buat proposal dan berikan suara pada keputusan penting"
+    },
+    "treasury": {
+      "title": "Perbendaharaan",
+      "description": "Kelola dana dan alokasikan sumber daya"
+    },
+    "token": {
+      "title": "Token Tata Kelola",
+      "description": "Token ERC-20 untuk hak suara dan tata kelola"
+    },
+    "multiSig": {
+      "title": "Multi-Tanda Tangan",
+      "description": "Membutuhkan beberapa persetujuan untuk tindakan penting"
+    }
+  },
+  "wallet": {
+    "connected": "Dompet Terhubung",
+    "readyToDeploy": "Dompet Anda terhubung dan siap untuk menerapkan DAO",
+    "disconnect": "Putuskan Sambungan",
+    "address": "Alamat Dompet",
+    "copy": "Salin",
+    "balance": "Saldo",
+    "connectionRequired": "Koneksi Dompet Diperlukan",
+    "connectionMessage": "Anda perlu menghubungkan dompet Web3 untuk menerapkan DAO Anda. Ini memungkinkan Anda untuk:",
+    "signTransaction": "Tandatangani transaksi penerapan",
+    "becomeAdmin": "Menjadi admin DAO awal",
+    "receiveToken": "Terima token tata kelola Anda",
+    "connect": "Hubungkan Dompet"
+  },
+  "deploymentCost": {
+    "title": "Estimasi Biaya Penerapan",
+    "description": "Menerapkan DAO Anda akan memakan biaya sekitar:",
+    "calculating": "Menghitung...",
+    "note": "Catatan: Biaya aktual dapat bervariasi berdasarkan kondisi jaringan pada saat penerapan.",
+    "gasUnits": "≈ {{units}} unit gas"
+  },
+  "whatHappensNext": {
+    "title": "Apa yang Terjadi Selanjutnya",
+    "description": "Ketika Anda mengklik \"Lanjutkan ke Pra-Penerapan\", hal berikut akan terjadi:",
+    "checkBalance": "Kami akan memeriksa saldo dompet Anda untuk memastikan Anda memiliki cukup dana",
+    "simulateTransaction": "Kami akan mensimulasikan transaksi untuk memverifikasi keberhasilannya",
+    "confirmTransaction": "Dompet Anda akan meminta Anda untuk mengkonfirmasi transaksi",
+    "deployContracts": "Kontrak DAO akan diterapkan ke jaringan {{network}}",
+    "receiveToken": "Anda akan menerima 1 token {{symbol}} untuk mulai berpartisipasi dalam tata kelola",
+    "treasuryStorage": "Sisa {{amount}} {{symbol}} akan disimpan di perbendaharaan"
+  },
+  "preDeployment": {
+    "title": "Pemeriksaan Pra-Penerapan",
+    "description": "Kami akan menjalankan beberapa pemeriksaan untuk memastikan penerapan DAO Anda berhasil. Ini membantu mencegah transaksi gagal dan biaya gas yang terbuang.",
+    "checklist": "Daftar Periksa Penerapan",
+    "balanceCheck": {
+      "title": "Pemeriksaan Saldo Dompet",
+      "description": "Memverifikasi Anda memiliki cukup {{symbol}} untuk menerapkan"
+    },
+    "simulation": {
+      "title": "Simulasi Transaksi",
+      "description": "Mensimulasikan penerapan di {{network}} untuk memastikan keberhasilan"
+    },
+    "signing": {
+      "title": "Penandatanganan Transaksi",
+      "inProgress": "Harap tandatangani transaksi di dompet Anda...",
+      "description": "Tandatangani transaksi dengan dompet Anda untuk menerapkan DAO"
+    },
+    "confirmation": {
+      "title": "Konfirmasi Transaksi",
+      "inProgress": "Menunggu konfirmasi blockchain...",
+      "description": "Tunggu hingga transaksi dikonfirmasi di blockchain"
+    },
+    "status": {
+      "passed": "Lulus",
+      "failed": "Gagal",
+      "signed": "Ditandatangani",
+      "confirmed": "Dikonfirmasi"
+    },
+    "networkMismatch": {
+      "title": "Ketidakcocokan Jaringan",
+      "description": "Dompet Anda terhubung ke {{current}}, tetapi Anda memilih {{selected}} untuk penerapan.",
+      "switching": "Mengalihkan jaringan... Harap konfirmasi di dompet Anda.",
+      "switchFailed": "Gagal beralih secara otomatis. Harap ubah jaringan Anda secara manual di dompet Anda.",
+      "switchNeeded": "Harap alihkan jaringan Anda ke {{network}} untuk melanjutkan.",
+      "switchTo": "Beralih ke {{network}}"
+    },
+    "backToReview": "Kembali ke Tinjauan"
+  },
+  "stepIndicator": {
+    "stepCount": "Langkah {{current}} dari {{total}}",
+    "steps": {
+      "network": {
+        "label": "Jaringan",
+        "description": "Pilih jaringan blockchain"
+      },
+      "daoDetails": {
+        "label": "Detail DAO",
+        "description": "Konfigurasikan DAO dan token"
+      },
+      "review": {
+        "label": "Tinjau",
+        "description": "Verifikasi konfigurasi"
+      },
+      "preDeploy": {
+        "label": "Pra-Penerapan",
+        "description": "Jalankan pemeriksaan pra-penerapan"
+      },
+      "success": {
+        "label": "Berhasil",
+        "description": "Lihat DAO baru Anda"
+      }
+    }
+  },
+  "transaction": {
+    "waitingForSignature": "Harap tandatangani transaksi...",
+    "submitting": "Mengirim transaksi...",
+    "waitingForConfirmation": "Menunggu konfirmasi...",
+    "success": "Transaksi berhasil!",
+    "error": "Transaksi gagal",
+    "checkingBalance": "Memeriksa saldo dompet...",
+    "balanceError": "Saldo tidak mencukupi",
+    "balanceCheckError": "Gagal memeriksa saldo dompet",
+    "simulating": "Mensimulasikan transaksi...",
+    "simulationError": "Simulasi transaksi gagal",
+    "unexpectedError": "Kesalahan tak terduga",
+    "unexpectedErrorDetails": "Terjadi kesalahan tak terduga selama simulasi transaksi",
+    "viewOnExplorer": "Lihat di Explorer",
+    "insufficientBalanceDetails": "Saldo tidak mencukupi: Anda memerlukan <strong>{{amount}} {{symbol}}</strong> lagi untuk menyelesaikan transaksi ini.",
+    "tipTransactionProcessing": "Kiat: Transaksi Anda mungkin masih diproses. Periksa penjelajah untuk melihat statusnya.",
+    "tipAddMoreFunds": "Kiat: Tambahkan lebih banyak dana ke dompet Anda dan coba lagi.",
+    "tipIncreaseGasLimit": "Kiat: Coba tingkatkan batas gas di pengaturan dompet Anda.",
+    "tipIncreaseGasPrice": "Kiat: Coba tingkatkan harga gas di pengaturan dompet Anda.",
+    "tipResetWallet": "Kiat: Coba setel ulang riwayat transaksi dompet Anda atau sesuaikan nonce secara manual.",
+    "tipWalletDisconnected": "Kiat: Dompet Anda terputus. Harap hubungkan kembali dompet Anda dan coba lagi.",
+    "refreshPage": "Segarkan Halaman",
+    "tipWalletPermission": "Kiat: Dompet Anda memerlukan izin untuk berinteraksi dengan kontrak ini. Buka dompet Anda dan periksa permintaan izin.",
+    "stepsToFix": "Langkah-langkah untuk memperbaiki:",
+    "stepOpenWallet": "Buka dompet Anda (MetaMask, dll.)",
+    "stepLookForPermissions": "Cari permintaan izin yang tertunda",
+    "stepGrantPermission": "Berikan izin ke kontrak",
+    "stepTryAgain": "Coba transaksi lagi",
+    "noteRejectedTransaction": "Catatan: Anda menolak transaksi di dompet Anda. Jika ini tidak disengaja, silakan coba lagi.",
+    "retryTransaction": "Coba Ulang Transaksi",
+    "simulationErrorMessage": "Simulasi kontrak mengalami kesalahan. Ini mungkin disebabkan oleh batasan kontrak atau masalah jaringan."
+  }
+}

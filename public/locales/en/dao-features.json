@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "DAO Features & Information | CreateDAO",
+    "description": "Learn about the features and components of DAOs created with CreateDAO"
+  },
+  "header": {
+    "title": "DAO Features & Information",
+    "subtitle": "Understand the components, features, and technical details of your DAO"
+  },
+  "introduction": {
+    "title": "Introduction",
+    "description": "CreateDAO deploys a complete DAO ecosystem with four core smart contracts that work together to provide governance, token management, treasury control, and staking capabilities.",
+    "whatYouGet": {
+      "title": "What You Get",
+      "description": "When you create a DAO through CreateDAO, you receive a complete governance system with:",
+      "items": [
+        "A fully-functional <strong>DAO Core</strong> contract with proposal and voting systems",
+        "An <strong>ERC20 Governance Token</strong> with customizable tax mechanisms",
+        "A secure <strong>Treasury</strong> to manage your DAO's assets",
+        "A <strong>Staking System</strong> with time-based voting power multipliers",
+        "All contracts deployed as <strong>upgradeable proxies</strong> for future improvements"
+      ]
+    },
+    "forCreators": {
+      "title": "For DAO Creators",
+      "description": "As the creator, you'll receive:",
+      "items": [
+        "1 governance token to start participating",
+        "Ability to create initial proposals",
+        "Control over the initial deployment",
+        "Tools to bootstrap your community"
+      ]
+    },
+    "forMembers": {
+      "title": "For DAO Members",
+      "description": "Your community members will be able to:",
+      "items": [
+        "Stake tokens to gain voting power",
+        "Create and vote on proposals",
+        "Participate in presales",
+        "Help govern the DAO's treasury and future"
+      ]
+    }
+  },
+  "architecture": {
+    "title": "DAO Architecture",
+    "description": "Your DAO consists of four main contracts that work together to provide a complete governance system.",
+    "diagram": {
+      "daoCore": "DAO Core",
+      "governance": "Governance & Proposals",
+      "daoToken": "DAO Token",
+      "erc20": "ERC20 Governance Token",
+      "treasury": "Treasury",
+      "assetManagement": "Asset Management",
+      "staking": "Staking",
+      "votingPower": "Voting Power",
+      "daoFactory": "DAO Factory",
+      "note": "All contracts are deployed as upgradeable proxies with the latest implementations"
+    },
+    "upgradeableDesign": {
+      "title": "Upgradeable Design",
+      "description": "All contracts use the UUPS (Universal Upgradeable Proxy Standard) pattern, allowing for future improvements while preserving state and balances. Upgrades can only be executed through governance proposals that have passed community voting."
+    },
+    "contractInteractions": {
+      "title": "Contract Interactions",
+      "description": "The DAO Core contract is the central hub that coordinates all governance actions. It interacts with the Token, Treasury, and Staking contracts to execute proposals approved by the community."
+    }
+  },
+  "components": {
+    "title": "Core Components",
+    "description": "Each contract in your DAO ecosystem serves a specific purpose and has unique features.",
+    "daoCore": {
+      "title": "DAO Core",
+      "description": "The DAO Core contract is the central governance hub that manages proposals, voting, and execution of community decisions.",
+      "features": {
+        "title": "Key Features:",
+        "items": [
+          "<span class=\"font-medium\">Proposal System:</span> Create, vote on, and execute various types of proposals",
+          "<span class=\"font-medium\">Voting Mechanism:</span> Secure voting with stake-based voting power",
+          "<span class=\"font-medium\">Execution Logic:</span> Safe execution of approved proposals",
+          "<span class=\"font-medium\">Emergency Controls:</span> Pause/unpause functionality for security"
+        ]
+      },
+      "parameters": {
+        "title": "Governance Parameters:",
+        "votingPeriod": "Voting Period",
+        "votingPeriodValue": "3 days",
+        "minProposalStake": "Minimum Proposal Stake",
+        "minProposalStakeValue": "1 token",
+        "quorum": "Quorum",
+        "quorumValue": "50% of voting power",
+        "version": "Version",
+        "versionValue": "1.0.0"
+      },
+      "codeBlockTitle": "DAO Core Contract Initialization"
+    },
+    "daoToken": {
+      "title": "DAO Token",
+      "description": "The DAO Token is an ERC20 token that serves as the governance token for your DAO. It includes additional features beyond a standard ERC20 token.",
+      "features": {
+        "title": "Key Features:",
+        "items": [
+          "<span class=\"font-medium\">Initial Distribution:</span> 1 token to creator, rest to treasury",
+          "<span class=\"font-medium\">Tax Mechanism:</span> Configurable tax rate up to 10%",
+          "<span class=\"font-medium\">Whitelisting:</span> Addresses can be exempted from tax",
+          "<span class=\"font-medium\">Staking Integration:</span> Works with the staking contract for governance"
+        ]
+      },
+      "codeBlockTitle": "DAO Token Tax Mechanism"
+    },
+    "treasury": {
+      "title": "Treasury",
+      "description": "The Treasury contract securely holds and manages all assets owned by the DAO, including tokens and ETH.",
+      "features": {
+        "title": "Key Features:",
+        "items": [
+          "<span class=\"font-medium\">Asset Control:</span> Holds majority of tokens initially",
+          "<span class=\"font-medium\">Multi-Asset:</span> Can hold ETH and any ERC20 tokens",
+          "<span class=\"font-medium\">Governance-Controlled:</span> Only DAO can authorize transfers",
+          "<span class=\"font-medium\">Balance Tracking:</span> Methods to check current balances"
+        ]
+      },
+      "codeBlockTitle": "Treasury Transfer Functions"
+    },
+    "staking": {
+      "title": "Staking",
+      "description": "The Staking contract allows token holders to stake their tokens to gain voting power in the DAO.",
+      "features": {
+        "title": "Key Features:",
+        "items": [
+          "<span class=\"font-medium\">Time-Based Multipliers:</span> Longer staking periods increase voting power",
+          "<span class=\"font-medium\">Voting Power Calculation:</span> Stake × Time Multiplier",
+          "<span class=\"font-medium\">Flexible Staking:</span> Users can stake and unstake at any time",
+          "<span class=\"font-medium\">Configurable Parameters:</span> Multipliers and thresholds can be adjusted through governance"
+        ]
+      },
+      "multipliers": {
+        "title": "Staking Multipliers:",
+        "table": {
+          "headers": {
+            "duration": "Staking Duration",
+            "multiplier": "Multiplier",
+            "example": "Example"
+          },
+          "rows": [
+            {
+              "duration": "Less than 1 week",
+              "multiplier": "1x (base)",
+              "example": "100 tokens = 100 voting power"
+            },
+            {
+              "duration": "1 week to 1 month",
+              "multiplier": "1.25x",
+              "example": "100 tokens = 125 voting power"
+            },
+            {
+              "duration": "1 month to 3 months",
+              "multiplier": "1.5x",
+              "example": "100 tokens = 150 voting power"
+            },
+            {
+              "duration": "More than 3 months",
+              "multiplier": "2x",
+              "example": "100 tokens = 200 voting power"
+            }
+          ]
+        }
+      },
+      "codeBlockTitle": "Staking Voting Power Calculation"
+    }
+  },
+  "governance": {
+    "title": "Governance Features",
+    "description": "Your DAO includes a comprehensive governance system with various proposal types and voting mechanisms.",
+    "proposalTypes": {
+      "title": "Available Proposal Types",
+      "treasuryTransfers": {
+        "title": "Treasury Transfers",
+        "description": "Propose to transfer tokens or ETH from the treasury to any address"
+      },
+      "presaleCreation": {
+        "title": "Presale Creation",
+        "description": "Launch token presales with customizable token amount and initial price"
+      },
+      "presaleManagement": {
+        "title": "Presale Management",
+        "description": "Pause/unpause presales and withdraw funds from completed presales"
+      },
+      "contractUpgrades": {
+        "title": "Contract Upgrades",
+        "description": "Upgrade core contracts or modules to newer implementations"
+      },
+      "emergencyControls": {
+        "title": "Emergency Controls",
+        "description": "Pause/unpause the entire DAO in case of emergencies"
+      },
+      "moduleUpgrades": {
+        "title": "Module Upgrades",
+        "description": "Add or upgrade specific modules like presale or vesting contracts"
+      }
+    },
+    "votingProcess": {
+      "title": "Voting Process",
+      "steps": [
+        "<span class=\"font-medium\">Proposal Creation:</span> Any member with at least 1 staked token can create a proposal",
+        "<span class=\"font-medium\">Voting Period:</span> Members have a set time period to cast their votes",
+        "<span class=\"font-medium\">Vote Casting:</span> Members vote \"For\" or \"Against\" with their voting power",
+        "<span class=\"font-medium\">Quorum Check:</span> At least 50% of total voting power must participate",
+        "<span class=\"font-medium\">Execution:</span> If approved, the proposal can be executed to implement the changes"
+      ]
+    }
+  },
+  "deployment": {
+    "title": "Deployment Process",
+    "description": "When you create a DAO, the following steps happen automatically in a single transaction.",
+    "steps": [
+      "<span class=\"font-medium\">Token Deployment:</span> Your ERC20 governance token is deployed first",
+      "<span class=\"font-medium\">Treasury Deployment:</span> Treasury contract is deployed (uninitialized)",
+      "<span class=\"font-medium\">Staking Deployment:</span> Staking contract is deployed and linked to your token",
+      "<span class=\"font-medium\">DAO Deployment:</span> Main DAO contract is deployed and connected to all other contracts",
+      "<span class=\"font-medium\">Treasury Initialization:</span> Treasury is initialized with the DAO as owner",
+      "<span class=\"font-medium\">Token Configuration:</span> Staking contract is set in token and ownership transferred to DAO",
+      "<span class=\"font-medium\">Token Distribution:</span> Remaining tokens are transferred to treasury",
+      "<span class=\"font-medium\">Ownership Transfer:</span> DAO becomes self-governing (owns itself)"
+    ],
+    "note": {
+      "title": "Important Note",
+      "description": "After deployment, your DAO is fully autonomous and controlled by governance. The creator receives 1 token to start participating, but has no special privileges beyond that. All major decisions must go through the governance process."
+    }
+  },
+  "gettingStarted": {
+    "title": "Getting Started",
+    "description": "After creating your DAO, here are some steps to get started with governance.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Stake Your Token",
+        "description": "Stake your initial token to gain voting power. The longer you stake, the more voting power you'll have."
+      },
+      {
+        "number": "2",
+        "title": "Create a Proposal",
+        "description": "Create your first proposal to distribute tokens from the treasury or launch a presale to grow your community."
+      },
+      {
+        "number": "3",
+        "title": "Grow Your Community",
+        "description": "Invite members to join your DAO, distribute tokens through proposals, and build a decentralized community."
+      }
+    ],
+    "createButton": "Create Your DAO Now"
+  }
+}

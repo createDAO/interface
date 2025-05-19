@@ -1,0 +1,61 @@
+{
+  "terminology": {
+    "dao": "DAO",
+    "daoFull": "Tổ chức Tự trị Phi tập trung",
+    "token": "Token",
+    "governance": "Quản trị",
+    "proposal": "Đề xuất",
+    "vote": "Bỏ phiếu",
+    "treasury": "Kho bạc",
+    "member": "Thành viên",
+    "community": "Cộng đồng",
+    "blockchain": "Blockchain",
+    "smartContract": "Hợp đồng Thông minh",
+    "gas": "Gas",
+    "gasPrice": "Giá Gas",
+    "transaction": "Giao dịch",
+    "wallet": "Ví",
+    "connect": "Kết nối Ví",
+    "disconnect": "Ngắt kết nối Ví"
+  },
+  "wallets": {
+    "metamask": "MetaMask",
+    "walletConnect": "WalletConnect",
+    "coinbase": "Ví Coinbase",
+    "trustWallet": "Ví Trust",
+    "ledger": "Ledger",
+    "brave": "Ví Brave",
+    "rabby": "Ví Rabby",
+    "okx": "Ví OKX",
+    "browser": "Ví Trình duyệt"
+  },
+  "networks": {
+    "ethereum": "Ethereum",
+    "polygon": "Polygon",
+    "arbitrum": "Arbitrum",
+    "optimism": "Optimism",
+    "base": "Base",
+    "avalanche": "Avalanche",
+    "bnb": "BNB Chain",
+    "gnosis": "Gnosis Chain",
+    "celo": "Celo",
+    "mantle": "Mantle",
+    "scroll": "Scroll",
+    "blast": "Blast",
+    "unichain": "Unichain",
+    "worldchain": "Worldchain"
+  },
+  "status": {
+    "connecting": "Đang kết nối...",
+    "connected": "Đã kết nối",
+    "disconnected": "Đã ngắt kết nối",
+    "pending": "Đang chờ",
+    "confirmed": "Đã xác nhận",
+    "failed": "Thất bại",
+    "success": "Thành công",
+    "error": "Lỗi",
+    "deploymentReady": "Sẵn sàng Triển khai",
+    "deploying": "Đang triển khai...",
+    "deployed": "Đã triển khai"
+  }
+}

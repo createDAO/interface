@@ -1,8 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import Logo from './Logo';
+import { useTranslation } from 'next-i18next';
 
 const Footer: React.FC = () => {
+  const { t } = useTranslation('common');
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-gray-100 dark:bg-gray-800 py-12">
       <div className="container mx-auto px-4">
@@ -12,18 +16,18 @@ const Footer: React.FC = () => {
               <Logo />
             </div>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              The easiest way to create and deploy DAOs on multiple blockchains.
+              {t('footer.description')}
             </p>
             <div className="text-xs text-gray-500 dark:text-gray-400 mb-4">
               {process.env.NEXT_PUBLIC_APP_VERSION && (
                 <>
-                  Version: <span>{process.env.NEXT_PUBLIC_APP_VERSION}</span>
+                  {t('footer.version')}: <span>{process.env.NEXT_PUBLIC_APP_VERSION}</span>
                   {" | "}
                 </>
               )}
               {process.env.NEXT_PUBLIC_COMMIT_HASH && (
                 <>
-                  Commit:{" "}
+                  {t('footer.commit')}:{" "}
                   <a
                     href={`https://github.com/createDAO/interface/commit/${process.env.NEXT_PUBLIC_COMMIT_HASH}`}
                     target="_blank"
@@ -59,58 +63,64 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Resources</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              {t('footer.resources')}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link href="https://docs.createdao.org/" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  Documentation
+                  {t('footer.documentation')}
                 </Link>
               </li>
               <li>
                 <Link href="https://docs.createdao.org/tutorials/creating-dao" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  Tutorials
+                  {t('footer.tutorials')}
                 </Link>
               </li>
               <li>
                 <Link href="https://docs.createdao.org/contracts/dao-factory" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  Core Concepts
+                  {t('footer.coreConcepts')}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Community</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              {t('footer.community')}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <a href="https://github.com/createdao" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  GitHub
+                  {t('footer.github')}
                 </a>
               </li>
               <li>
                 <a href="https://discord.gg/HnRmtP2fph" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  Discord
+                  {t('footer.discord')}
                 </a>
               </li>
               <li>
                 <a href="https://t.me/createdao_org" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  Telegram
+                  {t('footer.telegram')}
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Legal</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              {t('footer.legal')}
+            </h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/privacy" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  Privacy Policy
+                  {t('footer.privacy')}
                 </Link>
               </li>
               <li>
                 <Link href="/terms" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  Terms of Service
+                  {t('footer.terms')}
                 </Link>
               </li>
             </ul>
@@ -119,7 +129,7 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-gray-200 dark:border-gray-700 mt-8 pt-8 text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            &copy; {new Date().getFullYear()} CreateDAO. All rights reserved.
+            {t('footer.copyright', { year: currentYear })}
           </p>
         </div>
       </div>

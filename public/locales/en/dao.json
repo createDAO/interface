@@ -1,0 +1,61 @@
+{
+  "terminology": {
+    "dao": "DAO",
+    "daoFull": "Decentralized Autonomous Organization",
+    "token": "Token",
+    "governance": "Governance",
+    "proposal": "Proposal",
+    "vote": "Vote",
+    "treasury": "Treasury",
+    "member": "Member",
+    "community": "Community",
+    "blockchain": "Blockchain",
+    "smartContract": "Smart Contract",
+    "gas": "Gas",
+    "gasPrice": "Gas Price",
+    "transaction": "Transaction",
+    "wallet": "Wallet",
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect Wallet"
+  },
+  "wallets": {
+    "metamask": "MetaMask",
+    "walletConnect": "WalletConnect",
+    "coinbase": "Coinbase Wallet",
+    "trustWallet": "Trust Wallet",
+    "ledger": "Ledger",
+    "brave": "Brave Wallet",
+    "rabby": "Rabby Wallet",
+    "okx": "OKX Wallet",
+    "browser": "Browser Wallet"
+  },
+  "networks": {
+    "ethereum": "Ethereum",
+    "polygon": "Polygon",
+    "arbitrum": "Arbitrum",
+    "optimism": "Optimism",
+    "base": "Base",
+    "avalanche": "Avalanche",
+    "bnb": "BNB Chain",
+    "gnosis": "Gnosis Chain",
+    "celo": "Celo",
+    "mantle": "Mantle",
+    "scroll": "Scroll",
+    "blast": "Blast",
+    "unichain": "Unichain",
+    "worldchain": "Worldchain"
+  },
+  "status": {
+    "connecting": "Connecting...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "failed": "Failed",
+    "success": "Success",
+    "error": "Error",
+    "deploymentReady": "Deployment Ready",
+    "deploying": "Deploying...",
+    "deployed": "Deployed"
+  }
+}

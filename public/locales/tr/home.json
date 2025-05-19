@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "title": "DAO'nuzu <highlight>Zahmetsizce</highlight> Oluşturun",
+    "description": "Merkezi olmayan otonom organizasyonunuzu yalnızca birkaç tıklamayla birden fazla blok zincirinde başlatın. Kodlama gerekmez.",
+    "gasFeeNote": "Dağıtım için yalnızca ağ gaz ücretlerini ödeyin"
+  },
+  "features": {
+    "title": "Neden CreateDAO'yu Seçmelisiniz?",
+    "subtitle": "DAO'nuzu başlatmak ve yönetmek için ihtiyacınız olan her şey",
+    "governance": {
+      "title": "Yönetişim",
+      "description": "Teklifler oluşturun, oy verin ve kararları zincir üzerinde yürütün"
+    },
+    "treasury": {
+      "title": "Hazine Yönetimi",
+      "description": "Varlıkları yönetin ve topluluk oylamasıyla fonları tahsis edin"
+    },
+    "multichain": {
+      "title": "Çoklu Zincir Desteği",
+      "description": "Birden fazla EVM uyumlu blok zincirinde dağıtın"
+    },
+    "noCode": {
+      "title": "Kodsuz Çözüm",
+      "description": "Tek bir satır kod yazmadan DAO'nuzu başlatın"
+    },
+    "customization": {
+      "title": "Özelleştirme",
+      "description": "DAO'nuzu topluluğunuzun ihtiyaçlarına göre yapılandırın"
+    },
+    "security": {
+      "title": "Güvenlik",
+      "description": "Güvenlik en iyi uygulamaları ve açık kaynak şeffaflığıyla oluşturulmuştur"
+    },
+    "openSource": {
+      "title": "Açık Kaynak",
+      "description": "DAO fabrika sözleşmemiz ve arayüzümüz GitHub'da tamamen açık kaynaklıdır."
+    },
+    "notAudited": {
+      "title": "Henüz Denetlenmemiş Güvenlik",
+      "description": "Akıllı sözleşmeler, içinizin rahat olması için önde gelen güvenlik firmaları tarafından HENÜZ DENETLENMEMİŞTİR."
+    },
+    "alwaysFree": {
+      "title": "Her Zaman Ücretsiz",
+      "description": "Gizli ücret yok. Dağıtım için yalnızca ağ gazını ödeyin."
+    },
+    "openSourceSection": {
+      "title": "Açık Kaynak Kodu",
+      "description": "Akıllı sözleşmelerimizi kontrol edin ve koda katkıda bulunun. Şeffaflığa ve topluluk odaklı geliştirmeye inanıyoruz.",
+      "button": "GitHub'da Görüntüle"
+    },
+    "subtitle2": "DAO oluşturmak için en güvenilir ve kullanıcı dostu platformu oluşturduk."
+  },
+  "howItWorks": {
+    "title": "Nasıl Çalışır?",
+    "subtitle": "DAO'nuzu yalnızca birkaç basit adımda oluşturun",
+    "steps": {
+      "step1": {
+        "title": "Ağ Seçin",
+        "description": "DAO'nuz için blok zinciri ağını seçin"
+      },
+      "step2": {
+        "title": "DAO'yu Yapılandırın",
+        "description": "DAO adınızı, token'ınızı ve yönetişim parametrelerinizi ayarlayın"
+      },
+      "step3": {
+        "title": "Gözden Geçirin ve Dağıtın",
+        "description": "Ayarlarınızı gözden geçirin ve DAO'nuzu blok zincirine dağıtın"
+      },
+      "step4": {
+        "title": "DAO'yu Yönetin",
+        "description": "Yeni DAO'nuzu yönetişim ve hazine yönetimi için kullanın"
+      }
+    }
+  },
+  "steps": {
+    "title": "Üç Basit Adım",
+    "subtitle": "Bir DAO oluşturmak hiç bu kadar kolay olmamıştı. Organizasyonunuzu başlatmak için bu basit adımları izleyin.",
+    "step1": {
+      "title": "Cüzdanı Bağla",
+      "description": "Başlamak için MetaMask veya WalletConnect kullanın."
+    },
+    "step2": {
+      "title": "DAO Ayrıntılarını Girin",
+      "description": "DAO'nuzu adlandırın ve temel yönetişim parametrelerini ayarlayın."
+    },
+    "step3": {
+      "title": "Dağıt",
+      "description": "İşlemi onaylayın ve DAO'nuz kullanıma hazır."
+    },
+    "readyToStart": "Başlamaya hazır mısınız?",
+    "createButton": "DAO'nuzu Oluşturun"
+  },
+  "networks": {
+    "title": "Desteklenen Ağlar",
+    "subtitle": "DAO'nuzu bu popüler blok zinciri ağlarından herhangi birinde oluşturun ve dağıtın.",
+    "comingSoon": "Topluluk geri bildirimlerine göre yakında daha fazla ağ eklenecektir."
+  },
+  "platforms": {
+    "title": "DAO Yönetim Platformları",
+    "subtitle": "Dağıtımdan sonra DAO'nuzu yönetmek için güçlü arayüzler.",
+    "description": "Dağıtıldıktan sonra DAO'nuzu bu platformlarla yönetin",
+    "daoCafe": {
+      "name": "DAOCafe",
+      "description": "DAO'ları yönetmek için kapsamlı bir arayüz: teklifler oluşturun, tartışın, oy verin, ön satışlar oluşturun, hazine transferleri önerin ve daha fazlası.",
+      "visitButton": "DAOCafe'yi Ziyaret Edin"
+    },
+    "addYourPlatform": {
+      "title": "Platformunuzu Ekleyin",
+      "description": "Kendi DAO yönetim arayüzünüzü geliştirin ve burada öne çıkarın. Entegrasyon ayrıntıları ve gereksinimleri için belgelerimizi kontrol edin.",
+      "readDocsButton": "Belgeleri Oku"
+    },
+    "integration": {
+      "text": "Platformunuzu burada listelemek ister misiniz?",
+      "linkText": "Nasıl entegre edileceğini öğrenin"
+    }
+  },
+  "cta": {
+    "title": "DAO'nuzu Şimdi Oluşturun",
+    "description": "Topluluklarını ve hazinelerini yönetmek için CreateDAO'yu zaten kullanan yüzlerce kuruluşa katılın.",
+    "createButton": "DAO Oluştur",
+    "learnMoreButton": "Daha Fazla Bilgi Edinin",
+    "gasFeeNote": "Dağıtım için yalnızca ağ gaz ücretlerini ödeyin"
+  }
+}

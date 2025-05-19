@@ -1,0 +1,23 @@
+{
+  "title": "常见问题",
+  "subtitle": "关于 CreateDAO 您需要了解的一切。",
+  "contactText": "还有更多问题？联系我们的社区。",
+  "questions": {
+    "isFree": {
+      "question": "真的免费吗？",
+      "answer": "是的！CreateDAO 完全免费使用。您只需在部署 DAO 时支付区块链的网络燃料费。"
+    },
+    "isSecure": {
+      "question": "代码安全吗？",
+      "answer": "我们的智能合约尚未经过审计，但计划很快由领先的安全公司进行审计。同时，代码是开源的，以确保完全透明。"
+    },
+    "supportedNetworks": {
+      "question": "支持哪些网络？",
+      "answer": "我们目前支持 {{networks}}。根据社区反馈，更多网络即将推出。"
+    },
+    "customization": {
+      "question": "我可以定制我的 DAO 吗？",
+      "answer": "目前还不行，但将来您将能够定制投票期、提案阈值和其他治理参数，以满足您社区的需求。"
+    }
+  }
+}

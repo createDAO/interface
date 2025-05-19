@@ -1,13 +1,16 @@
 import React from 'react';
 import Image from 'next/image';
 import daocafeLogo from '../../assets/daocafe.png';
+import { useTranslation } from 'next-i18next';
 
 const ManagementPlatforms: React.FC = () => {
+  const { t } = useTranslation('home');
+  
   const platforms = [
     { 
-      name: 'DAOCafe', 
+      name: t('platforms.daoCafe.name'), 
       logo: daocafeLogo, 
-      description: 'A comprehensive interface to manage DAOs: create proposals, discuss, vote, create presales, propose treasury transfers, and more.',
+      description: t('platforms.daoCafe.description'),
       url: 'https://dao.cafe'
     },
   ];
@@ -17,10 +20,10 @@ const ManagementPlatforms: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            DAO Management Platforms
+            {t('platforms.title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Powerful interfaces to manage your DAO after deployment.
+            {t('platforms.subtitle')}
           </p>
         </div>
 
@@ -55,7 +58,7 @@ const ManagementPlatforms: React.FC = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline"
                   >
-                    Visit {platform.name}
+                    {t('platforms.daoCafe.visitButton')}
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -76,19 +79,19 @@ const ManagementPlatforms: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                  Add Your Platform
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Develop your own DAO management interface and get it featured here. Check our documentation for integration details and requirements.
-                </p>
-                <a 
-                  href="https://docs.createdao.org" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline"
-                >
-                  Read Documentation
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                {t('platforms.addYourPlatform.title')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                {t('platforms.addYourPlatform.description')}
+              </p>
+              <a 
+                href="https://docs.createdao.org" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline"
+              >
+                {t('platforms.addYourPlatform.readDocsButton')}
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
@@ -100,7 +103,7 @@ const ManagementPlatforms: React.FC = () => {
 
         <div className="text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            Want to see your platform listed here? <a href="https://docs.createdao.org/integration/frontend-integration" className="text-primary-600 dark:text-primary-400 hover:underline">Learn how to integrate</a>.
+            {t('platforms.integration.text')} <a href="https://docs.createdao.org/integration/frontend-integration" className="text-primary-600 dark:text-primary-400 hover:underline">{t('platforms.integration.linkText')}</a>.
           </p>
         </div>
       </div>

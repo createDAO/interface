@@ -1,0 +1,61 @@
+{
+  "terminology": {
+    "dao": "DAO",
+    "daoFull": "Merkezi Olmayan Otonom Organizasyon",
+    "token": "Token",
+    "governance": "Yönetişim",
+    "proposal": "Teklif",
+    "vote": "Oy",
+    "treasury": "Hazine",
+    "member": "Üye",
+    "community": "Topluluk",
+    "blockchain": "Blok Zinciri",
+    "smartContract": "Akıllı Sözleşme",
+    "gas": "Gaz",
+    "gasPrice": "Gaz Fiyatı",
+    "transaction": "İşlem",
+    "wallet": "Cüzdan",
+    "connect": "Cüzdanı Bağla",
+    "disconnect": "Cüzdan Bağlantısını Kes"
+  },
+  "wallets": {
+    "metamask": "MetaMask",
+    "walletConnect": "WalletConnect",
+    "coinbase": "Coinbase Wallet",
+    "trustWallet": "Trust Wallet",
+    "ledger": "Ledger",
+    "brave": "Brave Wallet",
+    "rabby": "Rabby Wallet",
+    "okx": "OKX Wallet",
+    "browser": "Tarayıcı Cüzdanı"
+  },
+  "networks": {
+    "ethereum": "Ethereum",
+    "polygon": "Polygon",
+    "arbitrum": "Arbitrum",
+    "optimism": "Optimism",
+    "base": "Base",
+    "avalanche": "Avalanche",
+    "bnb": "BNB Chain",
+    "gnosis": "Gnosis Chain",
+    "celo": "Celo",
+    "mantle": "Mantle",
+    "scroll": "Scroll",
+    "blast": "Blast",
+    "unichain": "Unichain",
+    "worldchain": "Worldchain"
+  },
+  "status": {
+    "connecting": "Bağlanıyor...",
+    "connected": "Bağlı",
+    "disconnected": "Bağlantı Kesildi",
+    "pending": "Beklemede",
+    "confirmed": "Onaylandı",
+    "failed": "Başarısız Oldu",
+    "success": "Başarılı",
+    "error": "Hata",
+    "deploymentReady": "Dağıtıma Hazır",
+    "deploying": "Dağıtılıyor...",
+    "deployed": "Dağıtıldı"
+  }
+}

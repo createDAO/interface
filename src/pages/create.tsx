@@ -1,6 +1,9 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import { useChainId, useSwitchChain, useAccount } from 'wagmi';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
+import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
 import { useDaoDeployment } from '../hooks/useDaoDeployment';
 import { DAOFormData } from '../types/dao';
@@ -469,6 +472,18 @@ const CreateDAO: React.FC = () => {
       </div>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'en', [
+        'common',
+        'navigation',
+        'create'
+      ], nextI18NextConfig)),
+    },
+  };
 };
 
 export default CreateDAO;

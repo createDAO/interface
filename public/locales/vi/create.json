@@ -1,0 +1,298 @@
+{
+  "title": "Tạo DAO của bạn",
+  "subtitle": "Khởi chạy tổ chức tự trị phi tập trung của bạn trong vài phút",
+  "steps": {
+    "network": {
+      "title": "Chọn Mạng lưới",
+      "description": "Chọn mạng lưới blockchain cho DAO của bạn",
+      "networkLabel": "Mạng lưới",
+      "networkPlaceholder": "Chọn một mạng lưới",
+      "versionLabel": "Phiên bản",
+      "versionPlaceholder": "Chọn một phiên bản"
+    },
+    "networkTypes": {
+      "ethereumMainnet": "Ethereum Mainnet: Blockchain Ethereum chính với độ bảo mật cao nhất nhưng phí gas cao hơn",
+      "layer2Networks": "Mạng lưới Layer 2: Optimism, Arbitrum, v.v. cung cấp phí thấp hơn trong khi vẫn kế thừa tính bảo mật của Ethereum",
+      "alternativeL1s": "L1 thay thế: Các mạng lưới như Avalanche, BNB Chain cung cấp các đánh đổi khác nhau",
+      "testnets": "Testnets: Để thử nghiệm trước khi triển khai lên mainnet (sử dụng miễn phí)"
+    },
+    "details": {
+      "title": "Chi tiết DAO",
+      "description": "Định cấu hình DAO và token quản trị của bạn",
+      "daoName": {
+        "label": "Tên DAO",
+        "placeholder": "Nhập tên DAO của bạn",
+        "helper": "Tên của tổ chức tự trị phi tập trung của bạn"
+      },
+      "tokenName": {
+        "label": "Tên Token",
+        "placeholder": "Nhập tên token của bạn",
+        "helper": "Tên của token quản trị của bạn"
+      },
+      "tokenSymbol": {
+        "label": "Ký hiệu Token",
+        "placeholder": "3-5 ký tự",
+        "helper": "Một mã định danh ngắn cho token của bạn (ví dụ: BTC, ETH)"
+      },
+      "tokenSupply": {
+        "label": "Nguồn cung Token",
+        "placeholder": "Nhập tổng nguồn cung",
+        "helper": "Tổng số token sẽ được tạo"
+      }
+    },
+    "review": {
+      "title": "Xem lại",
+      "description": "Xem lại cấu hình DAO của bạn trước khi triển khai",
+      "summary": "Tóm tắt",
+      "network": "Mạng lưới",
+      "version": "Phiên bản",
+      "daoName": "Tên DAO",
+      "tokenName": "Tên Token",
+      "tokenSymbol": "Ký hiệu Token",
+      "tokenSupply": "Nguồn cung Token",
+      "estimatedGas": "Gas ước tính",
+      "deploymentCost": "Chi phí triển khai",
+      "readyToDeploy": "Sẵn sàng triển khai DAO của bạn?",
+      "reviewYourDao": "Xem lại DAO của bạn",
+      "reviewDescription": "Vui lòng xem lại cấu hình DAO của bạn trước khi triển khai. Sau khi triển khai, một số cài đặt không thể thay đổi.",
+      "daoConfigSummary": "Tóm tắt cấu hình DAO",
+      "organizationDetails": "Chi tiết Tổ chức",
+      "tokenDetails": "Chi tiết Token",
+      "latest": "Mới nhất"
+    },
+    "deployment": {
+      "title": "Triển khai",
+      "description": "Triển khai DAO của bạn lên blockchain",
+      "connecting": "Đang kết nối với ví...",
+      "preparing": "Đang chuẩn bị triển khai...",
+      "deploying": "Đang triển khai DAO...",
+      "success": "Triển khai DAO thành công!",
+      "failed": "Triển khai thất bại",
+      "tryAgain": "Thử lại",
+      "viewOnExplorer": "Xem trên Explorer",
+      "managementPlatforms": "Bây giờ bạn có thể quản lý DAO của mình bằng các nền tảng sau:",
+      "processingDeployment": "Đang xử lý triển khai",
+      "waitingForDeployment": "Vui lòng đợi trong khi DAO của bạn đang được triển khai lên blockchain...",
+      "daoCreatedSuccessfully": "Tạo DAO thành công!",
+      "daoIsLive": "DAO {{daoName}} của bạn hiện đã hoạt động trên blockchain",
+      "daoFullyFunctional": "DAO của bạn hiện đã hoạt động đầy đủ với các khả năng quản trị, quản lý token và kiểm soát kho bạc.",
+      "contractAddresses": "Địa chỉ Hợp đồng",
+      "daoCoreContract": "Hợp đồng Lõi DAO",
+      "tokenContract": "Hợp đồng Token",
+      "transactionDetails": "Chi tiết Giao dịch",
+      "transactionHash": "Mã Hash Giao dịch",
+      "viewOnBlockExplorer": "Xem trên Block Explorer",
+      "blockExplorerDescription": "Bạn có thể xem chi tiết giao dịch của mình trên trình khám phá blockchain để theo dõi trạng thái và xác minh việc triển khai.",
+      "nextSteps": "Các bước tiếp theo",
+      "registerYourDao": "Đăng ký DAO của bạn",
+      "registerDescription": "Để đề xuất hành động, bỏ phiếu hoặc quản lý tài sản, hãy kết nối DAO của bạn với giao diện quản lý.",
+      "stakeYourToken": "Stake Token của bạn",
+      "stakeDescription": "Stake token ban đầu của bạn để có được quyền biểu quyết trong hệ thống quản trị của DAO.",
+      "createProposal": "Tạo Đề xuất",
+      "proposalDescription": "Tạo đề xuất quản trị đầu tiên của bạn để phân phối token hoặc quản lý tài sản kho bạc."
+    }
+  },
+  "validation": {
+    "required": "Trường này là bắt buộc",
+    "minLength": "Phải có ít nhất {{min}} ký tự",
+    "maxLength": "Phải có tối đa {{max}} ký tự",
+    "invalidSymbol": "Ký hiệu phải là 2-5 chữ cái viết hoa",
+    "positiveNumber": "Phải là một số dương",
+    "maxSupply": "Phải nhỏ hơn hoặc bằng {{max}}"
+  },
+  "tokenDistribution": {
+    "title": "Phân phối Token",
+    "totalSupply": "Tổng cung",
+    "details": "Chi tiết Phân phối Token",
+    "creator": "Người tạo (Bạn)",
+    "initialToken": "token quản trị ban đầu",
+    "treasury": "Kho bạc",
+    "controlledByDao": "được kiểm soát bởi DAO",
+    "initialTokenForGovernance": "Token ban đầu để quản trị",
+    "controlledByDaoGovernance": "Được kiểm soát bởi quản trị DAO",
+    "howItWorks": {
+      "title": "Cách hoạt động của Phân phối Token",
+      "description": "Sau khi triển khai, bạn sẽ nhận được 1 token để bắt đầu tham gia quản trị. Số token còn lại sẽ được lưu trữ trong kho bạc và có thể được phân phối thông qua các đề xuất quản trị được cộng đồng phê duyệt."
+    }
+  },
+  "navigation": {
+    "backToNetwork": "Quay lại Mạng lưới",
+    "continueToReview": "Tiếp tục Xem lại",
+    "continueToDetails": "Tiếp tục đến Chi tiết DAO",
+    "backToDetails": "Quay lại Chi tiết DAO",
+    "continueToPreDeployment": "Tiếp tục đến Tiền triển khai",
+    "processing": "Đang xử lý..."
+  },
+  "network": {
+    "wrongNetwork": "Sai Mạng lưới",
+    "switchToSupported": "Vui lòng chuyển sang mạng lưới được hỗ trợ để tạo DAO của bạn",
+    "switchingNetwork": "Đang chuyển mạng lưới... Vui lòng xác nhận trong ví của bạn.",
+    "switchFailed": "Không thể chuyển mạng lưới. Vui lòng kiểm tra ví của bạn và thử lại.",
+    "switching": "Đang chuyển...",
+    "switchTo": "Chuyển sang {{name}}",
+    "tooltip": "Mạng lưới blockchain nơi DAO của bạn sẽ được triển khai. Mỗi mạng lưới có các đặc điểm và phí khác nhau.",
+    "features": "Tính năng Mạng lưới",
+    "notSupported": "Mạng lưới hiện tại của bạn không được hỗ trợ. Vui lòng chuyển sang mạng lưới được hỗ trợ.",
+    "note": "Lưu ý",
+    "sepoliaNote": "Để thử nghiệm nhanh, các DAO Sepolia được triển khai với thời gian bỏ phiếu là 5 phút."
+  },
+  "version": {
+    "tooltip": "Phiên bản của các hợp đồng DAO sẽ triển khai. Các phiên bản mới hơn có thể bao gồm các tính năng hoặc cải tiến bổ sung."
+  },
+  "architecture": {
+    "title": "Kiến trúc DAO của bạn",
+    "daoCore": "Lõi DAO",
+    "daoCoreDescription": "Trung tâm quản trị trung ương cho các đề xuất, bỏ phiếu và thực hiện các quyết định của cộng đồng",
+    "daoToken": "Token DAO",
+    "daoTokenDescription": "Token quản trị ERC20 với cơ chế thuế tùy chỉnh và kiểm soát phân phối",
+    "treasury": "Kho bạc",
+    "treasuryDescription": "Kho tiền an toàn để quản lý tài sản DAO, được kiểm soát bởi các đề xuất quản trị",
+    "staking": "Staking",
+    "stakingDescription": "Staking dựa trên thời gian với hệ số nhân quyền biểu quyết cho những người nắm giữ dài hạn",
+    "upgradeableProxies": "Tất cả các hợp đồng được triển khai dưới dạng proxy có thể nâng cấp với các triển khai mới nhất"
+  },
+  "features": {
+    "governance": {
+      "title": "Quản trị",
+      "description": "Tạo đề xuất và bỏ phiếu cho các quyết định quan trọng"
+    },
+    "treasury": {
+      "title": "Kho bạc",
+      "description": "Quản lý quỹ và phân bổ nguồn lực"
+    },
+    "token": {
+      "title": "Token Quản trị",
+      "description": "Token ERC-20 cho quyền biểu quyết và quản trị"
+    },
+    "multiSig": {
+      "title": "Đa chữ ký",
+      "description": "Yêu cầu nhiều phê duyệt cho các hành động quan trọng"
+    }
+  },
+  "wallet": {
+    "connected": "Ví đã kết nối",
+    "readyToDeploy": "Ví của bạn đã được kết nối và sẵn sàng triển khai DAO",
+    "disconnect": "Ngắt kết nối",
+    "address": "Địa chỉ Ví",
+    "copy": "Sao chép",
+    "balance": "Số dư",
+    "connectionRequired": "Yêu cầu Kết nối Ví",
+    "connectionMessage": "Bạn cần kết nối ví Web3 để triển khai DAO của mình. Điều này cho phép bạn:",
+    "signTransaction": "Ký giao dịch triển khai",
+    "becomeAdmin": "Trở thành quản trị viên DAO ban đầu",
+    "receiveToken": "Nhận token quản trị của bạn",
+    "connect": "Kết nối Ví"
+  },
+  "deploymentCost": {
+    "title": "Chi phí Triển khai Ước tính",
+    "description": "Việc triển khai DAO của bạn sẽ tốn khoảng:",
+    "calculating": "Đang tính toán...",
+    "note": "Lưu ý: Chi phí thực tế có thể thay đổi tùy thuộc vào điều kiện mạng tại thời điểm triển khai.",
+    "gasUnits": "≈ {{units}} đơn vị gas"
+  },
+  "whatHappensNext": {
+    "title": "Điều gì xảy ra tiếp theo",
+    "description": "Khi bạn nhấp vào \"Tiếp tục đến Tiền triển khai\", những điều sau sẽ xảy ra:",
+    "checkBalance": "Chúng tôi sẽ kiểm tra số dư ví của bạn để đảm bảo bạn có đủ tiền",
+    "simulateTransaction": "Chúng tôi sẽ mô phỏng giao dịch để xác minh nó sẽ thành công",
+    "confirmTransaction": "Ví của bạn sẽ nhắc bạn xác nhận giao dịch",
+    "deployContracts": "Các hợp đồng DAO sẽ được triển khai lên mạng lưới {{network}}",
+    "receiveToken": "Bạn sẽ nhận được 1 token {{symbol}} để bắt đầu tham gia quản trị",
+    "treasuryStorage": "{{amount}} {{symbol}} còn lại sẽ được lưu trữ trong kho bạc"
+  },
+  "preDeployment": {
+    "title": "Kiểm tra Tiền triển khai",
+    "description": "Chúng tôi sẽ chạy một vài kiểm tra để đảm bảo việc triển khai DAO của bạn sẽ thành công. Điều này giúp ngăn chặn các giao dịch thất bại và lãng phí phí gas.",
+    "checklist": "Danh sách kiểm tra Triển khai",
+    "balanceCheck": {
+      "title": "Kiểm tra Số dư Ví",
+      "description": "Xác minh bạn có đủ {{symbol}} để triển khai"
+    },
+    "simulation": {
+      "title": "Mô phỏng Giao dịch",
+      "description": "Mô phỏng việc triển khai trên {{network}} để đảm bảo thành công"
+    },
+    "signing": {
+      "title": "Ký Giao dịch",
+      "inProgress": "Vui lòng ký giao dịch trong ví của bạn...",
+      "description": "Ký giao dịch bằng ví của bạn để triển khai DAO"
+    },
+    "confirmation": {
+      "title": "Xác nhận Giao dịch",
+      "inProgress": "Đang chờ xác nhận blockchain...",
+      "description": "Chờ giao dịch được xác nhận trên blockchain"
+    },
+    "status": {
+      "passed": "Đã qua",
+      "failed": "Thất bại",
+      "signed": "Đã ký",
+      "confirmed": "Đã xác nhận"
+    },
+    "networkMismatch": {
+      "title": "Không khớp Mạng lưới",
+      "description": "Ví của bạn được kết nối với {{current}}, nhưng bạn đã chọn {{selected}} để triển khai.",
+      "switching": "Đang chuyển mạng lưới... Vui lòng xác nhận trong ví của bạn.",
+      "switchFailed": "Không thể tự động chuyển. Vui lòng thay đổi mạng lưới của bạn theo cách thủ công trong ví.",
+      "switchNeeded": "Vui lòng chuyển mạng lưới của bạn sang {{network}} để tiếp tục.",
+      "switchTo": "Chuyển sang {{network}}"
+    },
+    "backToReview": "Quay lại Xem lại"
+  },
+  "stepIndicator": {
+    "stepCount": "Bước {{current}} của {{total}}",
+    "steps": {
+      "network": {
+        "label": "Mạng lưới",
+        "description": "Chọn mạng lưới blockchain"
+      },
+      "daoDetails": {
+        "label": "Chi tiết DAO",
+        "description": "Định cấu hình DAO và token"
+      },
+      "review": {
+        "label": "Xem lại",
+        "description": "Xác minh cấu hình"
+      },
+      "preDeploy": {
+        "label": "Tiền triển khai",
+        "description": "Chạy kiểm tra tiền triển khai"
+      },
+      "success": {
+        "label": "Thành công",
+        "description": "Xem DAO mới của bạn"
+      }
+    }
+  },
+  "transaction": {
+    "waitingForSignature": "Vui lòng ký giao dịch...",
+    "submitting": "Đang gửi giao dịch...",
+    "waitingForConfirmation": "Đang chờ xác nhận...",
+    "success": "Giao dịch thành công!",
+    "error": "Giao dịch thất bại",
+    "checkingBalance": "Đang kiểm tra số dư ví...",
+    "balanceError": "Không đủ số dư",
+    "balanceCheckError": "Không thể kiểm tra số dư ví",
+    "simulating": "Đang mô phỏng giao dịch...",
+    "simulationError": "Mô phỏng giao dịch thất bại",
+    "unexpectedError": "Lỗi không mong muốn",
+    "unexpectedErrorDetails": "Đã xảy ra lỗi không mong muốn trong quá trình mô phỏng giao dịch",
+    "viewOnExplorer": "Xem trên Explorer",
+    "insufficientBalanceDetails": "Không đủ số dư: Bạn cần thêm <strong>{{amount}} {{symbol}}</strong> để hoàn tất giao dịch này.",
+    "tipTransactionProcessing": "Mẹo: Giao dịch của bạn có thể vẫn đang được xử lý. Kiểm tra trình khám phá để xem trạng thái của nó.",
+    "tipAddMoreFunds": "Mẹo: Thêm tiền vào ví của bạn và thử lại.",
+    "tipIncreaseGasLimit": "Mẹo: Thử tăng giới hạn gas trong cài đặt ví của bạn.",
+    "tipIncreaseGasPrice": "Mẹo: Thử tăng giá gas trong cài đặt ví của bạn.",
+    "tipResetWallet": "Mẹo: Thử đặt lại lịch sử giao dịch của ví hoặc điều chỉnh nonce theo cách thủ công.",
+    "tipWalletDisconnected": "Mẹo: Ví của bạn đã bị ngắt kết nối. Vui lòng kết nối lại ví của bạn và thử lại.",
+    "refreshPage": "Làm mới Trang",
+    "tipWalletPermission": "Mẹo: Ví của bạn cần quyền tương tác với hợp đồng này. Mở ví của bạn và kiểm tra các yêu cầu cấp phép.",
+    "stepsToFix": "Các bước để khắc phục:",
+    "stepOpenWallet": "Mở ví của bạn (MetaMask, v.v.)",
+    "stepLookForPermissions": "Tìm kiếm các yêu cầu cấp phép đang chờ xử lý",
+    "stepGrantPermission": "Cấp quyền cho hợp đồng",
+    "stepTryAgain": "Thử lại giao dịch",
+    "noteRejectedTransaction": "Lưu ý: Bạn đã từ chối giao dịch trong ví của mình. Nếu điều này là vô ý, vui lòng thử lại.",
+    "retryTransaction": "Thử lại Giao dịch",
+    "simulationErrorMessage": "Mô phỏng hợp đồng đã gặp lỗi. Điều này có thể do các hạn chế của hợp đồng hoặc sự cố mạng."
+  }
+}

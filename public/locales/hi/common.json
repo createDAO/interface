@@ -1,0 +1,39 @@
+{
+  "buttons": {
+    "create": "DAO बनाएं",
+    "learnMore": "अधिक जानें",
+    "connect": "कनेक्ट करें",
+    "deploy": "डिप्लॉय करें",
+    "review": "समीक्षा करें",
+    "back": "वापस",
+    "next": "अगला",
+    "submit": "सबमिट करें",
+    "cancel": "रद्द करें"
+  },
+  "labels": {
+    "name": "नाम",
+    "token": "टोकन",
+    "symbol": "प्रतीक",
+    "supply": "आपूर्ति",
+    "network": "नेटवर्क",
+    "version": "संस्करण",
+    "gas": "गैस",
+    "deploymentReady": "डिप्लॉयमेंट के लिए तैयार"
+  },
+  "metadata": {
+    "title": "CreateDAO - अपना DAO आसानी से बनाएं",
+    "description": "कुछ ही क्लिक में कई ब्लॉकचेन पर अपना विकेंद्रीकृत स्वायत्त संगठन लॉन्च करें। कोडिंग की आवश्यकता नहीं है।"
+  },
+  "footer": {
+    "contact": "हमारे समुदाय से संपर्क करें",
+    "copyright": "© {{year}} CreateDAO. सर्वाधिकार सुरक्षित।",
+    "terms": "सेवा की शर्तें",
+    "privacy": "गोपनीयता नीति"
+  },
+  "errors": {
+    "general": "एक त्रुटि हुई है",
+    "tryAgain": "कृपया पुनः प्रयास करें"
+  },
+  "languageName": "हिन्दी",
+  "languageSelector": "भाषा चुनें"
+}

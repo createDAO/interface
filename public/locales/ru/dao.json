@@ -1,0 +1,61 @@
+{
+  "terminology": {
+    "dao": "DAO",
+    "daoFull": "Децентрализованная Автономная Организация",
+    "token": "Токен",
+    "governance": "Управление",
+    "proposal": "Предложение",
+    "vote": "Голосование",
+    "treasury": "Казна",
+    "member": "Участник",
+    "community": "Сообщество",
+    "blockchain": "Блокчейн",
+    "smartContract": "Смарт-контракт",
+    "gas": "Газ",
+    "gasPrice": "Цена газа",
+    "transaction": "Транзакция",
+    "wallet": "Кошелек",
+    "connect": "Подключить кошелек",
+    "disconnect": "Отключить кошелек"
+  },
+  "wallets": {
+    "metamask": "MetaMask",
+    "walletConnect": "WalletConnect",
+    "coinbase": "Coinbase Wallet",
+    "trustWallet": "Trust Wallet",
+    "ledger": "Ledger",
+    "brave": "Brave Wallet",
+    "rabby": "Rabby Wallet",
+    "okx": "OKX Wallet",
+    "browser": "Браузерный кошелек"
+  },
+  "networks": {
+    "ethereum": "Ethereum",
+    "polygon": "Polygon",
+    "arbitrum": "Arbitrum",
+    "optimism": "Optimism",
+    "base": "Base",
+    "avalanche": "Avalanche",
+    "bnb": "BNB Chain",
+    "gnosis": "Gnosis Chain",
+    "celo": "Celo",
+    "mantle": "Mantle",
+    "scroll": "Scroll",
+    "blast": "Blast",
+    "unichain": "Unichain",
+    "worldchain": "Worldchain"
+  },
+  "status": {
+    "connecting": "Подключение...",
+    "connected": "Подключено",
+    "disconnected": "Отключено",
+    "pending": "В ожидании",
+    "confirmed": "Подтверждено",
+    "failed": "Ошибка",
+    "success": "Успешно",
+    "error": "Ошибка",
+    "deploymentReady": "Готово к развертыванию",
+    "deploying": "Развертывание...",
+    "deployed": "Развернуто"
+  }
+}

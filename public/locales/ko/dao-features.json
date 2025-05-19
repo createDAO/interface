@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "DAO 기능 및 정보 | CreateDAO",
+    "description": "CreateDAO로 생성된 DAO의 기능 및 구성 요소에 대해 알아보세요"
+  },
+  "header": {
+    "title": "DAO 기능 및 정보",
+    "subtitle": "DAO의 구성 요소, 기능 및 기술적 세부 정보를 이해하세요"
+  },
+  "introduction": {
+    "title": "소개",
+    "description": "CreateDAO는 거버넌스, 토큰 관리, 재무 통제 및 스테이킹 기능을 제공하기 위해 함께 작동하는 네 가지 핵심 스마트 계약으로 완전한 DAO 생태계를 배포합니다.",
+    "whatYouGet": {
+      "title": "제공되는 것",
+      "description": "CreateDAO를 통해 DAO를 생성하면 다음과 같은 완전한 거버넌스 시스템을 받게 됩니다:",
+      "items": [
+        "제안 및 투표 시스템을 갖춘 완전 기능의 <strong>DAO 핵심</strong> 계약",
+        "사용자 정의 가능한 세금 메커니즘을 갖춘 <strong>ERC20 거버넌스 토큰</strong>",
+        "DAO 자산을 관리하기 위한 안전한 <strong>재무</strong>",
+        "시간 기반 투표력 승수를 갖춘 <strong>스테이킹 시스템</strong>",
+        "향후 개선을 위해 <strong>업그레이드 가능한 프록시</strong>로 배포된 모든 계약"
+      ]
+    },
+    "forCreators": {
+      "title": "DAO 생성자용",
+      "description": "생성자로서 다음을 받게 됩니다:",
+      "items": [
+        "참여를 시작하기 위한 거버넌스 토큰 1개",
+        "초기 제안 생성 기능",
+        "초기 배포에 대한 통제권",
+        "커뮤니티 부트스트랩을 위한 도구"
+      ]
+    },
+    "forMembers": {
+      "title": "DAO 회원용",
+      "description": "커뮤니티 회원은 다음을 수행할 수 있습니다:",
+      "items": [
+        "투표권을 얻기 위해 토큰 스테이킹",
+        "제안 생성 및 투표",
+        "프리세일 참여",
+        "DAO의 재무 및 미래 관리 지원"
+      ]
+    }
+  },
+  "architecture": {
+    "title": "DAO 아키텍처",
+    "description": "DAO는 완전한 거버넌스 시스템을 제공하기 위해 함께 작동하는 네 가지 주요 계약으로 구성됩니다.",
+    "diagram": {
+      "daoCore": "DAO 핵심",
+      "governance": "거버넌스 및 제안",
+      "daoToken": "DAO 토큰",
+      "erc20": "ERC20 거버넌스 토큰",
+      "treasury": "재무",
+      "assetManagement": "자산 관리",
+      "staking": "스테이킹",
+      "votingPower": "투표력",
+      "daoFactory": "DAO 팩토리",
+      "note": "모든 계약은 최신 구현으로 업그레이드 가능한 프록시로 배포됩니다."
+    },
+    "upgradeableDesign": {
+      "title": "업그레이드 가능한 설계",
+      "description": "모든 계약은 UUPS(Universal Upgradeable Proxy Standard) 패턴을 사용하여 상태와 잔액을 보존하면서 향후 개선을 허용합니다. 업그레이드는 커뮤니티 투표를 통과한 거버넌스 제안을 통해서만 실행할 수 있습니다."
+    },
+    "contractInteractions": {
+      "title": "계약 상호 작용",
+      "description": "DAO 핵심 계약은 모든 거버넌스 조치를 조정하는 중앙 허브입니다. 커뮤니티에서 승인한 제안을 실행하기 위해 토큰, 재무 및 스테이킹 계약과 상호 작용합니다."
+    }
+  },
+  "components": {
+    "title": "핵심 구성 요소",
+    "description": "DAO 생태계의 각 계약은 특정 목적을 수행하며 고유한 기능을 가지고 있습니다.",
+    "daoCore": {
+      "title": "DAO 핵심",
+      "description": "DAO 핵심 계약은 제안, 투표 및 커뮤니티 결정 실행을 관리하는 중앙 거버넌스 허브입니다.",
+      "features": {
+        "title": "주요 기능:",
+        "items": [
+          "<span class=\"font-medium\">제안 시스템:</span> 다양한 유형의 제안 생성, 투표 및 실행",
+          "<span class=\"font-medium\">투표 메커니즘:</span> 스테이크 기반 투표력을 통한 안전한 투표",
+          "<span class=\"font-medium\">실행 논리:</span> 승인된 제안의 안전한 실행",
+          "<span class=\"font-medium\">긴급 통제:</span> 보안을 위한 일시 중지/해제 기능"
+        ]
+      },
+      "parameters": {
+        "title": "거버넌스 매개변수:",
+        "votingPeriod": "투표 기간",
+        "votingPeriodValue": "3일",
+        "minProposalStake": "최소 제안 스테이크",
+        "minProposalStakeValue": "토큰 1개",
+        "quorum": "정족수",
+        "quorumValue": "투표력의 50%",
+        "version": "버전",
+        "versionValue": "1.0.0"
+      },
+      "codeBlockTitle": "DAO 핵심 계약 초기화"
+    },
+    "daoToken": {
+      "title": "DAO 토큰",
+      "description": "DAO 토큰은 DAO의 거버넌스 토큰 역할을 하는 ERC20 토큰입니다. 표준 ERC20 토큰 이상의 추가 기능을 포함합니다.",
+      "features": {
+        "title": "주요 기능:",
+        "items": [
+          "<span class=\"font-medium\">초기 배포:</span> 생성자에게 토큰 1개, 나머지는 재무부로",
+          "<span class=\"font-medium\">세금 메커니즘:</span> 최대 10%까지 구성 가능한 세율",
+          "<span class=\"font-medium\">화이트리스트:</span> 주소는 세금에서 면제될 수 있습니다.",
+          "<span class=\"font-medium\">스테이킹 통합:</span> 거버넌스를 위해 스테이킹 계약과 함께 작동합니다."
+        ]
+      },
+      "codeBlockTitle": "DAO 토큰 세금 메커니즘"
+    },
+    "treasury": {
+      "title": "재무",
+      "description": "재무 계약은 토큰 및 ETH를 포함하여 DAO가 소유한 모든 자산을 안전하게 보관하고 관리합니다.",
+      "features": {
+        "title": "주요 기능:",
+        "items": [
+          "<span class=\"font-medium\">자산 통제:</span> 초기에 대부분의 토큰 보유",
+          "<span class=\"font-medium\">다중 자산:</span> ETH 및 모든 ERC20 토큰 보유 가능",
+          "<span class=\"font-medium\">거버넌스 통제:</span> DAO만 이체를 승인할 수 있습니다.",
+          "<span class=\"font-medium\">잔액 추적:</span> 현재 잔액을 확인하는 방법"
+        ]
+      },
+      "codeBlockTitle": "재무 이체 기능"
+    },
+    "staking": {
+      "title": "스테이킹",
+      "description": "스테이킹 계약을 통해 토큰 보유자는 DAO에서 투표권을 얻기 위해 토큰을 스테이킹할 수 있습니다.",
+      "features": {
+        "title": "주요 기능:",
+        "items": [
+          "<span class=\"font-medium\">시간 기반 승수:</span> 스테이킹 기간이 길수록 투표력이 증가합니다.",
+          "<span class=\"font-medium\">투표력 계산:</span> 스테이크 × 시간 승수",
+          "<span class=\"font-medium\">유연한 스테이킹:</span> 사용자는 언제든지 스테이킹 및 언스테이킹할 수 있습니다.",
+          "<span class=\"font-medium\">구성 가능한 매개변수:</span> 승수 및 임계값은 거버넌스를 통해 조정할 수 있습니다."
+        ]
+      },
+      "multipliers": {
+        "title": "스테이킹 승수:",
+        "table": {
+          "headers": {
+            "duration": "스테이킹 기간",
+            "multiplier": "승수",
+            "example": "예시"
+          },
+          "rows": [
+            {
+              "duration": "1주 미만",
+              "multiplier": "1x (기본)",
+              "example": "토큰 100개 = 투표력 100"
+            },
+            {
+              "duration": "1주 ~ 1개월",
+              "multiplier": "1.25x",
+              "example": "토큰 100개 = 투표력 125"
+            },
+            {
+              "duration": "1개월 ~ 3개월",
+              "multiplier": "1.5x",
+              "example": "토큰 100개 = 투표력 150"
+            },
+            {
+              "duration": "3개월 이상",
+              "multiplier": "2x",
+              "example": "토큰 100개 = 투표력 200"
+            }
+          ]
+        }
+      },
+      "codeBlockTitle": "스테이킹 투표력 계산"
+    }
+  },
+  "governance": {
+    "title": "거버넌스 기능",
+    "description": "DAO에는 다양한 제안 유형과 투표 메커니즘을 갖춘 포괄적인 거버넌스 시스템이 포함되어 있습니다.",
+    "proposalTypes": {
+      "title": "사용 가능한 제안 유형",
+      "treasuryTransfers": {
+        "title": "재무 이체",
+        "description": "재무부에서 모든 주소로 토큰 또는 ETH를 이체하도록 제안"
+      },
+      "presaleCreation": {
+        "title": "프리세일 생성",
+        "description": "사용자 정의 가능한 토큰 금액 및 초기 가격으로 토큰 프리세일 시작"
+      },
+      "presaleManagement": {
+        "title": "프리세일 관리",
+        "description": "프리세일 일시 중지/해제 및 완료된 프리세일에서 자금 인출"
+      },
+      "contractUpgrades": {
+        "title": "계약 업그레이드",
+        "description": "핵심 계약 또는 모듈을 최신 구현으로 업그레이드"
+      },
+      "emergencyControls": {
+        "title": "긴급 통제",
+        "description": "긴급 상황 발생 시 전체 DAO 일시 중지/해제"
+      },
+      "moduleUpgrades": {
+        "title": "모듈 업그레이드",
+        "description": "프리세일 또는 베스팅 계약과 같은 특정 모듈 추가 또는 업그레이드"
+      }
+    },
+    "votingProcess": {
+      "title": "투표 절차",
+      "steps": [
+        "<span class=\"font-medium\">제안 생성:</span> 스테이킹된 토큰이 1개 이상 있는 모든 회원이 제안을 생성할 수 있습니다.",
+        "<span class=\"font-medium\">투표 기간:</span> 회원은 정해진 기간 동안 투표할 수 있습니다.",
+        "<span class=\"font-medium\">투표 행사:</span> 회원은 투표력으로 \"찬성\" 또는 \"반대\" 투표를 합니다.",
+        "<span class=\"font-medium\">정족수 확인:</span> 총 투표력의 최소 50%가 참여해야 합니다.",
+        "<span class=\"font-medium\">실행:</span> 승인되면 제안을 실행하여 변경 사항을 구현할 수 있습니다."
+      ]
+    }
+  },
+  "deployment": {
+    "title": "배포 절차",
+    "description": "DAO를 생성하면 다음 단계가 단일 트랜잭션에서 자동으로 발생합니다.",
+    "steps": [
+      "<span class=\"font-medium\">토큰 배포:</span> ERC20 거버넌스 토큰이 먼저 배포됩니다.",
+      "<span class=\"font-medium\">재무 배포:</span> 재무 계약이 배포됩니다 (초기화되지 않음).",
+      "<span class=\"font-medium\">스테이킹 배포:</span> 스테이킹 계약이 배포되고 토큰에 연결됩니다.",
+      "<span class=\"font-medium\">DAO 배포:</span> 주요 DAO 계약이 배포되고 다른 모든 계약에 연결됩니다.",
+      "<span class=\"font-medium\">재무 초기화:</span> 재무는 DAO를 소유자로 하여 초기화됩니다.",
+      "<span class=\"font-medium\">토큰 구성:</span> 스테이킹 계약이 토큰에 설정되고 소유권이 DAO로 이전됩니다.",
+      "<span class=\"font-medium\">토큰 배포:</span> 나머지 토큰이 재무부로 이전됩니다.",
+      "<span class=\"font-medium\">소유권 이전:</span> DAO는 자치적이 됩니다 (자신을 소유함)."
+    ],
+    "note": {
+      "title": "중요 참고 사항",
+      "description": "배포 후 DAO는 완전히 자율적이며 거버넌스에 의해 통제됩니다. 생성자는 참여를 시작하기 위해 토큰 1개를 받지만 그 외에는 특별한 권한이 없습니다. 모든 주요 결정은 거버넌스 절차를 거쳐야 합니다."
+    }
+  },
+  "gettingStarted": {
+    "title": "시작하기",
+    "description": "DAO를 생성한 후 거버넌스를 시작하기 위한 몇 가지 단계입니다.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "토큰 스테이킹",
+        "description": "초기 토큰을 스테이킹하여 투표력을 얻으십시오. 스테이킹 기간이 길수록 더 많은 투표력을 갖게 됩니다."
+      },
+      {
+        "number": "2",
+        "title": "제안 생성",
+        "description": "재무부에서 토큰을 배포하거나 커뮤니티를 성장시키기 위해 프리세일을 시작하는 첫 번째 제안을 만드십시오."
+      },
+      {
+        "number": "3",
+        "title": "커뮤니티 성장",
+        "description": "회원을 DAO에 초대하고, 제안을 통해 토큰을 배포하고, 탈중앙화 커뮤니티를 구축하십시오."
+      }
+    ],
+    "createButton": "지금 DAO 생성하기"
+  }
+}

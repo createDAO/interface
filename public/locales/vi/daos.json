@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "title": "Các DAO đã triển khai | CreateDAO",
+    "description": "Xem tất cả các DAO đã được triển khai thông qua CreateDAO"
+  },
+  "header": {
+    "title": "Các DAO đã triển khai",
+    "subtitle": "Duyệt tất cả các DAO đã được triển khai thông qua nền tảng CreateDAO"
+  },
+  "filters": {
+    "network": {
+      "label": "Lọc theo Mạng lưới",
+      "all": "Tất cả Mạng lưới",
+      "comingSoon": "(Sắp có)"
+    }
+  },
+  "table": {
+    "headers": {
+      "name": "Tên DAO",
+      "network": "Mạng lưới",
+      "token": "Token",
+      "address": "Địa chỉ DAO",
+      "created": "Đã tạo",
+      "actions": "Hành động"
+    },
+    "content": {
+      "version": "Phiên bản",
+      "creator": "Người tạo"
+    }
+  },
+  "actions": {
+    "viewExplorer": "Xem trên Explorer",
+    "createDao": "Tạo một DAO"
+  },
+  "status": {
+    "loading": "Đang tải các DAO...",
+    "noResults": {
+      "title": "Không tìm thấy DAO nào",
+      "allNetworks": "Chưa có DAO nào được triển khai.",
+      "specificNetwork": "Chưa có DAO nào được triển khai trên {{network}}."
+    }
+  },
+  "pagination": {
+    "previous": "Trước",
+    "next": "Tiếp theo",
+    "showing": "Đang hiển thị",
+    "to": "đến",
+    "of": "của",
+    "results": "kết quả"
+  },
+  "dates": {
+    "unknown": "Không xác định",
+    "invalid": "Ngày không hợp lệ"
+  },
+  "errors": {
+    "loadFailed": "Không thể tải các DAO"
+  }
+}

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 interface NavigationProps {
   isMobile?: boolean;
@@ -8,7 +9,14 @@ interface NavigationProps {
 
 const Navigation: React.FC<NavigationProps> = ({ isMobile = false }) => {
   const router = useRouter();
+  const { t } = useTranslation('navigation');
   const isHomePage = router.pathname === '/';
+  const [mounted, setMounted] = useState(false);
+
+  // Ensure hydration completes before rendering translated content
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Function to check if a path is active
   const isActive = (path: string) => router.pathname === path;
@@ -27,23 +35,43 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false }) => {
     return `${getLinkClasses(path)} py-2`;
   };
 
+  // If not mounted yet, render empty placeholders to avoid hydration mismatch
+  if (!mounted) {
+    return (
+      <>
+        {isHomePage ? (
+          <>
+            <span className={isMobile ? getMobileLinkClasses('#features') : getLinkClasses('#features')}></span>
+            <span className={isMobile ? getMobileLinkClasses('#how-it-works') : getLinkClasses('#how-it-works')}></span>
+            <span className={isMobile ? getMobileLinkClasses('#networks') : getLinkClasses('#networks')}></span>
+          </>
+        ) : (
+          <span className={isMobile ? getMobileLinkClasses('/') : getLinkClasses('/')}></span>
+        )}
+        <span className={isMobile ? getMobileLinkClasses('/daos') : getLinkClasses('/daos')}></span>
+        <span className={isMobile ? getMobileLinkClasses('/create') : getLinkClasses('/create')}></span>
+        <span className={isMobile ? getMobileLinkClasses('/dao-features') : getLinkClasses('/dao-features')}></span>
+      </>
+    );
+  }
+
   return (
     <>
       {isHomePage ? (
         <>
           <Link href="#features" className={isMobile ? getMobileLinkClasses('#features') : getLinkClasses('#features')}>
-            Features
+            {t('features')}
           </Link>
           <Link href="#how-it-works" className={isMobile ? getMobileLinkClasses('#how-it-works') : getLinkClasses('#how-it-works')}>
-            How It Works
+            {t('howItWorks')}
           </Link>
           <Link href="#networks" className={isMobile ? getMobileLinkClasses('#networks') : getLinkClasses('#networks')}>
-            Networks
+            {t('networks')}
           </Link>
         </>
       ) : (
         <Link href="/" className={isMobile ? getMobileLinkClasses('/') : getLinkClasses('/')}>
-          Home
+          {t('home')}
         </Link>
       )}
       <Link 
@@ -51,21 +79,21 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false }) => {
         prefetch={true}
         className={isMobile ? getMobileLinkClasses('/daos') : getLinkClasses('/daos')}
       >
-        Deployed DAOs
+        {t('deployedDAOs')}
       </Link>
       <Link 
         href="/create" 
         prefetch={true}
         className={isMobile ? getMobileLinkClasses('/create') : getLinkClasses('/create')}
       >
-        Create DAO
+        {t('createDAO')}
       </Link>
       <Link 
         href="/dao-features" 
         prefetch={true}
         className={isMobile ? getMobileLinkClasses('/dao-features') : getLinkClasses('/dao-features')}
       >
-        DAO Features
+        {t('daoFeatures')}
       </Link>
     </>
   );

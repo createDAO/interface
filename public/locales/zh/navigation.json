@@ -1,0 +1,18 @@
+{
+  "home": "首页",
+  "features": "功能",
+  "howItWorks": "工作原理",
+  "networks": "网络",
+  "deployedDAOs": "已部署的 DAO",
+  "createDAO": "创建 DAO",
+  "daoFeatures": "DAO 功能",
+  "menu": {
+    "open": "打开菜单",
+    "close": "关闭菜单"
+  },
+  "theme": {
+    "toggle": "切换主题",
+    "light": "浅色模式",
+    "dark": "深色模式"
+  }
+}

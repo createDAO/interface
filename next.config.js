@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
+const { i18n } = require('./next-i18next.config');
+
 const nextConfig = {
+  i18n,
   // Only enable React Strict Mode in development
   reactStrictMode: process.env.NODE_ENV === 'development',
   output: "standalone", // Optimized for Docker deployments

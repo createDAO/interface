@@ -1,0 +1,18 @@
+{
+  "home": "홈",
+  "features": "기능",
+  "howItWorks": "작동 방식",
+  "networks": "네트워크",
+  "deployedDAOs": "배포된 DAO",
+  "createDAO": "DAO 생성",
+  "daoFeatures": "DAO 기능",
+  "menu": {
+    "open": "메뉴 열기",
+    "close": "메뉴 닫기"
+  },
+  "theme": {
+    "toggle": "테마 전환",
+    "light": "라이트 모드",
+    "dark": "다크 모드"
+  }
+}

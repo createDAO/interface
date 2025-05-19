@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 import { TransactionState } from '../../types/transaction';
 import { getExplorerUrl } from '../../config/networks';
 
@@ -25,16 +26,18 @@ export function TransactionStatus({
   messages = {},
   className = ''
 }: TransactionStatusProps) {
+  const { t } = useTranslation('create');
+  
   const defaultMessages = {
-    waitingForSignature: 'Please sign the transaction...',
-    submitting: 'Submitting transaction...',
-    waitingForConfirmation: 'Waiting for confirmation...',
-    success: 'Transaction successful!',
-    error: 'Transaction failed',
-    checkingBalance: 'Checking wallet balance...',
-    balanceError: 'Insufficient balance',
-    simulating: 'Simulating transaction...',
-    simulationError: 'Transaction simulation failed',
+    waitingForSignature: t('transaction.waitingForSignature'),
+    submitting: t('transaction.submitting'),
+    waitingForConfirmation: t('transaction.waitingForConfirmation'),
+    success: t('transaction.success'),
+    error: t('transaction.error'),
+    checkingBalance: t('transaction.checkingBalance'),
+    balanceError: t('transaction.balanceError'),
+    simulating: t('transaction.simulating'),
+    simulationError: t('transaction.simulationError'),
     ...messages
   };
 
@@ -79,9 +82,12 @@ export function TransactionStatus({
 
           <div className="bg-red-100 dark:bg-red-900/30 rounded-md p-3 mt-2">
             <p className="text-red-600 dark:text-red-400 text-sm">
-              <strong>Insufficient balance:</strong> You need <strong>{(
-                (Number(state.balanceCheckResult.required) - Number(state.balanceCheckResult.balance)) / 1e18
-              ).toFixed(6)} {state.balanceCheckResult.symbol}</strong> more to complete this transaction.
+              <div dangerouslySetInnerHTML={{
+                __html: t('transaction.insufficientBalanceDetails', {
+                  amount: ((Number(state.balanceCheckResult.required) - Number(state.balanceCheckResult.balance)) / 1e18).toFixed(6),
+                  symbol: state.balanceCheckResult.symbol
+                })
+              }} />
             </p>
           </div>
 
@@ -174,7 +180,7 @@ export function TransactionStatus({
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-              View on Explorer
+              {t('transaction.viewOnExplorer')}
             </a>
           )}
         </div>
@@ -200,7 +206,7 @@ export function TransactionStatus({
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-              View on Explorer
+              {t('transaction.viewOnExplorer')}
             </a>
           )}
         </div>
@@ -227,7 +233,7 @@ export function TransactionStatus({
           {state.error?.name === 'TransactionTimeoutError' && (
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
               <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                <strong>Tip:</strong> Your transaction might still be processing. Check the explorer to see its status.
+                <strong>Tip:</strong> {t('transaction.tipTransactionProcessing')}
               </p>
             </div>
           )}
@@ -235,7 +241,7 @@ export function TransactionStatus({
           {state.error?.name === 'InsufficientFundsError' && (
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
               <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                <strong>Tip:</strong> Add more funds to your wallet and try again.
+                <strong>Tip:</strong> {t('transaction.tipAddMoreFunds')}
               </p>
             </div>
           )}
@@ -243,7 +249,7 @@ export function TransactionStatus({
           {state.error?.name === 'GasLimitExceededError' && (
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
               <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                <strong>Tip:</strong> Try increasing the gas limit in your wallet settings.
+                <strong>Tip:</strong> {t('transaction.tipIncreaseGasLimit')}
               </p>
             </div>
           )}
@@ -251,7 +257,7 @@ export function TransactionStatus({
           {state.error?.name === 'TransactionUnderpricedError' && (
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
               <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                <strong>Tip:</strong> Try increasing the gas price in your wallet settings.
+                <strong>Tip:</strong> {t('transaction.tipIncreaseGasPrice')}
               </p>
             </div>
           )}
@@ -259,7 +265,7 @@ export function TransactionStatus({
           {state.error?.name === 'NonceError' && (
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
               <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                <strong>Tip:</strong> Try resetting your wallet&#39;s transaction history or adjusting the nonce manually.
+                <strong>Tip:</strong> {t('transaction.tipResetWallet')}
               </p>
             </div>
           )}
@@ -268,7 +274,7 @@ export function TransactionStatus({
           {state.error?.name === 'ConnectorNotConnectedError' && (
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
               <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                <strong>Tip:</strong> Your wallet is disconnected. Please reconnect your wallet and try again.
+                <strong>Tip:</strong> {t('transaction.tipWalletDisconnected')}
               </p>
               <button
                 onClick={() => window.location.reload()}
@@ -277,7 +283,7 @@ export function TransactionStatus({
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
-                Refresh Page
+                {t('transaction.refreshPage')}
               </button>
             </div>
           )}
@@ -286,15 +292,15 @@ export function TransactionStatus({
           {state.error?.name === 'WalletAuthorizationError' && (
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
               <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                <strong>Tip:</strong> Your wallet needs permission to interact with this contract. Open your wallet and check for permission requests.
+                <strong>Tip:</strong> {t('transaction.tipWalletPermission')}
               </p>
               <div className="mt-2 space-y-2">
-                <p className="text-yellow-700 dark:text-yellow-300 text-sm font-medium">Steps to fix:</p>
+                <p className="text-yellow-700 dark:text-yellow-300 text-sm font-medium">{t('transaction.stepsToFix')}:</p>
                 <ol className="list-decimal list-inside text-yellow-700 dark:text-yellow-300 text-sm space-y-1 pl-2">
-                  <li>Open your wallet (MetaMask, etc.)</li>
-                  <li>Look for pending permission requests</li>
-                  <li>Grant permission to the contract</li>
-                  <li>Try the transaction again</li>
+                  <li>{t('transaction.stepOpenWallet')}</li>
+                  <li>{t('transaction.stepLookForPermissions')}</li>
+                  <li>{t('transaction.stepGrantPermission')}</li>
+                  <li>{t('transaction.stepTryAgain')}</li>
                 </ol>
               </div>
             </div>
@@ -304,7 +310,7 @@ export function TransactionStatus({
           {state.error?.name === 'UserRejectedError' && (
             <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md p-3 mt-2 mb-3">
               <p className="text-yellow-700 dark:text-yellow-300 text-sm">
-                <strong>Note:</strong> You rejected the transaction in your wallet. If this was unintentional, please try again.
+                <strong>Note:</strong> {t('transaction.noteRejectedTransaction')}
               </p>
             </div>
           )}
@@ -320,7 +326,7 @@ export function TransactionStatus({
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                View on Explorer
+                {t('transaction.viewOnExplorer')}
               </a>
             )}
 
@@ -332,7 +338,7 @@ export function TransactionStatus({
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
-                Retry Transaction
+                {t('transaction.retryTransaction')}
               </button>
             )}
           </div>

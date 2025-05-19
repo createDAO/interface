@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "title": "Tính năng & Thông tin DAO | CreateDAO",
+    "description": "Tìm hiểu về các tính năng và thành phần của DAO được tạo bằng CreateDAO"
+  },
+  "header": {
+    "title": "Tính năng & Thông tin DAO",
+    "subtitle": "Hiểu các thành phần, tính năng và chi tiết kỹ thuật của DAO của bạn"
+  },
+  "introduction": {
+    "title": "Giới thiệu",
+    "description": "CreateDAO triển khai một hệ sinh thái DAO hoàn chỉnh với bốn hợp đồng thông minh cốt lõi hoạt động cùng nhau để cung cấp khả năng quản trị, quản lý token, kiểm soát kho bạc và staking.",
+    "whatYouGet": {
+      "title": "Những gì bạn nhận được",
+      "description": "Khi bạn tạo một DAO thông qua CreateDAO, bạn sẽ nhận được một hệ thống quản trị hoàn chỉnh với:",
+      "items": [
+        "Một hợp đồng <strong>Lõi DAO</strong> đầy đủ chức năng với hệ thống đề xuất và bỏ phiếu",
+        "Một <strong>Token Quản trị ERC20</strong> với cơ chế thuế tùy chỉnh",
+        "Một <strong>Kho bạc</strong> an toàn để quản lý tài sản của DAO",
+        "Một <strong>Hệ thống Staking</strong> với hệ số nhân quyền biểu quyết dựa trên thời gian",
+        "Tất cả các hợp đồng được triển khai dưới dạng <strong>proxy có thể nâng cấp</strong> để cải tiến trong tương lai"
+      ]
+    },
+    "forCreators": {
+      "title": "Dành cho Người tạo DAO",
+      "description": "Là người tạo, bạn sẽ nhận được:",
+      "items": [
+        "1 token quản trị để bắt đầu tham gia",
+        "Khả năng tạo các đề xuất ban đầu",
+        "Kiểm soát việc triển khai ban đầu",
+        "Công cụ để khởi động cộng đồng của bạn"
+      ]
+    },
+    "forMembers": {
+      "title": "Dành cho Thành viên DAO",
+      "description": "Các thành viên cộng đồng của bạn sẽ có thể:",
+      "items": [
+        "Stake token để có được quyền biểu quyết",
+        "Tạo và bỏ phiếu cho các đề xuất",
+        "Tham gia vào các đợt bán trước",
+        "Giúp quản trị kho bạc và tương lai của DAO"
+      ]
+    }
+  },
+  "architecture": {
+    "title": "Kiến trúc DAO",
+    "description": "DAO của bạn bao gồm bốn hợp đồng chính hoạt động cùng nhau để cung cấp một hệ thống quản trị hoàn chỉnh.",
+    "diagram": {
+      "daoCore": "Lõi DAO",
+      "governance": "Quản trị & Đề xuất",
+      "daoToken": "Token DAO",
+      "erc20": "Token Quản trị ERC20",
+      "treasury": "Kho bạc",
+      "assetManagement": "Quản lý Tài sản",
+      "staking": "Staking",
+      "votingPower": "Quyền Biểu quyết",
+      "daoFactory": "Nhà máy DAO",
+      "note": "Tất cả các hợp đồng được triển khai dưới dạng proxy có thể nâng cấp với các triển khai mới nhất"
+    },
+    "upgradeableDesign": {
+      "title": "Thiết kế Có thể Nâng cấp",
+      "description": "Tất cả các hợp đồng sử dụng mẫu UUPS (Tiêu chuẩn Proxy Có thể Nâng cấp Toàn cầu), cho phép cải tiến trong tương lai trong khi vẫn bảo toàn trạng thái và số dư. Việc nâng cấp chỉ có thể được thực hiện thông qua các đề xuất quản trị đã được cộng đồng bỏ phiếu thông qua."
+    },
+    "contractInteractions": {
+      "title": "Tương tác Hợp đồng",
+      "description": "Hợp đồng Lõi DAO là trung tâm điều phối tất cả các hành động quản trị. Nó tương tác với các hợp đồng Token, Kho bạc và Staking để thực hiện các đề xuất được cộng đồng phê duyệt."
+    }
+  },
+  "components": {
+    "title": "Thành phần Cốt lõi",
+    "description": "Mỗi hợp đồng trong hệ sinh thái DAO của bạn phục vụ một mục đích cụ thể và có các tính năng độc đáo.",
+    "daoCore": {
+      "title": "Lõi DAO",
+      "description": "Hợp đồng Lõi DAO là trung tâm quản trị trung ương quản lý các đề xuất, bỏ phiếu và thực hiện các quyết định của cộng đồng.",
+      "features": {
+        "title": "Tính năng Chính:",
+        "items": [
+          "<span class=\"font-medium\">Hệ thống Đề xuất:</span> Tạo, bỏ phiếu và thực hiện các loại đề xuất khác nhau",
+          "<span class=\"font-medium\">Cơ chế Bỏ phiếu:</span> Bỏ phiếu an toàn với quyền biểu quyết dựa trên stake",
+          "<span class=\"font-medium\">Logic Thực thi:</span> Thực thi an toàn các đề xuất đã được phê duyệt",
+          "<span class=\"font-medium\">Kiểm soát Khẩn cấp:</span> Chức năng tạm dừng/tiếp tục để đảm bảo an ninh"
+        ]
+      },
+      "parameters": {
+        "title": "Thông số Quản trị:",
+        "votingPeriod": "Thời gian Bỏ phiếu",
+        "votingPeriodValue": "3 ngày",
+        "minProposalStake": "Stake Đề xuất Tối thiểu",
+        "minProposalStakeValue": "1 token",
+        "quorum": "Túc số",
+        "quorumValue": "50% quyền biểu quyết",
+        "version": "Phiên bản",
+        "versionValue": "1.0.0"
+      },
+      "codeBlockTitle": "Khởi tạo Hợp đồng Lõi DAO"
+    },
+    "daoToken": {
+      "title": "Token DAO",
+      "description": "Token DAO là một token ERC20 đóng vai trò là token quản trị cho DAO của bạn. Nó bao gồm các tính năng bổ sung ngoài một token ERC20 tiêu chuẩn.",
+      "features": {
+        "title": "Tính năng Chính:",
+        "items": [
+          "<span class=\"font-medium\">Phân phối Ban đầu:</span> 1 token cho người tạo, phần còn lại cho kho bạc",
+          "<span class=\"font-medium\">Cơ chế Thuế:</span> Tỷ lệ thuế có thể định cấu hình lên đến 10%",
+          "<span class=\"font-medium\">Danh sách Trắng:</span> Các địa chỉ có thể được miễn thuế",
+          "<span class=\"font-medium\">Tích hợp Staking:</span> Hoạt động với hợp đồng staking để quản trị"
+        ]
+      },
+      "codeBlockTitle": "Cơ chế Thuế Token DAO"
+    },
+    "treasury": {
+      "title": "Kho bạc",
+      "description": "Hợp đồng Kho bạc giữ và quản lý an toàn tất cả tài sản thuộc sở hữu của DAO, bao gồm token và ETH.",
+      "features": {
+        "title": "Tính năng Chính:",
+        "items": [
+          "<span class=\"font-medium\">Kiểm soát Tài sản:</span> Giữ phần lớn token ban đầu",
+          "<span class=\"font-medium\">Đa tài sản:</span> Có thể giữ ETH và bất kỳ token ERC20 nào",
+          "<span class=\"font-medium\">Kiểm soát bởi Quản trị:</span> Chỉ DAO mới có thể ủy quyền chuyển tiền",
+          "<span class=\"font-medium\">Theo dõi Số dư:</span> Các phương thức để kiểm tra số dư hiện tại"
+        ]
+      },
+      "codeBlockTitle": "Chức năng Chuyển tiền Kho bạc"
+    },
+    "staking": {
+      "title": "Staking",
+      "description": "Hợp đồng Staking cho phép người nắm giữ token stake token của họ để có được quyền biểu quyết trong DAO.",
+      "features": {
+        "title": "Tính năng Chính:",
+        "items": [
+          "<span class=\"font-medium\">Hệ số nhân Dựa trên Thời gian:</span> Thời gian staking dài hơn làm tăng quyền biểu quyết",
+          "<span class=\"font-medium\">Tính toán Quyền Biểu quyết:</span> Stake × Hệ số nhân Thời gian",
+          "<span class=\"font-medium\">Staking Linh hoạt:</span> Người dùng có thể stake và unstake bất cứ lúc nào",
+          "<span class=\"font-medium\">Thông số Có thể Định cấu hình:</span> Hệ số nhân và ngưỡng có thể được điều chỉnh thông qua quản trị"
+        ]
+      },
+      "multipliers": {
+        "title": "Hệ số nhân Staking:",
+        "table": {
+          "headers": {
+            "duration": "Thời gian Staking",
+            "multiplier": "Hệ số nhân",
+            "example": "Ví dụ"
+          },
+          "rows": [
+            {
+              "duration": "Ít hơn 1 tuần",
+              "multiplier": "1x (cơ bản)",
+              "example": "100 token = 100 quyền biểu quyết"
+            },
+            {
+              "duration": "1 tuần đến 1 tháng",
+              "multiplier": "1.25x",
+              "example": "100 token = 125 quyền biểu quyết"
+            },
+            {
+              "duration": "1 tháng đến 3 tháng",
+              "multiplier": "1.5x",
+              "example": "100 token = 150 quyền biểu quyết"
+            },
+            {
+              "duration": "Hơn 3 tháng",
+              "multiplier": "2x",
+              "example": "100 token = 200 quyền biểu quyết"
+            }
+          ]
+        }
+      },
+      "codeBlockTitle": "Tính toán Quyền Biểu quyết Staking"
+    }
+  },
+  "governance": {
+    "title": "Tính năng Quản trị",
+    "description": "DAO của bạn bao gồm một hệ thống quản trị toàn diện với các loại đề xuất và cơ chế bỏ phiếu khác nhau.",
+    "proposalTypes": {
+      "title": "Các loại Đề xuất Hiện có",
+      "treasuryTransfers": {
+        "title": "Chuyển tiền Kho bạc",
+        "description": "Đề xuất chuyển token hoặc ETH từ kho bạc đến bất kỳ địa chỉ nào"
+      },
+      "presaleCreation": {
+        "title": "Tạo Bán trước",
+        "description": "Khởi chạy các đợt bán trước token với số lượng token và giá ban đầu có thể tùy chỉnh"
+      },
+      "presaleManagement": {
+        "title": "Quản lý Bán trước",
+        "description": "Tạm dừng/tiếp tục các đợt bán trước và rút tiền từ các đợt bán trước đã hoàn thành"
+      },
+      "contractUpgrades": {
+        "title": "Nâng cấp Hợp đồng",
+        "description": "Nâng cấp các hợp đồng hoặc mô-đun cốt lõi lên các triển khai mới hơn"
+      },
+      "emergencyControls": {
+        "title": "Kiểm soát Khẩn cấp",
+        "description": "Tạm dừng/tiếp tục toàn bộ DAO trong trường hợp khẩn cấp"
+      },
+      "moduleUpgrades": {
+        "title": "Nâng cấp Mô-đun",
+        "description": "Thêm hoặc nâng cấp các mô-đun cụ thể như hợp đồng bán trước hoặc vesting"
+      }
+    },
+    "votingProcess": {
+      "title": "Quy trình Bỏ phiếu",
+      "steps": [
+        "<span class=\"font-medium\">Tạo Đề xuất:</span> Bất kỳ thành viên nào có ít nhất 1 token đã stake đều có thể tạo đề xuất",
+        "<span class=\"font-medium\">Thời gian Bỏ phiếu:</span> Các thành viên có một khoảng thời gian nhất định để bỏ phiếu",
+        "<span class=\"font-medium\">Bỏ phiếu:</span> Các thành viên bỏ phiếu \"Đồng ý\" hoặc \"Không đồng ý\" bằng quyền biểu quyết của họ",
+        "<span class=\"font-medium\">Kiểm tra Túc số:</span> Ít nhất 50% tổng quyền biểu quyết phải tham gia",
+        "<span class=\"font-medium\">Thực thi:</span> Nếu được chấp thuận, đề xuất có thể được thực thi để triển khai các thay đổi"
+      ]
+    }
+  },
+  "deployment": {
+    "title": "Quy trình Triển khai",
+    "description": "Khi bạn tạo một DAO, các bước sau sẽ tự động xảy ra trong một giao dịch duy nhất.",
+    "steps": [
+      "<span class=\"font-medium\">Triển khai Token:</span> Token quản trị ERC20 của bạn được triển khai đầu tiên",
+      "<span class=\"font-medium\">Triển khai Kho bạc:</span> Hợp đồng kho bạc được triển khai (chưa được khởi tạo)",
+      "<span class=\"font-medium\">Triển khai Staking:</span> Hợp đồng staking được triển khai và liên kết với token của bạn",
+      "<span class=\"font-medium\">Triển khai DAO:</span> Hợp đồng DAO chính được triển khai và kết nối với tất cả các hợp đồng khác",
+      "<span class=\"font-medium\">Khởi tạo Kho bạc:</span> Kho bạc được khởi tạo với DAO là chủ sở hữu",
+      "<span class=\"font-medium\">Cấu hình Token:</span> Hợp đồng staking được đặt trong token và quyền sở hữu được chuyển cho DAO",
+      "<span class=\"font-medium\">Phân phối Token:</span> Số token còn lại được chuyển vào kho bạc",
+      "<span class=\"font-medium\">Chuyển Quyền sở hữu:</span> DAO trở thành tự quản (sở hữu chính nó)"
+    ],
+    "note": {
+      "title": "Lưu ý Quan trọng",
+      "description": "Sau khi triển khai, DAO của bạn hoàn toàn tự trị và được kiểm soát bởi quản trị. Người tạo nhận được 1 token để bắt đầu tham gia, nhưng không có đặc quyền nào ngoài điều đó. Tất cả các quyết định quan trọng phải thông qua quy trình quản trị."
+    }
+  },
+  "gettingStarted": {
+    "title": "Bắt đầu",
+    "description": "Sau khi tạo DAO của bạn, đây là một số bước để bắt đầu với quản trị.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Stake Token của bạn",
+        "description": "Stake token ban đầu của bạn để có được quyền biểu quyết. Bạn stake càng lâu, bạn càng có nhiều quyền biểu quyết."
+      },
+      {
+        "number": "2",
+        "title": "Tạo một Đề xuất",
+        "description": "Tạo đề xuất đầu tiên của bạn để phân phối token từ kho bạc hoặc khởi chạy một đợt bán trước để phát triển cộng đồng của bạn."
+      },
+      {
+        "number": "3",
+        "title": "Phát triển Cộng đồng của bạn",
+        "description": "Mời các thành viên tham gia DAO của bạn, phân phối token thông qua các đề xuất và xây dựng một cộng đồng phi tập trung."
+      }
+    ],
+    "createButton": "Tạo DAO của bạn ngay bây giờ"
+  }
+}

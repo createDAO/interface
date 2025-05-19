@@ -1,0 +1,61 @@
+{
+  "terminology": {
+    "dao": "DAO",
+    "daoFull": "Organisasi Otonom Terdesentralisasi",
+    "token": "Token",
+    "governance": "Tata Kelola",
+    "proposal": "Proposal",
+    "vote": "Suara",
+    "treasury": "Perbendaharaan",
+    "member": "Anggota",
+    "community": "Komunitas",
+    "blockchain": "Blockchain",
+    "smartContract": "Kontrak Pintar",
+    "gas": "Gas",
+    "gasPrice": "Harga Gas",
+    "transaction": "Transaksi",
+    "wallet": "Dompet",
+    "connect": "Hubungkan Dompet",
+    "disconnect": "Putuskan Dompet"
+  },
+  "wallets": {
+    "metamask": "MetaMask",
+    "walletConnect": "WalletConnect",
+    "coinbase": "Coinbase Wallet",
+    "trustWallet": "Trust Wallet",
+    "ledger": "Ledger",
+    "brave": "Brave Wallet",
+    "rabby": "Rabby Wallet",
+    "okx": "OKX Wallet",
+    "browser": "Dompet Browser"
+  },
+  "networks": {
+    "ethereum": "Ethereum",
+    "polygon": "Polygon",
+    "arbitrum": "Arbitrum",
+    "optimism": "Optimism",
+    "base": "Base",
+    "avalanche": "Avalanche",
+    "bnb": "BNB Chain",
+    "gnosis": "Gnosis Chain",
+    "celo": "Celo",
+    "mantle": "Mantle",
+    "scroll": "Scroll",
+    "blast": "Blast",
+    "unichain": "Unichain",
+    "worldchain": "Worldchain"
+  },
+  "status": {
+    "connecting": "Menghubungkan...",
+    "connected": "Terhubung",
+    "disconnected": "Terputus",
+    "pending": "Tertunda",
+    "confirmed": "Dikonfirmasi",
+    "failed": "Gagal",
+    "success": "Berhasil",
+    "error": "Kesalahan",
+    "deploymentReady": "Siap Diterapkan",
+    "deploying": "Menerapkan...",
+    "deployed": "Diterapkan"
+  }
+}

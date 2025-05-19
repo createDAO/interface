@@ -1,0 +1,298 @@
+{
+  "title": "DAO 생성하기",
+  "subtitle": "몇 분 안에 탈중앙화 자율 조직을 시작하세요",
+  "steps": {
+    "network": {
+      "title": "네트워크 선택",
+      "description": "DAO를 위한 블록체인 네트워크를 선택하세요",
+      "networkLabel": "네트워크",
+      "networkPlaceholder": "네트워크 선택",
+      "versionLabel": "버전",
+      "versionPlaceholder": "버전 선택"
+    },
+    "networkTypes": {
+      "ethereumMainnet": "이더리움 메인넷: 가장 높은 보안성을 제공하지만 가스비가 높은 기본 이더리움 블록체인",
+      "layer2Networks": "레이어 2 네트워크: 옵티미즘, 아비트럼 등은 이더리움 보안을 상속하면서 더 낮은 수수료를 제공합니다",
+      "alternativeL1s": "대안 L1: 아발란체, BNB 체인과 같은 네트워크는 다양한 장단점을 제공합니다",
+      "testnets": "테스트넷: 메인넷 배포 전 테스트용 (무료 사용)"
+    },
+    "details": {
+      "title": "DAO 세부 정보",
+      "description": "DAO 및 거버넌스 토큰 구성",
+      "daoName": {
+        "label": "DAO 이름",
+        "placeholder": "DAO 이름 입력",
+        "helper": "탈중앙화 자율 조직의 이름"
+      },
+      "tokenName": {
+        "label": "토큰 이름",
+        "placeholder": "토큰 이름 입력",
+        "helper": "거버넌스 토큰의 이름"
+      },
+      "tokenSymbol": {
+        "label": "토큰 심볼",
+        "placeholder": "3-5자",
+        "helper": "토큰의 짧은 식별자 (예: BTC, ETH)"
+      },
+      "tokenSupply": {
+        "label": "토큰 공급량",
+        "placeholder": "총 공급량 입력",
+        "helper": "생성될 총 토큰 수"
+      }
+    },
+    "review": {
+      "title": "검토",
+      "description": "배포 전 DAO 구성 검토",
+      "summary": "요약",
+      "network": "네트워크",
+      "version": "버전",
+      "daoName": "DAO 이름",
+      "tokenName": "토큰 이름",
+      "tokenSymbol": "토큰 심볼",
+      "tokenSupply": "토큰 공급량",
+      "estimatedGas": "예상 가스비",
+      "deploymentCost": "배포 비용",
+      "readyToDeploy": "DAO를 배포할 준비가 되셨나요?",
+      "reviewYourDao": "DAO 검토",
+      "reviewDescription": "배포 전에 DAO 구성을 검토하십시오. 일단 배포되면 일부 설정은 변경할 수 없습니다.",
+      "daoConfigSummary": "DAO 구성 요약",
+      "organizationDetails": "조직 세부 정보",
+      "tokenDetails": "토큰 세부 정보",
+      "latest": "최신"
+    },
+    "deployment": {
+      "title": "배포",
+      "description": "DAO를 블록체인에 배포",
+      "connecting": "지갑에 연결 중...",
+      "preparing": "배포 준비 중...",
+      "deploying": "DAO 배포 중...",
+      "success": "DAO가 성공적으로 배포되었습니다!",
+      "failed": "배포 실패",
+      "tryAgain": "다시 시도",
+      "viewOnExplorer": "탐색기에서 보기",
+      "managementPlatforms": "이제 다음 플랫폼을 사용하여 DAO를 관리할 수 있습니다:",
+      "processingDeployment": "배포 처리 중",
+      "waitingForDeployment": "DAO가 블록체인에 배포되는 동안 잠시 기다려 주십시오...",
+      "daoCreatedSuccessfully": "DAO가 성공적으로 생성되었습니다!",
+      "daoIsLive": "{{daoName}} DAO가 이제 블록체인에서 활성화되었습니다",
+      "daoFullyFunctional": "이제 DAO는 거버넌스 기능, 토큰 관리 및 재무 통제를 통해 완벽하게 작동합니다.",
+      "contractAddresses": "계약 주소",
+      "daoCoreContract": "DAO 핵심 계약",
+      "tokenContract": "토큰 계약",
+      "transactionDetails": "거래 세부 정보",
+      "transactionHash": "거래 해시",
+      "viewOnBlockExplorer": "블록 탐색기에서 보기",
+      "blockExplorerDescription": "블록체인 탐색기에서 거래 세부 정보를 확인하여 상태를 추적하고 배포를 확인할 수 있습니다.",
+      "nextSteps": "다음 단계",
+      "registerYourDao": "DAO 등록",
+      "registerDescription": "조치를 제안하거나, 투표하거나, 자산을 관리하려면 DAO를 관리 인터페이스에 연결하십시오.",
+      "stakeYourToken": "토큰 스테이킹",
+      "stakeDescription": "DAO의 거버넌스 시스템에서 투표권을 얻으려면 초기 토큰을 스테이킹하십시오.",
+      "createProposal": "제안 생성",
+      "proposalDescription": "토큰을 배포하거나 재무 자산을 관리하기 위한 첫 번째 거버넌스 제안을 만드십시오."
+    }
+  },
+  "validation": {
+    "required": "이 필드는 필수입니다",
+    "minLength": "최소 {{min}}자여야 합니다",
+    "maxLength": "최대 {{max}}자여야 합니다",
+    "invalidSymbol": "심볼은 2-5자의 대문자여야 합니다",
+    "positiveNumber": "양수여야 합니다",
+    "maxSupply": "{{max}}보다 작거나 같아야 합니다"
+  },
+  "tokenDistribution": {
+    "title": "토큰 분배",
+    "totalSupply": "총 공급량",
+    "details": "토큰 분배 세부 정보",
+    "creator": "생성자 (귀하)",
+    "initialToken": "초기 거버넌스 토큰",
+    "treasury": "재무",
+    "controlledByDao": "DAO에 의해 제어됨",
+    "initialTokenForGovernance": "거버넌스를 위한 초기 토큰",
+    "controlledByDaoGovernance": "DAO 거버넌스에 의해 제어됨",
+    "howItWorks": {
+      "title": "토큰 분배 작동 방식",
+      "description": "배포 후 거버넌스에 참여하기 시작하도록 1개의 토큰을 받게 됩니다. 나머지 토큰은 재무부에 저장되며 커뮤니티에서 승인한 거버넌스 제안을 통해 배포할 수 있습니다."
+    }
+  },
+  "navigation": {
+    "backToNetwork": "네트워크로 돌아가기",
+    "continueToReview": "검토로 계속",
+    "continueToDetails": "DAO 세부 정보로 계속",
+    "backToDetails": "DAO 세부 정보로 돌아가기",
+    "continueToPreDeployment": "사전 배포로 계속",
+    "processing": "처리 중..."
+  },
+  "network": {
+    "wrongNetwork": "잘못된 네트워크",
+    "switchToSupported": "DAO를 생성하려면 지원되는 네트워크로 전환하십시오",
+    "switchingNetwork": "네트워크 전환 중... 지갑에서 확인하십시오.",
+    "switchFailed": "네트워크 전환 실패. 지갑을 확인하고 다시 시도하십시오.",
+    "switching": "전환 중...",
+    "switchTo": "{{name}}(으)로 전환",
+    "tooltip": "DAO가 배포될 블록체인 네트워크입니다. 각 네트워크에는 서로 다른 특성과 수수료가 있습니다.",
+    "features": "네트워크 기능",
+    "notSupported": "현재 네트워크는 지원되지 않습니다. 지원되는 네트워크로 전환하십시오.",
+    "note": "참고",
+    "sepoliaNote": "빠른 테스트를 위해 Sepolia DAO는 5분 투표 기간으로 배포됩니다."
+  },
+  "version": {
+    "tooltip": "배포할 DAO 계약의 버전입니다. 최신 버전에는 추가 기능이나 개선 사항이 포함될 수 있습니다."
+  },
+  "architecture": {
+    "title": "DAO 아키텍처",
+    "daoCore": "DAO 핵심",
+    "daoCoreDescription": "제안, 투표 및 커뮤니티 결정 실행을 위한 중앙 거버넌스 허브",
+    "daoToken": "DAO 토큰",
+    "daoTokenDescription": "사용자 정의 가능한 세금 메커니즘 및 배포 제어 기능이 있는 ERC20 거버넌스 토큰",
+    "treasury": "재무",
+    "treasuryDescription": "거버넌스 제안에 의해 제어되는 DAO 자산 관리를 위한 보안 금고",
+    "staking": "스테이킹",
+    "stakingDescription": "장기 보유자를 위한 투표력 승수가 있는 시간 기반 스테이킹",
+    "upgradeableProxies": "모든 계약은 최신 구현으로 업그레이드 가능한 프록시로 배포됩니다."
+  },
+  "features": {
+    "governance": {
+      "title": "거버넌스",
+      "description": "제안을 만들고 중요한 결정에 투표합니다."
+    },
+    "treasury": {
+      "title": "재무",
+      "description": "자금을 관리하고 자원을 할당합니다."
+    },
+    "token": {
+      "title": "거버넌스 토큰",
+      "description": "투표권 및 거버넌스를 위한 ERC-20 토큰"
+    },
+    "multiSig": {
+      "title": "다중 서명",
+      "description": "중요한 조치에 대해 여러 승인이 필요합니다."
+    }
+  },
+  "wallet": {
+    "connected": "지갑 연결됨",
+    "readyToDeploy": "지갑이 연결되어 DAO를 배포할 준비가 되었습니다.",
+    "disconnect": "연결 해제",
+    "address": "지갑 주소",
+    "copy": "복사",
+    "balance": "잔액",
+    "connectionRequired": "지갑 연결 필요",
+    "connectionMessage": "DAO를 배포하려면 Web3 지갑을 연결해야 합니다. 이를 통해 다음을 수행할 수 있습니다.",
+    "signTransaction": "배포 거래 서명",
+    "becomeAdmin": "초기 DAO 관리자 되기",
+    "receiveToken": "거버넌스 토큰 받기",
+    "connect": "지갑 연결"
+  },
+  "deploymentCost": {
+    "title": "예상 배포 비용",
+    "description": "DAO 배포 비용은 대략 다음과 같습니다.",
+    "calculating": "계산 중...",
+    "note": "참고: 실제 비용은 배포 시 네트워크 상태에 따라 달라질 수 있습니다.",
+    "gasUnits": "≈ {{units}} 가스 단위"
+  },
+  "whatHappensNext": {
+    "title": "다음에 일어날 일",
+    "description": "\"사전 배포로 계속\"을 클릭하면 다음이 발생합니다.",
+    "checkBalance": "자금이 충분한지 확인하기 위해 지갑 잔액을 확인합니다.",
+    "simulateTransaction": "성공할지 확인하기 위해 거래를 시뮬레이션합니다.",
+    "confirmTransaction": "지갑에서 거래를 확인하라는 메시지가 표시됩니다.",
+    "deployContracts": "DAO 계약이 {{network}} 네트워크에 배포됩니다.",
+    "receiveToken": "거버넌스에 참여하기 시작하도록 1개의 {{symbol}} 토큰을 받게 됩니다.",
+    "treasuryStorage": "나머지 {{amount}} {{symbol}}은 재무부에 저장됩니다."
+  },
+  "preDeployment": {
+    "title": "사전 배포 확인",
+    "description": "DAO 배포가 성공적으로 이루어지도록 몇 가지 확인을 실행합니다. 이렇게 하면 실패한 거래와 낭비되는 가스비를 방지하는 데 도움이 됩니다.",
+    "checklist": "배포 체크리스트",
+    "balanceCheck": {
+      "title": "지갑 잔액 확인",
+      "description": "배포할 {{symbol}}이 충분한지 확인 중"
+    },
+    "simulation": {
+      "title": "거래 시뮬레이션",
+      "description": "{{network}}에서 배포를 시뮬레이션하여 성공 확인"
+    },
+    "signing": {
+      "title": "거래 서명",
+      "inProgress": "지갑에서 거래에 서명하십시오...",
+      "description": "DAO를 배포하려면 지갑으로 거래에 서명하십시오."
+    },
+    "confirmation": {
+      "title": "거래 확인",
+      "inProgress": "블록체인 확인 대기 중...",
+      "description": "블록체인에서 거래가 확인될 때까지 기다리십시오."
+    },
+    "status": {
+      "passed": "통과",
+      "failed": "실패",
+      "signed": "서명됨",
+      "confirmed": "확인됨"
+    },
+    "networkMismatch": {
+      "title": "네트워크 불일치",
+      "description": "지갑이 {{current}}에 연결되어 있지만 배포용으로 {{selected}}를 선택했습니다.",
+      "switching": "네트워크 전환 중... 지갑에서 확인하십시오.",
+      "switchFailed": "자동 전환 실패. 지갑에서 수동으로 네트워크를 변경하십시오.",
+      "switchNeeded": "계속하려면 네트워크를 {{network}}(으)로 전환하십시오.",
+      "switchTo": "{{network}}(으)로 전환"
+    },
+    "backToReview": "검토로 돌아가기"
+  },
+  "stepIndicator": {
+    "stepCount": "{{total}}단계 중 {{current}}단계",
+    "steps": {
+      "network": {
+        "label": "네트워크",
+        "description": "블록체인 네트워크 선택"
+      },
+      "daoDetails": {
+        "label": "DAO 세부 정보",
+        "description": "DAO 및 토큰 구성"
+      },
+      "review": {
+        "label": "검토",
+        "description": "구성 확인"
+      },
+      "preDeploy": {
+        "label": "사전 배포",
+        "description": "사전 배포 확인 실행"
+      },
+      "success": {
+        "label": "성공",
+        "description": "새 DAO 보기"
+      }
+    }
+  },
+  "transaction": {
+    "waitingForSignature": "거래에 서명하십시오...",
+    "submitting": "거래 제출 중...",
+    "waitingForConfirmation": "확인 대기 중...",
+    "success": "거래 성공!",
+    "error": "거래 실패",
+    "checkingBalance": "지갑 잔액 확인 중...",
+    "balanceError": "잔액 부족",
+    "balanceCheckError": "지갑 잔액 확인 실패",
+    "simulating": "거래 시뮬레이션 중...",
+    "simulationError": "거래 시뮬레이션 실패",
+    "unexpectedError": "예상치 못한 오류",
+    "unexpectedErrorDetails": "거래 시뮬레이션 중 예상치 못한 오류가 발생했습니다.",
+    "viewOnExplorer": "탐색기에서 보기",
+    "insufficientBalanceDetails": "잔액 부족: 이 거래를 완료하려면 <strong>{{amount}} {{symbol}}</strong>이(가) 더 필요합니다.",
+    "tipTransactionProcessing": "팁: 거래가 아직 처리 중일 수 있습니다. 탐색기에서 상태를 확인하십시오.",
+    "tipAddMoreFunds": "팁: 지갑에 자금을 더 추가하고 다시 시도하십시오.",
+    "tipIncreaseGasLimit": "팁: 지갑 설정에서 가스 한도를 늘려보십시오.",
+    "tipIncreaseGasPrice": "팁: 지갑 설정에서 가스 가격을 늘려보십시오.",
+    "tipResetWallet": "팁: 지갑의 거래 내역을 재설정하거나 논스를 수동으로 조정해보십시오.",
+    "tipWalletDisconnected": "팁: 지갑 연결이 끊어졌습니다. 지갑을 다시 연결하고 다시 시도하십시오.",
+    "refreshPage": "페이지 새로고침",
+    "tipWalletPermission": "팁: 지갑이 이 계약과 상호 작용하려면 권한이 필요합니다. 지갑을 열고 권한 요청을 확인하십시오.",
+    "stepsToFix": "해결 단계:",
+    "stepOpenWallet": "지갑(MetaMask 등) 열기",
+    "stepLookForPermissions": "보류 중인 권한 요청 찾기",
+    "stepGrantPermission": "계약에 권한 부여",
+    "stepTryAgain": "거래 다시 시도",
+    "noteRejectedTransaction": "참고: 지갑에서 거래를 거부했습니다. 의도하지 않은 경우 다시 시도하십시오.",
+    "retryTransaction": "거래 재시도",
+    "simulationErrorMessage": "계약 시뮬레이션에서 오류가 발생했습니다. 이는 계약 제한 또는 네트워크 문제 때문일 수 있습니다."
+  }
+}

@@ -4,6 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps } from 'next';
+import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
 import { getAllDAOs, getDAOsByNetwork, DAORecord } from '../services/firebase/dao';
 import { SUPPORTED_NETWORKS, getExplorerUrl } from '../config/networks';
@@ -13,6 +17,7 @@ const PAGE_SIZE = 10;
 
 const DAOsPage: React.FC = () => {
   const router = useRouter();
+  const { t } = useTranslation(['common', 'navigation', 'daos']);
   const { page: pageParam, network: networkParam } = router.query;
   
   // Parse query parameters
@@ -151,7 +156,7 @@ const DAOsPage: React.FC = () => {
   }
   
   const formatDate = (timestamp: FirestoreTimestamp | Date | number | null) => {
-    if (!timestamp) return 'Unknown';
+    if (!timestamp) return t('daos:dates.unknown');
 
     try {
       // Convert Firestore timestamp to JS Date
@@ -190,7 +195,7 @@ const DAOsPage: React.FC = () => {
       });
     } catch (err) {
       console.error('Error formatting date:', err);
-      return 'Invalid date';
+      return t('daos:dates.invalid');
     }
   };
 
@@ -215,8 +220,8 @@ const DAOsPage: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>Deployed DAOs | CreateDAO</title>
-        <meta name="description" content="View all DAOs deployed through CreateDAO" />
+        <title>{t('daos:meta.title')}</title>
+        <meta name="description" content={t('daos:meta.description')} />
       </Head>
 
       <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -230,20 +235,20 @@ const DAOsPage: React.FC = () => {
         {/* Display error if present */}
         {error && (
            <div className="mb-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-             <p className="text-red-700 dark:text-red-400">{error instanceof Error ? error.message : 'Failed to load DAOs'}</p>
+             <p className="text-red-700 dark:text-red-400">{error instanceof Error ? error.message : t('daos:errors.loadFailed')}</p>
            </div>
          )}
 
         <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Deployed DAOs</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('daos:header.title')}</h1>
             <p className="mt-2 text-gray-600 dark:text-gray-300">
-              Browse all DAOs deployed through the CreateDAO platform
+              {t('daos:header.subtitle')}
             </p>
           </div>
 
           <div className="mt-4 md:mt-0">
-            <label htmlFor="network-filter" className="sr-only">Filter by Network</label>
+            <label htmlFor="network-filter" className="sr-only">{t('daos:filters.network.label')}</label>
             <select
               id="network-filter"
               value={filterNetwork || ''}
@@ -259,7 +264,7 @@ const DAOsPage: React.FC = () => {
               }}
               className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             >
-              <option value="">All Networks</option>
+              <option value="">{t('daos:filters.network.all')}</option>
               {SUPPORTED_NETWORKS.map((network) => (
                 <option 
                   key={network.id} 
@@ -267,7 +272,7 @@ const DAOsPage: React.FC = () => {
                   disabled={network.isAvailable === false}
                   className={network.isAvailable === false ? "text-gray-400 italic" : ""}
                 >
-                  {network.name} {network.isAvailable === false ? "(Coming Soon)" : ""}
+                  {network.name} {network.isAvailable === false ? t('daos:filters.network.comingSoon') : ""}
                 </option>
               ))}
             </select>
@@ -278,19 +283,19 @@ const DAOsPage: React.FC = () => {
         {isLoading ? (
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 text-center">
             <div className="animate-spin h-8 w-8 border-2 border-primary-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400">Loading DAOs...</p>
+            <p className="text-gray-600 dark:text-gray-400">{t('daos:status.loading')}</p>
           </div>
         ) : totalCount === 0 && !error ? (
           <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-8 text-center">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">No DAOs Found</h3>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white">{t('daos:status.noResults.title')}</h3>
             <p className="mt-2 text-gray-600 dark:text-gray-400">
                 {filterNetwork
-                  ? `No DAOs have been deployed on ${getNetworkName(filterNetwork)} yet.`
-                  : 'No DAOs have been deployed yet.'}
+                  ? t('daos:status.noResults.specificNetwork', { network: getNetworkName(filterNetwork) })
+                  : t('daos:status.noResults.allNetworks')}
             </p>
             <div className="mt-6">
               <Link href="/create" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-                Create a DAO
+                {t('daos:actions.createDao')}
               </Link>
             </div>
           </div>
@@ -301,22 +306,22 @@ const DAOsPage: React.FC = () => {
                 <thead className="bg-gray-50 dark:bg-gray-900">
                   <tr>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      DAO Name
+                      {t('daos:table.headers.name')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Network
+                      {t('daos:table.headers.network')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Token
+                      {t('daos:table.headers.token')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      DAO Address
+                      {t('daos:table.headers.address')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Created
+                      {t('daos:table.headers.created')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                      Actions
+                      {t('daos:table.headers.actions')}
                     </th>
                   </tr>
                 </thead>
@@ -328,7 +333,7 @@ const DAOsPage: React.FC = () => {
                           {dao.name}
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
-                          Version: {dao.versionId}
+                          {t('daos:table.content.version')}: {dao.versionId}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -378,7 +383,7 @@ const DAOsPage: React.FC = () => {
                           {formatAddress(dao.daoAddress)}
                         </div>
                         <div className="text-sm text-gray-500 dark:text-gray-400">
-                          Creator: {formatAddress(dao.creatorAddress)}
+                          {t('daos:table.content.creator')}: {formatAddress(dao.creatorAddress)}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
@@ -391,7 +396,7 @@ const DAOsPage: React.FC = () => {
                           rel="noopener noreferrer"
                           className="text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300 mr-4"
                         >
-                          View on Explorer
+                          {t('daos:actions.viewExplorer')}
                         </a>
                       </td>
                     </tr>
@@ -408,22 +413,22 @@ const DAOsPage: React.FC = () => {
                       disabled={currentPage === 1}
                       className="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Previous
+                      {t('daos:pagination.previous')}
                     </button>
                     <button
                       onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
                       disabled={currentPage === totalPages}
                     className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Next
+                    {t('daos:pagination.next')}
                   </button>
                 </div>
                 <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                   <div>
                     <p className="text-sm text-gray-700 dark:text-gray-300">
-                      Showing <span className="font-medium">{Math.min((currentPage - 1) * PAGE_SIZE + 1, totalCount)}</span> to{' '}
-                      <span className="font-medium">{Math.min(currentPage * PAGE_SIZE, totalCount)}</span> of{' '}
-                      <span className="font-medium">{totalCount}</span> results
+                      {t('daos:pagination.showing')} <span className="font-medium">{Math.min((currentPage - 1) * PAGE_SIZE + 1, totalCount)}</span> {t('daos:pagination.to')}{' '}
+                      <span className="font-medium">{Math.min(currentPage * PAGE_SIZE, totalCount)}</span> {t('daos:pagination.of')}{' '}
+                      <span className="font-medium">{totalCount}</span> {t('daos:pagination.results')}
                     </p>
                   </div>
                   <div>
@@ -433,7 +438,7 @@ const DAOsPage: React.FC = () => {
                         disabled={currentPage === 1}
                         className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                       >
-                        <span className="sr-only cursor-pointer">Previous</span>
+                        <span className="sr-only cursor-pointer">{t('daos:pagination.previous')}</span>
                         <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
@@ -467,7 +472,7 @@ const DAOsPage: React.FC = () => {
                         disabled={currentPage === totalPages}
                         className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm font-medium text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <span className="sr-only">Next</span>
+                        <span className="sr-only">{t('daos:pagination.next')}</span>
                         <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                           <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                         </svg>
@@ -484,6 +489,16 @@ const DAOsPage: React.FC = () => {
   );
 };
 
-export default DAOsPage;
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale || 'en', [
+        'common',
+        'navigation',
+        'daos'
+      ], nextI18NextConfig)),
+    },
+  };
+};
 
-// No getStaticProps - we're using client-side data fetching only
+export default DAOsPage;

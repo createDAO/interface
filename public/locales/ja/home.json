@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "title": "DAOを<highlight>簡単</highlight>に作成",
+    "description": "数クリックで複数のブロックチェーンに分散型自律組織を立ち上げます。コーディングは不要です。",
+    "gasFeeNote": "デプロイにはネットワークガス料金のみをお支払いください"
+  },
+  "features": {
+    "title": "CreateDAOを選ぶ理由",
+    "subtitle": "DAOの立ち上げと管理に必要なすべて",
+    "governance": {
+      "title": "ガバナンス",
+      "description": "提案を作成し、投票し、オンチェーンで決定を実行します"
+    },
+    "treasury": {
+      "title": "財務管理",
+      "description": "コミュニティ投票を通じて資産を管理し、資金を割り当てます"
+    },
+    "multichain": {
+      "title": "マルチチェーンサポート",
+      "description": "複数のEVM互換ブロックチェーンにデプロイします"
+    },
+    "noCode": {
+      "title": "ノーコードソリューション",
+      "description": "1行のコードも書かずにDAOを立ち上げます"
+    },
+    "customization": {
+      "title": "カスタマイズ",
+      "description": "コミュニティのニーズに合わせてDAOを設定します"
+    },
+    "security": {
+      "title": "セキュリティ",
+      "description": "セキュリティのベストプラクティスとオープンソースの透明性に基づいて構築されています"
+    },
+    "openSource": {
+      "title": "オープンソース",
+      "description": "当社のDAOファクトリコントラクトとインターフェースは、GitHubで完全にオープンソースです。"
+    },
+    "notAudited": {
+      "title": "未監査のセキュリティ",
+      "description": "スマートコントラクトは、安心のために主要なセキュリティ会社によってまだ監査されていません。"
+    },
+    "alwaysFree": {
+      "title": "常に無料",
+      "description": "隠れた料金はありません。デプロイにはネットワークガスのみをお支払いください。"
+    },
+    "openSourceSection": {
+      "title": "オープンソースコード",
+      "description": "当社のスマートコントラクトを確認し、コードに貢献してください。私たちは透明性とコミュニティ主導の開発を信じています。",
+      "button": "GitHubで表示"
+    },
+    "subtitle2": "DAOを作成するための最も信頼性が高く、ユーザーフレンドリーなプラットフォームを構築しました。"
+  },
+  "howItWorks": {
+    "title": "仕組み",
+    "subtitle": "わずか数ステップでDAOを作成",
+    "steps": {
+      "step1": {
+        "title": "ネットワークを選択",
+        "description": "DAOのブロックチェーンネットワークを選択します"
+      },
+      "step2": {
+        "title": "DAOを設定",
+        "description": "DAO名、トークン、ガバナンスパラメータを設定します"
+      },
+      "step3": {
+        "title": "レビューとデプロイ",
+        "description": "設定を確認し、DAOをブロックチェーンにデプロイします"
+      },
+      "step4": {
+        "title": "DAOを管理",
+        "description": "ガバナンスと財務管理のために新しいDAOを使用します"
+      }
+    }
+  },
+  "steps": {
+    "title": "3つの簡単なステップ",
+    "subtitle": "DAOの作成がこれまでになく簡単になりました。これらの簡単な手順に従って組織を立ち上げてください。",
+    "step1": {
+      "title": "ウォレットを接続",
+      "description": "MetaMaskまたはWalletConnectを使用して開始します。"
+    },
+    "step2": {
+      "title": "DAO詳細を入力",
+      "description": "DAOに名前を付け、基本的なガバナンスパラメータを設定します。"
+    },
+    "step3": {
+      "title": "デプロイ",
+      "description": "トランザクションを確認すると、DAOを使用する準備が整います。"
+    },
+    "readyToStart": "始める準備はできましたか？",
+    "createButton": "DAOを作成"
+  },
+  "networks": {
+    "title": "サポートされているネットワーク",
+    "subtitle": "これらの人気のあるブロックチェーンネットワークのいずれかでDAOを作成およびデプロイします。",
+    "comingSoon": "コミュニティのフィードバックに基づいて、さらに多くのネットワークが間もなく追加される予定です。"
+  },
+  "platforms": {
+    "title": "DAO管理プラットフォーム",
+    "subtitle": "デプロイ後にDAOを管理するための強力なインターフェース。",
+    "description": "デプロイ後、これらのプラットフォームでDAOを管理します",
+    "daoCafe": {
+      "name": "DAOCafe",
+      "description": "DAOを管理するための包括的なインターフェース: 提案の作成、議論、投票、プレセールの作成、財務送金の提案など。",
+      "visitButton": "DAOCafeにアクセス"
+    },
+    "addYourPlatform": {
+      "title": "プラットフォームを追加",
+      "description": "独自のDAO管理インターフェースを開発し、ここで紹介してもらいましょう。統合の詳細と要件については、ドキュメントを確認してください。",
+      "readDocsButton": "ドキュメントを読む"
+    },
+    "integration": {
+      "text": "ここにあなたのプラットフォームを掲載しませんか？",
+      "linkText": "統合方法を学ぶ"
+    }
+  },
+  "cta": {
+    "title": "今すぐDAOを作成",
+    "description": "コミュニティと財務を管理するためにCreateDAOをすでに使用している何百もの組織に参加してください。",
+    "createButton": "DAOを作成",
+    "learnMoreButton": "詳細を見る",
+    "gasFeeNote": "デプロイにはネットワークガス料金のみをお支払いください"
+  }
+}

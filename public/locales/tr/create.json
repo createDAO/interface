@@ -1,0 +1,298 @@
+{
+  "title": "DAO'nuzu Oluşturun",
+  "subtitle": "Merkezi olmayan otonom organizasyonunuzu dakikalar içinde başlatın",
+  "steps": {
+    "network": {
+      "title": "Ağ Seçin",
+      "description": "DAO'nuz için blok zinciri ağını seçin",
+      "networkLabel": "Ağ",
+      "networkPlaceholder": "Bir ağ seçin",
+      "versionLabel": "Sürüm",
+      "versionPlaceholder": "Bir sürüm seçin"
+    },
+    "networkTypes": {
+      "ethereumMainnet": "Ethereum Ana Ağı: En yüksek güvenliğe sahip ancak daha yüksek gaz ücretleri olan birincil Ethereum blok zinciri",
+      "layer2Networks": "Katman 2 Ağları: Optimism, Arbitrum vb. Ethereum güvenliğini devralırken daha düşük ücretler sunar",
+      "alternativeL1s": "Alternatif L1'ler: Avalanche, BNB Chain gibi ağlar farklı ödünleşimler sunar",
+      "testnets": "Test Ağları: Ana ağa dağıtmadan önce test etmek için (kullanımı ücretsiz)"
+    },
+    "details": {
+      "title": "DAO Detayları",
+      "description": "DAO'nuzu ve yönetişim token'ınızı yapılandırın",
+      "daoName": {
+        "label": "DAO Adı",
+        "placeholder": "DAO adınızı girin",
+        "helper": "Merkezi olmayan otonom organizasyonunuzun adı"
+      },
+      "tokenName": {
+        "label": "Token Adı",
+        "placeholder": "Token adınızı girin",
+        "helper": "Yönetişim token'ınızın adı"
+      },
+      "tokenSymbol": {
+        "label": "Token Sembolü",
+        "placeholder": "3-5 karakter",
+        "helper": "Token'ınız için kısa bir tanımlayıcı (örneğin, BTC, ETH)"
+      },
+      "tokenSupply": {
+        "label": "Token Arzı",
+        "placeholder": "Toplam arzı girin",
+        "helper": "Oluşturulacak toplam token sayısı"
+      }
+    },
+    "review": {
+      "title": "Gözden Geçir",
+      "description": "Dağıtımdan önce DAO yapılandırmanızı gözden geçirin",
+      "summary": "Özet",
+      "network": "Ağ",
+      "version": "Sürüm",
+      "daoName": "DAO Adı",
+      "tokenName": "Token Adı",
+      "tokenSymbol": "Token Sembolü",
+      "tokenSupply": "Token Arzı",
+      "estimatedGas": "Tahmini Gaz",
+      "deploymentCost": "Dağıtım Maliyeti",
+      "readyToDeploy": "DAO'nuzu dağıtmaya hazır mısınız?",
+      "reviewYourDao": "DAO'nuzu Gözden Geçirin",
+      "reviewDescription": "Lütfen dağıtımdan önce DAO yapılandırmanızı gözden geçirin. Dağıtıldıktan sonra bazı ayarlar değiştirilemez.",
+      "daoConfigSummary": "DAO Yapılandırma Özeti",
+      "organizationDetails": "Organizasyon Detayları",
+      "tokenDetails": "Token Detayları",
+      "latest": "En son"
+    },
+    "deployment": {
+      "title": "Dağıtım",
+      "description": "DAO'nuzu blok zincirine dağıtın",
+      "connecting": "Cüzdana bağlanılıyor...",
+      "preparing": "Dağıtım hazırlanıyor...",
+      "deploying": "DAO dağıtılıyor...",
+      "success": "DAO başarıyla dağıtıldı!",
+      "failed": "Dağıtım başarısız oldu",
+      "tryAgain": "Tekrar Dene",
+      "viewOnExplorer": "Gezginde Görüntüle",
+      "managementPlatforms": "DAO'nuzu artık bu platformları kullanarak yönetebilirsiniz:",
+      "processingDeployment": "Dağıtım İşleniyor",
+      "waitingForDeployment": "Lütfen DAO'nuz blok zincirine dağıtılırken bekleyin...",
+      "daoCreatedSuccessfully": "DAO Başarıyla Oluşturuldu!",
+      "daoIsLive": "{{daoName}} DAO'nuz artık blok zincirinde yayında",
+      "daoFullyFunctional": "DAO'nuz artık yönetişim yetenekleri, token yönetimi ve hazine kontrolleri ile tamamen işlevseldir.",
+      "contractAddresses": "Sözleşme Adresleri",
+      "daoCoreContract": "DAO Çekirdek Sözleşmesi",
+      "tokenContract": "Token Sözleşmesi",
+      "transactionDetails": "İşlem Detayları",
+      "transactionHash": "İşlem Karması",
+      "viewOnBlockExplorer": "Blok Gezgininde Görüntüle",
+      "blockExplorerDescription": "Durumunu izlemek ve dağıtımı doğrulamak için işlem ayrıntılarınızı blok zinciri gezgininde görüntüleyebilirsiniz.",
+      "nextSteps": "Sonraki Adımlar",
+      "registerYourDao": "DAO'nuzu Kaydedin",
+      "registerDescription": "Eylemler önermek, oy kullanmak veya varlıkları yönetmek için DAO'nuzu bir yönetim arayüzüne bağlayın.",
+      "stakeYourToken": "Token'ınızı Stake Edin",
+      "stakeDescription": "DAO'nuzun yönetişim sisteminde oy gücü kazanmak için başlangıç token'ınızı stake edin.",
+      "createProposal": "Bir Teklif Oluşturun",
+      "proposalDescription": "Token dağıtmak veya hazine varlıklarını yönetmek için ilk yönetişim teklifinizi oluşturun."
+    }
+  },
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "minLength": "En az {{min}} karakter olmalıdır",
+    "maxLength": "En fazla {{max}} karakter olmalıdır",
+    "invalidSymbol": "Sembol 2-5 büyük harf olmalıdır",
+    "positiveNumber": "Pozitif bir sayı olmalıdır",
+    "maxSupply": "{{max}} değerinden küçük veya eşit olmalıdır"
+  },
+  "tokenDistribution": {
+    "title": "Token Dağıtımı",
+    "totalSupply": "Toplam Arz",
+    "details": "Token Dağıtım Detayları",
+    "creator": "Oluşturan (Siz)",
+    "initialToken": "başlangıç yönetişim token'ı",
+    "treasury": "Hazine",
+    "controlledByDao": "DAO tarafından kontrol edilir",
+    "initialTokenForGovernance": "Yönetişim için başlangıç token'ı",
+    "controlledByDaoGovernance": "DAO yönetişimi tarafından kontrol edilir",
+    "howItWorks": {
+      "title": "Token Dağıtımı Nasıl Çalışır?",
+      "description": "Dağıtımdan sonra, yönetişime katılmaya başlamak için 1 token alacaksınız. Kalan token'lar hazinede saklanacak ve topluluk tarafından onaylanan yönetişim teklifleri aracılığıyla dağıtılabilecektir."
+    }
+  },
+  "navigation": {
+    "backToNetwork": "Ağa Geri Dön",
+    "continueToReview": "Gözden Geçirmeye Devam Et",
+    "continueToDetails": "DAO Detaylarına Devam Et",
+    "backToDetails": "DAO Detaylarına Geri Dön",
+    "continueToPreDeployment": "Ön Dağıtıma Devam Et",
+    "processing": "İşleniyor..."
+  },
+  "network": {
+    "wrongNetwork": "Yanlış Ağ",
+    "switchToSupported": "DAO'nuzu oluşturmak için lütfen desteklenen bir ağa geçin",
+    "switchingNetwork": "Ağ değiştiriliyor... Lütfen cüzdanınızda onaylayın.",
+    "switchFailed": "Ağ değiştirilemedi. Lütfen cüzdanınızı kontrol edin ve tekrar deneyin.",
+    "switching": "Değiştiriliyor...",
+    "switchTo": "{{name}} ağına geç",
+    "tooltip": "DAO'nuzun dağıtılacağı blok zinciri ağı. Her ağın farklı özellikleri ve ücretleri vardır.",
+    "features": "Ağ Özellikleri",
+    "notSupported": "Mevcut ağınız desteklenmiyor. Lütfen desteklenen bir ağa geçin.",
+    "note": "Not",
+    "sepoliaNote": "Hızlı test için Sepolia DAO'ları 5 dakikalık bir oylama süresiyle dağıtılır."
+  },
+  "version": {
+    "tooltip": "Dağıtılacak DAO sözleşmelerinin sürümü. Daha yeni sürümler ek özellikler veya iyileştirmeler içerebilir."
+  },
+  "architecture": {
+    "title": "DAO Mimarınız",
+    "daoCore": "DAO Çekirdeği",
+    "daoCoreDescription": "Topluluk kararlarının teklifleri, oylaması ve yürütülmesi için merkezi yönetişim merkezi",
+    "daoToken": "DAO Token'ı",
+    "daoTokenDescription": "Özelleştirilebilir vergi mekanizmalarına ve dağıtım kontrollerine sahip ERC20 yönetişim token'ı",
+    "treasury": "Hazine",
+    "treasuryDescription": "Yönetişim teklifleriyle kontrol edilen DAO varlıklarını yönetmek için güvenli kasa",
+    "staking": "Staking",
+    "stakingDescription": "Uzun vadeli sahipler için oy gücü çarpanlarıyla zaman tabanlı staking",
+    "upgradeableProxies": "Tüm sözleşmeler, en son uygulamalarla yükseltilebilir proxy'ler olarak dağıtılır"
+  },
+  "features": {
+    "governance": {
+      "title": "Yönetişim",
+      "description": "Teklifler oluşturun ve önemli kararlar hakkında oy verin"
+    },
+    "treasury": {
+      "title": "Hazine",
+      "description": "Fonları yönetin ve kaynakları tahsis edin"
+    },
+    "token": {
+      "title": "Yönetişim Token'ı",
+      "description": "Oy hakları ve yönetişim için ERC-20 token'ı"
+    },
+    "multiSig": {
+      "title": "Çoklu İmza",
+      "description": "Kritik eylemler için birden fazla onay gerektirir"
+    }
+  },
+  "wallet": {
+    "connected": "Cüzdan Bağlandı",
+    "readyToDeploy": "Cüzdanınız bağlı ve DAO'yu dağıtmaya hazır",
+    "disconnect": "Bağlantıyı Kes",
+    "address": "Cüzdan Adresi",
+    "copy": "Kopyala",
+    "balance": "Bakiye",
+    "connectionRequired": "Cüzdan Bağlantısı Gerekli",
+    "connectionMessage": "DAO'nuzu dağıtmak için bir Web3 cüzdanı bağlamanız gerekir. Bu size şunları sağlar:",
+    "signTransaction": "Dağıtım işlemini imzala",
+    "becomeAdmin": "İlk DAO yöneticisi ol",
+    "receiveToken": "Yönetişim token'ınızı alın",
+    "connect": "Cüzdanı Bağla"
+  },
+  "deploymentCost": {
+    "title": "Tahmini Dağıtım Maliyeti",
+    "description": "DAO'nuzu dağıtmak yaklaşık olarak şu kadara mal olacaktır:",
+    "calculating": "Hesaplanıyor...",
+    "note": "Not: Gerçek maliyet, dağıtım sırasındaki ağ koşullarına göre değişebilir.",
+    "gasUnits": "≈ {{units}} gaz birimi"
+  },
+  "whatHappensNext": {
+    "title": "Sırada Ne Var?",
+    "description": "\"Ön Dağıtıma Devam Et\"e tıkladığınızda şunlar olacaktır:",
+    "checkBalance": "Yeterli paranız olduğundan emin olmak için cüzdan bakiyenizi kontrol edeceğiz",
+    "simulateTransaction": "Başarılı olacağını doğrulamak için işlemi simüle edeceğiz",
+    "confirmTransaction": "Cüzdanınız işlemi onaylamanızı isteyecektir",
+    "deployContracts": "DAO sözleşmeleri {{network}} ağına dağıtılacaktır",
+    "receiveToken": "Yönetişime katılmaya başlamak için 1 {{symbol}} token alacaksınız",
+    "treasuryStorage": "Kalan {{amount}} {{symbol}} hazinede saklanacaktır"
+  },
+  "preDeployment": {
+    "title": "Ön Dağıtım Kontrolleri",
+    "description": "DAO dağıtımınızın başarılı olmasını sağlamak için birkaç kontrol yapacağız. Bu, başarısız işlemleri ve boşa harcanan gaz ücretlerini önlemeye yardımcı olur.",
+    "checklist": "Dağıtım Kontrol Listesi",
+    "balanceCheck": {
+      "title": "Cüzdan Bakiye Kontrolü",
+      "description": "Dağıtım için yeterli {{symbol}} paranızın olduğunu doğrulama"
+    },
+    "simulation": {
+      "title": "İşlem Simülasyonu",
+      "description": "Başarıyı sağlamak için {{network}} üzerinde dağıtımı simüle etme"
+    },
+    "signing": {
+      "title": "İşlem İmzalama",
+      "inProgress": "Lütfen cüzdanınızdaki işlemi imzalayın...",
+      "description": "DAO'yu dağıtmak için işlemi cüzdanınızla imzalayın"
+    },
+    "confirmation": {
+      "title": "İşlem Onayı",
+      "inProgress": "Blok zinciri onayı bekleniyor...",
+      "description": "İşlemin blok zincirinde onaylanmasını bekleyin"
+    },
+    "status": {
+      "passed": "Geçti",
+      "failed": "Başarısız Oldu",
+      "signed": "İmzalandı",
+      "confirmed": "Onaylandı"
+    },
+    "networkMismatch": {
+      "title": "Ağ Uyuşmazlığı",
+      "description": "Cüzdanınız {{current}} ağına bağlı, ancak dağıtım için {{selected}} ağını seçtiniz.",
+      "switching": "Ağ değiştiriliyor... Lütfen cüzdanınızda onaylayın.",
+      "switchFailed": "Otomatik olarak değiştirilemedi. Lütfen ağınızı cüzdanınızda manuel olarak değiştirin.",
+      "switchNeeded": "Devam etmek için lütfen ağınızı {{network}} olarak değiştirin.",
+      "switchTo": "{{network}} ağına geç"
+    },
+    "backToReview": "Gözden Geçirmeye Geri Dön"
+  },
+  "stepIndicator": {
+    "stepCount": "Adım {{current}} / {{total}}",
+    "steps": {
+      "network": {
+        "label": "Ağ",
+        "description": "Blok zinciri ağını seçin"
+      },
+      "daoDetails": {
+        "label": "DAO Detayları",
+        "description": "DAO ve token'ı yapılandırın"
+      },
+      "review": {
+        "label": "Gözden Geçir",
+        "description": "Yapılandırmayı doğrulayın"
+      },
+      "preDeploy": {
+        "label": "Ön Dağıtım",
+        "description": "Ön dağıtım kontrollerini çalıştırın"
+      },
+      "success": {
+        "label": "Başarı",
+        "description": "Yeni DAO'nuzu görüntüleyin"
+      }
+    }
+  },
+  "transaction": {
+    "waitingForSignature": "Lütfen işlemi imzalayın...",
+    "submitting": "İşlem gönderiliyor...",
+    "waitingForConfirmation": "Onay bekleniyor...",
+    "success": "İşlem başarılı!",
+    "error": "İşlem başarısız oldu",
+    "checkingBalance": "Cüzdan bakiyesi kontrol ediliyor...",
+    "balanceError": "Yetersiz bakiye",
+    "balanceCheckError": "Cüzdan bakiyesi kontrol edilemedi",
+    "simulating": "İşlem simüle ediliyor...",
+    "simulationError": "İşlem simülasyonu başarısız oldu",
+    "unexpectedError": "Beklenmeyen hata",
+    "unexpectedErrorDetails": "İşlem simülasyonu sırasında beklenmeyen bir hata oluştu",
+    "viewOnExplorer": "Gezginde Görüntüle",
+    "insufficientBalanceDetails": "Yetersiz bakiye: Bu işlemi tamamlamak için <strong>{{amount}} {{symbol}}</strong> daha ihtiyacınız var.",
+    "tipTransactionProcessing": "İpucu: İşleminiz hala işleniyor olabilir. Durumunu görmek için gezgini kontrol edin.",
+    "tipAddMoreFunds": "İpucu: Cüzdanınıza daha fazla para ekleyin ve tekrar deneyin.",
+    "tipIncreaseGasLimit": "İpucu: Cüzdan ayarlarınızda gaz limitini artırmayı deneyin.",
+    "tipIncreaseGasPrice": "İpucu: Cüzdan ayarlarınızda gaz fiyatını artırmayı deneyin.",
+    "tipResetWallet": "İpucu: Cüzdanınızın işlem geçmişini sıfırlamayı veya nonce'u manuel olarak ayarlamayı deneyin.",
+    "tipWalletDisconnected": "İpucu: Cüzdanınızın bağlantısı kesildi. Lütfen cüzdanınızı yeniden bağlayın ve tekrar deneyin.",
+    "refreshPage": "Sayfayı Yenile",
+    "tipWalletPermission": "İpucu: Cüzdanınızın bu sözleşmeyle etkileşim kurmak için izne ihtiyacı var. Cüzdanınızı açın ve izin isteklerini kontrol edin.",
+    "stepsToFix": "Düzeltme adımları:",
+    "stepOpenWallet": "Cüzdanınızı açın (MetaMask vb.)",
+    "stepLookForPermissions": "Bekleyen izin isteklerini arayın",
+    "stepGrantPermission": "Sözleşmeye izin verin",
+    "stepTryAgain": "İşlemi tekrar deneyin",
+    "noteRejectedTransaction": "Not: Cüzdanınızdaki işlemi reddettiniz. Bu kasıtsızsa, lütfen tekrar deneyin.",
+    "retryTransaction": "İşlemi Yeniden Dene",
+    "simulationErrorMessage": "Sözleşme simülasyonu bir hatayla karşılaştı. Bu, sözleşme kısıtlamalarından veya ağ sorunlarından kaynaklanıyor olabilir."
+  }
+}

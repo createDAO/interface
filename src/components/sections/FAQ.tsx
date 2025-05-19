@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 import { SUPPORTED_NETWORKS } from '../../config/networks';
 
 interface FAQItemProps {
@@ -37,6 +38,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
 };
 
 const FAQ: React.FC = () => {
+  const { t } = useTranslation('faq');
   const availableNetworks = SUPPORTED_NETWORKS
     .filter((n) => n.isAvailable)
     .map((n) => n.name)
@@ -44,24 +46,20 @@ const FAQ: React.FC = () => {
 
   const faqs = [
     {
-      question: 'Is it really free?',
-      answer: 'Yes! CreateDAO is completely free to use. You only pay the blockchain\'s network gas fees when deploying your DAO.',
+      question: t('questions.isFree.question'),
+      answer: t('questions.isFree.answer'),
     },
     {
-      question: 'Is the code secure?',
-      answer: 'Our smart contracts have not been audited yet, but audits by leading security firms are planned soon. The code is open source for full transparency in the meantime.',
+      question: t('questions.isSecure.question'),
+      answer: t('questions.isSecure.answer'),
     },
     {
-      question: 'Which networks are supported?',
-      answer: (
-        <>
-          We currently support {availableNetworks}. More networks are coming soon based on community feedback.
-        </>
-      ),
+      question: t('questions.supportedNetworks.question'),
+      answer: t('questions.supportedNetworks.answer', { networks: availableNetworks }),
     },
     {
-      question: 'Can I customize my DAO?',
-      answer: 'Not yet, but in the future you\'ll be able to customize voting periods, proposal thresholds, and other governance parameters to fit your community\'s needs.',
+      question: t('questions.customization.question'),
+      answer: t('questions.customization.answer'),
     },
   ];
 
@@ -70,10 +68,10 @@ const FAQ: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Common Questions
+            {t('title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Everything you need to know about CreateDAO.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -85,7 +83,7 @@ const FAQ: React.FC = () => {
 
         <div className="mt-12 text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            Have more questions? Contact our community.
+            {t('contactText')}
           </p>
         </div>
       </div>

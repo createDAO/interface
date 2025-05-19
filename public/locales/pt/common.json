@@ -1,0 +1,39 @@
+{
+  "buttons": {
+    "create": "Criar DAO",
+    "learnMore": "Saiba mais",
+    "connect": "Conectar",
+    "deploy": "Implantar",
+    "review": "Revisar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "submit": "Enviar",
+    "cancel": "Cancelar"
+  },
+  "labels": {
+    "name": "Nome",
+    "token": "Token",
+    "symbol": "Símbolo",
+    "supply": "Fornecimento",
+    "network": "Rede",
+    "version": "Versão",
+    "gas": "Gás",
+    "deploymentReady": "Pronto para implantação"
+  },
+  "metadata": {
+    "title": "CreateDAO - Crie sua DAO sem esforço",
+    "description": "Lance sua organização autônoma descentralizada em múltiplos blockchains com apenas alguns cliques. Sem necessidade de codificação."
+  },
+  "footer": {
+    "contact": "Entre em contato com nossa comunidade",
+    "copyright": "© {{year}} CreateDAO. Todos os direitos reservados.",
+    "terms": "Termos de Serviço",
+    "privacy": "Política de Privacidade"
+  },
+  "errors": {
+    "general": "Ocorreu um erro",
+    "tryAgain": "Por favor, tente novamente"
+  },
+  "languageName": "Português",
+  "languageSelector": "Selecionar idioma"
+}

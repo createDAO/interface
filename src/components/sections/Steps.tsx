@@ -1,12 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 const Steps: React.FC = () => {
+  const { t } = useTranslation('home');
+  
   const steps = [
     {
       number: 1,
-      title: 'Connect Wallet',
-      description: 'Use MetaMask or WalletConnect to get started.',
+      title: t('steps.step1.title'),
+      description: t('steps.step1.description'),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
@@ -17,8 +20,8 @@ const Steps: React.FC = () => {
     },
     {
       number: 2,
-      title: 'Enter DAO Details',
-      description: 'Name your DAO and set basic governance parameters.',
+      title: t('steps.step2.title'),
+      description: t('steps.step2.description'),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M12 20h9"></path>
@@ -29,8 +32,8 @@ const Steps: React.FC = () => {
     },
     {
       number: 3,
-      title: 'Deploy',
-      description: 'Confirm transaction and your DAO is ready to use.',
+      title: t('steps.step3.title'),
+      description: t('steps.step3.description'),
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
@@ -45,10 +48,10 @@ const Steps: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Three Simple Steps
+            {t('steps.title')}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Creating a DAO has never been easier. Follow these simple steps to launch your organization.
+            {t('steps.subtitle')}
           </p>
         </div>
 
@@ -78,12 +81,12 @@ const Steps: React.FC = () => {
         <div className="mt-16 text-center">
           <div className="inline-flex items-center mb-8">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
-            <span className="mx-4 text-gray-500 dark:text-gray-400">Ready to start?</span>
+            <span className="mx-4 text-gray-500 dark:text-gray-400">{t('steps.readyToStart')}</span>
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-700"></div>
           </div>
           <div>
             <Link href="/create" className="inline-block bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 cursor-pointer">
-              Create Your DAO
+              {t('steps.createButton')}
             </Link>
           </div>
         </div>

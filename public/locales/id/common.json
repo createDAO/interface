@@ -1,0 +1,51 @@
+{
+  "buttons": {
+    "create": "Buat DAO",
+    "learnMore": "Pelajari Lebih Lanjut",
+    "connect": "Hubungkan",
+    "deploy": "Terapkan",
+    "review": "Tinjau",
+    "back": "Kembali",
+    "next": "Lanjut",
+    "submit": "Kirim",
+    "cancel": "Batal"
+  },
+  "labels": {
+    "name": "Nama",
+    "token": "Token",
+    "symbol": "Simbol",
+    "supply": "Pasokan",
+    "network": "Jaringan",
+    "version": "Versi",
+    "gas": "Gas",
+    "deploymentReady": "Siap Diterapkan"
+  },
+  "metadata": {
+    "title": "CreateDAO - Buat DAO Anda dengan Mudah",
+    "description": "Luncurkan organisasi otonom terdesentralisasi Anda di berbagai blockchain hanya dengan beberapa klik. Tidak perlu coding."
+  },
+  "footer": {
+    "description": "Cara termudah untuk membuat dan menerapkan DAO di berbagai blockchain.",
+    "version": "Versi",
+    "commit": "Komit",
+    "resources": "Sumber Daya",
+    "documentation": "Dokumentasi",
+    "tutorials": "Tutorial",
+    "coreConcepts": "Konsep Inti",
+    "community": "Komunitas",
+    "github": "GitHub",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "legal": "Legal",
+    "contact": "Hubungi komunitas kami",
+    "copyright": "© {{year}} CreateDAO. Hak cipta dilindungi undang-undang.",
+    "terms": "Ketentuan Layanan",
+    "privacy": "Kebijakan Privasi"
+  },
+  "errors": {
+    "general": "Terjadi kesalahan",
+    "tryAgain": "Silakan coba lagi"
+  },
+  "languageName": "Bahasa Indonesia",
+  "languageSelector": "Pilih bahasa"
+}

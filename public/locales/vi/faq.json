@@ -1,0 +1,23 @@
+{
+  "title": "Câu hỏi Thường gặp",
+  "subtitle": "Mọi thứ bạn cần biết về CreateDAO.",
+  "contactText": "Có thêm câu hỏi? Liên hệ với cộng đồng của chúng tôi.",
+  "questions": {
+    "isFree": {
+      "question": "Có thực sự miễn phí không?",
+      "answer": "Có! CreateDAO hoàn toàn miễn phí sử dụng. Bạn chỉ phải trả phí gas mạng của blockchain khi triển khai DAO của mình."
+    },
+    "isSecure": {
+      "question": "Mã có an toàn không?",
+      "answer": "Các hợp đồng thông minh của chúng tôi chưa được kiểm toán, nhưng các cuộc kiểm toán bởi các công ty bảo mật hàng đầu đã được lên kế hoạch sớm. Mã nguồn mở để đảm bảo tính minh bạch hoàn toàn trong thời gian chờ đợi."
+    },
+    "supportedNetworks": {
+      "question": "Những mạng lưới nào được hỗ trợ?",
+      "answer": "Chúng tôi hiện hỗ trợ {{networks}}. Nhiều mạng lưới khác sẽ sớm ra mắt dựa trên phản hồi của cộng đồng."
+    },
+    "customization": {
+      "question": "Tôi có thể tùy chỉnh DAO của mình không?",
+      "answer": "Chưa, nhưng trong tương lai bạn sẽ có thể tùy chỉnh thời gian bỏ phiếu, ngưỡng đề xuất và các thông số quản trị khác để phù hợp với nhu cầu của cộng đồng bạn."
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "home": "ホーム",
+  "features": "特徴",
+  "howItWorks": "仕組み",
+  "networks": "ネットワーク",
+  "deployedDAOs": "デプロイされたDAO",
+  "createDAO": "DAOを作成",
+  "daoFeatures": "DAOの特徴",
+  "menu": {
+    "open": "メニューを開く",
+    "close": "メニューを閉じる"
+  },
+  "theme": {
+    "toggle": "テーマを切り替える",
+    "light": "ライトモード",
+    "dark": "ダークモード"
+  }
+}

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
 import Navigation from './Navigation';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,12 +41,14 @@ const Header: React.FC = () => {
         <nav className="hidden md:flex items-center space-x-8">
           <Navigation />
           <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
         </nav>
 
         {/* Mobile Navigation */}
         <div className="flex items-center space-x-4 md:hidden">
+          <LanguageSwitcher />
           <ThemeToggle />
           <button
             onClick={toggleMenu}
@@ -62,7 +65,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-96 opacity-100 pointer-events-auto' : 'max-h-0 opacity-0 pointer-events-none'}`}>
+      <div className={`md:hidden bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-[500px] opacity-100 pointer-events-auto' : 'max-h-0 opacity-0 pointer-events-none'}`}>
         <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
           <Navigation isMobile={true} />
         </div>

@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "title": "Deployed DAOs | CreateDAO",
+    "description": "View all DAOs deployed through CreateDAO"
+  },
+  "header": {
+    "title": "Deployed DAOs",
+    "subtitle": "Browse all DAOs deployed through the CreateDAO platform"
+  },
+  "filters": {
+    "network": {
+      "label": "Filter by Network",
+      "all": "All Networks",
+      "comingSoon": "(Coming Soon)"
+    }
+  },
+  "table": {
+    "headers": {
+      "name": "DAO Name",
+      "network": "Network",
+      "token": "Token",
+      "address": "DAO Address",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "content": {
+      "version": "Version",
+      "creator": "Creator"
+    }
+  },
+  "actions": {
+    "viewExplorer": "View on Explorer",
+    "createDao": "Create a DAO"
+  },
+  "status": {
+    "loading": "Loading DAOs...",
+    "noResults": {
+      "title": "No DAOs Found",
+      "allNetworks": "No DAOs have been deployed yet.",
+      "specificNetwork": "No DAOs have been deployed on {{network}} yet."
+    }
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results"
+  },
+  "dates": {
+    "unknown": "Unknown",
+    "invalid": "Invalid date"
+  },
+  "errors": {
+    "loadFailed": "Failed to load DAOs"
+  }
+}

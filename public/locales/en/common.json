@@ -1,0 +1,51 @@
+{
+  "buttons": {
+    "create": "Create DAO",
+    "learnMore": "Learn More",
+    "connect": "Connect",
+    "deploy": "Deploy",
+    "review": "Review",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "labels": {
+    "name": "Name",
+    "token": "Token",
+    "symbol": "Symbol",
+    "supply": "Supply",
+    "network": "Network",
+    "version": "Version",
+    "gas": "Gas",
+    "deploymentReady": "Deployment ready"
+  },
+  "metadata": {
+    "title": "CreateDAO - Create Your DAO Effortlessly",
+    "description": "Launch your decentralized autonomous organization on multiple blockchains with just a few clicks. No coding required."
+  },
+  "footer": {
+    "description": "The easiest way to create and deploy DAOs on multiple blockchains.",
+    "version": "Version",
+    "commit": "Commit",
+    "resources": "Resources",
+    "documentation": "Documentation",
+    "tutorials": "Tutorials",
+    "coreConcepts": "Core Concepts",
+    "community": "Community",
+    "github": "GitHub",
+    "discord": "Discord",
+    "telegram": "Telegram",
+    "legal": "Legal",
+    "contact": "Contact our community",
+    "copyright": "© {{year}} CreateDAO. All rights reserved.",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
+  },
+  "errors": {
+    "general": "An error occurred",
+    "tryAgain": "Please try again"
+  },
+  "languageName": "English",
+  "languageSelector": "Select language"
+}

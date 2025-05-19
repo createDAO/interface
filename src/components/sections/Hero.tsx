@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation(['home', 'common', 'dao']);
   const [showNetworkDropdown, setShowNetworkDropdown] = useState(false);
   const [typedText, setTypedText] = useState('');
   const [progress, setProgress] = useState(0);
@@ -50,22 +52,27 @@ const Hero: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              Create Your DAO <span className="text-primary-600 dark:text-primary-400">Effortlessly</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6" 
+                dangerouslySetInnerHTML={{ 
+                  __html: t('home:hero.title').replace(
+                    '<highlight>', 
+                    '<span class="text-primary-600 dark:text-primary-400">'
+                  ).replace('</highlight>', '</span>') 
+                }}>
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-              Launch your decentralized autonomous organization on multiple blockchains with just a few clicks. No coding required.
+              {t('home:hero.description')}
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <Link href="/create" className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
-                Create DAO
+                {t('common:buttons.create')}
               </Link>
               <Link href="#features" className="bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 border border-primary-600 dark:border-primary-400 px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
-                Learn More
+                {t('common:buttons.learnMore')}
               </Link>
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-              Only pay network gas fees for deployment
+              {t('home:hero.gasFeeNote')}
             </p>
           </div>
           <div className="md:w-1/2">
@@ -136,7 +143,7 @@ const Hero: React.FC = () => {
                     {/* DAO Name input */}
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">Name</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">{t('common:labels.name')}</span>
                       </div>
                       <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded h-8 pl-16 pr-3 flex items-center text-xs text-gray-800 dark:text-gray-200">
                         <span className="inline-block">{typedText}</span>
@@ -147,7 +154,7 @@ const Hero: React.FC = () => {
                     {/* Token Name input */}
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">Token</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">{t('common:labels.token')}</span>
                       </div>
                       <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded h-8 pl-16 pr-3 flex items-center text-xs text-gray-800 dark:text-gray-200">
                         MyDAO Token
@@ -158,7 +165,7 @@ const Hero: React.FC = () => {
                     <div className="flex space-x-2">
                       <div className="relative flex-1">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <span className="text-xs text-gray-500 dark:text-gray-400">Symbol</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">{t('common:labels.symbol')}</span>
                         </div>
                         <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded h-8 pl-16 pr-3 flex items-center text-xs text-gray-800 dark:text-gray-200">
                           MDT
@@ -166,7 +173,7 @@ const Hero: React.FC = () => {
                       </div>
                       <div className="relative flex-1">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <span className="text-xs text-gray-500 dark:text-gray-400">Supply</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">{t('common:labels.supply')}</span>
                         </div>
                         <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded h-8 pl-16 pr-3 flex items-center text-xs text-gray-800 dark:text-gray-200">
                           1,000,000
@@ -186,7 +193,7 @@ const Hero: React.FC = () => {
                     <div className="relative mt-4 group">
                       <div className="absolute inset-0 bg-primary-400 dark:bg-primary-600 rounded animate-pulse opacity-30"></div>
                       <div className="h-10 bg-primary-500 dark:bg-primary-600 rounded flex items-center justify-center relative transition-all duration-200 group-hover:bg-primary-600 dark:group-hover:bg-primary-700 cursor-pointer">
-                        <span className="text-white text-sm font-medium group-hover:scale-105 transition-transform duration-200">Create DAO</span>
+                        <span className="text-white text-sm font-medium group-hover:scale-105 transition-transform duration-200">{t('common:buttons.create')}</span>
                       </div>
                     </div>
                   </div>
@@ -195,14 +202,14 @@ const Hero: React.FC = () => {
                   <div className="space-y-2">
                     <div className="flex items-center">
                       <div className="h-3 w-3 rounded-full bg-green-500 mr-2 animate-ping opacity-75"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24 text-xs text-gray-600 dark:text-gray-400 flex items-center px-2">Gas: 0.005 ETH</div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24 text-xs text-gray-600 dark:text-gray-400 flex items-center px-2">{t('common:labels.gas')}: 0.005 ETH</div>
                     </div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32 text-xs text-gray-600 dark:text-gray-400 flex items-center px-2">Deployment ready</div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32 text-xs text-gray-600 dark:text-gray-400 flex items-center px-2">{t('common:labels.deploymentReady')}</div>
                   </div>
                   <div className="relative">
                     <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
                     <div className="h-10 w-24 bg-primary-600 dark:bg-primary-500 rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors duration-200 cursor-pointer">
-                      <span className="text-white text-xs">Connect</span>
+                      <span className="text-white text-xs">{t('common:buttons.connect')}</span>
                     </div>
                   </div>
                 </div>
