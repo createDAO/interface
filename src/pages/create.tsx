@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
 import { useChainId, useSwitchChain, useAccount } from 'wagmi';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
@@ -16,6 +17,7 @@ import { hasDeployedContracts } from '../utils/contracts';
 import { BalanceCheckResult, SimulationResult } from '../types/transaction';
 
 const CreateDAO: React.FC = () => {
+  const { t } = useTranslation('create');
   const { address } = useAccount();
   const chainId = useChainId();
   const { isPending: isSwitchingNetwork } = useSwitchChain();
@@ -450,12 +452,12 @@ const CreateDAO: React.FC = () => {
   return (
     <Layout>
       <Head>
-        <title>Create Your DAO | CreateDAO</title>
+        <title>{`${t('title')} | CreateDAO`}</title>
         <meta name="description" content="Create your own DAO with customizable governance and token parameters" />
       </Head>
 
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Create Your DAO</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">{t('title')}</h1>
 
         {/* Step Indicator */}
         <StepIndicator

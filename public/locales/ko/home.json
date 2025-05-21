@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "DAO를 <highlight>손쉽게</highlight> 만드세요",
-    "description": "몇 번의 클릭만으로 여러 블록체인에 탈중앙화 자율 조직을 시작하세요. 코딩이 필요 없습니다.",
+    "description": "지원되는 모든 블록체인에서 몇 분 만에 탈중앙화된 조직을 만드십시오. 코딩이 필요하지 않습니다.",
     "gasFeeNote": "배포 시 네트워크 가스비만 지불"
   },
   "features": {

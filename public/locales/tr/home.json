@@ -1,7 +1,7 @@
 {
   "hero": {
     "title": "DAO'nuzu <highlight>Zahmetsizce</highlight> Oluşturun",
-    "description": "Merkezi olmayan otonom organizasyonunuzu yalnızca birkaç tıklamayla birden fazla blok zincirinde başlatın. Kodlama gerekmez.",
+    "description": "Desteklenen herhangi bir blok zincirinde dakikalar içinde merkezi olmayan bir organizasyon oluşturun. Kodlama gerekmez.",
     "gasFeeNote": "Dağıtım için yalnızca ağ gaz ücretlerini ödeyin"
   },
   "features": {
