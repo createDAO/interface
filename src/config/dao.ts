@@ -24,8 +24,8 @@ interface FactoryAddressConfig {
 // Map of chainId to factory address
 const FACTORY_ADDRESSES: Record<number, FactoryAddressConfig> = {
   1: {
-    isAvailable: false,
-    comingSoon: "Coming Soon",
+    isAvailable: true,
+    address: "0x22f38c01222E07Efe0B7E0409EF9235B6Ab641d6",
   },
   56: {
     isAvailable: false,

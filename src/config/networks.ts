@@ -35,7 +35,7 @@ const mainNetworks: NetworkInfo[] = [
     name: "Ethereum",
     isTestnet: false,
     icon: ethereumIcon,
-    isAvailable: false,
+    isAvailable: true,
     nativeCurrency: {
       name: "Ether",
       symbol: "ETH",
