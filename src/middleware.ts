@@ -8,7 +8,6 @@ export function middleware(request: NextRequest) {
   if (pathname.startsWith('/_next/data/')) {
     // Extract locale and page from the path
     const pathParts = pathname.split('/');
-    const buildId = pathParts[3];
     const locale = pathParts[4];
     const page = pathParts[5]?.replace('.json', '');
 

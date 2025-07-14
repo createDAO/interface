@@ -1,14 +1,14 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+// import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
 
 const Custom404: React.FC = () => {
-  const { t } = useTranslation('common');
+  // const { t } = useTranslation('common');
 
   return (
     <Layout>
@@ -26,7 +26,7 @@ const Custom404: React.FC = () => {
               Page Not Found
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mb-8">
-              The page you're looking for doesn't exist or has been moved.
+              The page you&apos;re looking for doesn&apos;t exist or has been moved.
             </p>
           </div>
 
@@ -37,7 +37,7 @@ const Custom404: React.FC = () => {
             >
               Go Home
             </Link>
-            
+
             <div className="flex justify-center space-x-4 text-sm">
               <Link
                 href="/create"

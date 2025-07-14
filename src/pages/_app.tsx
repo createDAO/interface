@@ -10,14 +10,6 @@ import ErrorBoundaryWrapper from '../components/ui/ErrorBoundaryWrapper';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import '../styles/globals.css';
 
-// Error handler for i18n-related issues
-const handleI18nError = (error: Error) => {
-  if (process.env.NODE_ENV === 'development') {
-    console.warn('i18n error:', error);
-  }
-  // Don't throw the error, just log it
-};
-
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient({
