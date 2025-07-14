@@ -1,6 +1,6 @@
 {
   "name": "createdao",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -24,6 +24,7 @@
     "url": "https://github.com/createDAO/interface"
   },
   "dependencies": {
+    "@sentry/nextjs": "^9.38.0",
     "@tanstack/react-query": "^5.74.11",
     "firebase": "^11.6.0",
     "i18next": "^25.1.2",
