@@ -24,5 +24,20 @@ module.exports = {
     bindI18n: 'languageChanged loaded',
     bindI18nStore: 'added removed',
     transKeepBasicHtmlNodesFor: ['br', 'strong', 'i', 'p', 'span'],
+  },
+  
+  // Add fallback handling for missing translations
+  fallbackLng: 'en',
+  
+  // Ensure all namespaces are loaded
+  ns: ['common', 'navigation', 'home', 'create', 'daos', 'dao-features', 'faq'],
+  defaultNS: 'common',
+  
+  // Handle missing keys gracefully
+  parseMissingKeyHandler: (key) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`Missing translation key: ${key}`);
+    }
+    return key;
   }
 }

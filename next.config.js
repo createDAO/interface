@@ -45,6 +45,23 @@ const nextConfig = {
   // Package import optimization for better performance
   experimental: {
     optimizePackageImports: ['wagmi', 'firebase/firestore', 'firebase/app'],
+    // Reduce aggressive prefetching to minimize 404 requests
+    linkNoTouchStart: true,
+  },
+  
+  // Optimize static generation for i18n
+  trailingSlash: false,
+  
+  // Add custom webpack config to handle missing locale files gracefully
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Handle missing locale files on client side
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
   },
   
   // Configure CSS handling

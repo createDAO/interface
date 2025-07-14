@@ -11,8 +11,23 @@ import {
 let walletConnectInstance: ReturnType<typeof walletConnect> | null = null;
 const getWalletConnectConnector = () => {
   if (!walletConnectInstance) {
+    const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID;
+    
+    if (!projectId) {
+      throw new Error("WalletConnect Project ID is required. Please set NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID in your environment variables.");
+    }
+
     walletConnectInstance = walletConnect({
-      projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "",
+      projectId,
+      metadata: {
+        name: "CreateDAO",
+        description: "Create a decentralized organization on any supported blockchain in minutes.",
+        url: "https://createdao.org",
+        icons: "https://createdao.org/favicon.png"
+      },
+      qrModalOptions: {
+        themeMode: 'dark',
+      },
     });
   }
   return walletConnectInstance;
@@ -93,7 +108,13 @@ for (const chain of chains) {
 const config = createConfig({
   chains,
   connectors: [
-    metaMask(),
+    metaMask({
+      dappMetadata: {
+        name: "CreateDAO",
+        url: typeof window !== 'undefined' ? window.location.origin : "https://createdao.org",
+        iconUrl: typeof window !== 'undefined' ? `${window.location.origin}/favicon.png` : "https://createdao.org/favicon.png"
+      }
+    }),
     coinbaseWallet({
       appName: "CreateDAO",
     }),

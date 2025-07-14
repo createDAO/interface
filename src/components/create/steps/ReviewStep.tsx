@@ -147,8 +147,8 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
   // Estimated gas for DAO deployment (1.4 million gas units)
   const ESTIMATED_GAS_UNITS = 1400000;
 
-  // Calculate estimated cost in native token
-  const calculateGasCost = () => {
+  // Calculate estimated cost in native token (memoized to prevent infinite re-renders)
+  const estimatedCost = React.useMemo(() => {
     // Use maxFeePerGas for EIP-1559 networks, or gasPrice for legacy networks
     const feePerGas = feesData?.maxFeePerGas || feesData?.gasPrice;
     if (!feePerGas) return null;
@@ -163,9 +163,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
       cost: parseFloat(estimatedCostInEth).toFixed(6),
       symbol
     };
-  };
-
-  const estimatedCost = calculateGasCost();
+  }, [feesData?.maxFeePerGas, feesData?.gasPrice, selectedNetworkId]);
 
   // Call the callback whenever the estimated cost changes
   React.useEffect(() => {

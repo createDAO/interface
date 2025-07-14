@@ -22,7 +22,7 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({
     
     // Clean up
     return () => clearInterval(interval);
-  }, [duration]);
+  }, []); // Remove duration from dependencies to prevent infinite loop
   
   return (
     <div className={`transition-transform duration-300 ease-in-out ${isAnimating ? 'scale-110' : 'scale-100'}`}>
