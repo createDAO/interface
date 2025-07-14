@@ -23,7 +23,7 @@ const getWalletConnectConnector = () => {
         name: "CreateDAO",
         description: "Create a decentralized organization on any supported blockchain in minutes.",
         url: "https://createdao.org",
-        icons: "https://createdao.org/favicon.png"
+        icons: ["https://createdao.org/favicon.png"]
       },
       qrModalOptions: {
         themeMode: 'dark',
