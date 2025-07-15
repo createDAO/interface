@@ -20,7 +20,7 @@ interface DAOsPageProps {
   initialNetwork: number | null;
 }
 
-const DAOsPage: React.FC<DAOsPageProps> = ({ initialPage, initialNetwork }) => {
+const DAOsPage: React.FC<DAOsPageProps> = () => {
   const router = useRouter();
   const { t } = useTranslation(['common', 'navigation', 'daos']);
   const { page: pageParam, network: networkParam } = router.query;
