@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
 import { getAllDAOs, getDAOsByNetwork, DAORecord } from '../services/firebase/dao';
@@ -15,7 +15,12 @@ import { SUPPORTED_NETWORKS, getExplorerUrl } from '../config/networks';
 // Page size constant
 const PAGE_SIZE = 10;
 
-const DAOsPage: React.FC = () => {
+interface DAOsPageProps {
+  initialPage: number;
+  initialNetwork: number | null;
+}
+
+const DAOsPage: React.FC<DAOsPageProps> = ({ initialPage, initialNetwork }) => {
   const router = useRouter();
   const { t } = useTranslation(['common', 'navigation', 'daos']);
   const { page: pageParam, network: networkParam } = router.query;
@@ -489,7 +494,31 @@ const DAOsPage: React.FC = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
+  // Parse query parameters
+  const page = Number(query.page) || 1;
+  const network = query.network ? Number(query.network) : null;
+  
+  // Validate page parameter
+  if (page < 1) {
+    return {
+      redirect: {
+        destination: '/daos',
+        permanent: false,
+      },
+    };
+  }
+  
+  // Validate network parameter if provided
+  if (network !== null && (!Number.isInteger(network) || network < 0)) {
+    return {
+      redirect: {
+        destination: '/daos',
+        permanent: false,
+      },
+    };
+  }
+
   return {
     props: {
       ...(await serverSideTranslations(locale || 'en', [
@@ -497,6 +526,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         'navigation',
         'daos'
       ], nextI18NextConfig)),
+      // Pass query parameters as props for SEO and initial state
+      initialPage: page,
+      initialNetwork: network,
     },
   };
 };
