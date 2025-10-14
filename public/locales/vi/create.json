@@ -206,7 +206,9 @@
     "checklist": "Danh sách kiểm tra Triển khai",
     "balanceCheck": {
       "title": "Kiểm tra Số dư Ví",
-      "description": "Xác minh bạn có đủ {{symbol}} để triển khai"
+      "description": "Xác minh bạn có đủ {{symbol}} để triển khai",
+      "sponsoredTitle": "Transaction Sponsorship",
+      "sponsoredDescription": "Your transaction is sponsored - no gas fees required"
     },
     "simulation": {
       "title": "Mô phỏng Giao dịch",
@@ -226,7 +228,8 @@
       "passed": "Đã qua",
       "failed": "Thất bại",
       "signed": "Đã ký",
-      "confirmed": "Đã xác nhận"
+      "confirmed": "Đã xác nhận",
+      "sponsored": "Sponsored"
     },
     "networkMismatch": {
       "title": "Không khớp Mạng lưới",
@@ -278,6 +281,7 @@
     "unexpectedErrorDetails": "Đã xảy ra lỗi không mong muốn trong quá trình mô phỏng giao dịch",
     "viewOnExplorer": "Xem trên Explorer",
     "insufficientBalanceDetails": "Không đủ số dư: Bạn cần thêm <strong>{{amount}} {{symbol}}</strong> để hoàn tất giao dịch này.",
+    "insufficientBalanceDetailsPlain": "Bạn cần thêm {{amount}} {{symbol}} để hoàn tất giao dịch này.",
     "tipTransactionProcessing": "Mẹo: Giao dịch của bạn có thể vẫn đang được xử lý. Kiểm tra trình khám phá để xem trạng thái của nó.",
     "tipAddMoreFunds": "Mẹo: Thêm tiền vào ví của bạn và thử lại.",
     "tipIncreaseGasLimit": "Mẹo: Thử tăng giới hạn gas trong cài đặt ví của bạn.",

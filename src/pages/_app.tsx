@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { AppProps } from 'next/app';
-import { WagmiProvider } from 'wagmi';
+import type { AppProps } from 'next/app';
+import { WagmiProvider, cookieToInitialState, type State } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { appWithTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
-import wagmiConfig from '../config/wagmi';
+import { getWagmiConfig } from '../config/wagmi';
 import ErrorBoundaryWrapper from '../components/ui/ErrorBoundaryWrapper';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps & { initialWagmiState?: State }) {
   const router = useRouter();
+  
+  // Create wagmi config fresh on mount to ensure proper connector rehydration
+  const [wagmiConfig] = useState(() => getWagmiConfig());
+  
+  // Get initial state from cookies for proper SSR hydration
+  const [initialState] = useState(() => {
+    if (typeof window !== 'undefined' && document.cookie) {
+      return cookieToInitialState(wagmiConfig, document.cookie);
+    }
+    return pageProps.initialWagmiState;
+  });
+  
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
@@ -29,23 +41,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     setMounted(true);
   }, []);
 
-  // Handle hydration mismatch by ensuring the component only renders fully on the client
-  const content = (
+  // Don't render until mounted to prevent double initialization of connectors
+  if (!mounted) {
+    return null;
+  }
+
+  return (
     <QueryClientProvider client={queryClient}>
-      <WagmiProvider config={wagmiConfig}>
+      <WagmiProvider config={wagmiConfig} initialState={initialState}>
         <ErrorBoundaryWrapper>
           <Component {...pageProps} key={router.locale} />
         </ErrorBoundaryWrapper>
       </WagmiProvider>
       {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
-  );
-
-  // Only render the full app after client-side hydration is complete
-  return mounted ? content : (
-    <div style={{ visibility: 'hidden' }}>
-      {content}
-    </div>
   );
 }
 

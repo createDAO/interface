@@ -181,7 +181,14 @@
     "signTransaction": "Sign the deployment transaction",
     "becomeAdmin": "Become the initial DAO admin",
     "receiveToken": "Receive your governance token",
-    "connect": "Connect Wallet"
+    "connect": "Connect Wallet",
+    "networkNotSupported": {
+      "title": "Network Not Supported",
+      "description": "Your wallet ({{connector}}) does not support {{network}}. Please choose a different network or use a different wallet.",
+      "supportedNetworks": "Supported networks by {{connector}}:",
+      "changeNetwork": "Change Network",
+      "switchWallet": "Switch Wallet"
+    }
   },
   "deploymentCost": {
     "title": "Estimated Deployment Cost",
@@ -206,7 +213,9 @@
     "checklist": "Deployment Checklist",
     "balanceCheck": {
       "title": "Wallet Balance Check",
-      "description": "Verifying you have enough {{symbol}} to deploy"
+      "description": "Verifying you have enough {{symbol}} to deploy",
+      "sponsoredTitle": "Transaction Sponsorship",
+      "sponsoredDescription": "Your transaction is sponsored - no gas fees required"
     },
     "simulation": {
       "title": "Transaction Simulation",
@@ -226,7 +235,8 @@
       "passed": "Passed",
       "failed": "Failed",
       "signed": "Signed",
-      "confirmed": "Confirmed"
+      "confirmed": "Confirmed",
+      "sponsored": "Sponsored"
     },
     "networkMismatch": {
       "title": "Network Mismatch",
@@ -278,6 +288,7 @@
     "unexpectedErrorDetails": "An unexpected error occurred during transaction simulation",
     "viewOnExplorer": "View on Explorer",
     "insufficientBalanceDetails": "Insufficient balance: You need <strong>{{amount}} {{symbol}}</strong> more to complete this transaction.",
+    "insufficientBalanceDetailsPlain": "You need {{amount}} {{symbol}} more to complete this transaction.",
     "tipTransactionProcessing": "Tip: Your transaction might still be processing. Check the explorer to see its status.",
     "tipAddMoreFunds": "Tip: Add more funds to your wallet and try again.",
     "tipIncreaseGasLimit": "Tip: Try increasing the gas limit in your wallet settings.",

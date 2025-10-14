@@ -206,7 +206,9 @@
     "checklist": "Daftar Periksa Penerapan",
     "balanceCheck": {
       "title": "Pemeriksaan Saldo Dompet",
-      "description": "Memverifikasi Anda memiliki cukup {{symbol}} untuk menerapkan"
+      "description": "Memverifikasi Anda memiliki cukup {{symbol}} untuk menerapkan",
+      "sponsoredTitle": "Transaction Sponsorship",
+      "sponsoredDescription": "Your transaction is sponsored - no gas fees required"
     },
     "simulation": {
       "title": "Simulasi Transaksi",
@@ -226,7 +228,8 @@
       "passed": "Lulus",
       "failed": "Gagal",
       "signed": "Ditandatangani",
-      "confirmed": "Dikonfirmasi"
+      "confirmed": "Dikonfirmasi",
+      "sponsored": "Sponsored"
     },
     "networkMismatch": {
       "title": "Ketidakcocokan Jaringan",
@@ -278,6 +281,7 @@
     "unexpectedErrorDetails": "Terjadi kesalahan tak terduga selama simulasi transaksi",
     "viewOnExplorer": "Lihat di Explorer",
     "insufficientBalanceDetails": "Saldo tidak mencukupi: Anda memerlukan <strong>{{amount}} {{symbol}}</strong> lagi untuk menyelesaikan transaksi ini.",
+    "insufficientBalanceDetailsPlain": "Anda memerlukan {{amount}} {{symbol}} lagi untuk menyelesaikan transaksi ini.",
     "tipTransactionProcessing": "Kiat: Transaksi Anda mungkin masih diproses. Periksa penjelajah untuk melihat statusnya.",
     "tipAddMoreFunds": "Kiat: Tambahkan lebih banyak dana ke dompet Anda dan coba lagi.",
     "tipIncreaseGasLimit": "Kiat: Coba tingkatkan batas gas di pengaturan dompet Anda.",

@@ -206,7 +206,9 @@
     "checklist": "Контрольный список развертывания",
     "balanceCheck": {
       "title": "Проверка баланса кошелька",
-      "description": "Проверка наличия достаточного количества {{symbol}} для развертывания"
+      "description": "Проверка наличия достаточного количества {{symbol}} для развертывания",
+      "sponsoredTitle": "Transaction Sponsorship",
+      "sponsoredDescription": "Your transaction is sponsored - no gas fees required"
     },
     "simulation": {
       "title": "Симуляция транзакции",
@@ -226,7 +228,8 @@
       "passed": "Пройдено",
       "failed": "Ошибка",
       "signed": "Подписано",
-      "confirmed": "Подтверждено"
+      "confirmed": "Подтверждено",
+      "sponsored": "Sponsored"
     },
     "networkMismatch": {
       "title": "Несоответствие сети",
@@ -278,6 +281,7 @@
     "unexpectedErrorDetails": "Во время симуляции транзакции произошла непредвиденная ошибка",
     "viewOnExplorer": "Посмотреть в обозревателе",
     "insufficientBalanceDetails": "Недостаточно средств: Вам нужно еще <strong>{{amount}} {{symbol}}</strong> для завершения этой транзакции.",
+    "insufficientBalanceDetailsPlain": "Вам нужно еще {{amount}} {{symbol}} для завершения этой транзакции.",
     "tipTransactionProcessing": "Совет: Ваша транзакция все еще может обрабатываться. Проверьте обозреватель, чтобы узнать ее статус.",
     "tipAddMoreFunds": "Совет: Пополните свой кошелек и попробуйте снова.",
     "tipIncreaseGasLimit": "Совет: Попробуйте увеличить лимит газа в настройках вашего кошелька.",

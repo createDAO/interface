@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useChainId, useAccount, useBalance, useSwitchChain } from 'wagmi';
+import { useChainId, useAccount, useBalance, useSwitchChain, useConfig } from 'wagmi';
 import { useTranslation } from 'next-i18next';
 import { parseEther } from 'viem';
 import { simulateContract } from '@wagmi/core';
-import config from '../../../config/wagmi';
 import { DAOFormData } from '../../../types/dao';
 import { TransactionState, BalanceCheckResult, SimulationResult } from '../../../types/transaction';
 import { SUPPORTED_NETWORKS } from '../../../config/networks';
@@ -44,9 +43,13 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
 }) => {
   const { t } = useTranslation('create');
   const chainId = useChainId();
-  const { address } = useAccount();
+  const { address, connector } = useAccount();
   const { data: balance } = useBalance({ address });
   const { switchChain, isPending: isSwitchingNetwork, error: switchError } = useSwitchChain();
+  const config = useConfig();
+  
+  // Check if the current connector is NYKNYC (which sponsors transactions)
+  const isNyknycConnector = connector?.id === 'nyknyc';
   const [checksPassed, setChecksPassed] = useState({
     balance: false,
     simulation: false
@@ -133,8 +136,25 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
   useEffect(() => {
     // Only proceed with checks if we're on the correct network
     if (chainId === selectedNetworkId) {
-      // Only trigger if not already checking/simulating or completed/error
-      if (!txState.isCheckingBalance && !txState.isBalanceChecked && !txState.isError) {
+      // If NYKNYC connector is active, skip balance check and mark as passed automatically
+      if (isNyknycConnector && !txState.isBalanceChecked && !txState.isError) {
+        const sponsoredResult: BalanceCheckResult = {
+          sufficient: true,
+          balance: BigInt(0), // Not relevant for sponsored transactions
+          required: BigInt(0), // Not relevant for sponsored transactions
+          symbol: 'Sponsored'
+        };
+        
+        setChecksPassed(prev => ({ ...prev, balance: true }));
+        setBalanceCheckStatus({
+          isChecking: false,
+          isChecked: true,
+          isPassed: true
+        });
+        onCheckBalanceComplete(sponsoredResult);
+      }
+      // Only trigger balance check if not NYKNYC and not already checking/simulating or completed/error
+      else if (!isNyknycConnector && !txState.isCheckingBalance && !txState.isBalanceChecked && !txState.isError) {
         setBalanceCheckStatus(prev => ({ ...prev, isChecking: true }));
         startBalanceCheck();
       }
@@ -147,7 +167,7 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
     }
     // Intentionally run when chainId or selectedNetworkId changes to re-trigger checks if needed
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chainId, selectedNetworkId, simulationStatus]);
+  }, [chainId, selectedNetworkId, simulationStatus, isNyknycConnector]);
 
   // Get network information
   const network = SUPPORTED_NETWORKS.find(n => n.id === chainId);
@@ -201,10 +221,10 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
               code: -1,
               name: 'InsufficientFundsError',
               shortMessage: t('transaction.balanceError'),
-              details: t('transaction.insufficientBalanceDetails', { 
+              details: t('transaction.insufficientBalanceDetailsPlain', { 
                 amount: neededEth.toFixed(6), 
                 symbol: balance.symbol 
-              }).replace(/<[^>]*>/g, '')
+              })
             });
           }
         } catch (error) {
@@ -478,15 +498,19 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
                   </div>
                 )}
                 <div>
-                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">{t('preDeployment.balanceCheck.title')}</h4>
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">
+                    {isNyknycConnector ? t('preDeployment.balanceCheck.sponsoredTitle') : t('preDeployment.balanceCheck.title')}
+                  </h4>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {t('preDeployment.balanceCheck.description', { symbol: network?.nativeCurrency?.symbol || 'ETH' })}
+                    {isNyknycConnector 
+                      ? t('preDeployment.balanceCheck.sponsoredDescription')
+                      : t('preDeployment.balanceCheck.description', { symbol: network?.nativeCurrency?.symbol || 'ETH' })}
                   </p>
                 </div>
               </div>
               {balanceCheckStatus.isChecked && balanceCheckStatus.isPassed && (
                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                  {t('preDeployment.status.passed')}
+                  {isNyknycConnector ? t('preDeployment.status.sponsored') : t('preDeployment.status.passed')}
                 </span>
               )}
             </div>

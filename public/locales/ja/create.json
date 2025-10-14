@@ -206,7 +206,9 @@
     "checklist": "デプロイチェックリスト",
     "balanceCheck": {
       "title": "ウォレット残高チェック",
-      "description": "デプロイに十分な{{symbol}}があることを確認しています"
+      "description": "デプロイに十分な{{symbol}}があることを確認しています",
+      "sponsoredTitle": "Transaction Sponsorship",
+      "sponsoredDescription": "Your transaction is sponsored - no gas fees required"
     },
     "simulation": {
       "title": "トランザクションシミュレーション",
@@ -226,7 +228,8 @@
       "passed": "合格",
       "failed": "失敗",
       "signed": "署名済み",
-      "confirmed": "確認済み"
+      "confirmed": "確認済み",
+      "sponsored": "Sponsored"
     },
     "networkMismatch": {
       "title": "ネットワークの不一致",
@@ -278,6 +281,7 @@
     "unexpectedErrorDetails": "トランザクションシミュレーション中に予期しないエラーが発生しました",
     "viewOnExplorer": "エクスプローラーで表示",
     "insufficientBalanceDetails": "残高不足: このトランザクションを完了するには、さらに<strong>{{amount}} {{symbol}}</strong>が必要です。",
+    "insufficientBalanceDetailsPlain": "このトランザクションを完了するには、さらに{{amount}} {{symbol}}が必要です。",
     "tipTransactionProcessing": "ヒント: トランザクションはまだ処理中である可能性があります。エクスプローラーでステータスを確認してください。",
     "tipAddMoreFunds": "ヒント: ウォレットに資金を追加して、もう一度お試しください。",
     "tipIncreaseGasLimit": "ヒント: ウォレット設定でガス制限を増やしてみてください。",

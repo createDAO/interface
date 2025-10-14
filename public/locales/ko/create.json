@@ -206,7 +206,9 @@
     "checklist": "배포 체크리스트",
     "balanceCheck": {
       "title": "지갑 잔액 확인",
-      "description": "배포할 {{symbol}}이 충분한지 확인 중"
+      "description": "배포할 {{symbol}}이 충분한지 확인 중",
+      "sponsoredTitle": "Transaction Sponsorship",
+      "sponsoredDescription": "Your transaction is sponsored - no gas fees required"
     },
     "simulation": {
       "title": "거래 시뮬레이션",
@@ -226,7 +228,8 @@
       "passed": "통과",
       "failed": "실패",
       "signed": "서명됨",
-      "confirmed": "확인됨"
+      "confirmed": "확인됨",
+      "sponsored": "Sponsored"
     },
     "networkMismatch": {
       "title": "네트워크 불일치",
@@ -278,6 +281,7 @@
     "unexpectedErrorDetails": "거래 시뮬레이션 중 예상치 못한 오류가 발생했습니다.",
     "viewOnExplorer": "탐색기에서 보기",
     "insufficientBalanceDetails": "잔액 부족: 이 거래를 완료하려면 <strong>{{amount}} {{symbol}}</strong>이(가) 더 필요합니다.",
+    "insufficientBalanceDetailsPlain": "이 거래를 완료하려면 {{amount}} {{symbol}}이(가) 더 필요합니다.",
     "tipTransactionProcessing": "팁: 거래가 아직 처리 중일 수 있습니다. 탐색기에서 상태를 확인하십시오.",
     "tipAddMoreFunds": "팁: 지갑에 자금을 더 추가하고 다시 시도하십시오.",
     "tipIncreaseGasLimit": "팁: 지갑 설정에서 가스 한도를 늘려보십시오.",

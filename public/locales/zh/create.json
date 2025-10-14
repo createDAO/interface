@@ -206,7 +206,9 @@
     "checklist": "部署检查清单",
     "balanceCheck": {
       "title": "钱包余额检查",
-      "description": "验证您有足够的 {{symbol}} 进行部署"
+      "description": "验证您有足够的 {{symbol}} 进行部署",
+      "sponsoredTitle": "Transaction Sponsorship",
+      "sponsoredDescription": "Your transaction is sponsored - no gas fees required"
     },
     "simulation": {
       "title": "交易模拟",
@@ -226,7 +228,8 @@
       "passed": "通过",
       "failed": "失败",
       "signed": "已签署",
-      "confirmed": "已确认"
+      "confirmed": "已确认",
+      "sponsored": "Sponsored"
     },
     "networkMismatch": {
       "title": "网络不匹配",
@@ -278,6 +281,7 @@
     "unexpectedErrorDetails": "交易模拟过程中发生意外错误",
     "viewOnExplorer": "在浏览器中查看",
     "insufficientBalanceDetails": "余额不足：您需要额外 <strong>{{amount}} {{symbol}}</strong> 来完成此交易。",
+    "insufficientBalanceDetailsPlain": "您需要额外 {{amount}} {{symbol}} 来完成此交易。",
     "tipTransactionProcessing": "提示：您的交易可能仍在处理中。查看浏览器以了解其状态。",
     "tipAddMoreFunds": "提示：向您的钱包添加更多资金并重试。",
     "tipIncreaseGasLimit": "提示：尝试在钱包设置中增加燃料限制。",

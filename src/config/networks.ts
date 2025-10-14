@@ -188,7 +188,7 @@ const mainNetworks: NetworkInfo[] = [
   },
   {
     id: 480,
-    name: "World Chain",
+    name: "World",
     isTestnet: false,
     icon: worldchainIcon,
     isAvailable: true,
