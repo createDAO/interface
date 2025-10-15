@@ -69,6 +69,9 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
 
   // Local state for simulation status - persists after transaction submission
   const [simulationStatus, setSimulationStatus] = useState<'idle' | 'passed' | 'failed'>('idle');
+  
+  // State to track if ready to deploy (both checks passed)
+  const [readyToDeploy, setReadyToDeploy] = useState(false);
 
   // Only reset simulation status when form data or network changes, not after simulation completes
   useEffect(() => {
@@ -86,35 +89,34 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
     }
   }, [simulationStatus, checksPassed]);
 
-  // Automatically proceed to deployment when both checks pass
+  // Update ready to deploy state when both checks pass
   useEffect(() => {
-    // If both checks have passed and we're not already in a transaction process
-    // and deployment hasn't been started yet
     if (
       checksPassed.balance &&
       checksPassed.simulation &&
-      !txState.isWaitingForSignature &&
-      !txState.isWaitingForConfirmation &&
-      !txState.isSuccess &&
-      !txState.isError &&
       !networkMismatch &&
-      !isLoading &&
-      !deploymentStartedRef.current
+      !isLoading
     ) {
-      // Mark deployment as started to prevent multiple calls
-      deploymentStartedRef.current = true;
-      // Automatically start the deployment process
-      console.log('All checks passed, automatically proceeding to deployment');
-      onProceed();
+      setReadyToDeploy(true);
+      console.log('All checks passed, ready to deploy');
+    } else {
+      setReadyToDeploy(false);
     }
   }, [
     checksPassed.balance,
     checksPassed.simulation,
-    txState,
     networkMismatch,
-    isLoading,
-    onProceed
+    isLoading
   ]);
+
+  // Handler for deploy button click
+  const handleDeployClick = () => {
+    if (readyToDeploy && !deploymentStartedRef.current) {
+      deploymentStartedRef.current = true;
+      console.log('User initiated deployment');
+      onProceed();
+    }
+  };
 
   // Check if the current network matches the selected network
   useEffect(() => {
@@ -698,6 +700,41 @@ const PreDeploymentStep: React.FC<PreDeploymentStepProps> = ({
                 </button>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Deploy Button - Shows when all checks pass */}
+      {readyToDeploy && !txState.isWaitingForSignature && !txState.isWaitingForConfirmation && !txState.isSuccess && (
+        <div className="bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 border-2 border-primary-300 dark:border-primary-700 rounded-lg p-6 mb-6">
+          <div className="flex flex-col items-center text-center space-y-4">
+            <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                {t('preDeployment.readyToDeploy.title', 'Ready to Deploy!')}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                {t('preDeployment.readyToDeploy.description', 'All checks have passed. Click the button below to deploy your DAO.')}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={handleDeployClick}
+              disabled={!readyToDeploy || txState.isWaitingForSignature || txState.isWaitingForConfirmation}
+              className="w-full sm:w-auto min-w-[280px] bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white py-4 px-8 rounded-lg font-bold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-md"
+            >
+              <svg className="inline-block mr-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              {t('preDeployment.deployButton', 'Deploy DAO')}
+            </button>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {t('preDeployment.deployHint', 'Your wallet will prompt you to confirm the transaction')}
+            </p>
           </div>
         </div>
       )}

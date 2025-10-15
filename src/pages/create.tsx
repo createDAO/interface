@@ -32,6 +32,9 @@ const CreateDAO: React.FC = () => {
     reset              // Get the reset function
   } = useDaoDeployment();
 
+  // Ref for step content container to manage focus
+  const stepContentRef = useRef<HTMLDivElement>(null);
+
   const [selectedVersion, setSelectedVersion] = useState(getCurrentVersion().id);
   const [selectedNetworkId, setSelectedNetworkId] = useState<number | null>(null);
   const [formData, setFormData] = useState<DAOFormData>({
@@ -147,6 +150,16 @@ const CreateDAO: React.FC = () => {
       setNetworkSwitchError(null);
     }
   }, [chainId, networkSwitchError]);
+
+  // Auto-focus step content when step changes for better UX and accessibility
+  useEffect(() => {
+    if (stepContentRef.current) {
+      // Small delay to ensure DOM has updated
+      setTimeout(() => {
+        stepContentRef.current?.focus();
+      }, 100);
+    }
+  }, [currentStep]);
 
   // Ref to track if we've attempted to save this transaction
   const savedTransactionHashRef = useRef<string | null>(null);
@@ -458,16 +471,23 @@ const CreateDAO: React.FC = () => {
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">{t('title')}</h1>
+        <div
+          ref={stepContentRef}
+          tabIndex={-1}
+          aria-label={`Step ${currentStep + 1} of ${totalSteps}`}
+          className="focus:outline-none"
+        >
+          {/* Step Indicator */}
+          <StepIndicator
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+            onStepClick={goToStep}
+          />
 
-        {/* Step Indicator */}
-        <StepIndicator
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          onStepClick={goToStep}
-        />
-
+        </div>
 
         {/* Step Content */}
+
         <form onSubmit={handleSubmit}>
           {renderStepContent()}
         </form>

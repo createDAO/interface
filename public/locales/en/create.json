@@ -246,6 +246,12 @@
       "switchNeeded": "Please switch your network to {{network}} to continue.",
       "switchTo": "Switch to {{network}}"
     },
+    "readyToDeploy": {
+      "title": "Ready to Deploy!",
+      "description": "All checks have passed. Click the button below to deploy your DAO."
+    },
+    "deployButton": "Deploy DAO",
+    "deployHint": "Your wallet will prompt you to confirm the transaction",
     "backToReview": "Back to Review"
   },
   "stepIndicator": {

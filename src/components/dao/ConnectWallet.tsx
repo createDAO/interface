@@ -53,11 +53,7 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
     } catch (error) {
       console.error('Connection error:', error);
     }
-    // Don't clear connecting state immediately for WalletConnect
-    // It will be cleared when connection succeeds or fails via the isConnected/error effect
-    if (connector.name !== 'WalletConnect') {
-      setConnecting(null);
-    }
+    // Loading state will be cleared when connection succeeds or fails via the isConnected/error effect
   };
 
   // Clear connecting state when connection succeeds or fails

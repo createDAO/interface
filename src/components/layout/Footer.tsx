@@ -91,8 +91,8 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2">
               <li>
-                <a href="https://github.com/createdao" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  {t('footer.github')}
+                <a href="https://daoforum.org/forums/createdao/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
+                  DAOForum
                 </a>
               </li>
               <li>
