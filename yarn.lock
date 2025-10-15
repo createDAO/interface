@@ -1153,10 +1153,10 @@
   resolved "https://registry.npmjs.org/@nolyfill/is-core-module/-/is-core-module-1.0.39.tgz"
   integrity sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==
 
-"@nyknyc/wagmi-connector@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/@nyknyc/wagmi-connector/-/wagmi-connector-0.1.1.tgz"
-  integrity sha512-wq93E/N3S6lZxFALja/7Urp/m++YoDeCd7WbEaSj1Brb5HvcEYuoB6JxLPZz/j4QgR+tdjIUsLm86/KGtyQ0Iw==
+"@nyknyc/wagmi-connector@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.npmjs.org/@nyknyc/wagmi-connector/-/wagmi-connector-0.1.2.tgz"
+  integrity sha512-BUbrd8wN6av7d3wyIRF8+CPqU+TldoyxOOsT+UNE45ssjCHmpsYk3v8k/gK0oL3vGHxOVvmCn6q9PbKF8N3Hyg==
 
 "@opentelemetry/api-logs@0.57.2":
   version "0.57.2"
