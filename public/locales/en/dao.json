@@ -27,7 +27,12 @@
     "brave": "Brave Wallet",
     "rabby": "Rabby Wallet",
     "okx": "OKX Wallet",
-    "browser": "Browser Wallet"
+    "browser": "Browser Wallet",
+    "otherWallets": "Other Wallets",
+    "sponsoredWallet": "Sponsored Wallet",
+    "sponsored": "Sponsored",
+    "freeDAODeployment": "Free DAO Deployment",
+    "sponsoredByCreateDAO": "Sponsored by CreateDAO - No transaction fees required"
   },
   "networks": {
     "ethereum": "Ethereum",

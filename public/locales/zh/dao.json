@@ -27,7 +27,12 @@
     "brave": "Brave 钱包",
     "rabby": "Rabby 钱包",
     "okx": "OKX 钱包",
-    "browser": "浏览器钱包"
+    "browser": "浏览器钱包",
+    "otherWallets": "其他钱包",
+    "sponsoredWallet": "赞助钱包",
+    "sponsored": "赞助",
+    "freeDAODeployment": "免费 DAO 部署",
+    "sponsoredByCreateDAO": "由 CreateDAO 赞助 - 无需支付交易费用"
   },
   "networks": {
     "ethereum": "以太坊",

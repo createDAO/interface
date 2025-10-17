@@ -370,11 +370,11 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
       )}
       
       {/* Navigation Buttons */}
-      <div className="flex justify-between mt-8">
+      <div className="flex flex-col md:flex-row justify-between gap-3 mt-8">
         <button
           type="button"
           onClick={goToPreviousStep}
-          className="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-2 px-4 rounded-lg font-medium transition-colors duration-200 cursor-pointer"
+          className="w-full md:w-auto bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 py-2 px-4 rounded-lg font-medium transition-colors duration-200 cursor-pointer"
         >
           <svg className="inline-block mr-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 17l-5-5m0 0l5-5m-5 5h12" />
@@ -386,7 +386,7 @@ const ReviewStep: React.FC<ReviewStepProps> = ({
           type="button"
           onClick={handleSubmitWithWalletState}
           disabled={!hasWallet || isLoading || isInitiatingWallet}
-          className="bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full md:w-auto bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg font-medium transition-colors duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading || isInitiatingWallet ? (
             <>

@@ -27,7 +27,12 @@
     "brave": "Brave Wallet",
     "rabby": "Rabby Wallet",
     "okx": "OKX Wallet",
-    "browser": "ブラウザウォレット"
+    "browser": "ブラウザウォレット",
+    "otherWallets": "その他のウォレット",
+    "sponsoredWallet": "スポンサーウォレット",
+    "sponsored": "スポンサー",
+    "freeDAODeployment": "無料DAOデプロイ",
+    "sponsoredByCreateDAO": "CreateDAOがスポンサー - 取引手数料不要"
   },
   "networks": {
     "ethereum": "イーサリアム",

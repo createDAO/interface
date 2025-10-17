@@ -27,7 +27,12 @@
     "brave": "Brave Wallet",
     "rabby": "Rabby Wallet",
     "okx": "OKX Wallet",
-    "browser": "Dompet Browser"
+    "browser": "Dompet Browser",
+    "otherWallets": "Dompet Lainnya",
+    "sponsoredWallet": "Dompet Bersponsor",
+    "sponsored": "Bersponsor",
+    "freeDAODeployment": "Penerapan DAO Gratis",
+    "sponsoredByCreateDAO": "Disponsori oleh CreateDAO - Tidak ada biaya transaksi yang diperlukan"
   },
   "networks": {
     "ethereum": "Ethereum",

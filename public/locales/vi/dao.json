@@ -27,7 +27,12 @@
     "brave": "Ví Brave",
     "rabby": "Ví Rabby",
     "okx": "Ví OKX",
-    "browser": "Ví Trình duyệt"
+    "browser": "Ví Trình duyệt",
+    "otherWallets": "Các Ví Khác",
+    "sponsoredWallet": "Ví Được Tài trợ",
+    "sponsored": "Được Tài trợ",
+    "freeDAODeployment": "Triển khai DAO Miễn phí",
+    "sponsoredByCreateDAO": "Được tài trợ bởi CreateDAO - Không yêu cầu phí giao dịch"
   },
   "networks": {
     "ethereum": "Ethereum",

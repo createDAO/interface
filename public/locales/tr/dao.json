@@ -27,7 +27,12 @@
     "brave": "Brave Wallet",
     "rabby": "Rabby Wallet",
     "okx": "OKX Wallet",
-    "browser": "Tarayıcı Cüzdanı"
+    "browser": "Tarayıcı Cüzdanı",
+    "otherWallets": "Diğer Cüzdanlar",
+    "sponsoredWallet": "Sponsorlu Cüzdan",
+    "sponsored": "Sponsorlu",
+    "freeDAODeployment": "Ücretsiz DAO Dağıtımı",
+    "sponsoredByCreateDAO": "CreateDAO tarafından desteklenmektedir - İşlem ücreti gerekmez"
   },
   "networks": {
     "ethereum": "Ethereum",

@@ -27,7 +27,12 @@
     "brave": "브레이브 월렛",
     "rabby": "래비 월렛",
     "okx": "OKX 월렛",
-    "browser": "브라우저 지갑"
+    "browser": "브라우저 지갑",
+    "otherWallets": "기타 지갑",
+    "sponsoredWallet": "후원 지갑",
+    "sponsored": "후원",
+    "freeDAODeployment": "무료 DAO 배포",
+    "sponsoredByCreateDAO": "CreateDAO 후원 - 거래 수수료 불필요"
   },
   "networks": {
     "ethereum": "이더리움",
