@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAccount, useDisconnect, useEnsName, useBalance } from 'wagmi';
+import { formatEther } from 'viem';
 
 export function WalletButton() {
   const { address } = useAccount();
@@ -73,7 +74,7 @@ export function WalletButton() {
           <div className="p-4 border-b border-gray-200 dark:border-gray-700">
             <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Balance</div>
             <p className="font-medium">
-              {balance ? `${parseFloat(balance.formatted).toFixed(4)} ${balance.symbol}` : 'Loading...'}
+              {balance ? `${parseFloat(formatEther(balance.value)).toFixed(4)} ${balance.symbol}` : 'Loading...'}
             </p>
           </div>
           

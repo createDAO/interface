@@ -1,23 +1,39 @@
 {
-  "title": "Common Questions",
-  "subtitle": "Everything you need to know about CreateDAO.",
-  "contactText": "Have more questions? Contact our community.",
+  "title": "Frequently Asked Questions",
+  "subtitle": "Everything you need to know about CreateDAO v2",
   "questions": {
     "isFree": {
-      "question": "Is it really free?",
-      "answer": "Yes! CreateDAO is completely free to use. You only pay the blockchain's network gas fees when deploying your DAO."
+      "question": "Is CreateDAO free to use?",
+      "answer": "Yes, CreateDAO is completely free. You only pay the network gas fees for deploying your contracts. There are no platform fees, subscription costs, or hidden charges."
     },
     "isSecure": {
-      "question": "Is the code secure?",
-      "answer": "Our smart contracts have not been audited yet, but audits by leading security firms are planned soon. The code is open source for full transparency in the meantime."
+      "question": "Are the smart contracts audited?",
+      "answer": "The smart contracts are built on OpenZeppelin's battle-tested, audited contracts. However, our factory contracts are not yet independently audited. We recommend testing thoroughly on Sepolia before deploying to mainnet. Use at your own risk."
     },
     "supportedNetworks": {
-      "question": "Which networks are supported?",
-      "answer": "We currently support {{networks}}. More networks are coming soon based on community feedback."
+      "question": "What networks are supported?",
+      "answer": "Currently, CreateDAO v2 supports Sepolia (testnet) for testing and Base (mainnet) for production deployments. We plan to expand to more networks based on community feedback."
+    },
+    "tokenDistribution": {
+      "question": "How is the token distribution set up?",
+      "answer": "When you create a DAO, 1% of tokens go to you (the creator) with automatic voting power delegation, and 99% go to the treasury. The treasury tokens can only be distributed through governance proposals - this ensures fair, community-controlled token distribution."
+    },
+    "managingDao": {
+      "question": "How do I manage my DAO after deployment?",
+      "answer": "OpenBook (openbook.to) is built specifically for CreateDAO contracts - it provides transparent business management including off-chain legal entities, treasury tracking, and team permissions. For on-chain governance, Tally and Snapshot are also fully compatible with your DAO for creating proposals, voting, and delegating."
+    },
+    "gasEfficiency": {
+      "question": "What makes v2 more gas efficient?",
+      "answer": "Version 2 uses EIP-1167 minimal proxy clones for the token and governor contracts. Each clone is just 45 bytes instead of 15KB+, reducing deployment costs by approximately 90% compared to deploying full contracts."
+    },
+    "governance": {
+      "question": "How does the governance work?",
+      "answer": "Your DAO uses OpenZeppelin's Governor contract with 1% quorum (minimum participation for valid votes), 1-week voting period, and 1-day timelock delay. The creator can immediately create and pass proposals. To transfer tokens from treasury, create a proposal, vote, wait for the timelock, then execute."
     },
     "customization": {
-      "question": "Can I customize my DAO?",
-      "answer": "Not yet, but in the future you'll be able to customize voting periods, proposal thresholds, and other governance parameters to fit your community's needs."
+      "question": "Can I customize the governance parameters?",
+      "answer": "After deployment, you can update quorum, voting delay, voting period, and proposal threshold through governance proposals. The manager role can also be changed through governance. These changes require going through the full proposal-vote-execute cycle."
     }
-  }
+  },
+  "contactText": "Have more questions? Join our community on Discord or open an issue on GitHub."
 }

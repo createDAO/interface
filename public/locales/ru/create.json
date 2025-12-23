@@ -169,6 +169,22 @@
       "description": "Требуйте несколько подтверждений для критически важных действий"
     }
   },
+  "page": {
+    "metaTitle": "Создать DAO | CreateDAO",
+    "metaDescription": "Создайте собственное DAO с настраиваемыми параметрами управления и токена",
+    "heading": "Создать DAO",
+    "subheading": "Разверните полноценное DAO с токеном управления, казной и механизмами голосования.",
+    "selectNetworkTitle": "Выберите сеть",
+    "selectNetworkSubtitle": "Выберите блокчейн для вашего DAO",
+    "wrongNetwork": "Пожалуйста, переключитесь на поддерживаемую сеть, чтобы создать DAO.",
+    "noContractsForNetwork": "Контракты ещё не развернуты в этой сети. Пожалуйста, переключитесь на поддерживаемую сеть.",
+    "readyToDeployOn": "Готово к развертыванию в сети {{name}}",
+    "daoDetailsTitle": "Детали DAO",
+    "daoDetailsSubtitle": "Настройте ваше DAO и токен управления",
+    "connectWalletToContinue": "Подключите кошелёк, чтобы продолжить",
+    "switchToSupportedNetwork": "Переключиться на поддерживаемую сеть",
+    "createDaoButton": "Создать DAO"
+  },
   "wallet": {
     "connected": "Кошелек подключен",
     "readyToDeploy": "Ваш кошелек подключен и готов к развертыванию DAO",
@@ -181,7 +197,14 @@
     "signTransaction": "Подписать транзакцию развертывания",
     "becomeAdmin": "Стать первоначальным администратором DAO",
     "receiveToken": "Получить свой токен управления",
-    "connect": "Подключить кошелек"
+    "connect": "Подключить кошелек",
+    "networkNotSupported": {
+      "title": "Сеть не поддерживается",
+      "description": "Ваш кошелек ({{connector}}) не поддерживает сеть {{network}}. Пожалуйста, выберите другую сеть или используйте другой кошелек.",
+      "supportedNetworks": "Поддерживаемые сети для {{connector}}:",
+      "changeNetwork": "Сменить сеть",
+      "switchWallet": "Сменить кошелек"
+    }
   },
   "deploymentCost": {
     "title": "Примерная стоимость развертывания",
@@ -207,8 +230,8 @@
     "balanceCheck": {
       "title": "Проверка баланса кошелька",
       "description": "Проверка наличия достаточного количества {{symbol}} для развертывания",
-      "sponsoredTitle": "Transaction Sponsorship",
-      "sponsoredDescription": "Your transaction is sponsored - no gas fees required"
+      "sponsoredTitle": "Спонсирование транзакции",
+      "sponsoredDescription": "Ваша транзакция спонсируется — комиссии за газ не требуются"
     },
     "simulation": {
       "title": "Симуляция транзакции",
@@ -229,7 +252,7 @@
       "failed": "Ошибка",
       "signed": "Подписано",
       "confirmed": "Подтверждено",
-      "sponsored": "Sponsored"
+      "sponsored": "Спонсировано"
     },
     "networkMismatch": {
       "title": "Несоответствие сети",
@@ -239,6 +262,12 @@
       "switchNeeded": "Пожалуйста, переключите свою сеть на {{network}}, чтобы продолжить.",
       "switchTo": "Переключиться на {{network}}"
     },
+    "readyToDeploy": {
+      "title": "Готово к развертыванию!",
+      "description": "Все проверки пройдены. Нажмите кнопку ниже, чтобы развернуть ваше DAO."
+    },
+    "deployButton": "Развернуть DAO",
+    "deployHint": "Ваш кошелек попросит подтвердить транзакцию",
     "backToReview": "Назад к обзору"
   },
   "stepIndicator": {

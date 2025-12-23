@@ -1,55 +1,62 @@
 import { getFactoryAddress } from './dao';
 
-// Contract ABIs
+// Contract ABIs - Updated for new DAOFactory with CreateDAOParams struct
 const DAO_FACTORY_ABI = [
   {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "versionId",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "tokenName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "tokenSymbol",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "initialSupply",
-        "type": "uint256"
+        "components": [
+          {
+            "internalType": "string",
+            "name": "daoName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "tokenName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "tokenSymbol",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "totalSupply",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint48",
+            "name": "votingDelay",
+            "type": "uint48"
+          },
+          {
+            "internalType": "uint32",
+            "name": "votingPeriod",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct DAOFactory.CreateDAOParams",
+        "name": "params",
+        "type": "tuple"
       }
     ],
     "name": "createDAO",
     "outputs": [
       {
         "internalType": "address",
-        "name": "daoAddress",
+        "name": "token",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "tokenAddress",
+        "name": "timelock",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "treasuryAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "stakingAddress",
+        "name": "governor",
         "type": "address"
       }
     ],
@@ -62,42 +69,93 @@ const DAO_FACTORY_ABI = [
       {
         "indexed": true,
         "internalType": "address",
-        "name": "daoAddress",
+        "name": "creator",
         "type": "address"
       },
       {
         "indexed": true,
         "internalType": "address",
-        "name": "tokenAddress",
+        "name": "token",
         "type": "address"
       },
       {
         "indexed": true,
         "internalType": "address",
-        "name": "treasuryAddress",
+        "name": "governor",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "address",
-        "name": "stakingAddress",
+        "name": "timelock",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "string",
-        "name": "name",
+        "name": "daoName",
         "type": "string"
       },
       {
         "indexed": false,
         "internalType": "string",
-        "name": "versionId",
+        "name": "tokenName",
         "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "tokenSymbol",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalSupply",
+        "type": "uint256"
       }
     ],
     "name": "DAOCreated",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "getDAOCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "TIMELOCK_MIN_DELAY",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "CREATOR_ALLOCATION_PERCENT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   }
 ];
 

@@ -1,19 +1,4 @@
-import { DAOVersion } from "../types/dao";
-
-export const DAO_VERSIONS: DAOVersion[] = [
-  {
-    id: "1.0.0",
-    name: "v1.0.0",
-    description: "Standard DAO with governance token, treasury, and staking",
-    isAvailable: true,
-  },
-  {
-    id: "1.0.1",
-    name: "v1.0.1",
-    description: "Upcoming DAO factory changes",
-    isAvailable: false,
-  }
-];
+import { SUPPORTED_CHAIN_IDS } from "./wagmi";
 
 interface FactoryAddressConfig {
   isAvailable: boolean;
@@ -21,73 +6,21 @@ interface FactoryAddressConfig {
   comingSoon?: string;
 }
 
-// Map of chainId to factory address
+// Map of chainId to factory address - only supported networks
 const FACTORY_ADDRESSES: Record<number, FactoryAddressConfig> = {
-  1: {
-    isAvailable: true,
-    address: "0x22f38c01222E07Efe0B7E0409EF9235B6Ab641d6",
-  },
-  56: {
-    isAvailable: false,
-    comingSoon: "Coming Soon",
-  },
-  137: {
-    isAvailable: true,
-    address: "0x8d2D2fb9388B16a51263593323aBBDf80aee54e6",
-  },
-  42161: {
-    isAvailable: true,
-    address: "0x8d2D2fb9388B16a51263593323aBBDf80aee54e6",
-  },
-  10: {
-    isAvailable: false,
-    comingSoon: "Coming Soon",
-  },
-  8453: {
-    isAvailable: true,
-    address: "0x8d2D2fb9388B16a51263593323aBBDf80aee54e6",
-  },
-  43114: {
-    isAvailable: false,
-    comingSoon: "Coming Soon",
-  },
-  100: {
-    isAvailable: true,
-    address: "0x8d2D2fb9388B16a51263593323aBBDf80aee54e6",
-  },
-  5000: {
-    isAvailable: false,
-    comingSoon: "Coming Soon",
-  },
-  42220: {
-    isAvailable: false,
-    comingSoon: "Coming Soon",
-  },
-  81457: {
-    isAvailable: false,
-    comingSoon: "Coming Soon",
-  },
-  534352: {
-    isAvailable: false,
-    comingSoon: "Coming Soon",
-  },
-  130: {
-    isAvailable: true,
-    address: "0x8d2D2fb9388B16a51263593323aBBDf80aee54e6",
-  },
-  480: {
-    isAvailable: true,
-    address: "0x8d2D2fb9388B16a51263593323aBBDf80aee54e6",
-  },
-
   // Testnets
-  11155111: {
+  [SUPPORTED_CHAIN_IDS.SEPOLIA]: {
     isAvailable: true,
-    address: "0xcC961E2a43762caD4c673d471b9fcddE233716Dd",
+    address: "0x2e00e5c34d7779bcaeb0f1d679efb89ea98624ae",
   },
-  31337: {
+  [SUPPORTED_CHAIN_IDS.HARDHAT]: {
     isAvailable: true,
     address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+  },
+  // Mainnets
+  [SUPPORTED_CHAIN_IDS.BASE]: {
+    isAvailable: true,
+    address: "0x2e00E5c34D7779BcaEB0f1D679efB89ea98624AE",
   },
 };
 
@@ -99,9 +32,3 @@ export function getFactoryAddress(chainId: number): FactoryAddressConfig {
     }
   );
 }
-
-export function getCurrentVersion(): DAOVersion {
-  return DAO_VERSIONS.find((v) => v.isAvailable) || DAO_VERSIONS[0];
-}
-
-export const DEFAULT_DAO_VERSION = "1.0.0";

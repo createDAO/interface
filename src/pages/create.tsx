@@ -1,496 +1,350 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import Head from 'next/head';
-import { useTranslation } from 'next-i18next';
-import { useChainId, useSwitchChain, useAccount } from 'wagmi';
+import { useChainId, useAccount } from 'wagmi';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
+import { useTranslation } from 'next-i18next';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
+import { NetworkSelect } from '../components/dao/NetworkSelect';
+import {
+  WalletConnectSection,
+  FormInput,
+  AdvancedSettings,
+  LivePreview,
+  DeploymentStatus,
+  SuccessPanel
+} from '../components/create';
 import { useDaoDeployment } from '../hooks/useDaoDeployment';
-import { DAOFormData } from '../types/dao';
+import {
+  DAOFormData,
+  DEFAULT_VOTING_DELAY,
+  DEFAULT_VOTING_PERIOD
+} from '../types/dao';
 import { SUPPORTED_NETWORKS } from '../config/networks';
-import { getCurrentVersion } from '../config/dao';
-import { saveDAO, daoExists } from '../services/firebase/dao';
-import { StepIndicator } from '../components/create/ui';
-import { NetworkStep, DAODetailsStep, ReviewStep, PreDeploymentStep, DeploymentStep } from '../components/create/steps';
 import { hasDeployedContracts } from '../utils/contracts';
-import { BalanceCheckResult, SimulationResult } from '../types/transaction';
 
 const CreateDAO: React.FC = () => {
-  const { t } = useTranslation('create');
-  const { address } = useAccount();
+  const { t } = useTranslation(['create']);
+  const { isConnected } = useAccount();
   const chainId = useChainId();
-  const { isPending: isSwitchingNetwork } = useSwitchChain();
-  const {
-    deploy,
-    checkBalance,
-    simulateTransaction,
-    state: txState,
-    deploymentData,
-    setBalanceChecked, // Get the state update function
-    setSimulated,      // Get the state update function
-    reset              // Get the reset function
-  } = useDaoDeployment();
+  const { deploy, state: txState, deploymentData, reset } = useDaoDeployment();
 
-  // Ref for step content container to manage focus
-  const stepContentRef = useRef<HTMLDivElement>(null);
-
-  const [selectedVersion, setSelectedVersion] = useState(getCurrentVersion().id);
-  const [selectedNetworkId, setSelectedNetworkId] = useState<number | null>(null);
+  // Form state
   const [formData, setFormData] = useState<DAOFormData>({
     daoName: '',
     tokenName: '',
     symbol: '',
     totalSupply: '',
+    votingDelay: DEFAULT_VOTING_DELAY,
+    votingPeriod: DEFAULT_VOTING_PERIOD,
   });
 
-  const [errors, setErrors] = useState<Partial<DAOFormData>>({});
+  // Error and network state
+  const [errors, setErrors] = useState<Partial<Record<keyof DAOFormData, string>>>({});
   const [networkSwitchError, setNetworkSwitchError] = useState<string | null>(null);
 
-  // Handle network switch errors (memoized to prevent re-renders)
-  const handleNetworkSwitchError = useCallback((error: Error | null) => {
-    if (error) {
-      console.log(error);
-
-      setNetworkSwitchError(`Failed to switch network: ${error.message}`);
-    } else {
-      setNetworkSwitchError(null); // Allow clearing the error
-    }
-  }, []); // Empty dependency array ensures the function reference is stable
-
-  // Track which fields have been touched by the user
-  const [touchedFields, setTouchedFields] = useState<Record<keyof DAOFormData, boolean>>({
-    daoName: false,
-    tokenName: false,
-    symbol: false,
-    totalSupply: false,
-    versionId: false,
-  });
-
-
-  // State for multi-step form
-  const [currentStep, setCurrentStep] = useState(0);
-  const totalSteps = 5;
-
-  // Track form validation state
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  // Define network status variables
-  const isWrongNetwork = !!chainId && !SUPPORTED_NETWORKS.find(n => n.id === chainId);
+  // Network checks
+  const currentNetwork = SUPPORTED_NETWORKS.find(n => n.id === chainId);
+  const isWrongNetwork = !!chainId && !currentNetwork;
   const noContractsForNetwork = !!chainId && !hasDeployedContracts(chainId);
+  const canDeploy = isConnected && !isWrongNetwork && !noContractsForNetwork;
 
-  // Store the selected network ID when the user selects a network
-  useEffect(() => {
-    if (chainId && currentStep === 0 && !isWrongNetwork && !noContractsForNetwork) {
-      setSelectedNetworkId(chainId);
-    }
-  }, [chainId, currentStep, isWrongNetwork, noContractsForNetwork]);
-
-  // Handle step navigation
-  const goToNextStep = () => {
-    if (currentStep < totalSteps - 1) {
-      setCurrentStep(currentStep + 1);
-
-      // Reset touched fields when changing steps
-      setTouchedFields({
-        daoName: false,
-        tokenName: false,
-        symbol: false,
-        totalSupply: false,
-        versionId: false,
-      });
-    }
-  };
-
-  const goToPreviousStep = () => {
-    if (currentStep > 0) {
-      // Reset transaction state when navigating back from Pre-deployment step
-      if (currentStep === 3) {
-        // Reset transaction state to ensure checks run again when returning to this step
-        reset();
-        console.log('Transaction state reset when navigating back from Pre-deployment step');
-      }
-
-      setCurrentStep(currentStep - 1);
-
-      // Reset touched fields when changing steps
-      setTouchedFields({
-        daoName: false,
-        tokenName: false,
-        symbol: false,
-        totalSupply: false,
-        versionId: false,
-      });
-    }
-  };
-
-  const goToStep = (step: number) => {
-    if (step >= 0 && step < totalSteps) {
-      setCurrentStep(step);
-
-      // Reset touched fields when changing steps
-      setTouchedFields({
-        daoName: false,
-        tokenName: false,
-        symbol: false,
-        totalSupply: false,
-        versionId: false,
-      });
-    }
-  };
-
-  // Only clear network switch error when we successfully switch to a supported network
-  useEffect(() => {
-    // Check if we're on a supported network with deployed contracts
-    const isOnSupportedNetwork = chainId && SUPPORTED_NETWORKS.some(n => n.id === chainId);
-    const hasContracts = hasDeployedContracts(chainId);
-
-    // Only clear the error if we're on a supported network with contracts
-    if (networkSwitchError && isOnSupportedNetwork && hasContracts) {
-      setNetworkSwitchError(null);
-    }
-  }, [chainId, networkSwitchError]);
-
-  // Auto-focus step content when step changes for better UX and accessibility
-  useEffect(() => {
-    if (stepContentRef.current) {
-      // Small delay to ensure DOM has updated
-      setTimeout(() => {
-        stepContentRef.current?.focus();
-      }, 100);
-    }
-  }, [currentStep]);
-
-  // Ref to track if we've attempted to save this transaction
-  const savedTransactionHashRef = useRef<string | null>(null);
-
-  // Silently save DAO to Firestore when deployment is successful - only once per transaction
-  useEffect(() => {
-    const saveDeployedDAO = async () => {
-      // Only proceed if we have deployment data, transaction was successful, and we haven't saved this transaction yet
-      if (deploymentData &&
-        txState.isSuccess &&
-        address &&
-        chainId &&
-        deploymentData.transactionHash &&
-        savedTransactionHashRef.current !== deploymentData.transactionHash) {
-
-        // Mark this transaction hash as saved to prevent duplicate saves
-        savedTransactionHashRef.current = deploymentData.transactionHash;
-
-        try {
-          // Check if this DAO already exists in Firestore (additional safeguard against duplicates)
-          const exists = await daoExists(deploymentData.transactionHash, chainId);
-
-          if (!exists) {
-            // Find the current network info
-            const network = SUPPORTED_NETWORKS.find(n => n.id === chainId) || {
-              id: chainId,
-              name: `Network ${chainId}`,
-              isTestnet: true,
-            };
-
-            // Save to Firestore
-            await saveDAO(
-              deploymentData,
-              formData,
-              network,
-              address
-            );
-          }
-        } catch (error) {
-          // Silently log error but don't show to user
-          console.error('Error saving DAO to Firestore:', error);
-        }
-      }
-    };
-
-    saveDeployedDAO();
-  }, [deploymentData, txState.isSuccess, address, chainId, formData]);
-
-  // Reset the saved transaction hash when starting a new transaction
-  useEffect(() => {
-    if (txState.isIdle) {
-      savedTransactionHashRef.current = null;
-    }
-  }, [txState.isIdle]);
-
-  // Estimated gas cost for deployment - This will be set by ReviewStep via callback
-  const [estimatedGasCost, setEstimatedGasCost] = useState<{
-    cost: string;
-    symbol: string;
-  } | null>(null);
-
-  // Auto-advance to success step when transaction is successful
-  useEffect(() => {
-    if (txState.isSuccess && currentStep < 4) {
-      setCurrentStep(4);
-    }
-  }, [txState.isSuccess, currentStep]);
-
-  // Function to validate a single field
-  const validateField = (name: keyof DAOFormData, value: string | undefined): string | undefined => {
+  // Validation
+  const validateField = useCallback((name: keyof DAOFormData, value: string | number): string | undefined => {
+    const strValue = String(value);
     switch (name) {
       case 'daoName':
-        return !value ? 'DAO name is required' : undefined;
-
+        return !strValue ? 'DAO name is required' : undefined;
       case 'tokenName':
-        return !value ? 'Token name is required' : undefined;
-
+        return !strValue ? 'Token name is required' : undefined;
       case 'symbol':
-        if (!value) return 'Symbol is required';
-        if (value.length > 6) return 'Symbol must be 6 characters or less';
+        if (!strValue) return 'Symbol is required';
+        if (strValue.length > 6) return 'Symbol must be 6 characters or less';
         return undefined;
-
       case 'totalSupply':
-        if (!value) return 'Total supply is required';
-        if (isNaN(Number(value)) || Number(value) <= 0) return 'Total supply must be a positive number';
-        if (Number(value) >= 999999999999) return 'Total supply must be less than 999,999,999,999';
+        if (!strValue) return 'Total supply is required';
+        if (isNaN(Number(strValue)) || Number(strValue) <= 0) return 'Must be a positive number';
+        if (Number(strValue) >= 999999999999) return 'Must be less than 999,999,999,999';
         return undefined;
-
       default:
         return undefined;
     }
-  };
+  }, []);
 
-  // Update form validation when data changes
-  useEffect(() => {
-    if (currentStep === 1) {
-      // Create a new errors object
-      const newErrors: Partial<DAOFormData> = {};
-      let hasErrors = false;
+  const validateForm = useCallback((): boolean => {
+    const newErrors: Partial<Record<keyof DAOFormData, string>> = {};
+    const fieldsToValidate: (keyof DAOFormData)[] = ['daoName', 'tokenName', 'symbol', 'totalSupply'];
 
-      // Only validate fields that have been touched
-      Object.keys(formData).forEach((key) => {
-        const fieldName = key as keyof DAOFormData;
-        if (touchedFields[fieldName]) {
-          const error = validateField(fieldName, formData[fieldName]);
-          if (error) {
-            newErrors[fieldName] = error;
-            hasErrors = true;
-          }
-        }
-      });
+    fieldsToValidate.forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) newErrors[field] = error;
+    });
 
-      // Update errors state
-      setErrors(newErrors);
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }, [formData, validateField]);
 
-      // Check if all required fields are filled and valid
-      const allFieldsValid = !hasErrors &&
-        !!formData.daoName &&
-        !!formData.tokenName &&
-        !!formData.symbol &&
-        !!formData.totalSupply &&
-        Number(formData.totalSupply) > 0 &&
-        Number(formData.totalSupply) < 999999999999 &&
-        formData.symbol.length <= 6;
-
-      setIsFormValid(!!allFieldsValid);
-    }
-  }, [formData, touchedFields, currentStep]);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Handlers
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    // Update form data
     setFormData(prev => ({ ...prev, [name]: value }));
 
-    // Mark this field as touched
-    setTouchedFields(prev => ({
-      ...prev,
-      [name]: true
-    }));
-  };
+    // Clear error on change
+    if (errors[name as keyof DAOFormData]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
+  }, [errors]);
 
-  // Function to validate all form fields
-  const validateForm = (): boolean => {
-    // Mark all fields as touched
-    setTouchedFields({
-      daoName: true,
-      tokenName: true,
-      symbol: true,
-      totalSupply: true,
-      versionId: true,
-    });
-
-    // Validate all fields
-    const newErrors: Partial<DAOFormData> = {};
-
-    Object.keys(formData).forEach((key) => {
-      const fieldName = key as keyof DAOFormData;
-      const error = validateField(fieldName, formData[fieldName]);
-      if (error) {
-        newErrors[fieldName] = error;
-      }
-    });
-
-    // Update errors state
-    setErrors(newErrors);
-
-    // Check if form is valid
-    const valid = Object.keys(newErrors).length === 0;
-    setIsFormValid(valid);
-    return valid;
-  };
+  const handleNetworkSwitchError = useCallback((error: Error | null) => {
+    setNetworkSwitchError(error ? error.message : null);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.warn('Form onSubmit triggered, but deployment should be handled by step buttons.');
-    // Intentionally do nothing here. Deployment is triggered by handleStartDeployment
-    // in the PreDeploymentStep. We might want validation based on currentStep here
-    // in the future, but for now, let's prevent accidental deployment.
-    // validateForm(); // Optionally re-validate current step's inputs if needed
-  };
+    if (!validateForm() || !canDeploy) return;
 
-
-  // Check if we can proceed to the next step
-  const canProceedToNextStep = () => {
-    if (currentStep === 0) {
-      // Can proceed from network step if we're on a supported network with contracts
-      return !isWrongNetwork && !noContractsForNetwork;
-    } else if (currentStep === 1) {
-      // Can proceed from DAO details step if form is valid
-      return isFormValid;
-    } else if (currentStep === 2) {
-      // Can proceed from review step if we're ready to deploy
-      return true;
-    }
-    return false;
-  };
-
-  // Function to handle "Continue to Review" button click
-  const handleContinue = () => {
-    if (validateForm()) {
-      goToNextStep();
-    }
-  };
-
-  // Handlers for pre-deployment checks
-  const handleCheckBalance = async (result: unknown) => {
-    console.log('Balance check result:', result);
-    // Update transaction state with balance check result
-    setBalanceChecked(result as BalanceCheckResult); // Call the state update function with the result
-  };
-
-  const handleSimulate = async (result: unknown) => {
-    console.log('Simulation result 2:', result);
-    // Update transaction state with simulation result
-    const simulationResult = result as SimulationResult;
-    console.log('Handling simulation result in create.tsx:', simulationResult);
-    setSimulated(simulationResult); // Call the state update function with the result
-  };
-
-  const handlePreDeploymentError = (error: unknown) => {
-    console.error('Pre-deployment error:', error);
-  };
-
-  const handleStartDeployment = async () => {
     try {
-      await deploy({ ...formData, versionId: selectedVersion });
+      await deploy(formData);
     } catch (error) {
       console.error('Deployment error:', error);
     }
   };
 
-  // Render the appropriate step content
-  const renderStepContent = () => {
-    switch (currentStep) {
-      case 0:
-        return (
-          <NetworkStep
-            selectedVersion={selectedVersion}
-            setSelectedVersion={setSelectedVersion}
-            handleNetworkSwitchError={handleNetworkSwitchError}
-            networkSwitchError={networkSwitchError}
-            isSwitchingNetwork={isSwitchingNetwork}
-            noContractsForNetwork={noContractsForNetwork}
-            goToNextStep={goToNextStep}
-            canProceedToNextStep={canProceedToNextStep}
-          />
-        );
-      case 1:
-        return (
-          <DAODetailsStep
-            formData={formData}
-            errors={errors}
-            touchedFields={touchedFields}
-            handleInputChange={handleInputChange}
-            goToPreviousStep={goToPreviousStep}
-            goToNextStep={handleContinue}
-            canProceedToNextStep={canProceedToNextStep}
-          />
-        );
-      case 2:
-        return (
-          <ReviewStep
-            formData={formData}
-            selectedVersion={selectedVersion}
-            handleSubmit={() => goToNextStep()} // Go to pre-deployment step instead of submitting
-            goToPreviousStep={goToPreviousStep}
-            isLoading={txState.isSubmitting || txState.isWaitingForConfirmation}
-            hasWallet={!!address}
-            selectedNetworkId={selectedNetworkId || chainId}
-            onEstimateCalculated={setEstimatedGasCost} // Pass the setter function
-          />
-        );
-      case 3:
-        return (
-          <PreDeploymentStep
-            formData={{ ...formData, versionId: selectedVersion }} // Include selectedVersion in formData
-            txState={txState}
-            estimatedGasCost={estimatedGasCost} // Fix variable name
-            onProceed={handleStartDeployment}
-            onBack={goToPreviousStep}
-            startBalanceCheck={() => checkBalance()} // No arguments needed
-            startSimulation={simulateTransaction}      // Pass the function to start simulation
-            onCheckBalanceComplete={handleCheckBalance} // Keep existing handler for completion
-            onSimulateComplete={handleSimulate}         // Keep existing handler for completion
-            onError={handlePreDeploymentError}
-            selectedNetworkId={selectedNetworkId || chainId}
-          />
-        );
-      case 4:
-        return (
-          <DeploymentStep
-            formData={formData}
-            deploymentData={deploymentData}
-            isSuccess={txState.isSuccess}
-          />
-        );
-      default:
-        return null;
-    }
+  const handleCreateAnother = () => {
+    reset();
+    setFormData({
+      daoName: '',
+      tokenName: '',
+      symbol: '',
+      totalSupply: '',
+      votingDelay: DEFAULT_VOTING_DELAY,
+      votingPeriod: DEFAULT_VOTING_PERIOD,
+    });
+    setErrors({});
   };
+
+  // Check if form is valid for button state
+  const isFormValid = formData.daoName && formData.tokenName && formData.symbol &&
+    formData.totalSupply && Number(formData.totalSupply) > 0 &&
+    formData.symbol.length <= 6 && Object.keys(errors).filter(k => errors[k as keyof DAOFormData]).length === 0;
+
+  const isDeploying = txState.isWaitingForSignature || txState.isWaitingForConfirmation;
+
+  // Show success panel
+  if (txState.isSuccess && deploymentData) {
+    return (
+      <Layout>
+        <Head>
+          <title>DAO Created | CreateDAO</title>
+        </Head>
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <SuccessPanel
+            deploymentData={deploymentData}
+            formData={formData}
+            onCreateAnother={handleCreateAnother}
+          />
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <Head>
-        <title>{`${t('title')} | CreateDAO`}</title>
-        <meta name="description" content="Create your own DAO with customizable governance and token parameters" />
+        <title>{t('page.metaTitle')}</title>
+        <meta name="description" content={t('page.metaDescription')} />
       </Head>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">{t('title')}</h1>
-        <div
-          ref={stepContentRef}
-          tabIndex={-1}
-          aria-label={`Step ${currentStep + 1} of ${totalSteps}`}
-          className="focus:outline-none"
-        >
-          {/* Step Indicator */}
-          <StepIndicator
-            currentStep={currentStep}
-            totalSteps={totalSteps}
-            onStepClick={goToStep}
-          />
-
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('page.heading')}</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">{t('page.subheading')}</p>
         </div>
 
-        {/* Step Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Form Column */}
+          <div className="lg:col-span-2">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Step 1: Wallet Connection */}
+              <WalletConnectSection />
 
-        <form onSubmit={handleSubmit}>
-          {renderStepContent()}
-        </form>
+              {/* Step 2: Network Selection */}
+              <div className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 transition-opacity ${!isConnected ? 'opacity-50 pointer-events-none' : ''}`}>
+                <div className="flex items-center mb-4">
+                  <div className={`flex items-center justify-center w-8 h-8 rounded-full mr-3 text-sm font-bold ${
+                    isConnected && currentNetwork && !noContractsForNetwork
+                      ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' 
+                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                  }`}>
+                    {isConnected && currentNetwork && !noContractsForNetwork ? (
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    ) : '2'}
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {t('page.selectNetworkTitle')}
+                    </h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('page.selectNetworkSubtitle')}
+                    </p>
+                  </div>
+                </div>
+
+                {(isWrongNetwork || noContractsForNetwork) && (
+                  <div className="mb-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                    <p className="text-yellow-700 dark:text-yellow-300 text-sm">
+                      {isWrongNetwork ? t('page.wrongNetwork') : t('page.noContractsForNetwork')}
+                    </p>
+                  </div>
+                )}
+
+                {networkSwitchError && (
+                  <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                    <p className="text-red-700 dark:text-red-300 text-sm">{networkSwitchError}</p>
+                  </div>
+                )}
+
+                <NetworkSelect onSwitchError={handleNetworkSwitchError} />
+
+                {currentNetwork && !noContractsForNetwork && (
+                  <p className="mt-2 text-sm text-green-600 dark:text-green-400 flex items-center">
+                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    {t('page.readyToDeployOn', { name: currentNetwork.name })}
+                  </p>
+                )}
+              </div>
+
+              {/* Step 3: DAO Details */}
+              <div className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 transition-opacity ${!isConnected ? 'opacity-50 pointer-events-none' : ''}`}>
+                <div className="flex items-center mb-4">
+                  <div className={`flex items-center justify-center w-8 h-8 rounded-full mr-3 text-sm font-bold ${
+                    isFormValid
+                      ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400' 
+                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                  }`}>
+                    {isFormValid ? (
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    ) : '3'}
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      {t('page.daoDetailsTitle')}
+                    </h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t('page.daoDetailsSubtitle')}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <FormInput
+                    id="daoName"
+                    name="daoName"
+                    label={t('steps.details.daoName.label')}
+                    value={formData.daoName}
+                    onChange={handleInputChange}
+                    placeholder={t('steps.details.daoName.placeholder')}
+                    error={errors.daoName}
+                    helperText={t('steps.details.daoName.helper')}
+                    isValid={!!formData.daoName && !errors.daoName}
+                  />
+
+                  <FormInput
+                    id="tokenName"
+                    name="tokenName"
+                    label={t('steps.details.tokenName.label')}
+                    value={formData.tokenName}
+                    onChange={handleInputChange}
+                    placeholder={t('steps.details.tokenName.placeholder')}
+                    error={errors.tokenName}
+                    helperText={t('steps.details.tokenName.helper')}
+                    isValid={!!formData.tokenName && !errors.tokenName}
+                  />
+
+                  <FormInput
+                    id="symbol"
+                    name="symbol"
+                    label={t('steps.details.tokenSymbol.label')}
+                    value={formData.symbol}
+                    onChange={handleInputChange}
+                    placeholder={t('steps.details.tokenSymbol.placeholder')}
+                    error={errors.symbol}
+                    helperText={t('steps.details.tokenSymbol.helper')}
+                    isValid={!!formData.symbol && formData.symbol.length <= 6 && !errors.symbol}
+                  />
+
+                  <FormInput
+                    id="totalSupply"
+                    name="totalSupply"
+                    label={t('steps.details.tokenSupply.label')}
+                    value={formData.totalSupply}
+                    onChange={handleInputChange}
+                    placeholder={t('steps.details.tokenSupply.placeholder')}
+                    error={errors.totalSupply}
+                    helperText={t('steps.details.tokenSupply.helper')}
+                    isValid={!!formData.totalSupply && Number(formData.totalSupply) > 0 && !errors.totalSupply}
+                  />
+                </div>
+              </div>
+
+              {/* Advanced Settings */}
+              <AdvancedSettings
+                votingDelay={formData.votingDelay}
+                votingPeriod={formData.votingPeriod}
+                onVotingDelayChange={(value) => setFormData(prev => ({ ...prev, votingDelay: value }))}
+                onVotingPeriodChange={(value) => setFormData(prev => ({ ...prev, votingPeriod: value }))}
+              />
+
+              {/* Deployment Status */}
+              {(isDeploying || txState.isError) && (
+                <DeploymentStatus
+                  isWaitingForSignature={txState.isWaitingForSignature}
+                  isWaitingForConfirmation={txState.isWaitingForConfirmation}
+                  isError={txState.isError}
+                  error={txState.error}
+                  onRetry={() => reset()}
+                />
+              )}
+
+              {/* Submit Button */}
+              {!isDeploying && !txState.isError && (
+                <button
+                  type="submit"
+                  disabled={!canDeploy || !isFormValid || isDeploying}
+                  className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-4 px-6 rounded-xl font-semibold text-lg transition-colors flex items-center justify-center"
+                >
+                  {!isConnected ? (
+                    t('page.connectWalletToContinue')
+                  ) : !canDeploy ? (
+                    t('page.switchToSupportedNetwork')
+                  ) : (
+                    <>
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                      {t('page.createDaoButton')}
+                    </>
+                  )}
+                </button>
+              )}
+            </form>
+          </div>
+
+          {/* Preview Column */}
+          <div className="lg:col-span-1">
+            <LivePreview
+              formData={formData}
+              networkName={currentNetwork?.name || 'Unknown Network'}
+            />
+          </div>
+        </div>
       </div>
     </Layout>
   );

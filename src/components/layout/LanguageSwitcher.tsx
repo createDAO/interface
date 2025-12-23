@@ -11,20 +11,23 @@ const LanguageSwitcher: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Define all supported languages
+  // (Temporarily limited to EN/RU; keep the full list commented for later.)
   const languages = [
     { code: 'en', name: 'English' },
-    { code: 'zh', name: '简体中文' },
     { code: 'ru', name: 'Русский' },
+
+    // Full list kept for later:
+    // { code: 'zh', name: '简体中文' },
     // { code: 'es', name: 'Español' },
-    { code: 'ko', name: '한국어' },
-    { code: 'ja', name: '日本語' },
+    // { code: 'ko', name: '한국어' },
+    // { code: 'ja', name: '日本語' },
     // { code: 'pt', name: 'Português' },
-    { code: 'tr', name: 'Türkçe' },
-    { code: 'vi', name: 'Tiếng Việt' },
+    // { code: 'tr', name: 'Türkçe' },
+    // { code: 'vi', name: 'Tiếng Việt' },
     // { code: 'de', name: 'Deutsch' },
     // { code: 'fr', name: 'Français' },
     // { code: 'hi', name: 'हिन्दी' },
-    { code: 'id', name: 'Bahasa Indonesia' }
+    // { code: 'id', name: 'Bahasa Indonesia' },
   ];
 
   // Ensure hydration completes before rendering translated content

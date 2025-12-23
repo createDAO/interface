@@ -5,11 +5,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
+import VersionBanner from '../components/sections/VersionBanner';
 import Hero from '../components/sections/Hero';
+import ArchitectureHighlights from '../components/sections/ArchitectureHighlights';
+import WhatYouGet from '../components/sections/WhatYouGet';
 import Steps from '../components/sections/Steps';
-import Features from '../components/sections/Features';
 import Networks from '../components/sections/Networks';
 import ManagementPlatforms from '../components/sections/ManagementPlatforms';
+import OpenSource from '../components/sections/OpenSource';
 import CTA from '../components/sections/CTA';
 import FAQ from '../components/sections/FAQ';
 
@@ -37,11 +40,14 @@ const Home: React.FC = () => {
         <meta name="twitter:image" content="https://createdao.org/twitter-image.jpg" />
       </Head>
 
+      <VersionBanner />
       <Hero />
+      <ArchitectureHighlights />
+      <WhatYouGet />
       <Steps />
-      <Features />
       <Networks />
       <ManagementPlatforms />
+      <OpenSource />
       <CTA />
       <FAQ />
     </Layout>

@@ -13,13 +13,6 @@ const nextConfig = {
     NEXT_PUBLIC_COMMIT_HASH: process.env.NEXT_PUBLIC_COMMIT_HASH,
     NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
     NEXT_PUBLIC_DRPC_API_KEY: process.env.NEXT_PUBLIC_DRPC_API_KEY,
-    NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    NEXT_PUBLIC_FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-    NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
   },
   // Enable image optimization
   images: {
@@ -44,7 +37,7 @@ const nextConfig = {
   
   // Package import optimization for better performance
   experimental: {
-    optimizePackageImports: ['wagmi', 'firebase/firestore', 'firebase/app'],
+    optimizePackageImports: ['wagmi'],
     // Reduce aggressive prefetching to minimize 404 requests
     linkNoTouchStart: true,
   },
@@ -54,6 +47,17 @@ const nextConfig = {
   
   // Add custom webpack config to handle missing locale files gracefully
   webpack: (config, { isServer }) => {
+    // Prevent Next/Webpack from failing on Wagmi connector optional peer deps
+    // that we are not using (gemini/porto/safe). If you add these connectors
+    // later, remove the alias and install the real packages.
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@gemini-wallet/core': false,
+      porto: false,
+      '@safe-global/safe-apps-provider': false,
+      '@safe-global/safe-apps-sdk': false,
+    };
+
     if (!isServer) {
       // Handle missing locale files on client side
       config.resolve.fallback = {

@@ -1,221 +1,182 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 
 const Hero: React.FC = () => {
-  const { t } = useTranslation(['home', 'common', 'dao']);
-  const [showNetworkDropdown, setShowNetworkDropdown] = useState(false);
-  const [typedText, setTypedText] = useState('');
-  const [progress, setProgress] = useState(0);
-  const fullText = 'MyAwesomeDAO';
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  
-  // Typing animation effect
-  useEffect(() => {
-    if (typedText.length < fullText.length) {
-      const timeout = setTimeout(() => {
-        setTypedText(fullText.substring(0, typedText.length + 1));
-      }, 150);
-      return () => clearTimeout(timeout);
-    }
-  }, [typedText]);
-  
-  // Reset typing animation periodically
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTypedText('');
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-  
-  // Progress bar animation
-  useEffect(() => {
-    // Start progress animation when component mounts
-    progressIntervalRef.current = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          // Reset progress when it reaches 100%
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 100);
-    
-    return () => {
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
-      }
-    };
-  }, []);
+  const { t } = useTranslation(['home', 'common']);
+
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-10 md:mb-0">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6" 
-                dangerouslySetInnerHTML={{ 
-                  __html: t('home:hero.title').replace(
-                    '<highlight>', 
-                    '<span class="text-primary-600 dark:text-primary-400">'
-                  ).replace('</highlight>', '</span>') 
-                }}>
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+    <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-primary-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 py-20 lg:py-28">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200/30 dark:bg-primary-900/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-100/40 dark:bg-primary-800/20 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          {/* Left side - Content */}
+          <div className="lg:w-1/2 text-center lg:text-left">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary-100 dark:bg-primary-900/50 text-primary-700 dark:text-primary-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-11v6h2v-6h-2zm0-4v2h2V7h-2z"/>
+              </svg>
+              {t('home:hero.badge')}
+            </div>
+
+            {/* Title */}
+            <h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
+              dangerouslySetInnerHTML={{ 
+                __html: t('home:hero.title').replace(
+                  '<highlight>', 
+                  '<span class="text-primary-600 dark:text-primary-400">'
+                ).replace('</highlight>', '</span>') 
+              }}
+            />
+
+            {/* Description */}
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0">
               {t('home:hero.description')}
             </p>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Link href="/create" className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
-                {t('common:buttons.create')}
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
+              <Link 
+                href="/create?network=sepolia" 
+                className="inline-flex items-center justify-center gap-2 bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900 px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+                {t('home:hero.deployTestnet')}
               </Link>
-              <Link href="#features" className="bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 border border-primary-600 dark:border-primary-400 px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
-                {t('common:buttons.learnMore')}
+              <Link 
+                href="/create?network=base" 
+                className="inline-flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                <span className="w-2 h-2 bg-green-400 rounded-full" />
+                {t('home:hero.deployMainnet')}
               </Link>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+
+            {/* Gas fee note */}
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {t('home:hero.gasFeeNote')}
             </p>
           </div>
-          <div className="md:w-1/2">
+
+          {/* Right side - Architecture Diagram */}
+          <div className="lg:w-1/2">
             <div className="relative">
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 md:p-8 transform rotate-1 transition-all duration-300 hover:rotate-0 hover:shadow-2xl animate-float relative overflow-hidden">
-                {/* Blockchain node visualization */}
-                <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none">
-                  <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary-500 rounded-full"></div>
-                  <div className="absolute top-3/4 left-1/2 w-2 h-2 bg-primary-500 rounded-full"></div>
-                  <div className="absolute top-1/2 left-3/4 w-2 h-2 bg-primary-500 rounded-full"></div>
-                  <div className="absolute top-1/3 left-2/3 w-2 h-2 bg-primary-500 rounded-full"></div>
-                  <div className="absolute top-2/3 left-1/3 w-2 h-2 bg-primary-500 rounded-full"></div>
-                  
-                  {/* Connection lines */}
-                  <div className="absolute top-1/4 left-1/4 w-[150px] h-[1px] bg-primary-500 transform rotate-45"></div>
-                  <div className="absolute top-3/4 left-1/2 w-[100px] h-[1px] bg-primary-500 transform -rotate-45"></div>
-                  <div className="absolute top-1/3 left-2/3 w-[120px] h-[1px] bg-primary-500 transform rotate-30"></div>
-                  <div className="absolute top-2/3 left-1/3 w-[80px] h-[1px] bg-primary-500 transform -rotate-30"></div>
+              {/* Main card */}
+              <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 md:p-8 border border-gray-100 dark:border-gray-700">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-400" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                    <div className="w-3 h-3 rounded-full bg-green-400" />
+                  </div>
+                  <span className="text-xs font-mono text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                    createDAO()
+                  </span>
                 </div>
-                <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 mb-4">
-                  <div className="flex items-center mb-4">
-                    <div className="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    <div className="ml-4 text-sm text-gray-500 dark:text-gray-400">CreateDAO Interface</div>
-                  </div>
-                  <div className="space-y-3">
-                    {/* Network selector */}
-                    <div className="flex items-center space-x-2 mb-4">
-                      <div className="flex-1">
-                        <div className="relative">
-                          <div 
-                            className="flex items-center justify-between bg-gray-100 dark:bg-gray-700 rounded p-2 text-xs text-gray-700 dark:text-gray-300 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
-                            onClick={() => setShowNetworkDropdown(!showNetworkDropdown)}
-                          >
-                            <div className="flex items-center">
-                              <div className="w-4 h-4 rounded-full bg-primary-500 mr-2"></div>
-                              <span>Ethereum</span>
-                            </div>
-                            <svg className={`w-4 h-4 transition-transform duration-200 ${showNetworkDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                            </svg>
-                          </div>
-                          <div className={`absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 rounded shadow-lg z-10 transition-opacity duration-200 ${showNetworkDropdown ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                            <div className="p-1">
-                              <div className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer">
-                                <div className="w-4 h-4 rounded-full bg-primary-500 mr-2"></div>
-                                <span className="text-xs">Ethereum</span>
-                              </div>
-                              <div className="flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer">
-                                <div className="w-4 h-4 rounded-full bg-purple-500 mr-2"></div>
-                                <span className="text-xs">Polygon</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+
+                {/* Architecture visualization */}
+                <div className="space-y-4">
+                  {/* Factory */}
+                  <div className="bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/30 dark:to-primary-800/30 rounded-xl p-4 border border-primary-200 dark:border-primary-700">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center">
+                        <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
                       </div>
-                      <div className="flex-1">
-                        <div className="bg-gray-100 dark:bg-gray-700 rounded p-2 text-xs text-gray-700 dark:text-gray-300 flex items-center justify-between">
-                          <span>v1.0.0</span>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* DAO Name input */}
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">{t('common:labels.name')}</span>
-                      </div>
-                      <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded h-8 pl-16 pr-3 flex items-center text-xs text-gray-800 dark:text-gray-200">
-                        <span className="inline-block">{typedText}</span>
-                        <span className="inline-block w-1 h-4 bg-primary-500 ml-0.5 animate-pulse"></span>
-                      </div>
-                    </div>
-                    
-                    {/* Token Name input */}
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <span className="text-xs text-gray-500 dark:text-gray-400">{t('common:labels.token')}</span>
-                      </div>
-                      <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded h-8 pl-16 pr-3 flex items-center text-xs text-gray-800 dark:text-gray-200">
-                        MyDAO Token
-                      </div>
-                    </div>
-                    
-                    {/* Symbol and Supply */}
-                    <div className="flex space-x-2">
-                      <div className="relative flex-1">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <span className="text-xs text-gray-500 dark:text-gray-400">{t('common:labels.symbol')}</span>
-                        </div>
-                        <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded h-8 pl-16 pr-3 flex items-center text-xs text-gray-800 dark:text-gray-200">
-                          MDT
-                        </div>
-                      </div>
-                      <div className="relative flex-1">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <span className="text-xs text-gray-500 dark:text-gray-400">{t('common:labels.supply')}</span>
-                        </div>
-                        <div className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded h-8 pl-16 pr-3 flex items-center text-xs text-gray-800 dark:text-gray-200">
-                          1,000,000
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Progress bar */}
-                    <div className="h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden mt-2">
-                      <div 
-                        className="h-full bg-primary-500 dark:bg-primary-400 transition-all duration-100 ease-linear"
-                        style={{ width: `${progress}%` }}
-                      ></div>
-                    </div>
-                    
-                    {/* Create button with animation */}
-                    <div className="relative mt-4 group">
-                      <div className="absolute inset-0 bg-primary-400 dark:bg-primary-600 rounded animate-pulse opacity-30"></div>
-                      <div className="h-10 bg-primary-500 dark:bg-primary-600 rounded flex items-center justify-center relative transition-all duration-200 group-hover:bg-primary-600 dark:group-hover:bg-primary-700 cursor-pointer">
-                        <span className="text-white text-sm font-medium group-hover:scale-105 transition-transform duration-200">{t('common:buttons.create')}</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-900 dark:text-white">DAOFactory</h4>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">One-click deployment</p>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <div className="space-y-2">
-                    <div className="flex items-center">
-                      <div className="h-3 w-3 rounded-full bg-green-500 mr-2 animate-ping opacity-75"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24 text-xs text-gray-600 dark:text-gray-400 flex items-center px-2">{t('common:labels.gas')}: 0.005 ETH</div>
-                    </div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-32 text-xs text-gray-600 dark:text-gray-400 flex items-center px-2">{t('common:labels.deploymentReady')}</div>
+
+                  {/* Arrow */}
+                  <div className="flex justify-center">
+                    <svg className="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
                   </div>
-                  <div className="relative">
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="h-10 w-24 bg-primary-600 dark:bg-primary-500 rounded-lg flex items-center justify-center hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors duration-200 cursor-pointer">
-                      <span className="text-white text-xs">{t('common:buttons.connect')}</span>
+
+                  {/* Three contracts */}
+                  <div className="grid grid-cols-3 gap-3">
+                    {/* Token */}
+                    <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-3 border border-blue-200 dark:border-blue-800 text-center">
+                      <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">Token</h5>
+                      <p className="text-[10px] text-gray-500 dark:text-gray-400">ERC20Votes</p>
+                    </div>
+
+                    {/* Treasury */}
+                    <div className="bg-green-50 dark:bg-green-900/20 rounded-xl p-3 border border-green-200 dark:border-green-800 text-center">
+                      <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">Treasury</h5>
+                      <p className="text-[10px] text-gray-500 dark:text-gray-400">Timelock</p>
+                    </div>
+
+                    {/* Governor */}
+                    <div className="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-3 border border-purple-200 dark:border-purple-800 text-center">
+                      <div className="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                      </div>
+                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">Governor</h5>
+                      <p className="text-[10px] text-gray-500 dark:text-gray-400">Governance</p>
+                    </div>
+                  </div>
+
+                  {/* Distribution info */}
+                  <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg px-4 py-3 mt-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                      <span className="text-xs text-gray-600 dark:text-gray-300">1% Creator</span>
+                    </div>
+                    <div className="h-4 w-px bg-gray-300 dark:bg-gray-600" />
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full" />
+                      <span className="text-xs text-gray-600 dark:text-gray-300">99% Treasury</span>
+                    </div>
+                    <div className="h-4 w-px bg-gray-300 dark:bg-gray-600" />
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full" />
+                      <span className="text-xs text-gray-600 dark:text-gray-300">1% Quorum</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary-100 dark:bg-primary-900 rounded-full z-[-1] animate-pulse"></div>
-              <div className="absolute -top-6 -left-6 w-16 h-16 bg-primary-200 dark:bg-primary-800 rounded-full z-[-1] animate-pulse animation-delay-1000"></div>
+
+              {/* Stats cards */}
+              <div className="grid grid-cols-3 gap-3 mt-4">
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-100 dark:border-gray-700 text-center">
+                  <p className="text-lg font-bold text-gray-900 dark:text-white">{t('home:hero.stats.contracts')}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('home:hero.stats.contractsDesc')}</p>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-100 dark:border-gray-700 text-center">
+                  <p className="text-lg font-bold text-primary-600 dark:text-primary-400">{t('home:hero.stats.gasEfficient')}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('home:hero.stats.gasEfficientDesc')}</p>
+                </div>
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-100 dark:border-gray-700 text-center">
+                  <p className="text-lg font-bold text-green-600 dark:text-green-400">{t('home:hero.stats.compatible')}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{t('home:hero.stats.compatibleDesc')}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

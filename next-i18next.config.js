@@ -2,7 +2,11 @@
 module.exports = {
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'zh', 'ru', 'es', 'ko', 'ja', 'pt', 'tr', 'vi', 'de', 'fr', 'hi', 'id'],
+    // Full list kept for later:
+    // locales: ['en', 'zh', 'ru', 'es', 'ko', 'ja', 'pt', 'tr', 'vi', 'de', 'fr', 'hi', 'id'],
+
+    // Temporarily enabled locales:
+    locales: ['en', 'ru'],
   },
   /** To avoid issues when deploying to some paas (vercel...) */
   localePath: require('path').resolve('./public/locales'),

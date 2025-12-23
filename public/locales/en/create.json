@@ -169,6 +169,22 @@
       "description": "Require multiple approvals for critical actions"
     }
   },
+  "page": {
+    "metaTitle": "Create DAO | CreateDAO",
+    "metaDescription": "Create your own DAO with customizable governance and token parameters",
+    "heading": "Create Your DAO",
+    "subheading": "Deploy a fully-featured DAO with governance token, treasury, and voting mechanisms.",
+    "selectNetworkTitle": "Select Network",
+    "selectNetworkSubtitle": "Choose the blockchain for your DAO",
+    "wrongNetwork": "Please switch to a supported network to create your DAO.",
+    "noContractsForNetwork": "Contracts are not yet deployed on this network. Please switch to a supported network.",
+    "readyToDeployOn": "Ready to deploy on {{name}}",
+    "daoDetailsTitle": "DAO Details",
+    "daoDetailsSubtitle": "Configure your DAO and governance token",
+    "connectWalletToContinue": "Connect Wallet to Continue",
+    "switchToSupportedNetwork": "Switch to a Supported Network",
+    "createDaoButton": "Create DAO"
+  },
   "wallet": {
     "connected": "Wallet Connected",
     "readyToDeploy": "Your wallet is connected and ready to deploy the DAO",

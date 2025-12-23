@@ -1,11 +1,6 @@
 import * as wagmiChains from "wagmi/chains";
-import { createConfig, http, cookieStorage, createStorage } from "wagmi";
-import {
-  metaMask,
-  coinbaseWallet,
-  walletConnect,
-  injected,
-} from "wagmi/connectors";
+import { createConfig, http, cookieStorage, createStorage, fallback, type Transport } from "wagmi";
+import { metaMask, coinbaseWallet, walletConnect, injected } from "wagmi/connectors";
 import { nyknyc } from "@nyknyc/wagmi-connector";
 
 // Create a singleton instance of WalletConnect to prevent multiple initializations
@@ -52,116 +47,140 @@ const getNyknycAppId = (): string => {
 
 import type { Chain } from "wagmi/chains";
 
-// Map of chain IDs to wagmi chain objects
+// Supported network chain IDs
+export const SUPPORTED_CHAIN_IDS = {
+  SEPOLIA: 11155111,
+  BASE: 8453,
+  HARDHAT: 31337,
+} as const;
+
+// Map of supported chain IDs to wagmi chain objects
 const chainMap: Record<number, Chain> = {
-  // Testnet
-  11155111: wagmiChains.sepolia,
-  31337: wagmiChains.hardhat,
-  // Mainnets
-  1: wagmiChains.mainnet,
-  56: wagmiChains.bsc,
-  137: wagmiChains.polygon,
-  42161: wagmiChains.arbitrum,
-  10: wagmiChains.optimism,
-  8453: wagmiChains.base,
-  43114: wagmiChains.avalanche,
-  100: wagmiChains.gnosis,
-  5000: wagmiChains.mantle,
-  42220: wagmiChains.celo,
-  81457: wagmiChains.blast,
-  534352: wagmiChains.scroll,
-  130: wagmiChains.unichain,
-  480: wagmiChains.worldchain,
+  [SUPPORTED_CHAIN_IDS.SEPOLIA]: wagmiChains.sepolia,
+  [SUPPORTED_CHAIN_IDS.BASE]: wagmiChains.base,
+  [SUPPORTED_CHAIN_IDS.HARDHAT]: wagmiChains.hardhat,
 };
 
-// DRPC network name mapping
-const getDrpcNetworkName = (chainId: number): string => {
-  switch (chainId) {
-    case 11155111:
-      return "sepolia";
-    case 31337:
-      return "hardhat";
-    case 1:
-      return "ethereum";
-    case 56:
-      return "bsc";
-    case 137:
-      return "polygon";
-    case 42161:
-      return "arbitrum";
-    case 10:
-      return "optimism";
-    case 8453:
-      return "base";
-    case 43114:
-      return "avalanche";
-    case 100:
-      return "gnosis";
-    case 5000:
-      return "mantle";
-    case 42220:
-      return "celo";
-    case 81457:
-      return "blast";
-    case 534352:
-      return "scroll";
-    case 130:
-      return "unichain";
-    case 480:
-      return "worldchain";
-    default:
-      return "ethereum";
-  }
+// DRPC network name mapping for supported chains
+const DRPC_NETWORK_NAMES: Record<number, string> = {
+  [SUPPORTED_CHAIN_IDS.SEPOLIA]: "sepolia",
+  [SUPPORTED_CHAIN_IDS.BASE]: "base",
+};
+
+// Public fallback RPC URLs for supported chains
+const PUBLIC_RPC_URLS: Record<number, string[]> = {
+  [SUPPORTED_CHAIN_IDS.SEPOLIA]: [
+    "https://rpc.sepolia.org",
+    "https://ethereum-sepolia-rpc.publicnode.com",
+  ],
+  [SUPPORTED_CHAIN_IDS.BASE]: [
+    "https://mainnet.base.org",
+    "https://base.publicnode.com",
+  ],
 };
 
 // Create DRPC URL for a given chain
-const getDrpcUrl = (chainId: number): string => {
-  const network = getDrpcNetworkName(chainId);
-  return `https://lb.drpc.org/ogrpc?network=${network}&dkey=${process.env.NEXT_PUBLIC_DRPC_API_KEY}`;
+const getDrpcUrl = (chainId: number): string | null => {
+  const network = DRPC_NETWORK_NAMES[chainId];
+  if (!network) return null;
+  
+  const apiKey = process.env.NEXT_PUBLIC_DRPC_API_KEY;
+  if (!apiKey) {
+    console.warn("DRPC API key not configured, using public RPCs only");
+    return null;
+  }
+  
+  return `https://lb.drpc.org/ogrpc?network=${network}&dkey=${apiKey}`;
 };
 
-// Create an array of all supported chains
-// Make sure the first chain is sepolia (as the default)
-const defaultChain = wagmiChains.sepolia;
-const otherChains = Object.values(chainMap).filter(
-  (chain) => chain.id !== defaultChain.id
-);
-const chains: [Chain, ...Chain[]] = [defaultChain, ...otherChains];
-
-// Create transports for all chains
-const transports: Record<number, ReturnType<typeof http>> = {};
-
-// Add transport for each chain
-for (const chain of chains) {
-  if (chain.id === 31337 && process.env.NODE_ENV === "development") {
-    transports[chain.id] = http("http://127.0.0.1:8545/");
-  } else {
-    transports[chain.id] = http(getDrpcUrl(chain.id));
+// Create transport with fallbacks for a chain
+const createChainTransport = (chainId: number) => {
+  // Special case for local development
+  if (chainId === SUPPORTED_CHAIN_IDS.HARDHAT && process.env.NODE_ENV === "development") {
+    return http("http://127.0.0.1:8545/");
   }
-}
 
-// Create wagmi config with all chains - exported as factory function
+  const transports: ReturnType<typeof http>[] = [];
+  
+  // Add DRPC as primary if available
+  const drpcUrl = getDrpcUrl(chainId);
+  if (drpcUrl) {
+    transports.push(http(drpcUrl));
+  }
+  
+  // Add public fallback RPCs
+  const publicUrls = PUBLIC_RPC_URLS[chainId] || [];
+  for (const url of publicUrls) {
+    transports.push(http(url));
+  }
+  
+  // If we have multiple transports, use fallback; otherwise use single transport
+  if (transports.length > 1) {
+    return fallback(transports);
+  }
+  
+  return transports[0] || http();
+};
+
+// Get supported chains based on environment
+const getSupportedChains = (): [Chain, ...Chain[]] => {
+  const chains: Chain[] = [
+    chainMap[SUPPORTED_CHAIN_IDS.SEPOLIA],
+    chainMap[SUPPORTED_CHAIN_IDS.BASE],
+  ];
+  
+  // Add Hardhat only in development
+  if (process.env.NODE_ENV === "development") {
+    chains.push(chainMap[SUPPORTED_CHAIN_IDS.HARDHAT]);
+  }
+  
+  return chains as [Chain, ...Chain[]];
+};
+
+// Create transports for supported chains
+const createTransports = (chains: Chain[]): Record<number, Transport> => {
+  const transports: Record<number, Transport> = {};
+  
+  for (const chain of chains) {
+    transports[chain.id] = createChainTransport(chain.id);
+  }
+  
+  return transports;
+};
+
+// Create wagmi config with supported chains - exported as factory function
 export function getWagmiConfig() {
+  const chains = getSupportedChains();
+  const transports = createTransports(chains);
+  
   return createConfig({
     chains,
     connectors: [
-      metaMask({
-        dappMetadata: {
-          name: "CreateDAO",
-          url:
-            typeof window !== "undefined"
-              ? window.location.origin
-              : "https://createdao.org",
-          iconUrl:
-            typeof window !== "undefined"
-              ? `${window.location.origin}/favicon.png`
-              : "https://createdao.org/favicon.png",
-        },
-      }),
-      coinbaseWallet({
-        appName: "CreateDAO",
-      }),
-      getWalletConnectConnector(),
+      // Only load these connectors on the client side (when indexedDB is available)
+      // This prevents "ReferenceError: indexedDB is not defined" during SSR
+      ...(typeof indexedDB !== "undefined"
+        ? [
+            metaMask({
+              dappMetadata: {
+                name: "CreateDAO",
+                url:
+                  typeof window !== "undefined"
+                    ? window.location.origin
+                    : "https://createdao.org",
+                iconUrl:
+                  typeof window !== "undefined"
+                    ? `${window.location.origin}/favicon.png`
+                    : "https://createdao.org/favicon.png",
+              },
+            }),
+            coinbaseWallet({
+              appName: "CreateDAO",
+            }),
+            getWalletConnectConnector(),
+          ]
+        : []
+      ),
+      // These connectors work on both server and client
       nyknyc({
         appId: getNyknycAppId(),
       }),

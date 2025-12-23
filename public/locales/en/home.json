@@ -1,124 +1,151 @@
 {
-  "hero": {
-    "title": "Create Your DAO <highlight>Effortlessly</highlight>",
-    "description": "Create a decentralized organization on any supported blockchain in minutes. No coding required.",
-    "gasFeeNote": "Only pay network gas fees for deployment"
+  "versionBanner": {
+    "title": "🎉 CreateDAO v2 is here!",
+    "description": "Gas-efficient EIP-1167 clones, auto-delegation, and OpenBook integration.",
+    "cta": "Learn more"
   },
-  "features": {
-    "title": "Why Choose CreateDAO",
-    "subtitle": "Everything you need to launch and manage your DAO",
-    "governance": {
-      "title": "Governance",
-      "description": "Create proposals, vote, and execute decisions on-chain"
+  "hero": {
+    "badge": "Built with OpenZeppelin",
+    "title": "Deploy Your DAO in <highlight>One Transaction</highlight>",
+    "description": "Create a complete governance system with token, treasury, and governor. Gas-efficient, secure, and OpenBook-ready.",
+    "deployTestnet": "Deploy on Sepolia",
+    "deployMainnet": "Deploy on Base",
+    "gasFeeNote": "Only pay network gas fees • No platform fees",
+    "stats": {
+      "contracts": "3 Contracts",
+      "contractsDesc": "Token, Treasury, Governor",
+      "gasEfficient": "~90% Gas Saved",
+      "gasEfficientDesc": "EIP-1167 Clones",
+      "compatible": "100% Compatible",
+      "compatibleDesc": "OpenBook Ready"
+    }
+  },
+  "architecture": {
+    "title": "Built for Modern DAOs",
+    "subtitle": "CreateDAO v2 uses cutting-edge patterns for maximum efficiency and security.",
+    "features": {
+      "gasEfficient": {
+        "title": "Gas Efficient",
+        "description": "EIP-1167 minimal proxy clones reduce deployment cost by ~90%. Each clone is just 45 bytes instead of 15KB+."
+      },
+      "fairDistribution": {
+        "title": "Fair Distribution",
+        "description": "1% to creator for initial governance, 99% to treasury. Tokens unlock only through governance votes."
+      },
+      "autoDelegation": {
+        "title": "Auto-Delegation",
+        "description": "Token holders get voting power instantly. No manual delegation needed - vote right away."
+      },
+      "managerRole": {
+        "title": "Manager Role",
+        "description": "Built-in manager address for off-chain authorization. Perfect for DAO management platforms."
+      },
+      "timelockSecurity": {
+        "title": "Timelock Security",
+        "description": "1-day delay on all treasury actions. Community has time to react to proposals."
+      },
+      "openbookReady": {
+        "title": "OpenBook Ready",
+        "description": "Built for OpenBook's multi-entity architecture. Manage off-chain legal entities with full transparency."
+      }
+    }
+  },
+  "whatYouGet": {
+    "title": "What Gets Deployed",
+    "subtitle": "One transaction deploys a complete, production-ready DAO system.",
+    "token": {
+      "title": "DAO Token",
+      "description": "ERC20Votes governance token with 18 decimals. Auto-delegates to holders for instant voting power.",
+      "features": ["ERC20Votes + ERC20Permit", "Auto-delegation on transfer", "1% to creator, 99% to treasury"]
     },
     "treasury": {
-      "title": "Treasury Management",
-      "description": "Manage assets and allocate funds through community voting"
+      "title": "Treasury",
+      "description": "TimelockController that holds 99% of tokens. All transfers require governance approval.",
+      "features": ["1-day execution delay", "Governance-controlled", "Holds DAO assets"]
     },
-    "multichain": {
-      "title": "Multi-Chain Support",
-      "description": "Deploy on multiple EVM-compatible blockchains"
-    },
-    "noCode": {
-      "title": "No-Code Solution",
-      "description": "Launch your DAO without writing a single line of code"
-    },
-    "customization": {
-      "title": "Customization",
-      "description": "Configure your DAO to fit your community's needs"
-    },
-    "security": {
-      "title": "Security",
-      "description": "Built with security best practices and open-source transparency"
-    },
-    "openSource": {
-      "title": "Open Source",
-      "description": "Our DAO factory contract and interface are fully open source on GitHub."
-    },
-    "notAudited": {
-      "title": "Not Yet Audited Security",
-      "description": "Smart contracts NOT YET audited by leading security firms for your peace of mind."
-    },
-    "alwaysFree": {
-      "title": "Always Free",
-      "description": "No hidden fees. Only pay network gas for deployment."
-    },
-    "openSourceSection": {
-      "title": "Open Source Code",
-      "description": "Check our smart contracts and contribute to the code. We believe in transparency and community-driven development.",
-      "button": "View on GitHub"
-    },
-    "subtitle2": "We've built the most reliable and user-friendly platform for creating DAOs."
-  },
-  "howItWorks": {
-    "title": "How It Works",
-    "subtitle": "Create your DAO in just a few simple steps",
-    "steps": {
-      "step1": {
-        "title": "Choose Network",
-        "description": "Select the blockchain network for your DAO"
-      },
-      "step2": {
-        "title": "Configure DAO",
-        "description": "Set up your DAO name, token, and governance parameters"
-      },
-      "step3": {
-        "title": "Review & Deploy",
-        "description": "Review your settings and deploy your DAO to the blockchain"
-      },
-      "step4": {
-        "title": "Manage DAO",
-        "description": "Use your new DAO for governance and treasury management"
-      }
+    "governor": {
+      "title": "Governor",
+      "description": "Full-featured governance with OpenZeppelin extensions. Create proposals, vote, and execute on-chain.",
+      "features": ["1% quorum requirement", "1-week voting period", "Manager role included"]
     }
   },
   "steps": {
     "title": "Three Simple Steps",
-    "subtitle": "Creating a DAO has never been easier. Follow these simple steps to launch your organization.",
+    "subtitle": "Launch your DAO in under 5 minutes.",
     "step1": {
-      "title": "Connect Wallet",
-      "description": "Use MetaMask or WalletConnect to get started."
+      "title": "Connect & Select",
+      "description": "Connect your wallet and choose Sepolia (testnet) or Base (mainnet)."
     },
     "step2": {
-      "title": "Enter DAO Details",
-      "description": "Name your DAO and set basic governance parameters."
+      "title": "Name Your DAO",
+      "description": "Enter your DAO name, token name, symbol, and total supply."
     },
     "step3": {
       "title": "Deploy",
-      "description": "Confirm transaction and your DAO is ready to use."
+      "description": "Confirm one transaction. Your complete DAO is live instantly."
     },
-    "readyToStart": "Ready to start?",
+    "readyToStart": "Ready to launch?",
     "createButton": "Create Your DAO"
   },
   "networks": {
     "title": "Supported Networks",
-    "subtitle": "Create and deploy your DAO on any of these popular blockchain networks.",
-    "comingSoon": "More networks coming soon based on community feedback."
+    "subtitle": "Deploy on testnet first, then go to production.",
+    "testnet": {
+      "title": "Sepolia Testnet",
+      "description": "Test your DAO with free testnet ETH. Perfect for experimentation.",
+      "badge": "Recommended for testing"
+    },
+    "mainnet": {
+      "title": "Base Mainnet",
+      "description": "Production-ready deployment on Base L2. Low fees, real value.",
+      "badge": "Production ready"
+    },
+    "comingSoon": "More networks coming based on community feedback."
   },
   "platforms": {
-    "title": "DAO Management Platforms",
-    "subtitle": "Powerful interfaces to manage your DAO after deployment.",
-    "description": "Once deployed, manage your DAO with these platforms",
-    "daoCafe": {
-      "name": "DAOCafe",
-      "description": "A comprehensive interface to manage DAOs: create proposals, discuss, vote, create presales, propose treasury transfers, and more.",
-      "visitButton": "Visit DAOCafe"
+    "title": "Manage Your DAO",
+    "subtitle": "After deployment, use these platforms to govern your organization.",
+    "openbook": {
+      "name": "OpenBook",
+      "badge": "Made for CreateDAO",
+      "description": "Transparent business management for DAOs. Manage off-chain legal entities, treasury tracking, and team permissions with full financial transparency.",
+      "visitButton": "Open OpenBook"
+    },
+    "snapshot": {
+      "name": "Snapshot",
+      "badge": "Off-chain Voting",
+      "description": "Gasless voting and signaling for DAOs. Create proposals and vote without gas fees using off-chain signatures.",
+      "visitButton": "Open Snapshot"
+    },
+    "tally": {
+      "name": "Tally",
+      "badge": "On-chain Governance",
+      "description": "Industry-standard on-chain governance interface. Create proposals, vote, delegate, and track governance activity.",
+      "visitButton": "Open Tally"
     },
     "addYourPlatform": {
-      "title": "Add Your Platform",
-      "description": "Develop your own DAO management interface and get it featured here. Check our documentation for integration details and requirements.",
-      "readDocsButton": "Read Documentation"
+      "title": "Build Your Own",
+      "description": "CreateDAO contracts are open source. Build your own management interface.",
+      "readDocsButton": "View Documentation"
     },
     "integration": {
-      "text": "Want to see your platform listed here?",
-      "linkText": "Learn how to integrate"
+      "text": "Want to integrate with CreateDAO?",
+      "linkText": "Read the integration guide"
     }
   },
+  "openSource": {
+    "title": "Open Source & Transparent",
+    "subtitle": "Every line of code is public. Verify, contribute, or fork.",
+    "description": "CreateDAO is built on OpenZeppelin's battle-tested contracts. Our factory and interface are fully open source on GitHub.",
+    "viewContracts": "View Contracts",
+    "viewInterface": "View Interface",
+    "disclaimer": "Smart contracts are not yet audited. Use at your own risk."
+  },
   "cta": {
-    "title": "Create Your DAO Now",
-    "description": "Join hundreds of organizations already using CreateDAO to manage their communities and treasuries.",
-    "createButton": "Create DAO",
-    "learnMoreButton": "Learn More",
-    "gasFeeNote": "Only pay network gas fees for deployment"
+    "title": "Ready to Launch Your DAO?",
+    "description": "Join the decentralized governance revolution. Deploy your DAO in one transaction.",
+    "createButton": "Create DAO Now",
+    "learnMoreButton": "Explore Features",
+    "gasFeeNote": "No platform fees • Only network gas"
   }
 }

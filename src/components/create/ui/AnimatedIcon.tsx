@@ -14,15 +14,15 @@ const AnimatedIcon: React.FC<AnimatedIconProps> = ({
   useEffect(() => {
     // Start animation
     setIsAnimating(true);
-    
+
     // Set up animation interval
     const interval = setInterval(() => {
       setIsAnimating(prev => !prev);
     }, duration);
-    
+
     // Clean up
     return () => clearInterval(interval);
-  }, []); // Remove duration from dependencies to prevent infinite loop
+  }, [duration]);
   
   return (
     <div className={`transition-transform duration-300 ease-in-out ${isAnimating ? 'scale-110' : 'scale-100'}`}>

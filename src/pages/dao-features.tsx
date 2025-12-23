@@ -6,44 +6,234 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps } from 'next';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
-import CodeBlock from '../components/ui/CodeBlock';
 
-// Component for feature cards
-const FeatureCard: React.FC<{
+// Icons
+const TokenIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+);
+
+const GovernorIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+  </svg>
+);
+
+const TreasuryIcon: React.FC<{ className?: string }> = ({ className = "w-6 h-6" }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+  </svg>
+);
+
+const CheckIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 20 20">
+    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+  </svg>
+);
+
+const ArrowIcon: React.FC<{ className?: string }> = ({ className = "w-5 h-5" }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+  </svg>
+);
+
+// Section Header Component
+const SectionHeader: React.FC<{
   title: string;
-  description: React.ReactNode;
-  icon?: React.ReactNode;
-  className?: string;
-}> = ({ title, description, icon, className = "" }) => {
+  subtitle?: string;
+  centered?: boolean;
+}> = ({ title, subtitle, centered = false }) => (
+  <div className={`mb-10 ${centered ? 'text-center' : ''}`}>
+    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+      {title}
+    </h2>
+    {subtitle && (
+      <p className={`text-lg text-gray-600 dark:text-gray-400 ${centered ? 'max-w-2xl mx-auto' : ''}`}>
+        {subtitle}
+      </p>
+    )}
+  </div>
+);
+
+// Benefit Card Component
+const BenefitCard: React.FC<{
+  title: string;
+  description: string;
+  index: number;
+}> = ({ title, description, index }) => {
+  const colors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-amber-500'];
+  
   return (
-    <div className={`bg-gray-50 dark:bg-gray-900 rounded-lg p-4 border border-gray-200 dark:border-gray-700 ${className}`}>
-      <div className="flex items-start">
-        {icon && <div className="mr-3 text-primary-600 dark:text-primary-400">{icon}</div>}
-        <div>
-          <h4 className="font-medium text-gray-900 dark:text-white mb-1">{title}</h4>
-          <div className="text-sm text-gray-600 dark:text-gray-300">{description}</div>
+    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
+      <div className={`w-10 h-10 ${colors[index % colors.length]} rounded-lg flex items-center justify-center mb-4`}>
+        <CheckIcon className="w-5 h-5 text-white" />
+      </div>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
+      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{description}</p>
+    </div>
+  );
+};
+
+// Architecture Card Component
+const ArchitectureCard: React.FC<{
+  icon: React.ReactNode;
+  name: string;
+  tagline: string;
+  description: string;
+  color: 'blue' | 'purple' | 'green';
+}> = ({ icon, name, tagline, description, color }) => {
+  const colorClasses = {
+    blue: {
+      bg: 'bg-blue-50 dark:bg-blue-900/20',
+      border: 'border-blue-200 dark:border-blue-800',
+      iconBg: 'bg-blue-500',
+      text: 'text-blue-600 dark:text-blue-400',
+    },
+    purple: {
+      bg: 'bg-purple-50 dark:bg-purple-900/20',
+      border: 'border-purple-200 dark:border-purple-800',
+      iconBg: 'bg-purple-500',
+      text: 'text-purple-600 dark:text-purple-400',
+    },
+    green: {
+      bg: 'bg-green-50 dark:bg-green-900/20',
+      border: 'border-green-200 dark:border-green-800',
+      iconBg: 'bg-green-500',
+      text: 'text-green-600 dark:text-green-400',
+    },
+  };
+
+  const classes = colorClasses[color];
+
+  return (
+    <div className={`${classes.bg} ${classes.border} border rounded-xl p-6 text-center`}>
+      <div className={`w-14 h-14 ${classes.iconBg} rounded-xl flex items-center justify-center mx-auto mb-4`}>
+        {icon}
+      </div>
+      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{name}</h3>
+      <p className={`text-sm font-medium ${classes.text} mb-2`}>{tagline}</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+    </div>
+  );
+};
+
+// Component Detail Card
+const ComponentDetailCard: React.FC<{
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  features: string[];
+  color: 'blue' | 'purple' | 'green';
+}> = ({ icon, title, description, features, color }) => {
+  const colorClasses = {
+    blue: {
+      gradient: 'from-blue-500 to-blue-600',
+      check: 'text-blue-500',
+    },
+    purple: {
+      gradient: 'from-purple-500 to-purple-600',
+      check: 'text-purple-500',
+    },
+    green: {
+      gradient: 'from-green-500 to-green-600',
+      check: 'text-green-500',
+    },
+  };
+
+  const classes = colorClasses[color];
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className={`bg-gradient-to-r ${classes.gradient} p-6`}>
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+            {icon}
+          </div>
+          <h3 className="text-xl font-bold text-white">{title}</h3>
         </div>
+      </div>
+      <div className="p-6">
+        <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">{description}</p>
+        <ul className="space-y-3">
+          {features.map((feature, index) => (
+            <li key={index} className="flex items-start gap-3">
+              <CheckIcon className={`w-5 h-5 ${classes.check} flex-shrink-0 mt-0.5`} />
+              <span className="text-sm text-gray-700 dark:text-gray-300">{feature}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 };
 
-// Component for section headers
-const SectionHeader: React.FC<{
-  title: string;
-  description?: string;
-  className?: string;
-}> = ({ title, description, className = "" }) => {
-  return (
-    <div className={`mb-6 ${className}`}>
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{title}</h2>
-      {description && (
-        <p className="text-gray-600 dark:text-gray-300">{description}</p>
-      )}
-    </div>
-  );
-};
+// Parameter Row Component
+interface ParameterItem {
+  label: string;
+  value: string;
+  description: string;
+}
 
+const ParameterRow: React.FC<{ item: ParameterItem }> = ({ item }) => (
+  <div className="flex flex-col sm:flex-row sm:items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+    <div className="flex-1">
+      <span className="font-medium text-gray-900 dark:text-white">{item.label}</span>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{item.description}</p>
+    </div>
+    <div className="mt-2 sm:mt-0 sm:ml-4">
+      <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300">
+        {item.value}
+      </span>
+    </div>
+  </div>
+);
+
+// Governance Step Component
+interface GovernanceStep {
+  number: string;
+  title: string;
+  description: string;
+  duration: string;
+}
+
+const GovernanceStepCard: React.FC<{ step: GovernanceStep; isLast: boolean }> = ({ step, isLast }) => (
+  <div className="flex items-start">
+    <div className="flex flex-col items-center mr-4">
+      <div className="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold">
+        {step.number}
+      </div>
+      {!isLast && <div className="w-0.5 h-full bg-gray-200 dark:bg-gray-700 mt-2 min-h-[40px]" />}
+    </div>
+    <div className="flex-1 pb-8">
+      <div className="flex items-center gap-3 mb-1">
+        <h4 className="font-semibold text-gray-900 dark:text-white">{step.title}</h4>
+        {step.duration && (
+          <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+            {step.duration}
+          </span>
+        )}
+      </div>
+      <p className="text-sm text-gray-600 dark:text-gray-400">{step.description}</p>
+    </div>
+  </div>
+);
+
+// Security Feature Card
+const SecurityFeatureCard: React.FC<{
+  title: string;
+  description: string;
+}> = ({ title, description }) => (
+  <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-5 border border-gray-200 dark:border-gray-700">
+    <div className="flex items-center gap-3 mb-2">
+      <div className="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+        <CheckIcon className="w-4 h-4 text-green-600 dark:text-green-400" />
+      </div>
+      <h4 className="font-semibold text-gray-900 dark:text-white">{title}</h4>
+    </div>
+    <p className="text-sm text-gray-600 dark:text-gray-400 ml-11">{description}</p>
+  </div>
+);
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
@@ -55,6 +245,24 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
 const DAOFeaturesPage: React.FC = () => {
   const { t } = useTranslation('dao-features');
+
+  // Defensive parsing: if a translation is missing or has the wrong shape,
+  // ensure we always get arrays to avoid `.map is not a function` runtime crashes.
+  const asArray = <T,>(value: unknown): T[] => (Array.isArray(value) ? (value as T[]) : []);
+
+  const benefits = asArray<{ title: string; description: string }>(
+    t('whatIsDao.benefits.items', { returnObjects: true })
+  );
+  const parameters = asArray<ParameterItem>(t('parameters.items', { returnObjects: true }));
+  const governanceSteps = asArray<GovernanceStep>(t('governance.steps', { returnObjects: true }));
+  const managerUseCases = asArray<string>(t('manager.useCases.items', { returnObjects: true }));
+  const securityFeatures = asArray<{ title: string; description: string }>(
+    t('security.features', { returnObjects: true })
+  );
+  const tokenFeatures = asArray<string>(t('components.token.features', { returnObjects: true }));
+  const governorFeatures = asArray<string>(t('components.governor.features', { returnObjects: true }));
+  const treasuryFeatures = asArray<string>(t('components.treasury.features', { returnObjects: true }));
+
   return (
     <Layout>
       <Head>
@@ -62,489 +270,268 @@ const DAOFeaturesPage: React.FC = () => {
         <meta name="description" content={t('meta.description')} />
       </Head>
 
-      <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('header.title')}</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300">
+      <div className="py-12 px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="max-w-4xl mx-auto text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            {t('header.title')}
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             {t('header.subtitle')}
           </p>
         </div>
 
-        {/* Introduction Section */}
-        <div className="mb-16">
-          <SectionHeader
-            title={t('introduction.title')}
-            description={t('introduction.description')}
-          />
-
-          <div className="bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-lg p-6 mb-8">
-            <h3 className="text-lg font-medium text-primary-800 dark:text-primary-300 mb-3">{t('introduction.whatYouGet.title')}</h3>
-            <p className="text-primary-700 dark:text-primary-400 mb-4">
-              {t('introduction.whatYouGet.description')}
-            </p>
-            <ul className="list-disc pl-5 space-y-2 text-primary-700 dark:text-primary-400">
-              {(t('introduction.whatYouGet.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-              ))}
-            </ul>
-          </div>
-
+        {/* What is a DAO Section */}
+        <section className="max-w-5xl mx-auto mb-20">
+          <SectionHeader title={t('whatIsDao.title')} />
+          <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-10">
+            {t('whatIsDao.description')}
+          </p>
+          
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
+            {t('whatIsDao.benefits.title')}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">{t('introduction.forCreators.title')}</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('introduction.forCreators.description')}
-              </p>
-              <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-                {(t('introduction.forCreators.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-3">{t('introduction.forMembers.title')}</h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('introduction.forMembers.description')}
-              </p>
-              <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-                {(t('introduction.forMembers.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </div>
+            {benefits.map((benefit, index) => (
+              <BenefitCard
+                key={index}
+                title={benefit.title}
+                description={benefit.description}
+                index={index}
+              />
+            ))}
           </div>
-        </div>
+        </section>
 
-        {/* Contract Architecture Section */}
-        <div className="mb-16">
-          <SectionHeader
-            title={t('architecture.title')}
-            description={t('architecture.description')}
-          />
+        {/* Architecture Section */}
+        <section className="bg-gray-50 dark:bg-gray-800/50 py-16 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-20">
+          <div className="max-w-5xl mx-auto">
+            <SectionHeader
+              title={t('architecture.title')}
+              subtitle={t('architecture.subtitle')}
+              centered
+            />
 
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <ArchitectureCard
+                icon={<TokenIcon className="w-7 h-7 text-white" />}
+                name={t('architecture.contracts.token.name')}
+                tagline={t('architecture.contracts.token.tagline')}
+                description={t('architecture.contracts.token.description')}
+                color="blue"
+              />
+              <ArchitectureCard
+                icon={<GovernorIcon className="w-7 h-7 text-white" />}
+                name={t('architecture.contracts.governor.name')}
+                tagline={t('architecture.contracts.governor.tagline')}
+                description={t('architecture.contracts.governor.description')}
+                color="purple"
+              />
+              <ArchitectureCard
+                icon={<TreasuryIcon className="w-7 h-7 text-white" />}
+                name={t('architecture.contracts.treasury.name')}
+                tagline={t('architecture.contracts.treasury.tagline')}
+                description={t('architecture.contracts.treasury.description')}
+                color="green"
+              />
+            </div>
+
+            {/* Connection flow */}
             <div className="flex justify-center">
-              <div className="max-w-full overflow-auto">
-                <svg width="650" height="320" viewBox="0 0 650 320" className="mx-auto">
-                  {/* Main DAO Contract */}
-                  <rect x="245" y="20" width="160" height="60" rx="4" fill="#4f46e5" fillOpacity="0.2" stroke="#4f46e5" strokeWidth="2" />
-                  <text x="325" y="50" textAnchor="middle" fill="currentColor" className="text-gray-900 dark:text-white" fontWeight="500">{t('architecture.diagram.daoCore')}</text>
-                  <text x="325" y="70" textAnchor="middle" fill="currentColor" className="text-gray-600 dark:text-gray-300" fontSize="12">{t('architecture.diagram.governance')}</text>
-
-                  {/* Token Contract */}
-                  <rect x="60" y="140" width="160" height="60" rx="4" fill="#10b981" fillOpacity="0.2" stroke="#10b981" strokeWidth="2" />
-                  <text x="140" y="170" textAnchor="middle" fill="currentColor" className="text-gray-900 dark:text-white" fontWeight="500">{t('architecture.diagram.daoToken')}</text>
-                  <text x="140" y="190" textAnchor="middle" fill="currentColor" className="text-gray-600 dark:text-gray-300" fontSize="12">{t('architecture.diagram.erc20')}</text>
-
-                  {/* Treasury Contract */}
-                  <rect x="245" y="140" width="160" height="60" rx="4" fill="#f59e0b" fillOpacity="0.2" stroke="#f59e0b" strokeWidth="2" />
-                  <text x="325" y="170" textAnchor="middle" fill="currentColor" className="text-gray-900 dark:text-white" fontWeight="500">{t('architecture.diagram.treasury')}</text>
-                  <text x="325" y="190" textAnchor="middle" fill="currentColor" className="text-gray-600 dark:text-gray-300" fontSize="12">{t('architecture.diagram.assetManagement')}</text>
-
-                  {/* Staking Contract */}
-                  <rect x="430" y="140" width="160" height="60" rx="4" fill="#ec4899" fillOpacity="0.2" stroke="#ec4899" strokeWidth="2" />
-                  <text x="510" y="170" textAnchor="middle" fill="currentColor" className="text-gray-900 dark:text-white" fontWeight="500">{t('architecture.diagram.staking')}</text>
-                  <text x="510" y="190" textAnchor="middle" fill="currentColor" className="text-gray-600 dark:text-gray-300" fontSize="12">{t('architecture.diagram.votingPower')}</text>
-
-                  {/* Factory Contract */}
-                  <rect x="245" y="260" width="160" height="40" rx="4" fill="#6b7280" fillOpacity="0.2" stroke="#6b7280" strokeWidth="2" />
-                  <text x="325" y="285" textAnchor="middle" fill="currentColor" className="text-gray-900 dark:text-white" fontWeight="500">{t('architecture.diagram.daoFactory')}</text>
-
-                  {/* Connecting Lines */}
-                  {/* DAO to Token */}
-                  <line x1="245" y1="50" x2="140" y2="140" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4" className="text-gray-400 dark:text-gray-500" />
-                  {/* DAO to Treasury */}
-                  <line x1="325" y1="80" x2="325" y2="140" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4" className="text-gray-400 dark:text-gray-500" />
-                  {/* DAO to Staking */}
-                  <line x1="405" y1="50" x2="510" y2="140" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4" className="text-gray-400 dark:text-gray-500" />
-                  {/* Factory to All */}
-                  <line x1="325" y1="260" x2="325" y2="200" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4" className="text-gray-400 dark:text-gray-500" />
-                  <line x1="325" y1="240" x2="140" y2="200" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4" className="text-gray-400 dark:text-gray-500" />
-                  <line x1="325" y1="240" x2="510" y2="200" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4" className="text-gray-400 dark:text-gray-500" />
-                </svg>
+              <div className="inline-flex items-center gap-3 bg-white dark:bg-gray-800 rounded-full px-6 py-3 shadow-md border border-gray-200 dark:border-gray-700">
+                <div className="w-3 h-3 bg-blue-500 rounded-full" />
+                <ArrowIcon className="w-4 h-4 text-gray-400" />
+                <div className="w-3 h-3 bg-purple-500 rounded-full" />
+                <ArrowIcon className="w-4 h-4 text-gray-400" />
+                <div className="w-3 h-3 bg-green-500 rounded-full" />
               </div>
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 text-center mt-4">
-              {t('architecture.diagram.note')}
+            <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+              {t('architecture.flowDescription')}
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FeatureCard
-              title={t('architecture.upgradeableDesign.title')}
-              description={
-                <div>
-                  <p className="mb-2">{t('architecture.upgradeableDesign.description')}</p>
-                </div>
-              }
-            />
-
-            <FeatureCard
-              title={t('architecture.contractInteractions.title')}
-              description={
-                <div>
-                  <p className="mb-2">{t('architecture.contractInteractions.description')}</p>
-                </div>
-              }
-            />
-          </div>
-        </div>
+        </section>
 
         {/* Core Components Section */}
-        <div className="mb-16">
+        <section className="max-w-5xl mx-auto mb-20">
           <SectionHeader
             title={t('components.title')}
-            description={t('components.description')}
+            subtitle={t('components.subtitle')}
           />
 
-          {/* DAO Core */}
-          <div className="mb-10">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-              <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-indigo-600 dark:text-indigo-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-                </svg>
-              </div>
-              {t('components.daoCore.title')}
-            </h3>
-
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('components.daoCore.description')}
-              </p>
-
-              <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('components.daoCore.features.title')}</h4>
-              <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300 mb-4">
-                {(t('components.daoCore.features.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                  <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-                ))}
-              </ul>
-
-              <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('components.daoCore.parameters.title')}</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg">
-                  <span className="font-medium">{t('components.daoCore.parameters.votingPeriod')}:</span> {t('components.daoCore.parameters.votingPeriodValue')}
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg">
-                  <span className="font-medium">{t('components.daoCore.parameters.minProposalStake')}:</span> {t('components.daoCore.parameters.minProposalStakeValue')}
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg">
-                  <span className="font-medium">{t('components.daoCore.parameters.quorum')}:</span> {t('components.daoCore.parameters.quorumValue')}
-                </div>
-                <div className="bg-gray-50 dark:bg-gray-900 p-3 rounded-lg">
-                  <span className="font-medium">{t('components.daoCore.parameters.version')}:</span> {t('components.daoCore.parameters.versionValue')}
-                </div>
-              </div>
-
-              <CodeBlock
-                title={t('components.daoCore.codeBlockTitle')}
-code={`function initialize(
-  string memory _name,
-  address _treasury,
-  address _stakingContract,
-  address _token,
-  address _factory
-) external initializer {
-  require(bytes(_name).length > 0, "Empty name");
-  require(_treasury != address(0), "Zero treasury");
-  require(_stakingContract != address(0), "Zero staking");
-  require(_token != address(0), "Zero token");
-  require(_factory != address(0), "Zero factory");
-
-  __Ownable_init(_factory);
-  __UUPSUpgradeable_init();
-
-  CoreStorage.Layout storage core = _getCore();
-  core.name = _name;
-  core.factory = _factory;
-
-  // Initialize upgradeable contract addresses
-  core.upgradeableContracts[IDAOBase.UpgradeableContract.DAO] = address(this);
-  core.upgradeableContracts[IDAOBase.UpgradeableContract.Treasury] = _treasury;
-  core.upgradeableContracts[IDAOBase.UpgradeableContract.Staking] = _stakingContract;
-  core.upgradeableContracts[IDAOBase.UpgradeableContract.Token] = _token;
-
-  // Initialize governance parameters
-  core.votingPeriod = 1 minutes;
-  core.minProposalStake = 1e18; // 1 token
-  core.quorum = 5000; // 50%
-}`}              />
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <ComponentDetailCard
+              icon={<TokenIcon className="w-6 h-6 text-white" />}
+              title={t('components.token.title')}
+              description={t('components.token.description')}
+              features={tokenFeatures}
+              color="blue"
+            />
+            <ComponentDetailCard
+              icon={<GovernorIcon className="w-6 h-6 text-white" />}
+              title={t('components.governor.title')}
+              description={t('components.governor.description')}
+              features={governorFeatures}
+              color="purple"
+            />
+            <ComponentDetailCard
+              icon={<TreasuryIcon className="w-6 h-6 text-white" />}
+              title={t('components.treasury.title')}
+              description={t('components.treasury.description')}
+              features={treasuryFeatures}
+              color="green"
+            />
           </div>
+        </section>
 
-          {/* DAO Token */}
-          <div className="mb-10">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-              <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-green-600 dark:text-green-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd" />
-                </svg>
-              </div>
-              {t('components.daoToken.title')}
-            </h3>
-
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('components.daoToken.description')}
-              </p>
-
-              <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('components.daoToken.features.title')}</h4>
-              <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300 mb-4">
-                {(t('components.daoToken.features.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                  <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-                ))}
-              </ul>
-
-              <CodeBlock
-                title={t('components.daoToken.codeBlockTitle')}
-code={`function _update(
-  address from,
-  address to,
-  uint256 amount
-) internal virtual override {
-  if (
-    taxRate > 0 && // Tax is enabled
-    !isWhitelisted[from] && // Sender not whitelisted
-    !isWhitelisted[to] && // Recipient not whitelisted
-    from != address(0) && // Not minting
-    to != address(0) // Not burning
-  ) {
-    uint256 taxAmount = (amount * taxRate) / 10000;
-    super._update(from, taxRecipient, taxAmount);
-    super._update(from, to, amount - taxAmount);
-  } else {
-    super._update(from, to, amount);
-  }
-}`}              />
-            </div>
-          </div>
-
-          {/* Treasury */}
-          <div className="mb-10">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-              <div className="w-8 h-8 rounded-full bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-yellow-600 dark:text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                  <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-                </svg>
-              </div>
-              {t('components.treasury.title')}
-            </h3>
-
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('components.treasury.description')}
-              </p>
-
-              <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('components.treasury.features.title')}</h4>
-              <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300 mb-4">
-                {(t('components.treasury.features.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                  <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-                ))}
-              </ul>
-
-              <CodeBlock
-                title={t('components.treasury.codeBlockTitle')}
-                code={`function transferETH(address payable recipient, uint256 amount) external onlyDAO {
-  require(recipient != address(0), "Zero recipient");
-  require(amount > 0, "Zero amount");
-  require(address(this).balance >= amount, "Insufficient ETH");
-
-  (bool success, ) = recipient.call{value: amount}("");
-  require(success, "ETH transfer failed");
-
-  emit ETHTransferred(recipient, amount);
-}
-
-function transferERC20(address token, address recipient, uint256 amount) external onlyDAO {
-  require(token != address(0), "Zero token");
-  require(recipient != address(0), "Zero recipient");
-  require(amount > 0, "Zero amount");
-
-  IERC20(token).safeTransfer(recipient, amount);
-
-  emit ERC20Transferred(token, recipient, amount);
-}`}
-              />
-            </div>
-          </div>
-
-          {/* Staking */}
-          <div className="mb-10">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-              <div className="w-8 h-8 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center mr-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-pink-600 dark:text-pink-400" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
-                </svg>
-              </div>
-              {t('components.staking.title')}
-            </h3>
-
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-              <p className="text-gray-600 dark:text-gray-300 mb-4">
-                {t('components.staking.description')}
-              </p>
-
-              <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('components.staking.features.title')}</h4>
-              <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300 mb-4">
-                {(t('components.staking.features.items', { returnObjects: true }) as string[]).map((item: string, index: number) => (
-                  <li key={index} dangerouslySetInnerHTML={{ __html: item }} />
-                ))}
-              </ul>
-
-              <h4 className="font-medium text-gray-900 dark:text-white mb-2">{t('components.staking.multipliers.title')}</h4>
-              <div className="overflow-x-auto mb-4">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-900">
-                    <tr>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('components.staking.multipliers.table.headers.duration')}</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('components.staking.multipliers.table.headers.multiplier')}</th>
-                      <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('components.staking.multipliers.table.headers.example')}</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                    {(t('components.staking.multipliers.table.rows', { returnObjects: true }) as Array<{ duration: string; multiplier: string; example: string; }>).map((row: { duration: string; multiplier: string; example: string; }, index: number) => (
-                      <tr key={index}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{row.duration}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">{row.multiplier}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{row.example}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              <CodeBlock
-                title={t('components.staking.codeBlockTitle')}
-                code={`function getVotingPower(address account) public view returns (uint256) {
-  uint256 staked = stakedAmount[account];
-  if (staked == 0) return 0;
-
-  uint256 stakeDuration = block.timestamp - stakingTime[account];
-  uint256 multiplier = multipliers[0]; // Base multiplier
-
-  // Apply time-based multiplier
-  if (stakeDuration >= thresholds[2]) {
-    multiplier = multipliers[3];
-  } else if (stakeDuration >= thresholds[1]) {
-    multiplier = multipliers[2];
-  } else if (stakeDuration >= thresholds[0]) {
-    multiplier = multipliers[1];
-  }
-
-  return (staked * multiplier) / MULTIPLIER_DENOMINATOR;
-}`}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Governance Features Section */}
-        <div className="mb-16">
+        {/* Governance Parameters Section */}
+        <section className="max-w-3xl mx-auto mb-20">
           <SectionHeader
-            title={t('governance.title')}
-            description={t('governance.description')}
+            title={t('parameters.title')}
+            subtitle={t('parameters.subtitle')}
           />
 
-          <div className="mb-8">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{t('governance.proposalTypes.title')}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FeatureCard
-                title={t('governance.proposalTypes.treasuryTransfers.title')}
-                description={t('governance.proposalTypes.treasuryTransfers.description')}
-              />
-
-              <FeatureCard
-                title={t('governance.proposalTypes.presaleCreation.title')}
-                description={t('governance.proposalTypes.presaleCreation.description')}
-              />
-
-              <FeatureCard
-                title={t('governance.proposalTypes.presaleManagement.title')}
-                description={t('governance.proposalTypes.presaleManagement.description')}
-              />
-
-              <FeatureCard
-                title={t('governance.proposalTypes.contractUpgrades.title')}
-                description={t('governance.proposalTypes.contractUpgrades.description')}
-              />
-
-              <FeatureCard
-                title={t('governance.proposalTypes.emergencyControls.title')}
-                description={t('governance.proposalTypes.emergencyControls.description')}
-              />
-
-              <FeatureCard
-                title={t('governance.proposalTypes.moduleUpgrades.title')}
-                description={t('governance.proposalTypes.moduleUpgrades.description')}
-              />
-            </div>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">{t('governance.votingProcess.title')}</h3>
-            <ol className="list-decimal pl-5 space-y-3 text-gray-600 dark:text-gray-300">
-              {(t('governance.votingProcess.steps', { returnObjects: true }) as string[]).map((step: string, index: number) => (
-                <li key={index} dangerouslySetInnerHTML={{ __html: step }} />
-              ))}
-            </ol>
-          </div>
-        </div>
-
-        {/* Deployment Process Section */}
-        <div className="mb-16">
-          <SectionHeader
-            title={t('deployment.title')}
-            description={t('deployment.description')}
-          />
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <ol className="list-decimal pl-5 space-y-3 text-gray-600 dark:text-gray-300">
-              {(t('deployment.steps', { returnObjects: true }) as string[]).map((step: string, index: number) => (
-                <li key={index} dangerouslySetInnerHTML={{ __html: step }} />
-              ))}
-            </ol>
-
-            <div className="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-              <h4 className="font-medium text-yellow-800 dark:text-yellow-300 mb-2">{t('deployment.note.title')}</h4>
-              <p className="text-yellow-700 dark:text-yellow-400 text-sm">
-                {t('deployment.note.description')}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Getting Started Section */}
-        <div className="mb-16">
-          <SectionHeader
-            title={t('gettingStarted.title')}
-            description={t('gettingStarted.description')}
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {(t('gettingStarted.steps', { returnObjects: true }) as Array<{ number: string; title: string; description: string; }>).map((step: { number: string; title: string; description: string; }, index: number) => (
-              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                <div className="flex items-center mb-4">
-                  <div className="w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center mr-3">
-                    <span className="text-primary-600 dark:text-primary-400 font-bold">{step.number}</span>
-                  </div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">{step.title}</h3>
-                </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  {step.description}
-                </p>
-              </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6">
+            {parameters.map((item, index) => (
+              <ParameterRow key={index} item={item} />
             ))}
           </div>
 
-          <div className="mt-8 text-center">
-            <Link href="/create" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
-              {t('gettingStarted.createButton')}
-            </Link>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 text-center">
+            {t('parameters.note')}
+          </p>
+        </section>
+
+        {/* How Governance Works Section */}
+        <section className="bg-gray-50 dark:bg-gray-800/50 py-16 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 mb-20">
+          <div className="max-w-3xl mx-auto">
+            <SectionHeader
+              title={t('governance.title')}
+              subtitle={t('governance.subtitle')}
+              centered
+            />
+
+            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 md:p-8">
+              {governanceSteps.map((step, index) => (
+                <GovernanceStepCard
+                  key={index}
+                  step={step}
+                  isLast={index === governanceSteps.length - 1}
+                />
+              ))}
+            </div>
+
+            {/* Voting Options */}
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 text-center">
+                <div className="font-semibold text-green-700 dark:text-green-400 mb-1">For</div>
+                <div className="text-sm text-green-600 dark:text-green-500">Support the proposal</div>
+              </div>
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 text-center">
+                <div className="font-semibold text-red-700 dark:text-red-400 mb-1">Against</div>
+                <div className="text-sm text-red-600 dark:text-red-500">Oppose the proposal</div>
+              </div>
+              <div className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-4 text-center">
+                <div className="font-semibold text-gray-700 dark:text-gray-300 mb-1">Abstain</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Count toward quorum only</div>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        {/* DAO Manager Section */}
+        <section className="max-w-4xl mx-auto mb-20">
+          <div className="bg-gradient-to-r from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20 rounded-2xl border border-primary-200 dark:border-primary-800 p-8">
+            <div className="flex flex-col md:flex-row md:items-start gap-6">
+              <div className="w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                  {t('manager.title')}
+                </h2>
+                <p className="text-primary-700 dark:text-primary-300 font-medium mb-4">
+                  {t('manager.subtitle')}
+                </p>
+                <p className="text-gray-600 dark:text-gray-400 mb-6">
+                  {t('manager.description')}
+                </p>
+
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
+                  {t('manager.useCases.title')}
+                </h4>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+                  {managerUseCases.map((useCase, index) => (
+                    <li key={index} className="flex items-center gap-2">
+                      <CheckIcon className="w-4 h-4 text-primary-500 flex-shrink-0" />
+                      <span className="text-sm text-gray-700 dark:text-gray-300">{useCase}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="text-sm text-gray-500 dark:text-gray-400 bg-white/50 dark:bg-gray-800/50 rounded-lg p-3">
+                  {t('manager.note')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Security Section */}
+        <section className="max-w-5xl mx-auto mb-20">
+          <SectionHeader
+            title={t('security.title')}
+            subtitle={t('security.subtitle')}
+            centered
+          />
+
+          <p className="text-center text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
+            {t('security.description')}
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {securityFeatures.map((feature, index) => (
+              <SecurityFeatureCard
+                key={index}
+                title={feature.title}
+                description={feature.description}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="max-w-3xl mx-auto text-center">
+          <div className="bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-10">
+            <h2 className="text-3xl font-bold text-white mb-3">
+              {t('cta.title')}
+            </h2>
+            <p className="text-primary-100 mb-8">
+              {t('cta.subtitle')}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/create"
+                className="inline-flex items-center justify-center px-8 py-3 bg-white text-primary-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors"
+              >
+                {t('cta.createButton')}
+              </Link>
+              <a
+                href="https://docs.createdao.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-8 py-3 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition-colors border border-white/20"
+              >
+                {t('cta.docsButton')}
+                <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
       </div>
     </Layout>
   );

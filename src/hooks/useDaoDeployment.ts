@@ -1,7 +1,6 @@
 import React from 'react';
 import { useChainId, useWriteContract, useAccount } from 'wagmi';
 import { parseEther, decodeEventLog, type Hex } from 'viem';
-import { env } from '../config/env';
 import { getContractAddresses, getContractABI } from '../config/contracts';
 import { DAOFormData, DeploymentResult } from '../types/dao';
 import { useTransaction, formatTransactionError } from './useTransaction';
@@ -38,23 +37,25 @@ function parseReceipt(receipt: TransactionReceipt | undefined): DeploymentResult
     topics: event.topics as [Hex, ...Hex[]],
   });
 
-  // Type assertion since we know the event structure
+  // Type assertion for the new event structure
+  // Indexed: creator, token, governor
+  // Non-indexed: timelock, daoName, tokenName, tokenSymbol, totalSupply
   const args = decodedEvent.args as unknown as {
-    daoAddress: string;
-    tokenAddress: string;
-    treasuryAddress: string;
-    stakingAddress: string;
-    name: string;
-    versionId: string;
+    creator: string;
+    token: string;
+    governor: string;
+    timelock: string;
+    daoName: string;
+    tokenName: string;
+    tokenSymbol: string;
+    totalSupply: bigint;
   };
 
   return {
-    daoAddress: args.daoAddress,
-    tokenAddress: args.tokenAddress,
-    treasuryAddress: args.treasuryAddress,
-    stakingAddress: args.stakingAddress,
-    name: args.name,
-    versionId: args.versionId,
+    governorAddress: args.governor,
+    tokenAddress: args.token,
+    timelockAddress: args.timelock,
+    daoName: args.daoName,
     transactionHash: receipt.transactionHash,
   };
 }
@@ -69,7 +70,7 @@ export function useDaoDeployment() {
     isPending, 
     isError, 
     error,
-    status // Track status for better error detection
+    status
   } = useWriteContract();
   const transaction = useTransaction();
   
@@ -85,24 +86,22 @@ export function useDaoDeployment() {
   
   // Track connection state changes
   React.useEffect(() => {
-    // If connection state changed from connected to disconnected while not already in an error state
     if (prevIsConnectedRef.current && !isConnected && !transaction.state.isError) {
       console.warn('Wallet disconnected during transaction flow');
       transaction.setError({
-        code: -1, // Use a specific code or name to identify this error
+        code: -1,
         name: 'ConnectorNotConnectedError',
         shortMessage: 'Wallet disconnected',
         details: 'Your wallet was disconnected. Please reconnect your wallet and try again.'
       });
     } 
-    // If connection state changed from disconnected to connected AND the specific disconnect error is present
     else if (!prevIsConnectedRef.current && isConnected && transaction.state.isError && transaction.state.error?.name === 'ConnectorNotConnectedError') {
       console.log('Wallet reconnected, clearing disconnect error.');
-      transaction.reset(); // Reset the transaction state to clear the error
+      transaction.reset();
     }
     
     prevIsConnectedRef.current = isConnected;
-  }, [isConnected, transaction]); // Keep dependencies as is
+  }, [isConnected, transaction]);
 
   // Single effect to handle all state transitions
   React.useEffect(() => {
@@ -112,13 +111,11 @@ export function useDaoDeployment() {
       prevHashRef.current = hash;
       transaction.setWaitingForConfirmation(hash);
       
-      // Set a timeout to detect stuck transactions
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
       
       timeoutRef.current = setTimeout(() => {
-        // Only trigger timeout if we're still waiting for confirmation
         if (transaction.state.isWaitingForConfirmation) {
           console.warn('Transaction confirmation timeout:', hash);
           transaction.setError({
@@ -138,8 +135,6 @@ export function useDaoDeployment() {
         console.log('Waiting for signature...');
         transaction.setWaitingForSignature();
       } else if (!isPending && transaction.state.isWaitingForSignature && !hash) {
-        // If we were waiting for signature but isPending is now false and we don't have a hash,
-        // it likely means the user rejected the transaction or there was another pre-submission error
         if (!transaction.state.isError && error) {
           console.warn('Transaction signature failed without explicit error flag');
           transaction.setError(formatTransactionError(error as BaseError));
@@ -162,7 +157,6 @@ export function useDaoDeployment() {
         console.error('Transaction error:', error);
         transaction.setError(formatTransactionError(error as BaseError));
         
-        // Clear timeout if we have an error
         if (timeoutRef.current) {
           clearTimeout(timeoutRef.current);
           timeoutRef.current = null;
@@ -175,12 +169,10 @@ export function useDaoDeployment() {
       prevStatusRef.current = status;
       console.log('Transaction status changed:', status);
       
-      // If status is error but isError flag wasn't set, handle it
       if (status === 'error' && !transaction.state.isError && error) {
         console.error('Transaction error detected from status:', error);
         transaction.setError(formatTransactionError(error as BaseError));
         
-        // Clear timeout if we have an error
         if (timeoutRef.current) {
           clearTimeout(timeoutRef.current);
           timeoutRef.current = null;
@@ -188,7 +180,6 @@ export function useDaoDeployment() {
       }
     }
     
-    // Cleanup timeout on unmount or when transaction completes
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -199,7 +190,6 @@ export function useDaoDeployment() {
 
   // Enhanced error handler for contract errors
   const handleContractError = (error: Error | unknown): TransactionError => {
-    // Check for wallet connection errors first
     if (!isConnected) {
       return {
         code: -1,
@@ -209,14 +199,12 @@ export function useDaoDeployment() {
       };
     }
     
-    // Type guard to check if error is an Error object
     const isErrorWithMessage = (err: unknown): err is { message: string } => 
       typeof err === 'object' && err !== null && 'message' in err;
     
     const isErrorWithName = (err: unknown): err is { name: string } => 
       typeof err === 'object' && err !== null && 'name' in err;
     
-    // Check for authorization errors - common in MetaMask
     if (isErrorWithName(error) && 
         error.name === 'ContractFunctionExecutionError' && 
         isErrorWithMessage(error) && 
@@ -230,7 +218,6 @@ export function useDaoDeployment() {
       };
     }
     
-    // Check for specific error types that might not be caught by the standard handler
     if (isErrorWithMessage(error) && 
         (error.message?.includes('timeout') || error.message?.includes('timed out'))) {
       return {
@@ -264,12 +251,10 @@ export function useDaoDeployment() {
       };
     }
     
-    // For other errors, use the standard formatter
     return formatTransactionError(error as BaseError);
   };
 
   const deploy = async (formData: DAOFormData): Promise<DeploymentResult> => {
-    // Check if wallet is connected first
     if (!isConnected) {
       const error = {
         code: -1,
@@ -297,7 +282,6 @@ export function useDaoDeployment() {
       prevIsErrorRef.current = false;
       prevStatusRef.current = null;
       
-      // Clear any existing timeout
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
         timeoutRef.current = null;
@@ -307,26 +291,28 @@ export function useDaoDeployment() {
       const totalSupplyWei = parseEther(formData.totalSupply);
       
       console.log('Deploying DAO with params:', {
-        version: formData.versionId || env.dao.version,
         daoName: formData.daoName,
         tokenName: formData.tokenName,
-        symbol: formData.symbol,
+        tokenSymbol: formData.symbol,
         totalSupply: formData.totalSupply,
-        totalSupplyWei: totalSupplyWei.toString()
+        totalSupplyWei: totalSupplyWei.toString(),
+        votingDelay: formData.votingDelay,
+        votingPeriod: formData.votingPeriod
       });
 
-      // Call the contract
+      // Call the contract with CreateDAOParams struct
       writeContract({
         address: addresses.daoFactory as `0x${string}`,
         abi: getContractABI('daoFactory'),
         functionName: 'createDAO',
-        args: [
-          formData.versionId || env.dao.version,
-          formData.daoName,
-          formData.tokenName,
-          formData.symbol,
-          totalSupplyWei
-        ],
+        args: [{
+          daoName: formData.daoName,
+          tokenName: formData.tokenName,
+          tokenSymbol: formData.symbol,
+          totalSupply: totalSupplyWei,
+          votingDelay: formData.votingDelay,
+          votingPeriod: formData.votingPeriod
+        }],
       });
 
       return {
@@ -334,17 +320,13 @@ export function useDaoDeployment() {
       } as DeploymentResult;
     } catch (error) {
       console.error('Error deploying DAO:', error);
-      
-      // Use enhanced error handler
       const formattedError = handleContractError(error);
       transaction.setError(formattedError);
-      
-      // Re-throw for component error handling
       throw error;
     }
   };
 
-  // Parse deployment data from receipt - memoize to prevent unnecessary recalculations
+  // Parse deployment data from receipt
   const deploymentData = React.useMemo(() => {
     return transaction.state.receipt ? parseReceipt(transaction.state.receipt) : null;
   }, [transaction.state.receipt]);
@@ -353,8 +335,6 @@ export function useDaoDeployment() {
   const checkBalance = async (): Promise<void> => {
     try {
       transaction.setCheckingBalance();
-      // The actual balance check is handled in the PreDeploymentStep component
-      // This is just to trigger the state change
     } catch (error) {
       console.error('Error checking balance:', error);
       transaction.setError(formatTransactionError(error as BaseError));
@@ -364,8 +344,6 @@ export function useDaoDeployment() {
   const simulateTransaction = async (): Promise<void> => {
     try {
       transaction.setSimulating();
-      // The actual simulation is handled in the PreDeploymentStep component
-      // This is just to trigger the state change
     } catch (error) {
       console.error('Error simulating transaction:', error);
       transaction.setError(formatTransactionError(error as BaseError));
@@ -378,10 +356,8 @@ export function useDaoDeployment() {
     simulateTransaction,
     state: transaction.state,
     deploymentData,
-    // Expose functions to update check status
     setBalanceChecked: transaction.setBalanceChecked,
     setSimulated: transaction.setSimulated,
-    // Expose reset function to clear transaction state
     reset: transaction.reset,
   };
 }

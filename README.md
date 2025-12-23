@@ -1,188 +1,186 @@
-# CreateDAO Platform
+# CreateDAO Interface (v2)
 
-A web application for creating and deploying DAOs (Decentralized Autonomous Organizations) on multiple EVM blockchains.
+CreateDAO Interface is a Next.js web application for creating and deploying DAOs (Decentralized Autonomous Organizations) on EVM chains.
 
-## Introduction
+This repository is the **interface** for the CreateDAO **contracts v2** architecture.
 
-CreateDAO is a platform that allows anyone to create and deploy fully-functional DAOs on various EVM-compatible blockchains. The platform provides a user-friendly interface with step-by-step guidance, making DAO creation accessible to everyone, regardless of technical expertise.
+---
 
-When you create a DAO through CreateDAO, you receive a complete governance system with four core smart contracts that work together to provide governance, token management, treasury control, and staking capabilities.
+## Overview
 
-## DAO Architecture
+CreateDAO v2 deploys a complete, independent governance system using **OpenZeppelin Governor** primitives.
 
-Your DAO consists of four main contracts that work together to provide a complete governance system:
+Each DAO deployment includes:
 
-1. **DAO Core**: The central governance hub that manages proposals, voting, and execution of community decisions.
-2. **DAO Token**: An ERC20 token that serves as the governance token for your DAO with additional features like tax mechanisms.
-3. **Treasury**: Securely holds and manages all assets owned by the DAO, including tokens and native currency.
-4. **Staking**: Allows token holders to stake their tokens to gain voting power in the DAO with time-based multipliers.
+- **DAOToken** (ERC20Votes governance token)
+- **TimelockController** (acts as both **Treasury** and **execution timelock**)
+- **DAOGovernor** (proposals, voting, queueing, execution)
 
-All contracts are deployed as upgradeable proxies with the latest implementations, allowing for future improvements while preserving state and balances.
+All three are created via a single `DAOFactory.createDAO(...)` transaction.
+
+---
+
+## DAO Architecture (v2)
+
+### Contracts
+
+1. **DAOFactory**
+   - Deploys and tracks DAOs
+   - Uses **EIP-1167 minimal proxies (Clones)** to deploy `DAOToken` and `DAOGovernor` efficiently
+
+2. **DAOToken (ERC20Votes + ERC20Permit)**
+   - Governance token with checkpoint-based voting
+   - **Auto self-delegation**: when an address receives tokens for the first time, it delegates to itself so voting power is active immediately
+
+3. **TimelockController (Treasury)**
+   - Holds DAO assets (including **99% of token supply** by default)
+   - Enforces a **1-day delay** between proposal approval and execution
+   - Only governance-approved actions can move treasury funds
+
+4. **DAOGovernor**
+   - Manages proposal lifecycle: propose → vote → queue → execute
+   - Default parameters are designed to bootstrap governance safely
+   - Includes a **Manager role** (on-chain source of truth for off-chain authorization), changeable **only via governance**
+
+### Token distribution
+
+At DAO creation time:
+
+- **1%** of total supply is sent to the DAO creator (bootstraps governance)
+- **99%** of total supply is sent to the treasury (TimelockController)
+
+This ensures the creator can meet default quorum/threshold to start governance, and the community can later distribute tokens via proposals.
+
+### High-level diagram
 
 ```
-                       ┌─────────────┐
-                       │   DAO Core  │
-                       │  Governance │
-                       └──────┬──────┘
-                              │
-                 ┌────────────┼────────────┐
-                 │            │            │
-        ┌────────▼─────┐ ┌────▼─────┐ ┌────▼─────┐
-        │  DAO Token   │ │ Treasury │ │  Staking │
-        │    ERC20     │ │  Assets  │ │  Voting  │
-        └──────────────┘ └──────────┘ └──────────┘
+┌───────────────────────────────────────────────────────────┐
+│                         DAOFactory                        │
+│   - Holds impl addresses                                  │
+│   - createDAO() deploys a full DAO system                 │
+└───────────────────────────────┬───────────────────────────┘
+                                │
+                                ▼
+        ┌─────────────────────────────────────────────────┐
+        │            Deployed DAO Governance System       │
+        │                                                 │
+        │  ┌─────────────────┐      ┌─────────────────┐   │
+        │  │ DAOToken (clone)│────▶ │ DAOGovernor    │   │
+        │  │ ERC20Votes      │      │ (clone)         │   │
+        │  └─────────────────┘      └────────┬────────┘   │
+        │                                    │            │
+        │                                    ▼            │
+        │                         ┌───────────────────┐   │
+        │                         │ TimelockController│   │
+        │                         │ Treasury + Delay  │   │
+        │                         └───────────────────┘   │
+        └─────────────────────────────────────────────────┘
 ```
 
-## Features
+---
 
-### Core Features
+## Deployment Flow (v2)
 
-- Create and deploy DAOs on multiple blockchains with a governance token
-- User-friendly interface with step-by-step guidance
-- Support for multiple blockchain networks
-- Wallet integration with MetaMask, WalletConnect, and more
-- Transaction status tracking and confirmation
-- DAO recording service with Firebase Firestore
-- Browse and filter all deployed DAOs
-- Dark/light mode support
-- Responsive design for all devices
+When a user creates a DAO, the factory performs these actions:
 
-### Governance Features
+1. **Clone DAOToken** (EIP-1167) and initialize it
+2. **Deploy TimelockController** (full contract)
+3. **Clone DAOGovernor** (EIP-1167) and initialize it
+4. **Configure roles** so the Governor controls the Timelock
+5. **Distribute tokens** (1% creator / 99% treasury)
+6. **Emit `DAOCreated`** event with deployed addresses
 
-- **Proposal System**: Create, vote on, and execute various types of proposals
-- **Voting Mechanism**: Secure voting with stake-based voting power
-- **Treasury Management**: Propose to transfer tokens or ETH from the treasury
-- **Presale Creation**: Launch token presales with customizable parameters
-- **Contract Upgrades**: Upgrade core contracts or modules to newer implementations
-- **Emergency Controls**: Pause/unpause the entire DAO in case of emergencies
-
-### Staking Features
-
-- **Time-Based Multipliers**: Longer staking periods increase voting power
-- **Flexible Staking**: Users can stake and unstake at any time
-- **Configurable Parameters**: Multipliers and thresholds can be adjusted through governance
-
-## Tech Stack
-
-- **Frontend Framework**: Next.js
-- **CSS Framework**: Tailwind CSS v4.0
-- **Build Tool**: Vite
-- **Language**: TypeScript
-- **Blockchain Integration**: wagmi, viem
-- **Wallet Connection**: MetaMask, WalletConnect, Coinbase Wallet
-- **Database**: Firebase Firestore
+---
 
 ## Supported Networks
 
-CreateDAO supports the following networks:
+Currently supported (as shipped in this repository):
 
-- **Testnets**:
-  - Sepolia
+- **Sepolia** (testnet)
+- **Base** (mainnet)
 
-- **Mainnets**:
-  - Ethereum
-  - BNB Chain
-  - Polygon
-  - Arbitrum
-  - Optimism
-  - Base
-  - Avalanche
-  - Gnosis
-  - Mantle
-  - Celo
-  - Blast
-  - Scroll
-  - Unichain
+Additionally, **Hardhat** is enabled automatically in `NODE_ENV=development`.
+
+---
+
+## Deployed Factory Addresses
+
+The interface reads factory addresses from `src/config/dao.ts`.
+
+| Network | Chain ID | DAOFactory |
+|--------:|---------:|-----------:|
+| Sepolia | 11155111 | [`0x2e00e5c34d7779bcaeb0f1d679efb89ea98624ae`](https://sepolia.etherscan.io/address/0x2e00e5c34d7779bcaeb0f1d679efb89ea98624ae) |
+| Base | 8453 | [`0x2e00E5c34D7779BcaEB0f1D679efB89ea98624AE`](https://basescan.org/address/0x2e00E5c34D7779BcaEB0f1D679efB89ea98624AE) |
+
+---
+
+## Features
+
+- Deploy a complete DAO governance system in **one transaction**
+- Supports **OpenZeppelin Governor** proposal lifecycle
+- **Timelock-protected treasury** (security delay before execution)
+- **Auto-delegation** for immediate voting power after receiving tokens
+- **Manager role** for off-chain authorization (OpenBook-ready)
+- Wallet integration (MetaMask / WalletConnect / Coinbase Wallet)
+- Transaction status tracking and confirmations
+- Internationalization (i18n)
+
+---
+
+## Tech Stack
+
+- **Frontend**: Next.js + React + TypeScript
+- **Styling**: Tailwind CSS
+- **Web3**: wagmi + viem
+- **Wallets**: MetaMask SDK, WalletConnect, Coinbase Wallet
+
+---
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or later)
-- npm or yarn
-- A web3 wallet (MetaMask, WalletConnect, etc.)
+- Node.js (v18+ recommended)
+- npm
+- A Web3 wallet (MetaMask, WalletConnect, etc.)
 
-### Manual Installation
+### Install
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/createDAO/interface.git
-   cd interface
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Set up environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-   Edit the `.env` file with your own values.
-
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
-
-## Creating a DAO
-
-1. Navigate to the "Create DAO" page from the homepage or directly at `/create`
-2. Connect your wallet using the "Connect Wallet" button
-3. Select the network you want to deploy on
-4. Choose the DAO version
-5. Fill in the DAO details:
-   - DAO Name
-   - Token Name
-   - Token Symbol
-   - Total Supply
-6. Review your DAO configuration
-7. Proceed through the pre-deployment checks
-8. Click "Create DAO" and confirm the transaction in your wallet
-9. Once the transaction is confirmed, you'll see the deployment details including:
-   - DAO Address
-   - Token Address
-   - Treasury Address
-   - Staking Address
-
-## Deployment Process
-
-When you create a DAO, the following steps happen automatically in a single transaction:
-
-1. Token Deployment: Your ERC20 governance token is deployed first
-2. Treasury Deployment: Treasury contract is deployed
-3. Staking Deployment: Staking contract is deployed and linked to your token
-4. DAO Deployment: Main DAO contract is deployed and connected to all other contracts
-5. Treasury Initialization: Treasury is initialized with the DAO as owner
-6. Token Configuration: Staking contract is set in token and ownership transferred to DAO
-7. Token Distribution: Remaining tokens are transferred to treasury
-8. Ownership Transfer: DAO becomes self-governing (owns itself)
-
-## Environment Variables
-
-For WalletConnect, DRPC, and Firebase integration, you can set the following environment variables:
-
+```bash
+git clone https://github.com/createDAO/interface.git
+cd interface
+npm install
 ```
-# WalletConnect and DRPC
+
+### Configure environment
+
+```bash
+cp .env.example .env
+```
+
+For WalletConnect and DRPC you can set:
+
+```bash
 NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
 NEXT_PUBLIC_DRPC_API_KEY=your_drpc_api_key
-
-# Firebase Configuration
-NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
 ```
+
+### Run
+
+```bash
+npm run dev
+```
+
+Open: http://localhost:3000
+
+---
 
 ## Related Projects
 
-- [createDAO/v1-core](https://github.com/createDAO/v1-core) - The smart contracts used by this interface, licensed under MIT.
+- **Contracts (v2 core)**: https://github.com/createdao/v2-core
+- **Interface (this repo)**: https://github.com/createDAO/interface
+
+---
 
 ## License
 

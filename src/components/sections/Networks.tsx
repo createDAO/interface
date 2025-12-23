@@ -1,86 +1,128 @@
 import React from 'react';
-import { SUPPORTED_NETWORKS, getExplorerUrl } from '../../config/networks';
-import { getFactoryAddress } from '../../config/dao';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
+import ethereumIcon from '../../assets/networks/ethereum.png';
+import baseIcon from '../../assets/networks/base.png';
 
 const Networks: React.FC = () => {
   const { t } = useTranslation('home');
-  
-  // Filter out testnet networks for display in the Networks section
-  const mainnetNetworks = SUPPORTED_NETWORKS.filter(network => !network.isTestnet);
 
   return (
     <section id="networks" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t('networks.title')}
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             {t('networks.subtitle')}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
-          {mainnetNetworks.map((network) => (
-            <div
-              key={network.id}
-              className={`rounded-xl p-4 flex flex-col items-center justify-center transition-transform duration-300 ${network.isAvailable
-                ? "bg-gray-50 dark:bg-gray-800 hover:-translate-y-1 hover:shadow-md cursor-pointer"
-                : "bg-gray-100 dark:bg-gray-700 opacity-50 cursor-not-allowed"
-                }`}
-              title={network.isAvailable ? `View DAO Factory contract on ${network.name}` : `${network.name} coming soon`}
-              onClick={() => {
-                if (network.isAvailable) {
-                  const factoryConfig = getFactoryAddress(network.id);
-                  const baseUrl = getExplorerUrl(network.id);
-                  
-                  // If factory address is available, link directly to the contract
-                  if (factoryConfig.isAvailable && factoryConfig.address) {
-                    window.open(`${baseUrl}/address/${factoryConfig.address}`, '_blank', 'noopener,noreferrer');
-                  } else {
-                    // Otherwise, just link to the explorer main page
-                    window.open(baseUrl, '_blank', 'noopener,noreferrer');
-                  }
-                }
-              }}
-            >
-              <div className="relative">
-                <Image
-                  src={network.icon ?? '/images/networks/ethereum.png'}
-                  alt={`${network.name} logo`}
-                  width={48}
-                  height={48}
-                  className="w-12 h-12 rounded-full"
-                />
-                {!network.isAvailable && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-gray-200 dark:bg-gray-600 bg-opacity-70 dark:bg-opacity-70 rounded-full w-full h-full flex items-center justify-center">
-                      <Image
-                        src={network.icon ?? '/images/networks/ethereum.png'}
-                        alt={`${network.name} logo`}
-                        width={48}
-                        height={48}
-                        className="w-12 h-12 rounded-full"
-                      />
-                    </div>
-                  </div>
-                )}
+        {/* Network Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Sepolia Testnet */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 dark:from-yellow-600/10 dark:to-orange-600/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
+            <div className="relative bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              {/* Badge */}
+              <div className="absolute -top-3 left-6">
+                <span className="bg-yellow-100 dark:bg-yellow-900/50 text-yellow-700 dark:text-yellow-300 text-xs font-semibold px-3 py-1 rounded-full">
+                  {t('networks.testnet.badge')}
+                </span>
               </div>
-              <span className={`mt-3 font-medium ${network.isAvailable
-                ? "text-gray-900 dark:text-white"
-                : "text-gray-500 dark:text-gray-400"
-                }`}>
-                {network.name}
-                {network.isAvailable}
-              </span>
+
+              <div className="flex items-start gap-4 mb-6 mt-2">
+                <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-xl flex items-center justify-center p-2">
+                  <Image
+                    src={ethereumIcon}
+                    alt="Sepolia"
+                    width={48}
+                    height={48}
+                    className="rounded-lg"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    {t('networks.testnet.title')}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
+                    <span className="text-sm text-gray-500 dark:text-gray-400">Testnet</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                {t('networks.testnet.description')}
+              </p>
+
+              <Link 
+                href="/create?network=sepolia"
+                className="inline-flex items-center justify-center w-full gap-2 bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
+              >
+                Deploy on Sepolia
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
             </div>
-          ))}
+          </div>
+
+          {/* Base Mainnet */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-primary-400/20 dark:from-blue-600/10 dark:to-primary-600/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
+            <div className="relative bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              {/* Badge */}
+              <div className="absolute -top-3 left-6">
+                <span className="bg-green-100 dark:bg-green-900/50 text-green-700 dark:text-green-300 text-xs font-semibold px-3 py-1 rounded-full">
+                  {t('networks.mainnet.badge')}
+                </span>
+              </div>
+
+              <div className="flex items-start gap-4 mb-6 mt-2">
+                <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center p-2">
+                  <Image
+                    src={baseIcon}
+                    alt="Base"
+                    width={48}
+                    height={48}
+                    className="rounded-lg"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    {t('networks.mainnet.title')}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="w-2 h-2 bg-green-400 rounded-full" />
+                    <span className="text-sm text-gray-500 dark:text-gray-400">Mainnet</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                {t('networks.mainnet.description')}
+              </p>
+
+              <Link 
+                href="/create?network=base"
+                className="inline-flex items-center justify-center w-full gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200"
+              >
+                Deploy on Base
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
         </div>
 
+        {/* Coming soon note */}
         <div className="mt-12 text-center">
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-gray-500 dark:text-gray-400 text-sm">
             {t('networks.comingSoon')}
           </p>
         </div>
