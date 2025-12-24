@@ -98,7 +98,133 @@
     "maxLength": "Must be at most {{max}} characters",
     "invalidSymbol": "Symbol must be 2-5 uppercase letters",
     "positiveNumber": "Must be a positive number",
-    "maxSupply": "Must be less than or equal to {{max}}"
+    "maxSupply": "Must be less than or equal to {{max}}",
+    "daoNameRequired": "DAO name is required",
+    "tokenNameRequired": "Token name is required",
+    "symbolRequired": "Symbol is required",
+    "symbolTooLong": "Symbol must be {{max}} characters or less",
+    "totalSupplyRequired": "Total supply is required"
+  },
+  "time": {
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days"
+  },
+  "advanced": {
+    "title": "Advanced Settings",
+    "description": "Customize governance timing parameters. These settings affect how proposals are created and voted on.",
+    "votingDelay": {
+      "label": "Voting Delay",
+      "helper": "Time before voting starts after proposal creation"
+    },
+    "votingPeriod": {
+      "label": "Voting Period",
+      "helper": "Duration of the voting period"
+    },
+    "fixedSettings": {
+      "title": "Fixed settings",
+      "text": "Quorum is 1%, Proposal Threshold is 1%, Timelock delay is 1 day. These can be changed later through governance proposals."
+    }
+  },
+  "preview": {
+    "title": "Live Preview",
+    "unknownNetwork": "Unknown Network",
+    "daoNameLabel": "DAO Name",
+    "daoNamePlaceholder": "Your DAO Name",
+    "onNetwork": "on {{network}}",
+    "governanceTokenLabel": "Governance Token",
+    "tokenNamePlaceholder": "Token Name",
+    "tokenSymbolPlaceholder": "SYMBOL",
+    "totalSupplyLine": "{{amount}} total supply",
+    "tokenDistribution": {
+      "title": "Token Distribution",
+      "creatorLabel": "You (Creator)",
+      "treasuryLabel": "Treasury",
+      "creatorAmount": "{{amount}} (1%)",
+      "treasuryAmount": "{{amount}} (99%)"
+    },
+    "governance": {
+      "title": "Governance Settings",
+      "votingDelay": "Voting Delay",
+      "votingPeriod": "Voting Period",
+      "quorum": "Quorum",
+      "quorumValue": "1%",
+      "timelock": "Timelock",
+      "timelockValue": "1 day"
+    },
+    "tip": {
+      "title": "Tip",
+      "text": "You'll receive 1% of tokens to meet the proposal threshold. The remaining 99% goes to the treasury for governance distribution."
+    }
+  },
+  "walletSection": {
+    "title": "Connect Wallet",
+    "connectedSubtitle": "Your wallet is connected",
+    "disconnectedSubtitle": "Connect your wallet to create a DAO",
+    "badgeConnected": "Connected",
+    "copyAddressTitle": "Copy address",
+    "disconnectButton": "Disconnect",
+    "switchWalletPrompt": "Switch to a different wallet"
+  },
+  "connectWallet": {
+    "title": "Connect Your Wallet",
+    "subtitle": "Choose a wallet to get started",
+    "sponsoredBadge": "Sponsored",
+    "errorPrefix": "Error:",
+    "sections": {
+      "sponsored": {
+        "one": "Sponsored Wallet",
+        "many": "Sponsored Wallets"
+      },
+      "other": "Other Wallets"
+    }
+  },
+  "status": {
+    "waitingForSignature": {
+      "title": "Waiting for Signature",
+      "description": "Please confirm the transaction in your wallet..."
+    },
+    "waitingForConfirmation": {
+      "title": "Transaction Submitted",
+      "description": "Waiting for blockchain confirmation. This may take a moment...",
+      "info": "Please don't close this window. The transaction is being processed on the blockchain."
+    },
+    "error": {
+      "fallbackTitle": "Transaction Failed",
+      "retry": "Try Again"
+    }
+  },
+  "success": {
+    "copyToClipboard": "Copy to clipboard",
+    "title": "DAO Created Successfully!",
+    "subtitle": "is now live on the blockchain.",
+    "contractAddresses": {
+      "title": "Contract Addresses",
+      "governorContract": "Governor Contract",
+      "tokenContract": "Token Contract",
+      "timelockTreasury": "Timelock (Treasury)"
+    },
+    "transactionHash": {
+      "label": "Transaction Hash"
+    },
+    "nextSteps": {
+      "title": "Next Steps",
+      "openOpenBook": {
+        "title": "Open OpenBook",
+        "description": "Manage your DAO in OpenBook.to — built specifically for CreateDAO contracts with treasury tracking, team permissions, and transparent operations."
+      },
+      "createFirstProposal": {
+        "title": "Create First Proposal",
+        "description": "You have 1% of tokens - enough to create proposals. Start by distributing tokens from treasury."
+      },
+      "inviteMembers": {
+        "title": "Invite Members",
+        "description": "Share your DAO with community members and distribute governance tokens."
+      }
+    },
+    "actions": {
+      "createAnother": "Create Another DAO",
+      "openOpenBook": "Open OpenBook →"
+    }
   },
   "tokenDistribution": {
     "title": "Token Distribution",

@@ -147,7 +147,7 @@ const WhatYouGet: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
             <div className="w-3 h-3 bg-purple-500 rounded-full" />
-            <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">All connected & ready to govern</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400 ml-2">{t('whatYouGet.allConnected')}</span>
           </div>
         </div>
       </div>

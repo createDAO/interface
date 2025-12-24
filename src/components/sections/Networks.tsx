@@ -50,7 +50,7 @@ const Networks: React.FC = () => {
                   </h3>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
-                    <span className="text-sm text-gray-500 dark:text-gray-400">Testnet</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{t('networks.testnet.tag')}</span>
                   </div>
                 </div>
               </div>
@@ -63,7 +63,7 @@ const Networks: React.FC = () => {
                 href="/create?network=sepolia"
                 className="inline-flex items-center justify-center w-full gap-2 bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
               >
-                Deploy on Sepolia
+                {t('networks.testnet.deployButton')}
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -98,7 +98,7 @@ const Networks: React.FC = () => {
                   </h3>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="w-2 h-2 bg-green-400 rounded-full" />
-                    <span className="text-sm text-gray-500 dark:text-gray-400">Mainnet</span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{t('networks.mainnet.tag')}</span>
                   </div>
                 </div>
               </div>
@@ -111,7 +111,7 @@ const Networks: React.FC = () => {
                 href="/create?network=base"
                 className="inline-flex items-center justify-center w-full gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200"
               >
-                Deploy on Base
+                {t('networks.mainnet.deployButton')}
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

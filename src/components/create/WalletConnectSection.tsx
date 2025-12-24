@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAccount, useDisconnect, useEnsName, useBalance } from 'wagmi';
+import { useTranslation } from 'next-i18next';
 import { formatEther } from 'viem';
 import { ConnectWallet } from '../dao/ConnectWallet';
 
@@ -8,6 +9,7 @@ interface WalletConnectSectionProps {
 }
 
 export function WalletConnectSection({ className = '' }: WalletConnectSectionProps) {
+  const { t } = useTranslation('create');
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
@@ -37,10 +39,10 @@ export function WalletConnectSection({ className = '' }: WalletConnectSectionPro
           </div>
           <div>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Connect Wallet
+              {t('walletSection.title')}
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {isConnected ? 'Your wallet is connected' : 'Connect your wallet to create a DAO'}
+              {isConnected ? t('walletSection.connectedSubtitle') : t('walletSection.disconnectedSubtitle')}
             </p>
           </div>
         </div>
@@ -49,7 +51,7 @@ export function WalletConnectSection({ className = '' }: WalletConnectSectionPro
         {isConnected && (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300">
             <span className="w-1.5 h-1.5 mr-1.5 rounded-full bg-green-500 animate-pulse"></span>
-            Connected
+            {t('walletSection.badgeConnected')}
           </span>
         )}
       </div>
@@ -74,7 +76,7 @@ export function WalletConnectSection({ className = '' }: WalletConnectSectionPro
                   <button
                     onClick={() => navigator.clipboard.writeText(address)}
                     className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-                    title="Copy address"
+                    title={t('walletSection.copyAddressTitle')}
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -94,7 +96,7 @@ export function WalletConnectSection({ className = '' }: WalletConnectSectionPro
                 onClick={() => disconnect()}
                 className="px-3 py-1.5 text-sm font-medium text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 border border-red-200 dark:border-red-800 rounded-lg hover:border-red-300 dark:hover:border-red-700 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
               >
-                Disconnect
+                {t('walletSection.disconnectButton')}
               </button>
             </div>
           </div>
@@ -107,7 +109,7 @@ export function WalletConnectSection({ className = '' }: WalletConnectSectionPro
           {showWalletOptions && isConnected && (
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                Switch to a different wallet
+                {t('walletSection.switchWalletPrompt')}
               </span>
               <button
                 onClick={() => setShowWalletOptions(false)}

@@ -93,8 +93,8 @@ const Hero: React.FC = () => {
                         </svg>
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white">DAOFactory</h4>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">One-click deployment</p>
+                        <h4 className="font-semibold text-gray-900 dark:text-white">{t('home:hero.diagram.factoryName')}</h4>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{t('home:hero.diagram.factoryDescription')}</p>
                       </div>
                     </div>
                   </div>
@@ -115,8 +115,8 @@ const Hero: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
-                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">Token</h5>
-                      <p className="text-[10px] text-gray-500 dark:text-gray-400">ERC20Votes</p>
+                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">{t('home:hero.diagram.tokenLabel')}</h5>
+                      <p className="text-[10px] text-gray-500 dark:text-gray-400">{t('home:hero.diagram.tokenSublabel')}</p>
                     </div>
 
                     {/* Treasury */}
@@ -126,8 +126,8 @@ const Hero: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                       </div>
-                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">Treasury</h5>
-                      <p className="text-[10px] text-gray-500 dark:text-gray-400">Timelock</p>
+                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">{t('home:hero.diagram.treasuryLabel')}</h5>
+                      <p className="text-[10px] text-gray-500 dark:text-gray-400">{t('home:hero.diagram.treasurySublabel')}</p>
                     </div>
 
                     {/* Governor */}
@@ -137,8 +137,8 @@ const Hero: React.FC = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                         </svg>
                       </div>
-                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">Governor</h5>
-                      <p className="text-[10px] text-gray-500 dark:text-gray-400">Governance</p>
+                      <h5 className="text-xs font-semibold text-gray-900 dark:text-white">{t('home:hero.diagram.governorLabel')}</h5>
+                      <p className="text-[10px] text-gray-500 dark:text-gray-400">{t('home:hero.diagram.governorSublabel')}</p>
                     </div>
                   </div>
 
@@ -146,17 +146,17 @@ const Hero: React.FC = () => {
                   <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg px-4 py-3 mt-4">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                      <span className="text-xs text-gray-600 dark:text-gray-300">1% Creator</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-300">{t('home:hero.diagram.distributionCreator')}</span>
                     </div>
                     <div className="h-4 w-px bg-gray-300 dark:bg-gray-600" />
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full" />
-                      <span className="text-xs text-gray-600 dark:text-gray-300">99% Treasury</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-300">{t('home:hero.diagram.distributionTreasury')}</span>
                     </div>
                     <div className="h-4 w-px bg-gray-300 dark:bg-gray-600" />
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-purple-500 rounded-full" />
-                      <span className="text-xs text-gray-600 dark:text-gray-300">1% Quorum</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-300">{t('home:hero.diagram.distributionQuorum')}</span>
                     </div>
                   </div>
                 </div>

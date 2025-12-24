@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { useTranslation } from 'next-i18next';
 import { useConnect, useAccount, Connector } from 'wagmi';
 import Image from 'next/image';
 import metamaskIcon from '../../assets/wallets/metamask-icon.svg';
@@ -34,6 +35,7 @@ interface WalletCardProps {
   onConnect: (connector: Connector) => void;
   variant: 'sponsored' | 'default';
   sponsorInfo?: { description: string; benefit: string };
+  sponsoredBadgeLabel?: string;
 }
 
 // ============================================================================
@@ -90,26 +92,26 @@ const SectionDivider: React.FC<{ label: string }> = ({ label }) => (
   </div>
 );
 
-const LoadingSpinner: React.FC<{ size?: 'sm' | 'md'; variant?: 'sponsored' | 'default' }> = ({ 
-  size = 'sm', 
-  variant = 'default' 
+const LoadingSpinner: React.FC<{ size?: 'sm' | 'md'; variant?: 'sponsored' | 'default' }> = ({
+  size = 'sm',
+  variant = 'default'
 }) => {
   const sizeClasses = size === 'sm' ? 'h-3.5 w-3.5' : 'h-4 w-4';
-  const colorClasses = variant === 'sponsored' 
-    ? 'border-emerald-500 dark:border-emerald-400' 
+  const colorClasses = variant === 'sponsored'
+    ? 'border-emerald-500 dark:border-emerald-400'
     : 'border-blue-500 dark:border-cyan-400';
-  
+
   return (
     <div className={`animate-spin ${sizeClasses} border-2 ${colorClasses} border-t-transparent rounded-full ml-2 flex-shrink-0`} />
   );
 };
 
-const SponsoredBadge: React.FC = () => (
+const SponsoredBadge: React.FC<{ label: string }> = ({ label }) => (
   <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
     <svg className="w-2.5 h-2.5 mr-1" fill="currentColor" viewBox="0 0 20 20">
       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
     </svg>
-    Sponsored
+    {label}
   </span>
 );
 
@@ -120,15 +122,16 @@ const WalletCard: React.FC<WalletCardProps> = ({
   onConnect,
   variant,
   sponsorInfo,
+  sponsoredBadgeLabel,
 }) => {
   const isSponsored = variant === 'sponsored';
-  
+
   const baseStyles = `
     flex items-center w-full rounded-xl border transition-all duration-200 
     disabled:opacity-50 disabled:cursor-not-allowed
     hover:shadow-md hover:scale-[1.01] active:scale-[0.99]
   `;
-  
+
   const variantStyles = isSponsored
     ? `
         py-3 px-4
@@ -167,34 +170,36 @@ const WalletCard: React.FC<WalletCardProps> = ({
           className={isSponsored ? 'h-6 w-6' : 'h-[18px] w-[18px]'}
         />
       </div>
-      
+
       <div className={`flex-1 min-w-0 ${isSponsored ? 'ml-3' : 'ml-2'} text-left`}>
         <div className="flex items-center gap-2">
           <span className={`font-semibold text-gray-900 dark:text-gray-100 truncate ${isSponsored ? 'text-base' : 'text-sm'}`}>
             {connector.name}
           </span>
-          {isSponsored && <SponsoredBadge />}
+          {isSponsored && sponsoredBadgeLabel && (
+            <SponsoredBadge label={sponsoredBadgeLabel} />
+          )}
         </div>
-        
+
         {isSponsored && sponsorInfo && (
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">
             {sponsorInfo.description} • {sponsorInfo.benefit}
           </p>
         )}
       </div>
-      
+
       {isConnecting && <LoadingSpinner size={isSponsored ? 'md' : 'sm'} variant={variant} />}
     </button>
   );
 };
 
-const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
+const ErrorMessage: React.FC<{ message: string; prefixLabel: string }> = ({ message, prefixLabel }) => (
   <div className="mt-3 p-2.5 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-700 dark:text-red-300 text-xs">
     <div className="flex items-center">
       <svg className="h-3.5 w-3.5 mr-1.5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
-      <span className="font-medium">Error: </span>
+      <span className="font-medium">{prefixLabel}</span>
       <span className="ml-1 truncate">{message}</span>
     </div>
   </div>
@@ -205,6 +210,7 @@ const ErrorMessage: React.FC<{ message: string }> = ({ message }) => (
 // ============================================================================
 
 export function ConnectWallet({ onClose }: ConnectWalletProps) {
+  const { t } = useTranslation('create');
   const { connect, connectors, error } = useConnect();
   const { isConnected } = useAccount();
   const [connectorStates, setConnectorStates] = useState<Record<string, boolean>>({});
@@ -247,6 +253,9 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
   }, [connecting, connect]);
 
   // Separate sponsored and regular wallets
+  const sponsoredBadgeLabel = t('connectWallet.sponsoredBadge');
+  const errorPrefixLabel = t('connectWallet.errorPrefix');
+
   const { sponsoredConnectors, regularConnectors } = useMemo(() => {
     const sponsored: Array<{ connector: Connector; config: SponsoredWalletConfig }> = [];
     const regular: Connector[] = [];
@@ -269,18 +278,24 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
       {/* Header */}
       <div className="mb-5 text-center">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-          Connect Your Wallet
+          {t('connectWallet.title')}
         </h2>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Choose a wallet to get started
+          {t('connectWallet.subtitle')}
         </p>
       </div>
 
       {/* Sponsored Wallets Section */}
       {sponsoredConnectors.length > 0 && (
         <div className="mb-5">
-          <SectionDivider label={sponsoredConnectors.length === 1 ? 'Sponsored Wallet' : 'Sponsored Wallets'} />
-          
+          <SectionDivider
+            label={
+              sponsoredConnectors.length === 1
+                ? t('connectWallet.sections.sponsored.one')
+                : t('connectWallet.sections.sponsored.many')
+            }
+          />
+
           <div className="space-y-2">
             {sponsoredConnectors.map(({ connector, config }) => (
               <WalletCard
@@ -294,6 +309,7 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
                   description: config.description,
                   benefit: config.benefit,
                 }}
+                sponsoredBadgeLabel={sponsoredBadgeLabel}
               />
             ))}
           </div>
@@ -303,8 +319,8 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
       {/* Other Wallets Section */}
       {regularConnectors.length > 0 && (
         <div>
-          <SectionDivider label="Other Wallets" />
-          
+          <SectionDivider label={t('connectWallet.sections.other')} />
+
           <div className="grid grid-cols-2 gap-2">
             {regularConnectors.map((connector) => (
               <WalletCard
@@ -321,7 +337,7 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
       )}
 
       {/* Error Display */}
-      {error && <ErrorMessage message={error.message} />}
+      {error && <ErrorMessage message={error.message} prefixLabel={errorPrefixLabel} />}
     </div>
   );
 }

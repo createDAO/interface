@@ -207,8 +207,8 @@
         "description": "EIP-1167 minimal proxies reduce deployment costs significantly"
       },
       {
-        "title": "Tally Compatible",
-        "description": "Works with Tally, Snapshot, and other major governance platforms"
+        "title": "OpenBook Ready",
+        "description": "Built for OpenBook.to — manage off-chain operations, treasury tracking, and team permissions, while staying compatible with Snapshot, Tally and other governance tools."
       },
       {
         "title": "Immutable Deployment",

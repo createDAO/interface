@@ -98,7 +98,135 @@
     "maxLength": "Должно быть не более {{max}} символов",
     "invalidSymbol": "Символ должен состоять из 2-5 заглавных букв",
     "positiveNumber": "Должно быть положительным числом",
-    "maxSupply": "Должно быть меньше или равно {{max}}"
+    "maxSupply": "Должно быть меньше или равно {{max}}",
+    "daoNameRequired": "Название DAO обязательно",
+    "tokenNameRequired": "Название токена обязательно",
+    "symbolRequired": "Символ обязателен",
+    "symbolTooLong": "Символ должен содержать не более {{max}} символов",
+    "totalSupplyRequired": "Общая эмиссия обязательна"
+  },
+  "time": {
+    "days_one": "{{count}} день",
+    "days_few": "{{count}} дня",
+    "days_many": "{{count}} дней",
+    "days_other": "{{count}} дня"
+  },
+  "advanced": {
+    "title": "Расширенные настройки",
+    "description": "Настройте параметры времени управления. Эти настройки влияют на то, как создаются предложения и как проходит голосование.",
+    "votingDelay": {
+      "label": "Задержка голосования",
+      "helper": "Время до начала голосования после создания предложения"
+    },
+    "votingPeriod": {
+      "label": "Период голосования",
+      "helper": "Длительность периода голосования"
+    },
+    "fixedSettings": {
+      "title": "Фиксированные настройки",
+      "text": "Кворум — 1%, порог предложения — 1%, задержка Timelock — 1 день. Их можно изменить позже через предложения по управлению."
+    }
+  },
+  "preview": {
+    "title": "Предпросмотр",
+    "unknownNetwork": "Неизвестная сеть",
+    "daoNameLabel": "Название DAO",
+    "daoNamePlaceholder": "Ваше название DAO",
+    "onNetwork": "в сети {{network}}",
+    "governanceTokenLabel": "Токен управления",
+    "tokenNamePlaceholder": "Название токена",
+    "tokenSymbolPlaceholder": "СИМВОЛ",
+    "totalSupplyLine": "общая эмиссия: {{amount}}",
+    "tokenDistribution": {
+      "title": "Распределение токенов",
+      "creatorLabel": "Вы (создатель)",
+      "treasuryLabel": "Казна",
+      "creatorAmount": "{{amount}} (1%)",
+      "treasuryAmount": "{{amount}} (99%)"
+    },
+    "governance": {
+      "title": "Настройки управления",
+      "votingDelay": "Задержка голосования",
+      "votingPeriod": "Период голосования",
+      "quorum": "Кворум",
+      "quorumValue": "1%",
+      "timelock": "Timelock",
+      "timelockValue": "1 день"
+    },
+    "tip": {
+      "title": "Совет",
+      "text": "Вы получите 1% токенов, чтобы достичь порога предложения. Остальные 99% поступят в казну для распределения через управление."
+    }
+  },
+  "walletSection": {
+    "title": "Подключить кошелёк",
+    "connectedSubtitle": "Ваш кошелёк подключен",
+    "disconnectedSubtitle": "Подключите кошелёк, чтобы создать DAO",
+    "badgeConnected": "Подключён",
+    "copyAddressTitle": "Скопировать адрес",
+    "disconnectButton": "Отключить",
+    "switchWalletPrompt": "Переключиться на другой кошелёк"
+  },
+  "connectWallet": {
+    "title": "Подключите кошелёк",
+    "subtitle": "Выберите кошелёк, чтобы начать",
+    "sponsoredBadge": "Спонсируется",
+    "errorPrefix": "Ошибка:",
+    "sections": {
+      "sponsored": {
+        "one": "Спонсируемый кошелёк",
+        "many": "Спонсируемые кошельки"
+      },
+      "other": "Другие кошельки"
+    }
+  },
+  "status": {
+    "waitingForSignature": {
+      "title": "Ожидание подписи",
+      "description": "Пожалуйста, подтвердите транзакцию в вашем кошельке..."
+    },
+    "waitingForConfirmation": {
+      "title": "Транзакция отправлена",
+      "description": "Ожидание подтверждения в блокчейне. Это может занять некоторое время...",
+      "info": "Пожалуйста, не закрывайте это окно. Транзакция обрабатывается в блокчейне."
+    },
+    "error": {
+      "fallbackTitle": "Транзакция не удалась",
+      "retry": "Попробовать снова"
+    }
+  },
+  "success": {
+    "copyToClipboard": "Скопировать в буфер обмена",
+    "title": "DAO успешно создано!",
+    "subtitle": "теперь активно в блокчейне.",
+    "contractAddresses": {
+      "title": "Адреса контрактов",
+      "governorContract": "Контракт Governor",
+      "tokenContract": "Контракт токена",
+      "timelockTreasury": "Timelock (Казна)"
+    },
+    "transactionHash": {
+      "label": "Хеш транзакции"
+    },
+    "nextSteps": {
+      "title": "Следующие шаги",
+      "openOpenBook": {
+        "title": "Открыть OpenBook",
+        "description": "Управляйте своим DAO в OpenBook.to — интерфейс, созданный специально для контрактов CreateDAO, с отслеживанием казны, правами команды и прозрачными операциями."
+      },
+      "createFirstProposal": {
+        "title": "Создайте первое предложение",
+        "description": "У вас есть 1% токенов — этого достаточно, чтобы создавать предложения. Начните с распределения токенов из казны."
+      },
+      "inviteMembers": {
+        "title": "Пригласите участников",
+        "description": "Поделитесь своим DAO с сообществом и распределите токены управления."
+      }
+    },
+    "actions": {
+      "createAnother": "Создать ещё одно DAO",
+      "openOpenBook": "Открыть OpenBook →"
+    }
   },
   "tokenDistribution": {
     "title": "Распределение токенов",

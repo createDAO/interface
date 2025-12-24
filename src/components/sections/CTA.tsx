@@ -64,15 +64,15 @@ const CTA: React.FC = () => {
           <div className="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-white/10">
             <div>
               <p className="text-3xl font-bold text-white">3</p>
-              <p className="text-white/60 text-sm">Contracts Deployed</p>
+              <p className="text-white/60 text-sm">{t('cta.stats.contractsDeployed')}</p>
             </div>
             <div>
               <p className="text-3xl font-bold text-white">~90%</p>
-              <p className="text-white/60 text-sm">Gas Saved</p>
+              <p className="text-white/60 text-sm">{t('cta.stats.gasSaved')}</p>
             </div>
             <div>
               <p className="text-3xl font-bold text-white">1</p>
-              <p className="text-white/60 text-sm">Transaction</p>
+              <p className="text-white/60 text-sm">{t('cta.stats.transaction')}</p>
             </div>
           </div>
         </div>

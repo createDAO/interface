@@ -2,7 +2,8 @@
   "versionBanner": {
     "title": "🎉 CreateDAO v2 is here!",
     "description": "Gas-efficient EIP-1167 clones, auto-delegation, and OpenBook integration.",
-    "cta": "Learn more"
+    "cta": "Learn more",
+    "closeAria": "Close banner"
   },
   "hero": {
     "badge": "Built with OpenZeppelin",
@@ -11,6 +12,19 @@
     "deployTestnet": "Deploy on Sepolia",
     "deployMainnet": "Deploy on Base",
     "gasFeeNote": "Only pay network gas fees • No platform fees",
+    "diagram": {
+      "factoryName": "DAOFactory",
+      "factoryDescription": "One-click deployment",
+      "tokenLabel": "Token",
+      "tokenSublabel": "ERC20Votes",
+      "treasuryLabel": "Treasury",
+      "treasurySublabel": "Timelock",
+      "governorLabel": "Governor",
+      "governorSublabel": "Governance",
+      "distributionCreator": "1% Creator",
+      "distributionTreasury": "99% Treasury",
+      "distributionQuorum": "1% Quorum"
+    },
     "stats": {
       "contracts": "3 Contracts",
       "contractsDesc": "Token, Treasury, Governor",
@@ -53,6 +67,7 @@
   "whatYouGet": {
     "title": "What Gets Deployed",
     "subtitle": "One transaction deploys a complete, production-ready DAO system.",
+    "allConnected": "All connected & ready to govern",
     "token": {
       "title": "DAO Token",
       "description": "ERC20Votes governance token with 18 decimals. Auto-delegates to holders for instant voting power.",
@@ -93,12 +108,16 @@
     "testnet": {
       "title": "Sepolia Testnet",
       "description": "Test your DAO with free testnet ETH. Perfect for experimentation.",
-      "badge": "Recommended for testing"
+      "badge": "Recommended for testing",
+      "tag": "Testnet",
+      "deployButton": "Deploy on Sepolia"
     },
     "mainnet": {
       "title": "Base Mainnet",
       "description": "Production-ready deployment on Base L2. Low fees, real value.",
-      "badge": "Production ready"
+      "badge": "Production ready",
+      "tag": "Mainnet",
+      "deployButton": "Deploy on Base"
     },
     "comingSoon": "More networks coming based on community feedback."
   },
@@ -146,6 +165,11 @@
     "description": "Join the decentralized governance revolution. Deploy your DAO in one transaction.",
     "createButton": "Create DAO Now",
     "learnMoreButton": "Explore Features",
-    "gasFeeNote": "No platform fees • Only network gas"
+    "gasFeeNote": "No platform fees • Only network gas",
+    "stats": {
+      "contractsDeployed": "Contracts Deployed",
+      "gasSaved": "Gas Saved",
+      "transaction": "Transaction"
+    }
   }
 }

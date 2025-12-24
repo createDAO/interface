@@ -55,22 +55,22 @@ const CreateDAO: React.FC = () => {
     const strValue = String(value);
     switch (name) {
       case 'daoName':
-        return !strValue ? 'DAO name is required' : undefined;
+        return !strValue ? t('validation.daoNameRequired') : undefined;
       case 'tokenName':
-        return !strValue ? 'Token name is required' : undefined;
+        return !strValue ? t('validation.tokenNameRequired') : undefined;
       case 'symbol':
-        if (!strValue) return 'Symbol is required';
-        if (strValue.length > 6) return 'Symbol must be 6 characters or less';
+        if (!strValue) return t('validation.symbolRequired');
+        if (strValue.length > 6) return t('validation.symbolTooLong', { max: 6 });
         return undefined;
       case 'totalSupply':
-        if (!strValue) return 'Total supply is required';
-        if (isNaN(Number(strValue)) || Number(strValue) <= 0) return 'Must be a positive number';
-        if (Number(strValue) >= 999999999999) return 'Must be less than 999,999,999,999';
+        if (!strValue) return t('validation.totalSupplyRequired');
+        if (isNaN(Number(strValue)) || Number(strValue) <= 0) return t('validation.positiveNumber');
+        if (Number(strValue) >= 999999999999) return t('validation.maxSupply', { max: '999,999,999,999' });
         return undefined;
       default:
         return undefined;
     }
-  }, []);
+  }, [t]);
 
   const validateForm = useCallback((): boolean => {
     const newErrors: Partial<Record<keyof DAOFormData, string>> = {};
@@ -136,7 +136,7 @@ const CreateDAO: React.FC = () => {
     return (
       <Layout>
         <Head>
-          <title>DAO Created | CreateDAO</title>
+          <title>{t('page.successMetaTitle')}</title>
         </Head>
         <div className="max-w-4xl mx-auto px-4 py-8">
           <SuccessPanel
@@ -341,7 +341,7 @@ const CreateDAO: React.FC = () => {
           <div className="lg:col-span-1">
             <LivePreview
               formData={formData}
-              networkName={currentNetwork?.name || 'Unknown Network'}
+              networkName={currentNetwork?.name || t('preview.unknownNetwork')}
             />
           </div>
         </div>

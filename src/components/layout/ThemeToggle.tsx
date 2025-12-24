@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'next-i18next';
 import { ThemeContext } from './ThemeContext';
 
 const ThemeToggle: React.FC = () => {
+  const { t } = useTranslation('navigation');
   const { theme, toggleTheme } = useContext(ThemeContext);
   // Use state to track client-side rendering
   const [mounted, setMounted] = useState(false);
@@ -25,7 +27,7 @@ const ThemeToggle: React.FC = () => {
     <button
       onClick={toggleTheme}
       className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors duration-200 cursor-pointer"
-      aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
+      aria-label={t('theme.toggle')}
     >
       {isDarkMode ? (
         <svg

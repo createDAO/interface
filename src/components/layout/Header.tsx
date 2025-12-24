@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
 import Navigation from './Navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Header: React.FC = () => {
+  const { t } = useTranslation('navigation');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -53,7 +55,7 @@ const Header: React.FC = () => {
           <button
             onClick={toggleMenu}
             className="text-gray-700 dark:text-gray-300 flex items-center justify-center w-8 h-8"
-            aria-label="Toggle menu"
+            aria-label={isMenuOpen ? t('menu.close') : t('menu.open')}
           >
             <div className="relative w-6 h-6 flex items-center justify-center">
               <span className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out origin-center ${isMenuOpen ? 'rotate-45' : 'rotate-0 translate-y-[-4px]'}`}></span>

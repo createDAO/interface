@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'next-i18next';
 
 interface DeploymentStatusProps {
   isWaitingForSignature: boolean;
@@ -18,6 +19,8 @@ export const DeploymentStatus: React.FC<DeploymentStatusProps> = ({
   error,
   onRetry,
 }) => {
+  const { t } = useTranslation('create');
+
   if (isWaitingForSignature) {
     return (
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
@@ -25,10 +28,10 @@ export const DeploymentStatus: React.FC<DeploymentStatusProps> = ({
           <div className="animate-spin h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full mr-4" />
           <div>
             <h3 className="text-lg font-semibold text-blue-800 dark:text-blue-300">
-              Waiting for Signature
+              {t('status.waitingForSignature.title')}
             </h3>
             <p className="text-blue-700 dark:text-blue-400 text-sm mt-1">
-              Please confirm the transaction in your wallet...
+              {t('status.waitingForSignature.description')}
             </p>
           </div>
         </div>
@@ -43,16 +46,16 @@ export const DeploymentStatus: React.FC<DeploymentStatusProps> = ({
           <div className="animate-spin h-8 w-8 border-4 border-amber-500 border-t-transparent rounded-full mr-4" />
           <div>
             <h3 className="text-lg font-semibold text-amber-800 dark:text-amber-300">
-              Transaction Submitted
+              {t('status.waitingForConfirmation.title')}
             </h3>
             <p className="text-amber-700 dark:text-amber-400 text-sm mt-1">
-              Waiting for blockchain confirmation. This may take a moment...
+              {t('status.waitingForConfirmation.description')}
             </p>
           </div>
         </div>
         <div className="mt-4 pt-4 border-t border-amber-200 dark:border-amber-700">
           <p className="text-xs text-amber-600 dark:text-amber-400">
-            Please don&apos;t close this window. The transaction is being processed on the blockchain.
+            {t('status.waitingForConfirmation.info')}
           </p>
         </div>
       </div>
@@ -70,7 +73,7 @@ export const DeploymentStatus: React.FC<DeploymentStatusProps> = ({
           </div>
           <div className="ml-4 flex-1">
             <h3 className="text-lg font-semibold text-red-800 dark:text-red-300">
-              {error.shortMessage || 'Transaction Failed'}
+              {error.shortMessage || t('status.error.fallbackTitle')}
             </h3>
             {error.details && (
               <p className="text-red-700 dark:text-red-400 text-sm mt-1">
@@ -82,7 +85,7 @@ export const DeploymentStatus: React.FC<DeploymentStatusProps> = ({
                 onClick={onRetry}
                 className="mt-4 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors"
               >
-                Try Again
+                {t('status.error.retry')}
               </button>
             )}
           </div>
