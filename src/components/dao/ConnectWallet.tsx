@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useTranslation } from 'next-i18next';
-import { useConnect, useAccount, Connector } from 'wagmi';
+import { useConnect, useAccount, useConnection, Connector } from 'wagmi';
 import Image from 'next/image';
 import metamaskIcon from '../../assets/wallets/metamask-icon.svg';
 import walletconnectIcon from '../../assets/wallets/walletconnect-icon.svg';
@@ -211,10 +211,14 @@ const ErrorMessage: React.FC<{ message: string; prefixLabel: string }> = ({ mess
 
 export function ConnectWallet({ onClose }: ConnectWalletProps) {
   const { t } = useTranslation('create');
+  const connection = useConnection();
   const { connect, connectors, error } = useConnect();
   const { isConnected } = useAccount();
   const [connectorStates, setConnectorStates] = useState<Record<string, boolean>>({});
   const [connecting, setConnecting] = useState<string | null>(null);
+
+  const isPendingConnection =
+    connection.status === 'connecting' || connection.status === 'reconnecting';
 
   // Close modal on successful connection
   useEffect(() => {
@@ -242,15 +246,23 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
     }
   }, [isConnected, error]);
 
-  const handleConnect = useCallback(async (connector: Connector) => {
-    if (connecting) return;
-    setConnecting(connector.uid);
-    try {
-      await connect({ connector });
-    } catch (err) {
-      console.error('Connection error:', err);
-    }
-  }, [connecting, connect]);
+  const handleConnect = useCallback(
+    async (connector: Connector) => {
+      // Protect against races while Wagmi is reconnecting/connecting.
+      // If we call connect() in these states, Wagmi can throw
+      // "connector already connected".
+      if (isPendingConnection || connection.status !== 'disconnected') return;
+      if (connecting) return;
+
+      setConnecting(connector.uid);
+      try {
+        await connect({ connector });
+      } catch (err) {
+        console.error('Connection error:', err);
+      }
+    },
+    [isPendingConnection, connection.status, connecting, connect],
+  );
 
   // Separate sponsored and regular wallets
   const sponsoredBadgeLabel = t('connectWallet.sponsoredBadge');
@@ -302,7 +314,9 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
                 key={connector.uid}
                 connector={connector}
                 isConnecting={connecting === connector.uid}
-                isAvailable={connectorStates[connector.uid]}
+                isAvailable={
+                  !!connectorStates[connector.uid] && connection.status === 'disconnected'
+                }
                 onConnect={handleConnect}
                 variant="sponsored"
                 sponsorInfo={{
@@ -327,7 +341,9 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
                 key={connector.uid}
                 connector={connector}
                 isConnecting={connecting === connector.uid}
-                isAvailable={connectorStates[connector.uid]}
+                isAvailable={
+                  !!connectorStates[connector.uid] && connection.status === 'disconnected'
+                }
                 onConnect={handleConnect}
                 variant="default"
               />

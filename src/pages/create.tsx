@@ -88,13 +88,14 @@ const CreateDAO: React.FC = () => {
   // Handlers
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const fieldName = name as keyof DAOFormData;
 
-    // Clear error on change
-    if (errors[name as keyof DAOFormData]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
-    }
-  }, [errors]);
+    setFormData(prev => ({ ...prev, [fieldName]: value }));
+
+    // Validate on change so users can immediately see why the form is blocked
+    const error = validateField(fieldName, value);
+    setErrors(prev => ({ ...prev, [fieldName]: error }));
+  }, [validateField]);
 
   const handleNetworkSwitchError = useCallback((error: Error | null) => {
     setNetworkSwitchError(error ? error.message : null);
@@ -124,10 +125,11 @@ const CreateDAO: React.FC = () => {
     setErrors({});
   };
 
-  // Check if form is valid for button state
-  const isFormValid = formData.daoName && formData.tokenName && formData.symbol &&
-    formData.totalSupply && Number(formData.totalSupply) > 0 &&
-    formData.symbol.length <= 6 && Object.keys(errors).filter(k => errors[k as keyof DAOFormData]).length === 0;
+  // Check if form is valid for button state.
+  // Keep this derived from the same validation logic used to render inline errors
+  // so the button state always matches what the user sees.
+  const requiredFields: (keyof DAOFormData)[] = ['daoName', 'tokenName', 'symbol', 'totalSupply'];
+  const isFormValid = requiredFields.every((field) => !validateField(field, formData[field]));
 
   const isDeploying = txState.isWaitingForSignature || txState.isWaitingForConfirmation;
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAccount, useDisconnect, useEnsName, useBalance } from 'wagmi';
+import { useAccount, useConnection, useDisconnect, useEnsName, useBalance } from 'wagmi';
 import { useTranslation } from 'next-i18next';
 import { formatEther } from 'viem';
 import { ConnectWallet } from '../dao/ConnectWallet';
@@ -10,11 +10,21 @@ interface WalletConnectSectionProps {
 
 export function WalletConnectSection({ className = '' }: WalletConnectSectionProps) {
   const { t } = useTranslation('create');
+  const connection = useConnection();
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
   const { data: balance } = useBalance({ address });
   const [showWalletOptions, setShowWalletOptions] = useState(false);
+
+  const isPendingConnection =
+    connection.status === 'connecting' || connection.status === 'reconnecting';
+
+  const walletSubtitle = isPendingConnection
+    ? t('steps.deployment.connecting')
+    : isConnected
+      ? t('walletSection.connectedSubtitle')
+      : t('walletSection.disconnectedSubtitle');
 
   // Format address for display
   const formatAddress = (addr: string) => {
@@ -42,7 +52,7 @@ export function WalletConnectSection({ className = '' }: WalletConnectSectionPro
               {t('walletSection.title')}
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {isConnected ? t('walletSection.connectedSubtitle') : t('walletSection.disconnectedSubtitle')}
+              {walletSubtitle}
             </p>
           </div>
         </div>
@@ -103,9 +113,27 @@ export function WalletConnectSection({ className = '' }: WalletConnectSectionPro
         </div>
       )}
 
+      {/* Pending reconnection state (prevents "connector already connected" race) */}
+      {isPendingConnection && !isConnected && (
+        <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">
+          <div className="flex items-center gap-3">
+            <div className="animate-spin h-4 w-4 border-2 border-primary-500 border-t-transparent rounded-full" />
+            <div className="text-sm text-gray-600 dark:text-gray-300">
+              {t('steps.deployment.connecting')}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Disconnected State - Show ConnectWallet */}
-      {(!isConnected || showWalletOptions) && (
-        <div className={showWalletOptions && isConnected ? 'mt-4 pt-4 border-t border-gray-200 dark:border-gray-700' : ''}>
+      {(connection.status === 'disconnected' || (showWalletOptions && isConnected)) && (
+        <div
+          className={
+            showWalletOptions && isConnected
+              ? 'mt-4 pt-4 border-t border-gray-200 dark:border-gray-700'
+              : ''
+          }
+        >
           {showWalletOptions && isConnected && (
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -116,7 +144,12 @@ export function WalletConnectSection({ className = '' }: WalletConnectSectionPro
                 className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
