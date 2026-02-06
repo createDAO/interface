@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next';
 import { useDAOs } from 'daocafe-sdk';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
-import { getExplorerUrl, getNetworkById, SUPPORTED_NETWORKS } from '../config/networks';
+import { getNetworkById } from '../config/networks';
 import ethereumIcon from '../assets/networks/ethereum.png';
 
 // Chain ID to name mapping for networks not in SUPPORTED_NETWORKS
@@ -74,29 +74,6 @@ const getChainName = (chainId: number): string => {
   return CHAIN_NAMES[chainId] || `Chain ${chainId}`;
 };
 
-// DAO type from SDK response
-interface DAO {
-  id: string;
-  chainId: number;
-  governor: string;
-  token: string;
-  timelock: string;
-  creator: string;
-  name: string;
-  tokenName: string;
-  tokenSymbol: string;
-  totalSupply: string;
-  proposalCount: number;
-  manager: string;
-  votingDelay: string;
-  votingPeriod: string;
-  proposalThreshold: string;
-  quorumNumerator: string;
-  createdAt: string;
-  blockNumber: string;
-  transactionHash: string;
-}
-
 const DAOsPage: React.FC = () => {
   const { t } = useTranslation('daos');
   const [selectedChain, setSelectedChain] = useState<number | 'all'>('all');
@@ -114,13 +91,13 @@ const DAOsPage: React.FC = () => {
   const filteredDAOs = useMemo(() => {
     if (!data?.items) return [];
     if (selectedChain === 'all') return data.items;
-    return data.items.filter((dao: DAO) => dao.chainId === selectedChain);
+    return data.items.filter((dao) => dao.chainId === selectedChain);
   }, [data?.items, selectedChain]);
 
   // Get unique chain IDs from the data for the filter
   const availableChains = useMemo(() => {
     if (!data?.items) return [];
-    const chainIds = [...new Set(data.items.map((dao: DAO) => dao.chainId))];
+    const chainIds = [...new Set(data.items.map((dao) => dao.chainId))];
     return chainIds.sort((a, b) => a - b);
   }, [data?.items]);
 
@@ -250,7 +227,7 @@ const DAOsPage: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                  {filteredDAOs.map((dao: DAO) => (
+                  {filteredDAOs.map((dao) => (
                     <tr key={dao.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -318,7 +295,7 @@ const DAOsPage: React.FC = () => {
 
             {/* Mobile Card View */}
             <div className="lg:hidden space-y-4">
-              {filteredDAOs.map((dao: DAO) => (
+              {filteredDAOs.map((dao) => (
                 <div 
                   key={dao.id} 
                   className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm"
@@ -416,7 +393,7 @@ const DAOsPage: React.FC = () => {
                     {t('pagination.previous', 'Previous')}
                   </button>
                   <button
-                    onClick={() => setCursor(data.pageInfo.endCursor)}
+                    onClick={() => setCursor(data.pageInfo.endCursor ?? undefined)}
                     disabled={!data.pageInfo.hasNextPage}
                     className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >

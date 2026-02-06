@@ -36,33 +36,6 @@ const PlatformCard: React.FC<PlatformCardProps> = ({ href, isPrimary, isDashed, 
   );
 };
 
-// Platform icon wrapper component
-interface PlatformIconProps {
-  src?: string;
-  alt?: string;
-  emoji?: string;
-  isIcon?: boolean;
-  children?: React.ReactNode;
-}
-
-const PlatformIcon: React.FC<PlatformIconProps> = ({ src, alt, emoji, isIcon, children }) => (
-  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-700 flex items-center justify-center ${isIcon ? 'p-2' : ''}`}>
-    {emoji ? (
-      <span className="text-2xl md:text-3xl">{emoji}</span>
-    ) : src ? (
-      <Image 
-        src={src} 
-        alt={alt || ''} 
-        width={isIcon ? 40 : 56} 
-        height={isIcon ? 40 : 56} 
-        className={`${isIcon ? 'object-contain' : 'object-cover'} w-full h-full`}
-      />
-    ) : (
-      children
-    )}
-  </div>
-);
-
 const ManagementPlatforms: React.FC = () => {
   const { t } = useTranslation('home');
 
