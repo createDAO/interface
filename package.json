@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "dao",
@@ -34,7 +35,7 @@
     "@walletconnect/ethereum-provider": "~2.21.1",
     "daocafe-sdk": "^0.2.1",
     "i18next": "^25.7.3",
-    "next": "^15.3.8",
+    "next": "^15.5.11",
     "next-i18next": "^15.4.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

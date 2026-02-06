@@ -77,7 +77,7 @@ const NYKNYCWallet: React.FC = () => {
                 className="inline-flex items-center gap-3 px-8 py-4 bg-white text-primary-900 font-semibold rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
               >
                 <Image
-                  src={nyknycIcon}
+                  src={nyknycIcon.src}
                   alt="NYKNYC"
                   width={24}
                   height={24}
