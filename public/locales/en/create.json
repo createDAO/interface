@@ -11,7 +11,7 @@
       "versionPlaceholder": "Select a version"
     },
     "networkTypes": {
-      "ethereumMainnet": "Ethereum Mainnet: The primary Ethereum blockchain with highest security but higher gas fees",
+      "ethereumMainnet": "Ethereum Mainnet: The primary Ethereum blockchain. Maximum security and decentralization.",
       "layer2Networks": "Layer 2 Networks: Optimism, Arbitrum, etc. offer lower fees while inheriting Ethereum security",
       "alternativeL1s": "Alternative L1s: Networks like Avalanche, BNB Chain offer different trade-offs",
       "testnets": "Testnets: For testing before deploying to mainnet (free to use)"

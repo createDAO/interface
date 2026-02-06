@@ -50,21 +50,21 @@ import type { Chain } from "wagmi/chains";
 // Supported network chain IDs
 export const SUPPORTED_CHAIN_IDS = {
   SEPOLIA: 11155111,
-  BASE: 8453,
+  ETHEREUM: 1,
   HARDHAT: 31337,
 } as const;
 
 // Map of supported chain IDs to wagmi chain objects
 const chainMap: Record<number, Chain> = {
   [SUPPORTED_CHAIN_IDS.SEPOLIA]: wagmiChains.sepolia,
-  [SUPPORTED_CHAIN_IDS.BASE]: wagmiChains.base,
+  [SUPPORTED_CHAIN_IDS.ETHEREUM]: wagmiChains.mainnet,
   [SUPPORTED_CHAIN_IDS.HARDHAT]: wagmiChains.hardhat,
 };
 
 // DRPC network name mapping for supported chains
 const DRPC_NETWORK_NAMES: Record<number, string> = {
   [SUPPORTED_CHAIN_IDS.SEPOLIA]: "sepolia",
-  [SUPPORTED_CHAIN_IDS.BASE]: "base",
+  [SUPPORTED_CHAIN_IDS.ETHEREUM]: "ethereum",
 };
 
 // Public fallback RPC URLs for supported chains
@@ -73,9 +73,9 @@ const PUBLIC_RPC_URLS: Record<number, string[]> = {
     "https://rpc.sepolia.org",
     "https://ethereum-sepolia-rpc.publicnode.com",
   ],
-  [SUPPORTED_CHAIN_IDS.BASE]: [
-    "https://mainnet.base.org",
-    "https://base.publicnode.com",
+  [SUPPORTED_CHAIN_IDS.ETHEREUM]: [
+    "https://eth.llamarpc.com",
+    "https://rpc.ankr.com/eth",
   ],
 };
 
@@ -83,13 +83,13 @@ const PUBLIC_RPC_URLS: Record<number, string[]> = {
 const getDrpcUrl = (chainId: number): string | null => {
   const network = DRPC_NETWORK_NAMES[chainId];
   if (!network) return null;
-  
+
   const apiKey = process.env.NEXT_PUBLIC_DRPC_API_KEY;
   if (!apiKey) {
     console.warn("DRPC API key not configured, using public RPCs only");
     return null;
   }
-  
+
   return `https://lb.drpc.org/ogrpc?network=${network}&dkey=${apiKey}`;
 };
 
@@ -101,24 +101,24 @@ const createChainTransport = (chainId: number) => {
   }
 
   const transports: ReturnType<typeof http>[] = [];
-  
+
   // Add DRPC as primary if available
   const drpcUrl = getDrpcUrl(chainId);
   if (drpcUrl) {
     transports.push(http(drpcUrl));
   }
-  
+
   // Add public fallback RPCs
   const publicUrls = PUBLIC_RPC_URLS[chainId] || [];
   for (const url of publicUrls) {
     transports.push(http(url));
   }
-  
+
   // If we have multiple transports, use fallback; otherwise use single transport
   if (transports.length > 1) {
     return fallback(transports);
   }
-  
+
   return transports[0] || http();
 };
 
@@ -126,25 +126,25 @@ const createChainTransport = (chainId: number) => {
 const getSupportedChains = (): [Chain, ...Chain[]] => {
   const chains: Chain[] = [
     chainMap[SUPPORTED_CHAIN_IDS.SEPOLIA],
-    chainMap[SUPPORTED_CHAIN_IDS.BASE],
+    chainMap[SUPPORTED_CHAIN_IDS.ETHEREUM],
   ];
-  
+
   // Add Hardhat only in development
   if (process.env.NODE_ENV === "development") {
     chains.push(chainMap[SUPPORTED_CHAIN_IDS.HARDHAT]);
   }
-  
+
   return chains as [Chain, ...Chain[]];
 };
 
 // Create transports for supported chains
 const createTransports = (chains: Chain[]): Record<number, Transport> => {
   const transports: Record<number, Transport> = {};
-  
+
   for (const chain of chains) {
     transports[chain.id] = createChainTransport(chain.id);
   }
-  
+
   return transports;
 };
 
@@ -152,7 +152,7 @@ const createTransports = (chains: Chain[]): Record<number, Transport> => {
 export function getWagmiConfig() {
   const chains = getSupportedChains();
   const transports = createTransports(chains);
-  
+
   return createConfig({
     chains,
     connectors: [
@@ -160,24 +160,24 @@ export function getWagmiConfig() {
       // This prevents "ReferenceError: indexedDB is not defined" during SSR
       ...(typeof indexedDB !== "undefined"
         ? [
-            metaMask({
-              dappMetadata: {
-                name: "CreateDAO",
-                url:
-                  typeof window !== "undefined"
-                    ? window.location.origin
-                    : "https://createdao.org",
-                iconUrl:
-                  typeof window !== "undefined"
-                    ? `${window.location.origin}/favicon.png`
-                    : "https://createdao.org/favicon.png",
-              },
-            }),
-            coinbaseWallet({
-              appName: "CreateDAO",
-            }),
-            getWalletConnectConnector(),
-          ]
+          metaMask({
+            dappMetadata: {
+              name: "CreateDAO",
+              url:
+                typeof window !== "undefined"
+                  ? window.location.origin
+                  : "https://createdao.org",
+              iconUrl:
+                typeof window !== "undefined"
+                  ? `${window.location.origin}/favicon.png`
+                  : "https://createdao.org/favicon.png",
+            },
+          }),
+          coinbaseWallet({
+            appName: "CreateDAO",
+          }),
+          getWalletConnectConnector(),
+        ]
         : []
       ),
       // These connectors work on both server and client

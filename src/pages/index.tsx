@@ -7,12 +7,14 @@ import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
 import VersionBanner from '../components/sections/VersionBanner';
 import Hero from '../components/sections/Hero';
+import NYKNYCWallet from '../components/sections/NYKNYCWallet';
 import ArchitectureHighlights from '../components/sections/ArchitectureHighlights';
 import WhatYouGet from '../components/sections/WhatYouGet';
 import Steps from '../components/sections/Steps';
 import Networks from '../components/sections/Networks';
 import ManagementPlatforms from '../components/sections/ManagementPlatforms';
 import OpenSource from '../components/sections/OpenSource';
+import Community from '../components/sections/Community';
 import CTA from '../components/sections/CTA';
 import FAQ from '../components/sections/FAQ';
 
@@ -46,8 +48,10 @@ const Home: React.FC = () => {
       <WhatYouGet />
       <Steps />
       <Networks />
+      <NYKNYCWallet />
       <ManagementPlatforms />
       <OpenSource />
+      <Community />
       <CTA />
       <FAQ />
     </Layout>

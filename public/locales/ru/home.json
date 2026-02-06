@@ -10,7 +10,7 @@
     "title": "Разверните свой DAO за <highlight>одну транзакцию</highlight>",
     "description": "Создайте полноценную систему управления с токеном, казной и governor. Газоэффективно, безопасно и готово к OpenBook.",
     "deployTestnet": "Развернуть в Sepolia",
-    "deployMainnet": "Развернуть в Base",
+    "deployMainnet": "Развернуть в Ethereum",
     "gasFeeNote": "Платите только сетевой газ • Без комиссий платформы",
     "diagram": {
       "factoryName": "DAOFactory",
@@ -125,11 +125,11 @@
       "deployButton": "Развернуть в Sepolia"
     },
     "mainnet": {
-      "title": "Base Mainnet",
-      "description": "Production-ready развертывание в Base L2. Низкие комиссии, реальная ценность.",
+      "title": "Ethereum Mainnet",
+      "description": "Production-ready развертывание в Ethereum. Низкие комиссии, реальная ценность.",
       "badge": "Готово для production",
       "tag": "Mainnet",
-      "deployButton": "Развернуть в Base"
+      "deployButton": "Развернуть в Ethereum"
     },
     "comingSoon": "Новые сети появятся на основе обратной связи сообщества."
   },

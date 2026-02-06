@@ -12,7 +12,7 @@
     },
     "supportedNetworks": {
       "question": "Какие сети поддерживаются?",
-      "answer": "Сейчас CreateDAO v2 поддерживает Sepolia (testnet) для тестирования и Base (mainnet) для production-развертываний. Мы планируем добавить больше сетей на основе обратной связи сообщества."
+      "answer": "Сейчас CreateDAO v2 поддерживает Sepolia (testnet) для тестирования и Ethereum (mainnet) для production-развертываний. Мы планируем добавить больше сетей на основе обратной связи сообщества."
     },
     "tokenDistribution": {
       "question": "Как устроено распределение токенов?",

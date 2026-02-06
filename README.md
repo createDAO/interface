@@ -96,8 +96,8 @@ When a user creates a DAO, the factory performs these actions:
 
 Currently supported (as shipped in this repository):
 
+- **Ethereum** (mainnet)
 - **Sepolia** (testnet)
-- **Base** (mainnet)
 
 Additionally, **Hardhat** is enabled automatically in `NODE_ENV=development`.
 
@@ -109,8 +109,8 @@ The interface reads factory addresses from `src/config/dao.ts`.
 
 | Network | Chain ID | DAOFactory |
 |--------:|---------:|-----------:|
-| Sepolia | 11155111 | [`0x2e00e5c34d7779bcaeb0f1d679efb89ea98624ae`](https://sepolia.etherscan.io/address/0x2e00e5c34d7779bcaeb0f1d679efb89ea98624ae) |
-| Base | 8453 | [`0x2e00E5c34D7779BcaEB0f1D679efB89ea98624AE`](https://basescan.org/address/0x2e00E5c34D7779BcaEB0f1D679efB89ea98624AE) |
+| Ethereum | 1 | [`0x742236f55a5e43B1AAec404527cE6986E02cD700`](https://etherscan.io/address/0x742236f55a5e43B1AAec404527cE6986E02cD700) |
+| Sepolia | 11155111 | [`0xDcB4dB872798487b737D2dBf6bEfE5187299c3bc`](https://sepolia.etherscan.io/address/0xDcB4dB872798487b737D2dBf6bEfE5187299c3bc) |
 
 ---
 
@@ -132,7 +132,7 @@ The interface reads factory addresses from `src/config/dao.ts`.
 - **Frontend**: Next.js + React + TypeScript
 - **Styling**: Tailwind CSS
 - **Web3**: wagmi + viem
-- **Wallets**: MetaMask SDK, WalletConnect, Coinbase Wallet
+- **Wallets**: NYKNYC, MetaMask SDK, WalletConnect, Coinbase Wallet
 
 ---
 

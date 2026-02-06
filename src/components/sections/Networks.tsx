@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import ethereumIcon from '../../assets/networks/ethereum.png';
-import baseIcon from '../../assets/networks/base.png';
+
 
 const Networks: React.FC = () => {
   const { t } = useTranslation('home');
@@ -59,7 +59,7 @@ const Networks: React.FC = () => {
                 {t('networks.testnet.description')}
               </p>
 
-              <Link 
+              <Link
                 href="/create?network=sepolia"
                 className="inline-flex items-center justify-center w-full gap-2 bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-100 text-white dark:text-gray-900 px-6 py-3 rounded-xl font-semibold transition-all duration-200"
               >
@@ -71,7 +71,7 @@ const Networks: React.FC = () => {
             </div>
           </div>
 
-          {/* Base Mainnet */}
+          {/* Ethereum Mainnet */}
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-primary-400/20 dark:from-blue-600/10 dark:to-primary-600/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
             <div className="relative bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
@@ -85,8 +85,8 @@ const Networks: React.FC = () => {
               <div className="flex items-start gap-4 mb-6 mt-2">
                 <div className="w-16 h-16 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center p-2">
                   <Image
-                    src={baseIcon}
-                    alt="Base"
+                    src={ethereumIcon}
+                    alt="Ethereum"
                     width={48}
                     height={48}
                     className="rounded-lg"
@@ -107,8 +107,8 @@ const Networks: React.FC = () => {
                 {t('networks.mainnet.description')}
               </p>
 
-              <Link 
-                href="/create?network=base"
+              <Link
+                href="/create?network=ethereum"
                 className="inline-flex items-center justify-center w-full gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200"
               >
                 {t('networks.mainnet.deployButton')}

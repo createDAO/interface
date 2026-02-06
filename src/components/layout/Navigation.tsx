@@ -74,13 +74,13 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false }) => {
           {t('home')}
         </Link>
       )}
-      {/* <Link 
+      <Link 
         href="/daos" 
         prefetch={true}
         className={isMobile ? getMobileLinkClasses('/daos') : getLinkClasses('/daos')}
       >
         {t('deployedDAOs')}
-      </Link> */}
+      </Link>
       <Link 
         href="/create" 
         prefetch={true}

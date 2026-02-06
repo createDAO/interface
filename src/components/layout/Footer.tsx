@@ -123,11 +123,6 @@ const Footer: React.FC = () => {
                   {t('footer.terms')}
                 </Link>
               </li>
-              <li>
-                <Link href="https://reports.createdao.org/" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
-                  {t('footer.reports')}
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

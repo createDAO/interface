@@ -12,7 +12,7 @@
     },
     "supportedNetworks": {
       "question": "What networks are supported?",
-      "answer": "Currently, CreateDAO v2 supports Sepolia (testnet) for testing and Base (mainnet) for production deployments. We plan to expand to more networks based on community feedback."
+      "answer": "Currently, CreateDAO v2 supports Sepolia (testnet) for testing and Etherum (mainnet) for production deployments. We plan to expand to more networks based on community feedback."
     },
     "tokenDistribution": {
       "question": "How is the token distribution set up?",

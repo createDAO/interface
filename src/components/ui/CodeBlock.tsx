@@ -8,6 +8,24 @@ interface CodeBlockProps {
   theme?: 'dark' | 'light';
 }
 
+const escapeHtml = (input: string) =>
+  input.replace(/[&<>"']/g, (ch) => {
+    switch (ch) {
+      case '&':
+        return '&amp;';
+      case '<':
+        return '&lt;';
+      case '>':
+        return '&gt;';
+      case '"':
+        return '&quot;';
+      case "'":
+        return '&#39;';
+      default:
+        return ch;
+    }
+  });
+
 const CodeBlock: React.FC<CodeBlockProps> = ({
   code,
   language = 'solidity',
@@ -38,8 +56,8 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
         console.error(`Error highlighting code for language "${language}":`, error);
         // Fallback to plain text if highlighting fails
         if (isMounted) {
-          // Basic escaping for safety
-          const escapedCode = code.replace(/</g, '<').replace(/>/g, '>');
+          // Basic HTML escaping for safety (used with dangerouslySetInnerHTML)
+          const escapedCode = escapeHtml(code);
           setHighlightedCode(`<pre><code>${escapedCode}</code></pre>`);
         }
       } finally {

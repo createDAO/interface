@@ -1,4 +1,50 @@
 {
+  "nyknyc": {
+    "badge": "Sponsored Transactions",
+    "title": "Zero Gas Fees with",
+    "titleHighlight": "NYKNYC Wallet",
+    "description": "NYKNYC is an ERC-4337 smart wallet integrated with CreateDAO. When you connect with NYKNYC, CreateDAO sponsors all your transactions — deploy your DAO completely free.",
+    "cta": "Learn More About NYKNYC",
+    "trustNote": "Native to CreateDAO • Integrated with wagmi",
+    "features": {
+      "sponsored": {
+        "title": "Sponsored Transactions",
+        "description": "CreateDAO covers all gas fees for NYKNYC users. No ETH needed in your wallet to deploy a DAO."
+      },
+      "erc4337": {
+        "title": "ERC-4337 Account Abstraction",
+        "description": "Smart contract wallet with advanced features like batched transactions and social recovery."
+      },
+      "seamless": {
+        "title": "Seamless Integration",
+        "description": "Connect with one click. NYKNYC works natively with wagmi and the CreateDAO interface."
+      }
+    },
+    "freeRegistration": {
+      "title": "Free DAO Registration",
+      "description": "Users who connect with NYKNYC don't pay any gas fees for DAO deployment. CreateDAO sponsors everything."
+    }
+  },
+  "community": {
+    "title": "Join Our Community",
+    "subtitle": "Connect with DAO builders, get support, and help shape the future of decentralized governance.",
+    "joinButton": "Join Now",
+    "bottomNote": "Our community is open to everyone — whether you're building your first DAO or managing multiple organizations.",
+    "telegram": {
+      "name": "Telegram",
+      "description": "Join our Telegram group for real-time discussions, announcements, and direct support from the team."
+    },
+    "daoforum": {
+      "name": "DAOForum.org",
+      "description": "A forum built specifically for Web3 people, DAO members, and owners to learn and grow together.",
+      "features": {
+        "askQuestions": "Ask about contracts",
+        "requestFeatures": "Request features",
+        "growTogether": "Grow together",
+        "safeSpace": "Safe space"
+      }
+    }
+  },
   "versionBanner": {
     "title": "🎉 CreateDAO v2 is here!",
     "description": "Gas-efficient EIP-1167 clones, auto-delegation, and OpenBook integration.",
@@ -10,7 +56,7 @@
     "title": "Deploy Your DAO in <highlight>One Transaction</highlight>",
     "description": "Create a complete governance system with token, treasury, and governor. Gas-efficient, secure, and OpenBook-ready.",
     "deployTestnet": "Deploy on Sepolia",
-    "deployMainnet": "Deploy on Base",
+    "deployMainnet": "Deploy on Ethereum",
     "gasFeeNote": "Only pay network gas fees • No platform fees",
     "diagram": {
       "factoryName": "DAOFactory",
@@ -71,17 +117,29 @@
     "token": {
       "title": "DAO Token",
       "description": "ERC20Votes governance token with 18 decimals. Auto-delegates to holders for instant voting power.",
-      "features": ["ERC20Votes + ERC20Permit", "Auto-delegation on transfer", "1% to creator, 99% to treasury"]
+      "features": [
+        "ERC20Votes + ERC20Permit",
+        "Auto-delegation on transfer",
+        "1% to creator, 99% to treasury"
+      ]
     },
     "treasury": {
       "title": "Treasury",
       "description": "TimelockController that holds 99% of tokens. All transfers require governance approval.",
-      "features": ["1-day execution delay", "Governance-controlled", "Holds DAO assets"]
+      "features": [
+        "1-day execution delay",
+        "Governance-controlled",
+        "Holds DAO assets"
+      ]
     },
     "governor": {
       "title": "Governor",
       "description": "Full-featured governance with OpenZeppelin extensions. Create proposals, vote, and execute on-chain.",
-      "features": ["1% quorum requirement", "1-week voting period", "Manager role included"]
+      "features": [
+        "1% quorum requirement",
+        "1-week voting period",
+        "Manager role included"
+      ]
     }
   },
   "steps": {
@@ -89,7 +147,7 @@
     "subtitle": "Launch your DAO in under 5 minutes.",
     "step1": {
       "title": "Connect & Select",
-      "description": "Connect your wallet and choose Sepolia (testnet) or Base (mainnet)."
+      "description": "Connect your wallet and choose Sepolia (testnet) or Ethereum (mainnet)."
     },
     "step2": {
       "title": "Name Your DAO",
@@ -113,11 +171,11 @@
       "deployButton": "Deploy on Sepolia"
     },
     "mainnet": {
-      "title": "Base Mainnet",
-      "description": "Production-ready deployment on Base L2. Low fees, real value.",
+      "title": "Ethereum Mainnet",
+      "description": "Production-ready deployment on Ethereum. Maximum security and decentralization.",
       "badge": "Production ready",
       "tag": "Mainnet",
-      "deployButton": "Deploy on Base"
+      "deployButton": "Deploy on Ethereum"
     },
     "comingSoon": "More networks coming based on community feedback."
   },
@@ -127,8 +185,21 @@
     "openbook": {
       "name": "OpenBook",
       "badge": "Made for CreateDAO",
-      "description": "Transparent business management for DAOs. Manage off-chain legal entities, treasury tracking, and team permissions with full financial transparency.",
-      "visitButton": "Open OpenBook"
+      "description": "The ultimate DAO management platform. Create proposals, vote, and monitor your DAO's expenses and revenue with full financial transparency.",
+      "visitButton": "Open OpenBook",
+      "usp": {
+        "multiEntity": "Multi-entity architecture for legal entities",
+        "expenseTracking": "Track expenses & revenue transparently",
+        "walletAuth": "Wallet-based authentication",
+        "permissions": "Granular team permissions"
+      },
+      "compatibility": "📊 Also fully compatible with Tally and Snapshot for on-chain and off-chain governance"
+    },
+    "daocafe": {
+      "name": "DAO Café",
+      "badge": "API & SDK",
+      "description": "Developer tools for CreateDAO. Real-time GraphQL API, TypeScript SDK with React hooks for building governance apps.",
+      "visitButton": "View Documentation"
     },
     "snapshot": {
       "name": "Snapshot",
