@@ -26,7 +26,7 @@ const Home: React.FC = () => {
         <title>{t('metadata.title')}</title>
         <meta name="description" content={t('metadata.description')} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.png" />
+        {/* Favicon is configured globally in `src/pages/_document.tsx` */}
         
         {/* Open Graph / Social Media Meta Tags */}
         <meta property="og:title" content={t('metadata.title')} />

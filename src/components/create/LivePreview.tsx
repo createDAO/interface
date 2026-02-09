@@ -14,9 +14,24 @@ export const LivePreview: React.FC<LivePreviewProps> = ({ formData, networkName 
   const creatorAmount = totalSupply * 0.01; // 1%
   const treasuryAmount = totalSupply * 0.99; // 99%
 
-  const formatVotingTime = (seconds: number): string => {
+  const formatTime = (seconds: number): string => {
     const days = Math.floor(seconds / 86400);
-    return t('time.days', { count: days });
+    const hours = Math.floor((seconds % 86400) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    
+    if (days > 0) {
+      if (hours > 0) {
+        return `${t('time.days', { count: days })} ${hours}h`;
+      }
+      return t('time.days', { count: days });
+    }
+    if (hours > 0) {
+      if (minutes > 0) {
+        return `${hours}h ${minutes}m`;
+      }
+      return `${hours}h`;
+    }
+    return `${minutes}m`;
   };
 
   return (
@@ -97,11 +112,11 @@ export const LivePreview: React.FC<LivePreviewProps> = ({ formData, networkName 
         <div className="space-y-2 text-sm">
           <div className="flex justify-between">
             <span className="text-gray-500 dark:text-gray-400">{t('preview.governance.votingDelay')}</span>
-            <span className="text-gray-900 dark:text-white">{formatVotingTime(formData.votingDelay)}</span>
+            <span className="text-gray-900 dark:text-white">{formatTime(formData.votingDelay)}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500 dark:text-gray-400">{t('preview.governance.votingPeriod')}</span>
-            <span className="text-gray-900 dark:text-white">{formatVotingTime(formData.votingPeriod)}</span>
+            <span className="text-gray-900 dark:text-white">{formatTime(formData.votingPeriod)}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500 dark:text-gray-400">{t('preview.governance.quorum')}</span>
@@ -109,7 +124,7 @@ export const LivePreview: React.FC<LivePreviewProps> = ({ formData, networkName 
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500 dark:text-gray-400">{t('preview.governance.timelock')}</span>
-            <span className="text-gray-900 dark:text-white">{t('preview.governance.timelockValue')}</span>
+            <span className="text-gray-900 dark:text-white">{formatTime(formData.timelockDelay)}</span>
           </div>
         </div>
       </div>

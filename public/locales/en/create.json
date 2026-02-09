@@ -120,9 +120,16 @@
       "label": "Voting Period",
       "helper": "Duration of the voting period"
     },
+    "timelockDelay": {
+      "label": "Timelock Delay",
+      "helper": "Delay before approved proposals are executed"
+    },
+    "custom": "Custom",
+    "customPlaceholder": "Enter time in seconds",
+    "seconds": "seconds",
     "fixedSettings": {
       "title": "Fixed settings",
-      "text": "Quorum is 1%, Proposal Threshold is 1%, Timelock delay is 1 day. These can be changed later through governance proposals."
+      "text": "Quorum is 1%, Proposal Threshold is 1%. These can be changed later through governance proposals."
     }
   },
   "preview": {

@@ -5,6 +5,7 @@ export interface DAOFormData {
   totalSupply: string;
   votingDelay: number; // in seconds
   votingPeriod: number; // in seconds
+  timelockDelay: number; // in seconds
 }
 
 export interface DeploymentResult {
@@ -48,6 +49,16 @@ export const VOTING_PERIOD_PRESETS = [
   { label: '14 days', value: 1209600 },
 ] as const;
 
+export const TIMELOCK_DELAY_PRESETS = [
+  { label: '1 day', value: 86400 },
+  { label: '2 days', value: 172800 },
+  { label: '3 days', value: 259200 },
+] as const;
+
+// Special value for custom input
+export const CUSTOM_VALUE = -1;
+
 // Default values
 export const DEFAULT_VOTING_DELAY = 86400; // 1 day
 export const DEFAULT_VOTING_PERIOD = 604800; // 7 days
+export const DEFAULT_TIMELOCK_DELAY = 86400; // 1 day

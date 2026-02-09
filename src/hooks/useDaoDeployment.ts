@@ -1,5 +1,6 @@
 import React from 'react';
-import { useChainId, useWriteContract, useAccount } from 'wagmi';
+import { useChainId, useWriteContract, useAccount, useSwitchChain, useConfig } from 'wagmi';
+import { getAccount } from '@wagmi/core';
 import { parseEther, decodeEventLog, type Hex } from 'viem';
 import { getContractAddresses, getContractABI } from '../config/contracts';
 import { DAOFormData, DeploymentResult } from '../types/dao';
@@ -61,8 +62,10 @@ function parseReceipt(receipt: TransactionReceipt | undefined): DeploymentResult
 }
 
 export function useDaoDeployment() {
+  const config = useConfig();
   const chainId = useChainId();
   const { isConnected } = useAccount();
+  const { switchChainAsync } = useSwitchChain();
   const addresses = chainId ? getContractAddresses(chainId) : null;
   const { 
     data: hash, 
@@ -287,20 +290,54 @@ export function useDaoDeployment() {
         timeoutRef.current = null;
       }
 
+      // Verify and sync wallet chain with expected chain before transaction
+      // This prevents the wallet from showing a different chain than selected in the UI
+      const expectedChainId = chainId;
+      const account = getAccount(config);
+      const walletChainId = account.chainId;
+      
+      console.log('Chain verification:', {
+        expectedChainId,
+        walletChainId,
+        isConnected: account.isConnected
+      });
+
+      // If wallet is on a different chain than expected, switch it
+      if (walletChainId && walletChainId !== expectedChainId) {
+        console.log(`Wallet chain mismatch detected. Switching from ${walletChainId} to ${expectedChainId}...`);
+        try {
+          await switchChainAsync({ chainId: expectedChainId });
+          console.log('Chain switch successful');
+        } catch (switchError) {
+          console.error('Failed to switch chain:', switchError);
+          const formattedError: TransactionError = {
+            code: -1,
+            name: 'ChainSwitchError',
+            shortMessage: 'Failed to switch network',
+            details: `Please switch your wallet to the correct network and try again. Expected chain ID: ${expectedChainId}`
+          };
+          transaction.setError(formattedError);
+          throw new Error('Failed to switch chain');
+        }
+      }
+
       // Convert total supply to wei
       const totalSupplyWei = parseEther(formData.totalSupply);
       
       console.log('Deploying DAO with params:', {
+        chainId: expectedChainId,
         daoName: formData.daoName,
         tokenName: formData.tokenName,
         tokenSymbol: formData.symbol,
         totalSupply: formData.totalSupply,
         totalSupplyWei: totalSupplyWei.toString(),
         votingDelay: formData.votingDelay,
-        votingPeriod: formData.votingPeriod
+        votingPeriod: formData.votingPeriod,
+        timelockDelay: formData.timelockDelay
       });
 
       // Call the contract with CreateDAOParams struct
+      // Explicitly pass chainId to ensure transaction goes to the correct chain
       writeContract({
         address: addresses.daoFactory as `0x${string}`,
         abi: getContractABI('daoFactory'),
@@ -311,8 +348,10 @@ export function useDaoDeployment() {
           tokenSymbol: formData.symbol,
           totalSupply: totalSupplyWei,
           votingDelay: formData.votingDelay,
-          votingPeriod: formData.votingPeriod
+          votingPeriod: formData.votingPeriod,
+          timelockDelay: formData.timelockDelay
         }],
+        chainId: expectedChainId, // Explicitly specify the target chain
       });
 
       return {

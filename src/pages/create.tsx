@@ -19,7 +19,8 @@ import { useDaoDeployment } from '../hooks/useDaoDeployment';
 import {
   DAOFormData,
   DEFAULT_VOTING_DELAY,
-  DEFAULT_VOTING_PERIOD
+  DEFAULT_VOTING_PERIOD,
+  DEFAULT_TIMELOCK_DELAY
 } from '../types/dao';
 import { SUPPORTED_NETWORKS } from '../config/networks';
 import { hasDeployedContracts } from '../utils/contracts';
@@ -38,6 +39,7 @@ const CreateDAO: React.FC = () => {
     totalSupply: '',
     votingDelay: DEFAULT_VOTING_DELAY,
     votingPeriod: DEFAULT_VOTING_PERIOD,
+    timelockDelay: DEFAULT_TIMELOCK_DELAY,
   });
 
   // Error and network state
@@ -121,6 +123,7 @@ const CreateDAO: React.FC = () => {
       totalSupply: '',
       votingDelay: DEFAULT_VOTING_DELAY,
       votingPeriod: DEFAULT_VOTING_PERIOD,
+      timelockDelay: DEFAULT_TIMELOCK_DELAY,
     });
     setErrors({});
   };
@@ -300,8 +303,10 @@ const CreateDAO: React.FC = () => {
               <AdvancedSettings
                 votingDelay={formData.votingDelay}
                 votingPeriod={formData.votingPeriod}
+                timelockDelay={formData.timelockDelay}
                 onVotingDelayChange={(value) => setFormData(prev => ({ ...prev, votingDelay: value }))}
                 onVotingPeriodChange={(value) => setFormData(prev => ({ ...prev, votingPeriod: value }))}
+                onTimelockDelayChange={(value) => setFormData(prev => ({ ...prev, timelockDelay: value }))}
               />
 
               {/* Deployment Status */}
