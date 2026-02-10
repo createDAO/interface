@@ -11,7 +11,7 @@ const FACTORY_ADDRESSES: Record<number, FactoryAddressConfig> = {
   // Testnets
   [SUPPORTED_CHAIN_IDS.SEPOLIA]: {
     isAvailable: true,
-    address: "0xDcB4dB872798487b737D2dBf6bEfE5187299c3bc",
+    address: "0xc852E5Cb44C50614a82050163aB7170cB88EB5F9",
   },
   [SUPPORTED_CHAIN_IDS.HARDHAT]: {
     isAvailable: true,
@@ -20,7 +20,7 @@ const FACTORY_ADDRESSES: Record<number, FactoryAddressConfig> = {
   // Mainnets
   [SUPPORTED_CHAIN_IDS.ETHEREUM]: {
     isAvailable: true,
-    address: "0x742236f55a5e43B1AAec404527cE6986E02cD700",
+    address: "0xc852E5Cb44C50614a82050163aB7170cB88EB5F9",
   },
 };
 

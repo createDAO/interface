@@ -109,8 +109,8 @@ The interface reads factory addresses from `src/config/dao.ts`.
 
 | Network | Chain ID | DAOFactory |
 |--------:|---------:|-----------:|
-| Ethereum | 1 | [`0x742236f55a5e43B1AAec404527cE6986E02cD700`](https://etherscan.io/address/0x742236f55a5e43B1AAec404527cE6986E02cD700) |
-| Sepolia | 11155111 | [`0xDcB4dB872798487b737D2dBf6bEfE5187299c3bc`](https://sepolia.etherscan.io/address/0xDcB4dB872798487b737D2dBf6bEfE5187299c3bc) |
+| Ethereum | 1 | [`0xc852E5Cb44C50614a82050163aB7170cB88EB5F9`](https://etherscan.io/address/0xc852E5Cb44C50614a82050163aB7170cB88EB5F9) |
+| Sepolia | 11155111 | [`0xc852E5Cb44C50614a82050163aB7170cB88EB5F9`](https://sepolia.etherscan.io/address/0xc852E5Cb44C50614a82050163aB7170cB88EB5F9) |
 
 ---
 
