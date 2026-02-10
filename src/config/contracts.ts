@@ -35,6 +35,11 @@ const DAO_FACTORY_ABI = [
             "internalType": "uint32",
             "name": "votingPeriod",
             "type": "uint32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timelockDelay",
+            "type": "uint256"
           }
         ],
         "internalType": "struct DAOFactory.CreateDAOParams",
