@@ -51,6 +51,7 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false }) => {
         <span className={isMobile ? getMobileLinkClasses('/daos') : getLinkClasses('/daos')}></span>
         <span className={isMobile ? getMobileLinkClasses('/create') : getLinkClasses('/create')}></span>
         <span className={isMobile ? getMobileLinkClasses('/dao-features') : getLinkClasses('/dao-features')}></span>
+        <span className={isMobile ? getMobileLinkClasses('/blog') : getLinkClasses('/blog')}></span>
       </>
     );
   }
@@ -88,13 +89,19 @@ const Navigation: React.FC<NavigationProps> = ({ isMobile = false }) => {
       >
         {t('createDAO')}
       </Link>
-      <Link 
-        href="/dao-features" 
+      <Link
+        href="/dao-features"
         prefetch={true}
         className={isMobile ? getMobileLinkClasses('/dao-features') : getLinkClasses('/dao-features')}
       >
         {t('daoFeatures')}
       </Link>
+      <a
+        href="/blog"
+        className={isMobile ? getMobileLinkClasses('/blog') : getLinkClasses('/blog')}
+      >
+        {t('blog')}
+      </a>
     </>
   );
 };
