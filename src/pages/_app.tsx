@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import type { AppProps } from 'next/app';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { WagmiProvider, cookieToInitialState, type State } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -8,6 +9,7 @@ import { useRouter } from 'next/router';
 import { getWagmiConfig } from '../config/wagmi';
 import ErrorBoundaryWrapper from '../components/ui/ErrorBoundaryWrapper';
 import nextI18NextConfig from '../../next-i18next.config.js';
+import { GA_MEASUREMENT_ID } from '../utils/analytics';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps & { initialWagmiState?: State }) {
@@ -54,6 +56,7 @@ function MyApp({ Component, pageProps }: AppProps & { initialWagmiState?: State 
         </ErrorBoundaryWrapper>
       </WagmiProvider>
       {process.env.NODE_ENV === 'development' && <ReactQueryDevtools initialIsOpen={false} />}
+      <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />
     </QueryClientProvider>
   );
 }

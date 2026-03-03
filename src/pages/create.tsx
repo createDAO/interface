@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Head from 'next/head';
 import { useChainId, useAccount } from 'wagmi';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -24,6 +24,7 @@ import {
 } from '../types/dao';
 import { SUPPORTED_NETWORKS } from '../config/networks';
 import { hasDeployedContracts } from '../utils/contracts';
+import { trackDaoCreated } from '../utils/analytics';
 
 const CreateDAO: React.FC = () => {
   const { t } = useTranslation(['create']);
@@ -127,6 +128,19 @@ const CreateDAO: React.FC = () => {
     });
     setErrors({});
   };
+
+  // Track successful DAO creation
+  const hasTrackedRef = useRef(false);
+  useEffect(() => {
+    if (txState.isSuccess && deploymentData && !hasTrackedRef.current) {
+      hasTrackedRef.current = true;
+      trackDaoCreated({
+        daoName: formData.daoName,
+        network: currentNetwork?.name || 'unknown',
+        chainId,
+      });
+    }
+  }, [txState.isSuccess, deploymentData, formData.daoName, currentNetwork?.name, chainId]);
 
   // Check if form is valid for button state.
   // Keep this derived from the same validation logic used to render inline errors

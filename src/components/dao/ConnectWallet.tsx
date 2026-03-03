@@ -12,6 +12,7 @@ import rabbyIcon from '../../assets/wallets/rabby-icon.svg';
 import trustwalletIcon from '../../assets/wallets/trustwallet-icon.svg';
 import okxIcon from '../../assets/wallets/okx-icon.svg';
 import nyknycIcon from '../../assets/wallets/nyknyc-icon.svg';
+import { trackWalletConnected } from '../../utils/analytics';
 
 // ============================================================================
 // Types
@@ -213,19 +214,25 @@ export function ConnectWallet({ onClose }: ConnectWalletProps) {
   const { t } = useTranslation('create');
   const connection = useConnection();
   const { connect, connectors, error } = useConnect();
-  const { isConnected } = useAccount();
+  const { isConnected, connector: activeConnector } = useAccount();
   const [connectorStates, setConnectorStates] = useState<Record<string, boolean>>({});
   const [connecting, setConnecting] = useState<string | null>(null);
+  const wasConnectedRef = React.useRef(isConnected);
 
   const isPendingConnection =
     connection.status === 'connecting' || connection.status === 'reconnecting';
 
-  // Close modal on successful connection
+  // Track wallet connection and close modal on success
   useEffect(() => {
+    if (isConnected && !wasConnectedRef.current) {
+      trackWalletConnected(activeConnector?.name || 'unknown');
+    }
+    wasConnectedRef.current = isConnected;
+
     if (isConnected && onClose) {
       onClose();
     }
-  }, [isConnected, onClose]);
+  }, [isConnected, onClose, activeConnector]);
 
   // Check connector availability
   useEffect(() => {
