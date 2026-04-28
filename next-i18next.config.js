@@ -31,7 +31,7 @@ module.exports = {
   fallbackLng: 'en',
   
   // Ensure all namespaces are loaded
-  ns: ['common', 'navigation', 'home', 'create', 'daos', 'dao-features', 'faq'],
+  ns: ['common', 'navigation', 'home', 'create', 'daos', 'dao-features', 'faq', 'how-to-create-a-dao'],
   defaultNS: 'common',
   
   // Handle missing keys gracefully

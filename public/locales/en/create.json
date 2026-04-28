@@ -303,6 +303,11 @@
     }
   },
   "page": {
+    "guideBanner": {
+      "title": "First time creating a DAO?",
+      "subtitle": "Read the step-by-step guide before you deploy.",
+      "cta": "Read the guide"
+    },
     "metaTitle": "Create DAO | CreateDAO",
     "metaDescription": "Create your own DAO with customizable governance and token parameters",
     "heading": "Create Your DAO",

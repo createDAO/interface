@@ -220,6 +220,7 @@
     "title": "Ready to Create Your DAO?",
     "subtitle": "Deploy your governance system in minutes",
     "createButton": "Create Your DAO",
+    "guideButton": "Read the Step-by-Step Guide",
     "docsButton": "Technical Documentation"
   }
 }

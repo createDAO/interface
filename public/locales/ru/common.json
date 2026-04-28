@@ -32,6 +32,7 @@
     "documentation": "Документация",
     "tutorials": "Руководства",
     "coreConcepts": "Основные концепции",
+    "howToCreateDao": "Как создать DAO",
     "community": "Сообщество",
     "github": "GitHub",
     "discord": "Discord",
@@ -41,7 +42,8 @@
     "contact": "Свяжитесь с нашим сообществом",
     "copyright": "© {{year}} CreateDAO. Все права защищены.",
     "terms": "Условия обслуживания",
-    "privacy": "Политика конфиденциальности"
+    "privacy": "Политика конфиденциальности",
+    "blog": "Блог"
   },
   "errors": {
     "general": "Произошла ошибка",

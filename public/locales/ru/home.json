@@ -112,7 +112,9 @@
       "description": "Подтвердите одну транзакцию. Ваш DAO сразу начнет работать."
     },
     "readyToStart": "Готовы запустить?",
-    "createButton": "Создать DAO"
+    "createButton": "Создать DAO",
+    "guideHint": "Не знакомы с DAO?",
+    "guideLink": "Прочитайте пошаговое руководство →"
   },
   "networks": {
     "title": "Поддерживаемые сети",

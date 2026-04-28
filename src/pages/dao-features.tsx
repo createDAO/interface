@@ -511,12 +511,18 @@ const DAOFeaturesPage: React.FC = () => {
             <p className="text-primary-100 mb-8">
               {t('cta.subtitle')}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
               <Link
                 href="/create"
                 className="inline-flex items-center justify-center px-8 py-3 bg-white text-primary-600 font-semibold rounded-xl hover:bg-gray-100 transition-colors"
               >
                 {t('cta.createButton')}
+              </Link>
+              <Link
+                href="/how-to-create-a-dao"
+                className="inline-flex items-center justify-center px-8 py-3 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition-colors border border-white/20"
+              >
+                {t('cta.guideButton')}
               </Link>
               <a
                 href="https://docs.createdao.org"

@@ -68,6 +68,11 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/how-to-create-a-dao" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
+                  {t('footer.howToCreateDao')}
+                </Link>
+              </li>
+              <li>
                 <Link href="https://docs.createdao.org/" className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400">
                   {t('footer.documentation')}
                 </Link>

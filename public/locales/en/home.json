@@ -158,7 +158,9 @@
       "description": "Confirm one transaction. Your complete DAO is live instantly."
     },
     "readyToStart": "Ready to launch?",
-    "createButton": "Create Your DAO"
+    "createButton": "Create Your DAO",
+    "guideHint": "New to DAOs?",
+    "guideLink": "Read the step-by-step guide →"
   },
   "networks": {
     "title": "Supported Networks",

@@ -134,6 +134,15 @@ const Steps: React.FC = () => {
               </svg>
             </Link>
           </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">
+            📖 {t('steps.guideHint', 'New to DAOs?')}{' '}
+            <Link
+              href="/how-to-create-a-dao"
+              className="text-primary-600 dark:text-primary-400 font-medium hover:underline"
+            >
+              {t('steps.guideLink', 'Read the step-by-step guide →')}
+            </Link>
+          </p>
         </div>
       </div>
     </section>

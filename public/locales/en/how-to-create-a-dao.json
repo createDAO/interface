@@ -1,0 +1,372 @@
+{
+  "meta": {
+    "title": "How to Create a DAO: The Complete No-Code Guide (2026) | CreateDAO",
+    "description": "How to create a DAO in 3 steps — no code, free, deployed in one transaction on Ethereum. Token + governance + treasury. Beginner-friendly 2026 guide.",
+    "ogTitle": "How to Create a DAO: The Complete No-Code Guide (2026)",
+    "ogDescription": "Deploy a complete DAO — governance token, on-chain voting, and treasury — in one transaction. No code, no platform fees, free with NYKNYC.",
+    "datePublished": "2026-04-28",
+    "dateModified": "2026-04-28"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "current": "How to Create a DAO"
+  },
+  "hero": {
+    "eyebrow": "Step-by-Step Guide",
+    "title": "How to Create a DAO",
+    "subtitle": "Deploy a complete governance system — token, voting, and treasury — in one transaction. No code, no platform fees.",
+    "primaryCta": "Create Your DAO Now",
+    "secondaryCta": "Try on Sepolia First",
+    "trustNote": "Built on OpenZeppelin Governor • MIT licensed • Used by Zenland in production"
+  },
+  "tldr": {
+    "title": "TL;DR — Create a DAO in 3 Steps",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Connect your wallet",
+        "description": "MetaMask, WalletConnect, Coinbase Wallet — or sign in with Google via NYKNYC.app"
+      },
+      {
+        "number": "2",
+        "title": "Configure your DAO",
+        "description": "Name, token symbol, total supply, and governance defaults"
+      },
+      {
+        "number": "3",
+        "title": "Deploy in one transaction",
+        "description": "Three smart contracts go live on Ethereum. Your DAO is operational immediately."
+      }
+    ],
+    "footnote": "Total cost: ~$5–30 in gas on Ethereum mainnet, or $0 if you use NYKNYC.app (CreateDAO sponsors gas)."
+  },
+  "whatIsDao": {
+    "title": "What is a DAO?",
+    "paragraph1": "A <strong>DAO (Decentralized Autonomous Organization)</strong> is an organization governed by smart contracts on a blockchain instead of by people in board rooms. Decisions are made by token holders voting on proposals, and outcomes are enforced automatically by code — no intermediaries, no lawyers, no trustees.",
+    "paragraph2": "DAOs power major DeFi protocols (Uniswap, Compound, Aave), investment collectives, open-source funding, and governance for protocols like <a href=\"https://zen.land\" rel=\"noopener\">Zenland</a>. The technology is proven — and now anyone can deploy one.",
+    "characteristics": [
+      {
+        "title": "Transparent",
+        "description": "Every vote, proposal, and treasury transaction is public on-chain."
+      },
+      {
+        "title": "Trustless",
+        "description": "Rules are enforced by code. No single person can override a vote."
+      },
+      {
+        "title": "Autonomous",
+        "description": "Approved proposals execute automatically after a safety delay."
+      },
+      {
+        "title": "Permissionless",
+        "description": "Anyone holding governance tokens can vote and participate."
+      }
+    ]
+  },
+  "whatGetsDeployed": {
+    "title": "What Gets Deployed When You Create a DAO",
+    "subtitle": "One transaction. Three audited smart contracts. The complete OpenZeppelin Governor stack.",
+    "contracts": {
+      "token": {
+        "name": "DAO Token (ERC20Votes)",
+        "tagline": "Your governance token",
+        "description": "Every member needs tokens to vote. Voting weight is recorded at proposal creation, preventing manipulation. As the creator, you're auto-delegated — you can submit proposals immediately."
+      },
+      "governor": {
+        "name": "DAO Governor",
+        "tagline": "The voting contract",
+        "description": "Built on OpenZeppelin Governor — the same framework used by Uniswap, Compound, and Aave. Manages proposal lifecycle, voting, quorum, and execution queue."
+      },
+      "treasury": {
+        "name": "Timelock Controller",
+        "tagline": "Your secure treasury",
+        "description": "Holds 99% of your tokens. Approved proposals wait 1 day before executing — a critical safety buffer if anything malicious slips through."
+      }
+    },
+    "distributionTitle": "Token Distribution at Deployment",
+    "distribution": [
+      {
+        "recipient": "You (creator)",
+        "allocation": "1%",
+        "purpose": "Auto-delegated so you can propose immediately"
+      },
+      {
+        "recipient": "Treasury (Timelock)",
+        "allocation": "99%",
+        "purpose": "Distributed to community via governance proposals"
+      }
+    ],
+    "fixedSupplyNote": "Total supply is <strong>fixed at deployment</strong> — no minting, no inflation, no creator backdoor."
+  },
+  "whatYouNeed": {
+    "title": "What You Need Before You Start",
+    "subtitle": "Two things: a way to interact with Ethereum, and a basic plan for your DAO.",
+    "options": {
+      "nyknyc": {
+        "badge": "Easiest, $0 cost",
+        "title": "Sign in with Google via NYKNYC.app",
+        "description": "NYKNYC creates an ERC-4337 smart wallet from your Google, Twitter, or passkey login. CreateDAO sponsors gas fees for NYKNYC users — your entire DAO costs <strong>$0</strong> to deploy.",
+        "cta": "Sign in with Google →"
+      },
+      "wallet": {
+        "badge": "Standard Web3",
+        "title": "Use any Web3 wallet",
+        "description": "MetaMask, Rainbow, Coinbase Wallet, or any WalletConnect-compatible wallet. Gas typically costs <strong>$5–30 on Ethereum mainnet</strong>. Want to test free first? Use Sepolia testnet (faucets give free ETH).",
+        "cta": "Connect wallet & deploy →"
+      }
+    },
+    "planTitle": "A Plan for Your DAO",
+    "planIntro": "You don't need final answers — you can refine these later — but having them ready speeds up deployment:",
+    "planItems": [
+      {
+        "label": "DAO Name",
+        "example": "BuilderDAO, CreatorCollective"
+      },
+      {
+        "label": "Token Name",
+        "example": "Builder Token"
+      },
+      {
+        "label": "Token Symbol",
+        "example": "BUILD (3–6 characters)"
+      },
+      {
+        "label": "Total Supply",
+        "example": "1,000,000 (you get 1%, treasury gets 99%)"
+      },
+      {
+        "label": "Governance Parameters",
+        "example": "Use defaults — explained below"
+      }
+    ]
+  },
+  "stepByStep": {
+    "title": "How to Create a DAO: Step by Step",
+    "subtitle": "Three steps. One transaction. About 60 seconds total.",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Connect Your Wallet",
+        "description": "Go to createdao.org and click \"Connect Wallet.\" Select MetaMask, WalletConnect, Coinbase Wallet, or your NYKNYC smart wallet. Then choose your network — Ethereum Mainnet for production, or Sepolia Testnet to try it free first.",
+        "tip": "First-timers: deploy on Sepolia first. It's identical to mainnet, takes 30 seconds, and costs nothing."
+      },
+      {
+        "number": "2",
+        "title": "Configure Your DAO",
+        "description": "Fill in the configuration form: token name, symbol, initial supply, DAO name, and governance settings (voting delay, voting period, proposal threshold, quorum). The defaults are sensible for most new DAOs and can be changed later through governance proposals.",
+        "tip": "Voting delay 1 day, voting period 1 week, proposal threshold 1%, quorum 1% — change these later if needed."
+      },
+      {
+        "number": "3",
+        "title": "Deploy in One Transaction",
+        "description": "Review your configuration and click \"Deploy DAO.\" Your wallet prompts you to confirm <strong>one transaction</strong>. Within seconds it confirms on Ethereum, and your DAO is live: three smart contracts deployed, governance active, treasury funded. No follow-up steps.",
+        "tip": "EIP-1167 minimal proxies reduce gas by ~90%. You're paying for one tx, not three."
+      }
+    ],
+    "midCtaTitle": "Ready to deploy?",
+    "midCtaDescription": "Most users start on Sepolia testnet to try the flow at zero cost. Same UI, same contracts, free testnet ETH from faucets.",
+    "midCtaPrimary": "Deploy on Ethereum",
+    "midCtaSecondary": "Try on Sepolia First"
+  },
+  "parameters": {
+    "title": "Governance Parameters Explained",
+    "subtitle": "What each setting actually does — and why it exists.",
+    "items": [
+      {
+        "label": "Voting Delay",
+        "value": "1 day",
+        "changeable": "Yes — via governance",
+        "description": "After a proposal is submitted, voting doesn't open immediately. This 1-day window prevents snapshot attacks where someone buys tokens just before a vote to manipulate the outcome."
+      },
+      {
+        "label": "Voting Period",
+        "value": "1 week",
+        "changeable": "Yes — via governance",
+        "description": "How long members have to cast votes once voting opens. Balances community participation with decision velocity."
+      },
+      {
+        "label": "Proposal Threshold",
+        "value": "1%",
+        "changeable": "Yes — via governance",
+        "description": "Minimum tokens needed to create a proposal. Prevents spam. As the creator, you start with 1% auto-delegated — you can submit the very first proposal immediately."
+      },
+      {
+        "label": "Quorum",
+        "value": "1%",
+        "changeable": "Yes — via governance",
+        "description": "Minimum participation needed for a valid vote. Ensures decisions have meaningful support, not just a handful of votes while everyone else is unaware."
+      },
+      {
+        "label": "Timelock Delay",
+        "value": "1 day",
+        "changeable": "No — immutable",
+        "description": "Even after a proposal passes, it waits 1 day in the Timelock before executing. This is your community's safety buffer — and the one parameter that can never be changed."
+      }
+    ]
+  },
+  "afterDeployment": {
+    "title": "What Happens After Deployment",
+    "subtitle": "Your DAO is operational the moment the transaction confirms. Here's what to do next.",
+    "actions": [
+      {
+        "title": "Submit your first proposal",
+        "description": "You start with 1% auto-delegated — enough to meet the proposal threshold. Common first proposals: distribute tokens to early contributors, adjust governance parameters, or authorize treasury actions."
+      },
+      {
+        "title": "Connect to Tally or Snapshot",
+        "description": "DAOs deployed by CreateDAO are fully compatible with the existing governance ecosystem. Tally works out of the box for on-chain proposals; Snapshot for off-chain signaling."
+      },
+      {
+        "title": "Manage with OpenBook",
+        "description": "OpenBook.to is built specifically for CreateDAO-deployed DAOs. Treasury monitoring, transparency reports, proposal management, and member tracking — the operational layer on top of governance."
+      }
+    ]
+  },
+  "zenland": {
+    "title": "Real-World Example: Zenland",
+    "paragraph1": "If you're wondering whether this is production-ready — it is.",
+    "paragraph2": "<a href=\"https://zen.land\" rel=\"noopener\">Zenland</a> is a decentralized escrow protocol on Ethereum, governed by a DAO deployed via CreateDAO. Every protocol change — fee adjustments, agent policy updates, new token support — goes through the same Governor and Timelock contracts that get deployed for everyone.",
+    "paragraph3": "The community votes, the proposal passes, the Timelock waits 1 day, then execution happens automatically. No single person can override this. Zenland managing real user funds through a CreateDAO-deployed governance system is the clearest proof these contracts work in production, with real stakes."
+  },
+  "comparison": {
+    "title": "CreateDAO vs Other Ways to Create a DAO",
+    "subtitle": "How CreateDAO compares to alternatives.",
+    "headers": {
+      "feature": "Feature",
+      "createdao": "CreateDAO",
+      "aragon": "Aragon",
+      "colony": "Colony",
+      "manual": "Manual Deploy"
+    },
+    "rows": [
+      {
+        "feature": "Transactions to deploy",
+        "createdao": "1",
+        "aragon": "Multiple",
+        "colony": "Multiple",
+        "manual": "Many"
+      },
+      {
+        "feature": "Coding required",
+        "createdao": "None",
+        "aragon": "None",
+        "colony": "None",
+        "manual": "Yes (Solidity)"
+      },
+      {
+        "feature": "Platform cost",
+        "createdao": "Free",
+        "aragon": "Platform fees",
+        "colony": "Platform fees",
+        "manual": "Dev time + gas"
+      },
+      {
+        "feature": "Base contracts",
+        "createdao": "OpenZeppelin",
+        "aragon": "Custom",
+        "colony": "Custom",
+        "manual": "Your choice"
+      },
+      {
+        "feature": "Open source (MIT)",
+        "createdao": "Yes",
+        "aragon": "Partial",
+        "colony": "Partial",
+        "manual": "N/A"
+      },
+      {
+        "feature": "Gas sponsorship",
+        "createdao": "Yes (NYKNYC)",
+        "aragon": "No",
+        "colony": "No",
+        "manual": "No"
+      },
+      {
+        "feature": "Tally / Snapshot compatible",
+        "createdao": "Yes — natively",
+        "aragon": "Varies",
+        "colony": "No",
+        "manual": "If built on OZ"
+      },
+      {
+        "feature": "No vendor lock-in",
+        "createdao": "Yes (MIT)",
+        "aragon": "Partial",
+        "colony": "Partial",
+        "manual": "Yes"
+      }
+    ],
+    "summary": "The key advantage: CreateDAO deploys the <strong>OpenZeppelin Governor stack</strong> — the most audited, most adopted DAO framework — without requiring any technical knowledge. MIT-licensed with no platform fees: you own your DAO completely. CreateDAO could shut down tomorrow and your DAO would keep running."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How much does it cost to create a DAO?",
+        "answer": "CreateDAO charges <strong>no platform fees</strong>. You only pay Ethereum network gas — typically $5–30 on mainnet. If you connect via NYKNYC.app (Google login), CreateDAO sponsors gas fees entirely, making your DAO deployment <strong>$0 total cost</strong>. For testing before mainnet, Sepolia Testnet is free."
+      },
+      {
+        "question": "Are the contracts audited and secure?",
+        "answer": "Yes. The contracts are built on <strong>OpenZeppelin Governor</strong> — the industry standard for on-chain governance, used by Uniswap, Compound, Aave, and hundreds of other production protocols. CreateDAO uses EIP-1167 minimal proxy clones, so each deployment points to the same audited implementation rather than deploying fresh code. This shares the same proven logic as every other CreateDAO deployment and reduces gas by ~90%."
+      },
+      {
+        "question": "Can I change governance parameters after deployment?",
+        "answer": "Yes — most parameters can be changed through governance proposals. Voting delay, voting period, quorum, and proposal threshold can all be updated by passing a proposal through your DAO's own governance system. The one exception is the <strong>Timelock delay (1 day)</strong>, which is immutable after deployment as a deliberate security feature."
+      },
+      {
+        "question": "What networks does CreateDAO support?",
+        "answer": "Currently <strong>Ethereum Mainnet</strong> and <strong>Sepolia Testnet</strong>. Additional EVM-compatible networks are planned based on community demand."
+      },
+      {
+        "question": "Can I use my DAO with Tally or Snapshot?",
+        "answer": "Yes — immediately and natively. CreateDAO deploys the standard OpenZeppelin Governor interface that Tally understands out of the box. Connect your Governor contract address in Tally and your DAO appears with full proposal and voting functionality. Snapshot also works for off-chain voting with the same governance token."
+      },
+      {
+        "question": "What happens to the 99% of tokens in the treasury?",
+        "answer": "They sit in the Timelock Controller until your community votes to distribute them. Common methods: governance proposals to transfer tokens to contributors, batch airdrops to multiple addresses, or transfers to a staking contract that distributes over time. Every distribution requires a passed governance proposal — the treasury can't be drained without community approval."
+      },
+      {
+        "question": "What's the difference between the Governor and the Timelock?",
+        "answer": "The <strong>Governor</strong> handles the democratic process — collecting votes, tallying results, checking quorum and threshold requirements. If a proposal passes, the Governor queues it for execution. The <strong>Timelock</strong> handles execution delay and fund custody — once queued, a proposal waits 1 day before anyone can execute it. The Timelock also holds the treasury (99% of tokens). Together: Governor counts votes and says \"approved.\" Timelock says \"approved, but wait 24 hours, then execute.\""
+      },
+      {
+        "question": "Can I create a DAO without a crypto wallet?",
+        "answer": "Yes. NYKNYC.app lets you sign in with Google, Twitter, or a passkey — no browser extension, no seed phrase, no crypto required upfront. It creates an ERC-4337 smart wallet in the background. CreateDAO sponsors gas fees for NYKNYC users, so you can deploy your entire DAO without owning any ETH."
+      },
+      {
+        "question": "What is auto-delegation and why does it matter?",
+        "answer": "In standard ERC20Votes tokens, holders must manually delegate their tokens to activate voting power — even to themselves. Forgetting to delegate is one of the most common reasons governance participation is low. CreateDAO tokens auto-delegate: your 1% creator allocation is automatically delegated to your address at deployment, so you can submit the first proposal the moment the DAO goes live."
+      }
+    ]
+  },
+  "finalCta": {
+    "title": "Ready to Create Your DAO?",
+    "subtitle": "Three audited smart contracts. One transaction. Live in 30 seconds.",
+    "primaryCta": "Create DAO Now",
+    "secondaryCta": "Try on Sepolia First",
+    "trustNote": "No platform fees · MIT licensed · Built on OpenZeppelin Governor"
+  },
+  "related": {
+    "title": "Learn More",
+    "items": [
+      {
+        "title": "Understanding Your DAO",
+        "description": "Deep dive into the governance system: token, governor, timelock.",
+        "href": "/dao-features",
+        "cta": "Read the architecture →"
+      },
+      {
+        "title": "Technical Documentation",
+        "description": "Smart contract references, deployment addresses, governance internals.",
+        "href": "https://docs.createdao.org",
+        "cta": "Open the docs →"
+      },
+      {
+        "title": "DAOFactory Reference",
+        "description": "How one transaction deploys three contracts via EIP-1167 proxies.",
+        "href": "https://docs.createdao.org/contracts/dao-factory",
+        "cta": "View the contract →"
+      }
+    ]
+  }
+}
