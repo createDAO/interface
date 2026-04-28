@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import nyknycIcon from '../../assets/wallets/nyknyc-icon.svg';
 
 const NYKNYCWallet: React.FC = () => {

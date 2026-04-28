@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAccount, useConnection, useDisconnect, useEnsName, useBalance } from 'wagmi';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import { formatEther } from 'viem';
 import { ConnectWallet } from '../dao/ConnectWallet';
 

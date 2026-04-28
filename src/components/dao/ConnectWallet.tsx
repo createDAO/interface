@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import { useConnect, useAccount, useConnection, Connector } from 'wagmi';
 import Image from 'next/image';
 import metamaskIcon from '../../assets/wallets/metamask-icon.svg';

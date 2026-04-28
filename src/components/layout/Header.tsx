@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
 import Navigation from './Navigation';

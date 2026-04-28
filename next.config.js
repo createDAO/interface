@@ -56,6 +56,7 @@ const nextConfig = {
       porto: false,
       '@safe-global/safe-apps-provider': false,
       '@safe-global/safe-apps-sdk': false,
+      accounts: false,
     };
 
     if (!isServer) {

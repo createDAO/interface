@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'next-i18next';
+import { useTranslation } from 'react-i18next';
 import { ThemeContext } from './ThemeContext';
 
 const ThemeToggle: React.FC = () => {

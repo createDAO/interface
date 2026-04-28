@@ -4,7 +4,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import { WagmiProvider, cookieToInitialState, type State } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { appWithTranslation } from 'next-i18next';
+import { appWithTranslation } from 'next-i18next/pages';
 import { useRouter } from 'next/router';
 import { getWagmiConfig } from '../config/wagmi';
 import ErrorBoundaryWrapper from '../components/ui/ErrorBoundaryWrapper';

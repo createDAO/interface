@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
+import { serverSideTranslations } from 'next-i18next/pages/serverSideTranslations';
 import { GetStaticProps } from 'next';
 import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
