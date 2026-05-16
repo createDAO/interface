@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import ethereumIcon from '../../assets/networks/ethereum.png';
+import arbitrumIcon from '../../assets/networks/arbitrum.png';
 
 
 const Networks: React.FC = () => {
@@ -22,7 +23,7 @@ const Networks: React.FC = () => {
         </div>
 
         {/* Network Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Sepolia Testnet */}
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 dark:from-yellow-600/10 dark:to-orange-600/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
@@ -112,6 +113,54 @@ const Networks: React.FC = () => {
                 className="inline-flex items-center justify-center w-full gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200"
               >
                 {t('networks.mainnet.deployButton')}
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
+          {/* Arbitrum One */}
+          <div className="relative group">
+            <div className="absolute inset-0 bg-gradient-to-r from-sky-400/20 to-blue-400/20 dark:from-sky-600/10 dark:to-blue-600/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
+            <div className="relative bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              {/* Badge */}
+              <div className="absolute -top-3 left-6">
+                <span className="bg-sky-100 dark:bg-sky-900/50 text-sky-700 dark:text-sky-300 text-xs font-semibold px-3 py-1 rounded-full">
+                  {t('networks.arbitrum.badge')}
+                </span>
+              </div>
+
+              <div className="flex items-start gap-4 mb-6 mt-2">
+                <div className="w-16 h-16 bg-sky-50 dark:bg-sky-900/30 rounded-xl flex items-center justify-center p-2">
+                  <Image
+                    src={arbitrumIcon}
+                    alt="Arbitrum One"
+                    width={48}
+                    height={48}
+                    className="rounded-lg"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                    {t('networks.arbitrum.title')}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="w-2 h-2 bg-sky-400 rounded-full" />
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{t('networks.arbitrum.tag')}</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                {t('networks.arbitrum.description')}
+              </p>
+
+              <Link
+                href="/create?network=arbitrum"
+                className="inline-flex items-center justify-center w-full gap-2 bg-sky-600 hover:bg-sky-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200"
+              >
+                {t('networks.arbitrum.deployButton')}
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

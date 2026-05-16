@@ -51,6 +51,7 @@ import type { Chain } from "wagmi/chains";
 export const SUPPORTED_CHAIN_IDS = {
   SEPOLIA: 11155111,
   ETHEREUM: 1,
+  ARBITRUM: 42161,
   HARDHAT: 31337,
 } as const;
 
@@ -58,6 +59,7 @@ export const SUPPORTED_CHAIN_IDS = {
 const chainMap: Record<number, Chain> = {
   [SUPPORTED_CHAIN_IDS.SEPOLIA]: wagmiChains.sepolia,
   [SUPPORTED_CHAIN_IDS.ETHEREUM]: wagmiChains.mainnet,
+  [SUPPORTED_CHAIN_IDS.ARBITRUM]: wagmiChains.arbitrum,
   [SUPPORTED_CHAIN_IDS.HARDHAT]: wagmiChains.hardhat,
 };
 
@@ -65,6 +67,7 @@ const chainMap: Record<number, Chain> = {
 const DRPC_NETWORK_NAMES: Record<number, string> = {
   [SUPPORTED_CHAIN_IDS.SEPOLIA]: "sepolia",
   [SUPPORTED_CHAIN_IDS.ETHEREUM]: "ethereum",
+  [SUPPORTED_CHAIN_IDS.ARBITRUM]: "arbitrum",
 };
 
 // Public fallback RPC URLs for supported chains
@@ -76,6 +79,10 @@ const PUBLIC_RPC_URLS: Record<number, string[]> = {
   [SUPPORTED_CHAIN_IDS.ETHEREUM]: [
     "https://eth.llamarpc.com",
     "https://rpc.ankr.com/eth",
+  ],
+  [SUPPORTED_CHAIN_IDS.ARBITRUM]: [
+    "https://arb1.arbitrum.io/rpc",
+    "https://rpc.ankr.com/arbitrum",
   ],
 };
 
@@ -127,6 +134,7 @@ const getSupportedChains = (): [Chain, ...Chain[]] => {
   const chains: Chain[] = [
     chainMap[SUPPORTED_CHAIN_IDS.SEPOLIA],
     chainMap[SUPPORTED_CHAIN_IDS.ETHEREUM],
+    chainMap[SUPPORTED_CHAIN_IDS.ARBITRUM],
   ];
 
   // Add Hardhat only in development

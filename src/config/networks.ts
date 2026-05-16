@@ -3,10 +3,11 @@ import { SUPPORTED_CHAIN_IDS } from "./wagmi";
 
 // Import network icons
 import ethereumIcon from "../assets/networks/ethereum.png";
+import arbitrumIcon from "../assets/networks/arbitrum.png";
 
 
 // Define the supported networks for v2.0.0
-// Currently only Sepolia (testnet) and Ethereum (mainnet) are supported
+// Supported networks: Sepolia (testnet), Ethereum (mainnet), and Arbitrum One (L2)
 const mainNetworks: NetworkInfo[] = [
   {
     id: SUPPORTED_CHAIN_IDS.SEPOLIA,
@@ -25,6 +26,18 @@ const mainNetworks: NetworkInfo[] = [
     name: "Ethereum",
     isTestnet: false,
     icon: ethereumIcon,
+    isAvailable: true,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+  },
+  {
+    id: SUPPORTED_CHAIN_IDS.ARBITRUM,
+    name: "Arbitrum One",
+    isTestnet: false,
+    icon: arbitrumIcon,
     isAvailable: true,
     nativeCurrency: {
       name: "Ether",
@@ -61,6 +74,8 @@ export function getExplorerUrl(chainId: number): string {
       return "https://sepolia.etherscan.io";
     case SUPPORTED_CHAIN_IDS.ETHEREUM:
       return "https://etherscan.io";
+    case SUPPORTED_CHAIN_IDS.ARBITRUM:
+      return "https://arbiscan.io";
     default:
       return "https://etherscan.io";
   }

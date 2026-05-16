@@ -97,6 +97,7 @@ When a user creates a DAO, the factory performs these actions:
 Currently supported (as shipped in this repository):
 
 - **Ethereum** (mainnet)
+- **Arbitrum One** (L2)
 - **Sepolia** (testnet)
 
 Additionally, **Hardhat** is enabled automatically in `NODE_ENV=development`.
@@ -110,6 +111,7 @@ The interface reads factory addresses from `src/config/dao.ts`.
 | Network | Chain ID | DAOFactory |
 |--------:|---------:|-----------:|
 | Ethereum | 1 | [`0xc852E5Cb44C50614a82050163aB7170cB88EB5F9`](https://etherscan.io/address/0xc852E5Cb44C50614a82050163aB7170cB88EB5F9) |
+| Arbitrum One | 42161 | [`0xc852E5Cb44C50614a82050163aB7170cB88EB5F9`](https://arbiscan.io/address/0xc852E5Cb44C50614a82050163aB7170cB88EB5F9) |
 | Sepolia | 11155111 | [`0xc852E5Cb44C50614a82050163aB7170cB88EB5F9`](https://sepolia.etherscan.io/address/0xc852E5Cb44C50614a82050163aB7170cB88EB5F9) |
 
 ---

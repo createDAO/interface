@@ -101,7 +101,7 @@
     "subtitle": "Запустите свой DAO менее чем за 5 минут.",
     "step1": {
       "title": "Подключитесь и выберите",
-      "description": "Подключите кошелёк и выберите Sepolia (testnet) или Base (mainnet)."
+      "description": "Подключите кошелёк и выберите Sepolia (testnet), Ethereum или Arbitrum One."
     },
     "step2": {
       "title": "Назовите ваш DAO",
@@ -128,10 +128,17 @@
     },
     "mainnet": {
       "title": "Ethereum Mainnet",
-      "description": "Production-ready развертывание в Ethereum. Низкие комиссии, реальная ценность.",
+      "description": "Production-ready развертывание в Ethereum. Максимальная безопасность и децентрализация.",
       "badge": "Готово для production",
       "tag": "Mainnet",
       "deployButton": "Развернуть в Ethereum"
+    },
+    "arbitrum": {
+      "title": "Arbitrum One",
+      "description": "Развертывание на L2 с низкими комиссиями. Быстрые транзакции с безопасностью Ethereum.",
+      "badge": "Низкие комиссии",
+      "tag": "L2 Mainnet",
+      "deployButton": "Развернуть в Arbitrum"
     },
     "comingSoon": "Новые сети появятся на основе обратной связи сообщества."
   },

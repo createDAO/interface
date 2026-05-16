@@ -315,7 +315,7 @@
       },
       {
         "question": "What networks does CreateDAO support?",
-        "answer": "Currently <strong>Ethereum Mainnet</strong> and <strong>Sepolia Testnet</strong>. Additional EVM-compatible networks are planned based on community demand."
+        "answer": "Currently <strong>Ethereum Mainnet</strong>, <strong>Arbitrum One</strong>, and <strong>Sepolia Testnet</strong>. Additional EVM-compatible networks are planned based on community demand."
       },
       {
         "question": "Can I use my DAO with Tally or Snapshot?",

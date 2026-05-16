@@ -22,6 +22,10 @@ const FACTORY_ADDRESSES: Record<number, FactoryAddressConfig> = {
     isAvailable: true,
     address: "0xc852E5Cb44C50614a82050163aB7170cB88EB5F9",
   },
+  [SUPPORTED_CHAIN_IDS.ARBITRUM]: {
+    isAvailable: true,
+    address: "0xc852E5Cb44C50614a82050163aB7170cB88EB5F9",
+  },
 };
 
 export function getFactoryAddress(chainId: number): FactoryAddressConfig {

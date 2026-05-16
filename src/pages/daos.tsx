@@ -10,6 +10,16 @@ import nextI18NextConfig from '../../next-i18next.config.js';
 import Layout from '../components/layout/Layout';
 import { getNetworkById } from '../config/networks';
 import ethereumIcon from '../assets/networks/ethereum.png';
+import arbitrumIcon from '../assets/networks/arbitrum.png';
+
+// Chain ID to icon mapping
+const CHAIN_ICONS: Record<number, typeof ethereumIcon> = {
+  1: ethereumIcon,
+  11155111: ethereumIcon,
+  42161: arbitrumIcon,
+};
+
+const getChainIcon = (chainId: number) => CHAIN_ICONS[chainId] || ethereumIcon;
 
 // Chain ID to name mapping for networks not in SUPPORTED_NETWORKS
 const CHAIN_NAMES: Record<number, string> = {
@@ -247,7 +257,7 @@ const DAOsPage: React.FC = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-2">
                           <Image 
-                            src={ethereumIcon} 
+                            src={getChainIcon(dao.chainId)} 
                             alt={getChainName(dao.chainId)} 
                             width={20} 
                             height={20}
@@ -312,7 +322,7 @@ const DAOsPage: React.FC = () => {
                         </h3>
                         <div className="flex items-center gap-2 mt-1">
                           <Image 
-                            src={ethereumIcon} 
+                            src={getChainIcon(dao.chainId)} 
                             alt={getChainName(dao.chainId)} 
                             width={16} 
                             height={16}

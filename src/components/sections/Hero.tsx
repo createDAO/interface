@@ -51,7 +51,7 @@ const Hero: React.FC = () => {
                 {t('home:hero.deployTestnet')}
               </Link>
               <Link 
-                href="/create?network=base" 
+                href="/create?network=ethereum" 
                 className="inline-flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 <span className="w-2 h-2 bg-green-400 rounded-full" />

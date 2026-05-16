@@ -147,7 +147,7 @@
     "subtitle": "Launch your DAO in under 5 minutes.",
     "step1": {
       "title": "Connect & Select",
-      "description": "Connect your wallet and choose Sepolia (testnet) or Ethereum (mainnet)."
+      "description": "Connect your wallet and choose Sepolia (testnet), Ethereum, or Arbitrum One."
     },
     "step2": {
       "title": "Name Your DAO",
@@ -178,6 +178,13 @@
       "badge": "Production ready",
       "tag": "Mainnet",
       "deployButton": "Deploy on Ethereum"
+    },
+    "arbitrum": {
+      "title": "Arbitrum One",
+      "description": "Low-cost L2 deployment on Arbitrum. Fast transactions with Ethereum security.",
+      "badge": "Low gas fees",
+      "tag": "L2 Mainnet",
+      "deployButton": "Deploy on Arbitrum"
     },
     "comingSoon": "More networks coming based on community feedback."
   },
