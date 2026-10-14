@@ -51,6 +51,9 @@ ENV NEXT_PUBLIC_COMMIT_HASH=$NEXT_PUBLIC_COMMIT_HASH
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Writable dir for the daocafe-sdk chain cache (mounted as a volume)
+RUN mkdir -p /app/.daocafe-cache && chown nextjs:nodejs /app/.daocafe-cache
+
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/scripts ./scripts
 
